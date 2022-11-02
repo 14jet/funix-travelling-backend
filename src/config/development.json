@@ -1,0 +1,8 @@
+{
+  "cors": {
+    "whiteList": ["http://localhost:3000"]
+  },
+  "database": {
+    "mongodb_URI": "mongodb+srv://travelWeb:travelWebsite123@cluster0.qfie8nj.mongodb.net/travel?retryWrites=true&w=majority"
+  }
+}

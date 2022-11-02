@@ -1,0 +1,5 @@
+{
+  "cors": {
+    "whiteList": ["http://web-du-lich.com"]
+  }
+}
