@@ -13,6 +13,7 @@ const reviewSchema = new Schema({
   comment: {
     type: String,
     required: true,
+    answers: [],
   },
   rate: {
     type: Number,
@@ -21,7 +22,12 @@ const reviewSchema = new Schema({
   tourId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "Tours",
+    ref: "Tour",
+  },
+  reviewId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "Review",
   },
 });
 

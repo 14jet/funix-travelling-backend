@@ -1,79 +1,23 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
+
 const tourSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: [
-    {
-      destination: {
-        type: String,
-        required: true,
-      },
-      detail: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  itinerary: [
-    {
-      destination: {
-        type: String,
-        required: true,
-      },
-      meal: [],
-      detail: [
-        {
-          time: {
-            type: String,
-          },
-          description: {
-            type: String,
-          },
-        },
-      ],
-    },
-  ],
+  name: String,
+  journey: String,
+  highlights: [String],
+  itinerary: [],
   price: {
-    type: Number,
-    required: true,
+    from: Number,
+    includes: [String],
+    excludes: [String],
   },
-  inforDetailOfPrice: [],
-  image: [
-    {
-      title: {
-        type: String,
-        required: true,
-      },
-      imageOfDestination: [],
-    },
-  ],
-  typeOfTour: {
-    type: String,
-    required: true,
+  images: [String],
+  time: {
+    departureDates: [Date],
+    duration: String,
   },
-  regulations: [
-    {
-      surcharge: {
-        title: {
-          type: String,
-          required: true,
-        },
-        priceDetail: {
-          type: String,
-          required: true,
-        },
-      },
-      priceForChild: [],
-    },
-  ],
-  timeOfTour: {
-    type: String,
-    required: true,
-  },
+  cancellationPolicy: [String],
 });
 
+// review
 module.exports = mongoose.model("Tour", tourSchema);

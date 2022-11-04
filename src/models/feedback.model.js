@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
+// sort of thu gop y of contact page. Probably no needed.
 const feedbackSchema = new Schema({
   name: {
     type: String,

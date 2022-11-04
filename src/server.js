@@ -7,11 +7,13 @@ const app = require("express")();
 // middlewares
 app.use(require("./middlewares/cors.middleware"));
 app.use(require("body-parser").json());
+app.use("/images", require("./middlewares/staticFiles.middleware"));
 
-// admin routes
-
-// client routes
-app.use("/api/client/tour", require("./routes/client/tour.route"));
+// routes
+app.use("/api/user", require("./routes/user.route"));
+app.use("/api/tour", require("./routes/tour.route"));
+app.use("/api/article", require("./routes/article.route"));
+app.use("/api/file", require("./routes/file.route"));
 
 // 404 handler
 app.all("*", require("./middlewares/notFound.middleware"));
