@@ -27,7 +27,7 @@ module.exports.login = async (req, res, next) => {
       );
     }
 
-    const match = bcrypt.compare(password, user.password);
+    const match = await bcrypt.compare(password, user.password);
     if (!match) {
       return next(
         createError(new Error(""), 400, {
@@ -114,7 +114,23 @@ module.exports.register = async (req, res, next) => {
       );
     }
 
-    const hash = bcrypt.hash(password, config.get("bcrypt.saltRounds"));
+    bcrypt.hash(
+      password,
+      config.get("bcrypt.saltRounds"),
+      async (error, hash) => {
+        if (error) {
+          throw error;
+        }
+
+        await User.create({ username, password: hash });
+        return res.status(200).json({
+          message: {
+            en: "Registered successfully",
+            vi: "Đăng ký tài khoản thành công",
+          },
+        });
+      }
+    );
   } catch (error) {
     next(createError(error, 500));
   }

@@ -5,7 +5,7 @@ module.exports = [
     vi: "Tiêu đề không được bỏ trống!",
     en: "Missing title",
   }),
-  body("owner").trim().notEmpty().withMessage({
+  body("autherId").trim().notEmpty().withMessage({
     en: "Missing author",
     vi: "Tác giả không được để trống!",
   }),

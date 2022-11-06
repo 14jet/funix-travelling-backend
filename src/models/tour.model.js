@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 const tourSchema = new Schema({
   name: String,
   journey: String,
+  description: String,
   highlights: [String],
-  itinerary: [],
+  itinerary: Array,
   price: {
     from: Number,
     includes: [String],

@@ -140,6 +140,7 @@ module.exports.addTour = async (req, res, next) => {
     const {
       name,
       journey,
+      description,
       highlights,
       itinerary,
       departureDates,
@@ -148,25 +149,30 @@ module.exports.addTour = async (req, res, next) => {
       priceIncludes,
       priceExcludes,
       cancellationPolicy,
-      images,
     } = req.body;
 
+    const files = req.files;
+    const fileURLs = files.map(
+      (item) => new URL(item.filename, "http://localhost:5000/images/")
+    );
+
     await Tour.create({
-      name: name,
-      journey: journey,
-      highlights: highlights,
-      itinerary: itinerary,
+      name,
+      journey,
+      description,
+      highlights,
+      itinerary,
       price: {
         from: lowestPrice,
         includes: priceIncludes,
         excludes: priceExcludes,
       },
-      images: images,
+      images: fileURLs,
       time: {
         departureDates: departureDates,
         duration: duration,
       },
-      cancellationPolicy: cancellationPolicy,
+      cancellationPolicy,
     });
 
     return res.status(200).json({
@@ -193,15 +199,15 @@ module.exports.editTour = async (req, res, next) => {
       tourId,
       name,
       journey,
+      description,
       highlights,
-      itinerary,
       departureDates,
       duration,
       lowestPrice,
       priceIncludes,
       priceExcludes,
       cancellationPolicy,
-      images,
+      removedImages,
     } = req.body;
 
     // check if tourId can cast to ObjectId
@@ -227,23 +233,31 @@ module.exports.editTour = async (req, res, next) => {
       );
     }
 
-    await Tour.updateOne({
-      name: name,
-      journey: journey,
-      highlights: highlights,
-      itinerary: itinerary,
-      price: {
-        from: lowestPrice,
-        includes: priceIncludes,
-        excludes: priceExcludes,
-      },
-      images: images,
-      time: {
-        departureDates: departureDates,
-        duration: duration,
-      },
-      cancellationPolicy: cancellationPolicy,
-    });
+    const files = req.files;
+    const fileURLs = files.map(
+      (item) => new URL(item.filename, "http://localhost:5000/images/")
+    );
+
+    // loại những hình người dùng loại ra
+    // thêm những hình người dùng thêm vào
+    // còn 1 bước xóa ở storage nữa nhưng tính sau, để đọc về firebase đã
+    const newImages = tour.images
+      .filter((item) => !removedImages.includes(item))
+      .concat(fileURLs);
+
+    tour.name = name;
+    tour.journey = journey;
+    tour.description = description;
+    tour.highlights = highlights;
+    tour.time.departureDates = departureDates;
+    tour.time.duration = duration;
+    tour.price.from = lowestPrice;
+    tour.price.includes = priceIncludes;
+    tour.price.excludes = priceExcludes;
+    tour.cancellationPolicy = cancellationPolicy;
+    tour.images = newImages;
+
+    await tour.save();
 
     return res.status(200).json({
       message: {
@@ -322,7 +336,7 @@ module.exports.addReview = async (req, res, next) => {
       );
     }
 
-    await Review.create({
+    const review = await Review.create({
       name,
       email,
       comment,
@@ -330,7 +344,45 @@ module.exports.addReview = async (req, res, next) => {
       tourId,
     });
 
-    return res.status(200).json({ message: "Sent successfully" });
+    return res.status(200).json({
+      message: {
+        en: "Sent successfully",
+        vi: "Đánh giá thành công",
+      },
+      review,
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.getReviews = async (req, res, next) => {
+  try {
+    let { page, limit } = req.query;
+    if (!limit) {
+      limit = 8;
+    }
+
+    if (!page) {
+      page = 1;
+    }
+
+    const reviews = await Review.find()
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    const totalCount = await Review.countDocuments();
+    const remainCount = totalCount - ((page - 1) * limit + reviews.length);
+    const totalPages = Math.ceil(totalCount / limit);
+    const remailPages = totalPages - page;
+
+    return res.status(200).json({
+      items: reviews,
+      totalCount,
+      remainCount,
+      totalPages,
+      remailPages,
+    });
   } catch (error) {
     next(createError(error, 500));
   }
@@ -391,14 +443,46 @@ module.exports.getSingleTour = async (req, res, next) => {
       );
     }
 
-    // get some random tours
-    const relatedTours = (
-      await tour.aggregate([{ $sample: { size: 8 } }])
-    ).filter((item) => item._id !== tourId);
+    const relatedTours = (await Tour.find()).filter(
+      (item) => item._id.toString() !== tourId
+    );
 
     return res.status(200).json({
       item: tour,
       relatedItems: relatedTours,
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.addItinerary = async (req, res, next) => {
+  try {
+    // validation
+    const result = validationResult(req);
+    const hasError = !result.isEmpty();
+    if (hasError) {
+      return next(createError(new Error(""), 400, result.array()[0].msg));
+    }
+
+    const { tourId, itinerary } = req.body;
+
+    const tour = await Tour.findOne({ _id: tourId });
+    if (!tour) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Tour Not Found",
+          vi: "Không tìm thấy tour",
+        })
+      );
+    }
+    tour.itinerary = itinerary;
+    await tour.save();
+    return res.status(200).json({
+      message: {
+        en: "Added itinerary successfully",
+        vi: "Tạo tour thành công",
+      },
     });
   } catch (error) {
     next(createError(error, 500));

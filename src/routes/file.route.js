@@ -8,6 +8,6 @@ const fileControllers = require("../controllers/file.controller");
 const multer = require("../middlewares/multer.middleware");
 
 // routes
-router.post("/", multer, fileControllers.uploadFiles);
+router.post("/single", multer.single, fileControllers.uploadFile);
 
 module.exports = router;

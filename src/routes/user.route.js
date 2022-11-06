@@ -9,5 +9,6 @@ const userControllers = require("../controllers/user.controller");
 // middlewares
 
 router.post("/login", userControllers.login);
+router.post("/register", userControllers.register);
 
 module.exports = router;

@@ -95,3 +95,148 @@ c9ba3b37-25eb-4208-af8c-15d2904b244d	04-11-2022	10:07:43	POST	/api/admin/tour	Ca
     at Multipart.emit (node:events:513:28)
     at emitCloseNT (node:internal/streams/destroy:138:10)
     at processTicksAndRejections (node:internal/process/task_queues:82:21)
+1804cb7a-7df2-42ed-be51-293ae3b524a3	04-11-2022	05:05:37	POST	/api/user/register	
+04719cfb-8e7f-4bed-b550-f3c6a351e50f	04-11-2022	05:09:38	POST	/api/user/login	data and hash arguments required	Error: data and hash arguments required
+    at Object.compare (D:\ntav-workspace\job\travelling-website\backend\node_modules\bcrypt\bcrypt.js:208:17)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\bcrypt\promises.js:29:12
+    at new Promise (<anonymous>)
+    at Object.module.exports.promise (D:\ntav-workspace\job\travelling-website\backend\node_modules\bcrypt\promises.js:20:12)
+    at Object.compare (D:\ntav-workspace\job\travelling-website\backend\node_modules\bcrypt\bcrypt.js:204:25)
+    at module.exports.login (D:\ntav-workspace\job\travelling-website\backend\src\controllers\user.controller.js:30:32)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+4f92aa5f-78d0-4f56-96a5-fa5d19a47c90	04-11-2022	05:13:17	POST	/api/user/login	
+a8154833-79c7-4a34-b1d9-bd19cc881e68	04-11-2022	05:13:22	POST	/api/user/login	
+4e68b03b-6770-406a-9d28-264e7d67cfd2	05-11-2022	08:53:19	POST	/api/user/login	
+1b721a74-0ba9-44f1-8284-9dd021539a42	05-11-2022	08:53:26	POST	/api/user/login	
+3cbd8864-1c6d-4cc8-9f6f-d769d4a4b774	05-11-2022	09:59:24	POST	/api/user/login	
+f11e6e59-a7ed-4368-b5ba-d5b8751d9f16	05-11-2022	09:59:33	POST	/api/user/login	
+b0e59aeb-2b0c-45b3-b358-8bf10a196491	05-11-2022	09:59:36	POST	/api/user/login	
+8589275a-ad52-4ce3-83ff-b70d64bd0dc4	05-11-2022	10:20:51	GET	/favicon.ico	Route Not Found
+048d71e9-3848-4606-b5d7-521877f603aa	05-11-2022	11:04:23	GET	/api/tour/undefined	
+76c11d1a-239b-4118-8d58-c83ce012482d	05-11-2022	11:08:36	GET	/api/tour/63667ef336be4bbe63e90174	tour.aggregate is not a function	TypeError: tour.aggregate is not a function
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.controller.js:439:18)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+348bafc3-ebbf-4ebb-9b40-b68fb8e5a6f2	05-11-2022	11:10:28	GET	/api/tour/63667ef336be4bbe63e90174	tour.aggregate is not a function	TypeError: tour.aggregate is not a function
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.controller.js:439:18)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+d578fc75-de83-4653-b771-942fd0246288	05-11-2022	11:14:04	GET	/api/tour/63667ef336be4bbe63e90174	Tour.find(...).filter is not a function	TypeError: Tour.find(...).filter is not a function
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.controller.js:437:44)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+f80d89cb-c8ac-41ef-b589-cd2aa0c168f7	05-11-2022	11:17:29	POST	/api/tour	Tour validation failed: time.departureDates.0: Cast to [date] failed for value "[ '22/01/2022' ]" (type string) at path "time.departureDates.0" because of "CastError"	ValidationError: Tour validation failed: time.departureDates.0: Cast to [date] failed for value "[ '22/01/2022' ]" (type string) at path "time.departureDates.0" because of "CastError"
+    at model.Document.invalidate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\document.js:3097:32)
+    at model.$set (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\document.js:1452:12)
+    at model.$set (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\document.js:1215:14)
+    at model.$set (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\document.js:1119:14)
+    at model.Document (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\document.js:166:12)
+    at model.Model (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:121:12)
+    at new model (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:5032:15)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:3185:22
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:3220:7
+    at Array.forEach (<anonymous>)
+76f2092e-3ae5-43b4-9278-e8ef9efdc143	05-11-2022	11:36:50	PUT	/api/tour	
+4f693e1e-5303-4bb6-8b51-3957595a55df	05-11-2022	11:37:44	PUT	/api/tour	
+21e15e30-6a19-4366-a835-74700da725f1	05-11-2022	11:38:25	PUT	/api/tour	
+9e68df95-ff06-49e9-8df8-0292d8c12fb5	05-11-2022	11:38:44	PUT	/api/tour	
+0fa64e64-f22b-417f-94e2-a2220fec1f77	05-11-2022	11:39:27	PUT	/api/tour	
+0f5785a1-3c1f-4f30-95d3-5acecc9c517d	05-11-2022	11:39:47	PUT	/api/tour	
+78c974bc-e1d2-4573-9136-6f759c84ba7a	05-11-2022	11:41:25	PUT	/api/tour	
+77ab5f9d-bfca-4b6b-b5f0-fd5dfe7fb94f	05-11-2022	11:44:11	PUT	/api/tour	
+c34bf6a7-dc27-471f-92bd-05a056e203f2	05-11-2022	11:45:06	PUT	/api/tour	
+ea0dd519-c8f1-4ed5-bd64-3b8c9e4de22a	06-11-2022	11:38:49	POST	/api/file/single	Unexpected token - in JSON at position 0
+f1cf508a-d13e-4c39-af19-9daf0502eb49	06-11-2022	11:38:49	POST	/api/file/single	Unexpected token - in JSON at position 0
+a754d6f4-6bb9-46c9-83e9-7d8c2350860b	06-11-2022	11:40:51	POST	/api/file/single	Unexpected token - in JSON at position 0
+6e51a876-9914-4054-94bb-1a9f182a1e8b	06-11-2022	11:40:51	POST	/api/file/single	Unexpected token - in JSON at position 0
+73a170ca-4559-403f-b8c6-c5669457c6dd	06-11-2022	11:42:24	POST	/api/file/single	Cannot read properties of undefined (reading 'map')	TypeError: Cannot read properties of undefined (reading 'map')
+    at module.exports.uploadFiles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\file.controller.js:7:24)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at multerMiddleware (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+89b345f4-258a-4443-9d75-1806c0390f75	06-11-2022	11:42:24	POST	/api/file/single	Cannot read properties of undefined (reading 'map')	TypeError: Cannot read properties of undefined (reading 'map')
+    at module.exports.uploadFiles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\file.controller.js:7:24)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at multerMiddleware (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+a3b0645b-4ea7-4a72-b73b-271a766d055e	06-11-2022	11:42:52	POST	/api/file/single	Cannot read properties of undefined (reading 'filename')	TypeError: Cannot read properties of undefined (reading 'filename')
+    at module.exports.uploadFile (D:\ntav-workspace\job\travelling-website\backend\src\controllers\file.controller.js:20:30)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at multerMiddleware (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+eba715a3-eb33-4f0d-b968-c97d804c4d90	06-11-2022	11:42:52	POST	/api/file/single	Cannot read properties of undefined (reading 'filename')	TypeError: Cannot read properties of undefined (reading 'filename')
+    at module.exports.uploadFile (D:\ntav-workspace\job\travelling-website\backend\src\controllers\file.controller.js:20:30)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at multerMiddleware (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+0a804b6a-2b7f-461d-801a-276646638757	06-11-2022	11:44:18	POST	/api/file/single	Cannot read properties of undefined (reading 'filename')	TypeError: Cannot read properties of undefined (reading 'filename')
+    at module.exports.uploadFile (D:\ntav-workspace\job\travelling-website\backend\src\controllers\file.controller.js:21:30)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at multerMiddleware (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+74d90674-0785-4911-bbcc-cb8bfdb138f8	06-11-2022	11:44:18	POST	/api/file/single	Cannot read properties of undefined (reading 'filename')	TypeError: Cannot read properties of undefined (reading 'filename')
+    at module.exports.uploadFile (D:\ntav-workspace\job\travelling-website\backend\src\controllers\file.controller.js:21:30)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at multerMiddleware (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+98fcda00-1267-4008-a60e-b5f486a172e0	06-11-2022	11:46:00	POST	/api/file/single	Cannot read properties of undefined (reading 'filename')	TypeError: Cannot read properties of undefined (reading 'filename')
+    at module.exports.uploadFile (D:\ntav-workspace\job\travelling-website\backend\src\controllers\file.controller.js:21:30)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at multerMiddleware (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+7759c111-e551-44be-9441-060fcd373965	06-11-2022	11:46:38	POST	/api/file/single	Cannot read properties of undefined (reading 'filename')	TypeError: Cannot read properties of undefined (reading 'filename')
+    at module.exports.uploadFile (D:\ntav-workspace\job\travelling-website\backend\src\controllers\file.controller.js:21:30)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at multerMiddleware (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+bf19b32b-2bbe-434d-92a1-10689304dca4	06-11-2022	12:08:52	POST	/api/tour/itinerary	Cast to ObjectId failed for value "1" (type number) at path "_id" for model "Tour"	CastError: Cast to ObjectId failed for value "1" (type number) at path "_id" for model "Tour"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+a0f41ea8-0b7a-48b3-b863-aeb6904e108a	06-11-2022	12:40:14	GET	/favicon.ico	Route Not Found
