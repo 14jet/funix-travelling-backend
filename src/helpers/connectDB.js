@@ -1,16 +1,21 @@
 const mongoose = require("mongoose");
 const config = require("config");
 
-// config.get("database.mongodb_URI");
+let mongodbURI = "";
+
+if (config.has("database.mongodb_URI")) {
+  mongodbURI = config.get("database.mongodb_URI");
+} else {
+  console.error("ket noi bang config that bai");
+  mongodbURI =
+    "mongodb+srv://travelWeb:travelWebsite123@cluster0.qfie8nj.mongodb.net/travel?retryWrites=true&w=majority";
+}
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(config.get("database.mongodb_URI"));
+    await mongoose.connect(mongodbURI);
   } catch (error) {
-    console.error("ket noi bang config that bai");
-    await mongoose.connect(
-      "mongodb+srv://travelWeb:travelWebsite123@cluster0.qfie8nj.mongodb.net/travel?retryWrites=true&w=majority"
-    );
+    console.error(error.message);
   }
 };
 
