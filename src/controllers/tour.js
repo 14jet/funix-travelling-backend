@@ -152,9 +152,11 @@ module.exports.editTour = async (req, res, next) => {
     }
 
     const files = req.files;
-    const fileURLs = files.map(
-      (item) => new URL(item.filename, "http://localhost:5000/images/")
-    );
+    // const fileURLs = files.map(
+    //   (item) => new URL(item.filename, "http://localhost:5000/images/")
+    // );
+
+    const fileURLs = files.map((item) => item.path);
     // loại những hình người dùng loại ra
     // thêm những hình người dùng thêm vào
     // còn 1 bước xóa ở storage nữa nhưng tính sau, để đọc về firebase đã
