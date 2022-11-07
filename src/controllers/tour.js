@@ -69,9 +69,10 @@ module.exports.addTour = async (req, res, next) => {
     } = req.body;
 
     const files = req.files;
-    const fileURLs = files.map(
-      (item) => new URL(item.filename, "http://localhost:5000/images/")
-    );
+    // const fileURLs = files.map(
+    //   (item) => new URL(item.filename, "http://localhost:5000/images/")
+    // );
+    const fileURLs = files.map((item) => item.path);
 
     await Tour.create({
       name,
