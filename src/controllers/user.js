@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
-// const config = require("config");
+const config = require("config");
 var jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const createError = require("../helpers/errorCreator");
@@ -37,7 +37,7 @@ module.exports.login = async (req, res, next) => {
       );
     }
 
-    var token = jwt.sign({ username: user.username }, "funix-secret", {
+    var token = jwt.sign({ username: user.username }, config.get("jwtSecret"), {
       expiresIn: "1h",
     });
     return res.status(200).json({
@@ -77,21 +77,25 @@ module.exports.changePassword = async (req, res, next) => {
       }
     });
 
-    bcrypt.hash(newPassword, 10, async function (err, hash) {
-      if (err) {
-        throw err;
+    bcrypt.hash(
+      newPassword,
+      config.get("bcrypt.saltRounds"),
+      async function (err, hash) {
+        if (err) {
+          throw err;
+        }
+
+        user.password = hash;
+        await user.save();
+
+        return res.status(200).json({
+          message: {
+            en: "Password changed",
+            vi: "Đổi password thành công",
+          },
+        });
       }
-
-      user.password = hash;
-      await user.save();
-
-      return res.status(200).json({
-        message: {
-          en: "Password changed",
-          vi: "Đổi password thành công",
-        },
-      });
-    });
+    );
   } catch (error) {
     next(createError(error, 500));
   }
@@ -110,19 +114,23 @@ module.exports.register = async (req, res, next) => {
       );
     }
 
-    bcrypt.hash(password, 10, async (error, hash) => {
-      if (error) {
-        throw error;
-      }
+    bcrypt.hash(
+      password,
+      config.get("bcrypt.saltRounds"),
+      async (error, hash) => {
+        if (error) {
+          throw error;
+        }
 
-      await User.create({ username, password: hash });
-      return res.status(200).json({
-        message: {
-          en: "Registered successfully",
-          vi: "Đăng ký tài khoản thành công",
-        },
-      });
-    });
+        await User.create({ username, password: hash });
+        return res.status(200).json({
+          message: {
+            en: "Registered successfully",
+            vi: "Đăng ký tài khoản thành công",
+          },
+        });
+      }
+    );
   } catch (error) {
     next(createError(error, 500));
   }
