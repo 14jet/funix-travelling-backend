@@ -27,6 +27,6 @@ require("./helpers/connectDB")();
 
 app.listen(process.env.PORT || 5000, () => {
   console.log(
-    `Server is running on port ${PORT} in ${process.env.NODE_ENV} environment`
+    `Server is running on port ${process.env.PORT} in ${process.env.NODE_ENV} environment`
   );
 });

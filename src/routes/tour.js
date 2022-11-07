@@ -9,7 +9,6 @@ const requireAdmin = require("../middlewares/requireAdmin");
 const multer = require("../middlewares/multer");
 
 // validators
-const bookTourValidator = require("../validators/booktour.validator");
 const reviewTourValidator = require("../validators/reviewTour");
 const addItineraryValidator = require("../validators/addItinerary.js");
 
