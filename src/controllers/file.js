@@ -20,7 +20,9 @@ module.exports.uploadFile = async (req, res, next) => {
     const file = req.file;
     console.log(file);
 
-    const url = new URL(file.filename, "http://localhost:5000/images/");
+    // const url = new URL(file.filename, "http://localhost:5000/images/");
+    const url = file.path;
+
     return res.status(200).json(url);
   } catch (error) {
     next(createError(error, 500));
