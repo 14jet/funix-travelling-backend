@@ -1,14 +1,11 @@
 const cors = require("cors");
 const config = require("config");
 
-if (!config.has("cors.whiteList")) {
-  throw new Error("cors.whiteList khong ton tai");
-}
-
-console.log(config.get("cors.whiteList"));
-
 const corsOption = {
-  origin: config.get("cors.whiteList"),
+  origin: [
+    "http://localhost:3000",
+    "https://travelling-website-funix-v1.web.app/",
+  ],
   credentials: true,
 };
 
