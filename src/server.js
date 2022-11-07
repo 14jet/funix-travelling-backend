@@ -22,10 +22,10 @@ app.all("*", require("./middlewares/notFound.middleware"));
 // error handler
 app.use(require("./middlewares/errorHandler.middleware"));
 
+console.log(process.env.NODE_ENV);
+console.log(config.get("database"));
 // connect to database
 require("./helpers/connectDB")();
-
-console.log(process.env.NODE_ENV);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
