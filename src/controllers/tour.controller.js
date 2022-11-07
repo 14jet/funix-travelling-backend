@@ -237,13 +237,15 @@ module.exports.editTour = async (req, res, next) => {
     const fileURLs = files.map(
       (item) => new URL(item.filename, "http://localhost:5000/images/")
     );
-
     // loại những hình người dùng loại ra
     // thêm những hình người dùng thêm vào
     // còn 1 bước xóa ở storage nữa nhưng tính sau, để đọc về firebase đã
-    const newImages = tour.images
-      .filter((item) => !removedImages.includes(item))
-      .concat(fileURLs);
+    let newImages = tour.images;
+    if (removedImages) {
+      newImages = tour.images.filter((item) => !removedImages.includes(item));
+    }
+
+    newImages = newImages.concat(fileURLs);
 
     tour.name = name;
     tour.journey = journey;
@@ -456,7 +458,7 @@ module.exports.getSingleTour = async (req, res, next) => {
   }
 };
 
-module.exports.addItinerary = async (req, res, next) => {
+module.exports.updateItinerary = async (req, res, next) => {
   try {
     // validation
     const result = validationResult(req);
@@ -480,8 +482,8 @@ module.exports.addItinerary = async (req, res, next) => {
     await tour.save();
     return res.status(200).json({
       message: {
-        en: "Added itinerary successfully",
-        vi: "Tạo tour thành công",
+        en: "Updated itinerary successfully",
+        vi: "Cập nhật tour thành công",
       },
     });
   } catch (error) {

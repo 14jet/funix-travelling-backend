@@ -240,3 +240,42 @@ bf19b32b-2bbe-434d-92a1-10689304dca4	06-11-2022	12:08:52	POST	/api/tour/itinerar
     at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
 a0f41ea8-0b7a-48b3-b863-aeb6904e108a	06-11-2022	12:40:14	GET	/favicon.ico	Route Not Found
+c0432033-926d-45b7-9d8a-ce1001e6b0cb	06-11-2022	09:23:46	GET	/api/tour/admin	
+7d201f90-c0b6-4f59-b6af-a5643ffd7031	06-11-2022	09:35:43	GET	/api/tour/63675a6d07a2d0cf0c04c859	getaddrinfo ENOTFOUND ac-du6xjtu-shard-00-02.qfie8nj.mongodb.net	MongoNetworkError: getaddrinfo ENOTFOUND ac-du6xjtu-shard-00-02.qfie8nj.mongodb.net
+    at connectionFailureError (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connect.js:387:20)
+    at TLSSocket.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connect.js:310:22)
+    at Object.onceWrapper (node:events:628:26)
+    at TLSSocket.emit (node:events:513:28)
+    at emitErrorNT (node:internal/streams/destroy:157:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:122:3)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)
+0c024241-f7b0-44bd-851f-4d75e7d60483	06-11-2022	09:36:13	GET	/api/tour/63675a6d07a2d0cf0c04c859	Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/	MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/
+    at Function.Model.$wrapCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:5226:32)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4908:21
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:41:5
+    at new Promise (<anonymous>)
+    at promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:40:10)
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4907:10)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+84a98063-dae3-49bc-b7da-d3191fa35e5b	06-11-2022	09:38:29	PUT	/api/tour	Cannot read properties of undefined (reading 'includes')	TypeError: Cannot read properties of undefined (reading 'includes')
+    at D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.controller.js:245:40
+    at Array.filter (<anonymous>)
+    at Proxy.methods.<computed> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\types\array\methods\index.js:1011:24)
+    at module.exports.editTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.controller.js:245:8)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+40e5b69e-e6df-4a83-b31b-e0e14f071fc6	06-11-2022	09:39:30	PUT	/api/tour	Cannot read properties of undefined (reading 'includes')	TypeError: Cannot read properties of undefined (reading 'includes')
+    at D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.controller.js:245:40
+    at Array.filter (<anonymous>)
+    at Proxy.methods.<computed> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\types\array\methods\index.js:1011:24)
+    at module.exports.editTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.controller.js:245:8)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+8402a078-0963-473a-a29c-676c3df9fa79	06-11-2022	09:40:39	PUT	/api/tour	Cannot read properties of undefined (reading 'includes')	TypeError: Cannot read properties of undefined (reading 'includes')
+    at D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.controller.js:245:40
+    at Array.filter (<anonymous>)
+    at Proxy.methods.<computed> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\types\array\methods\index.js:1011:24)
+    at module.exports.editTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.controller.js:245:8)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+6fcf005a-4036-4a3e-b1e5-1e433165f3f7	07-11-2022	12:29:48	PUT	/api/tour/itinerary	Route Not Found

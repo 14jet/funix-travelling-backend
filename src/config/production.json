@@ -1,5 +1,15 @@
 {
   "cors": {
-    "whiteList": ["http://web-du-lich.com"]
+    "whiteList": [
+      "http://localhost:3000",
+      "https://travelling-website-funix-v1.web.app/"
+    ]
+  },
+  "database": {
+    "mongodb_URI": "mongodb+srv://travelWeb:travelWebsite123@cluster0.qfie8nj.mongodb.net/travel?retryWrites=true&w=majority"
+  },
+  "jwtSecret": "funix-secret",
+  "bcrypt": {
+    "saltRounds": 10
   }
 }

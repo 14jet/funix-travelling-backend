@@ -21,6 +21,6 @@ router.get("/", tourController.getTours);
 router.get("/:tourId", tourController.getSingleTour);
 router.get("/review", tourController.getReviews);
 router.post("/review", tourController.addReview);
-router.post("/itinerary", addItineraryValidator, tourController.addItinerary);
+router.put("/itinerary", addItineraryValidator, tourController.updateItinerary);
 
 module.exports = router;
