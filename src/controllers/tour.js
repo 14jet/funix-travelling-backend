@@ -106,12 +106,12 @@ module.exports.addTour = async (req, res, next) => {
 
 module.exports.editTour = async (req, res, next) => {
   try {
-    // validation
-    // const result = validationResult(req);
-    // const hasError = !result.isEmpty();
-    // if (hasError) {
-    //   return res.status(400).json({ message: result.array()[0].msg });
-    // }
+    validation;
+    const result = validationResult(req);
+    const hasError = !result.isEmpty();
+    if (hasError) {
+      return res.status(400).json({ message: result.array()[0].msg });
+    }
 
     const {
       tourId,
@@ -127,16 +127,6 @@ module.exports.editTour = async (req, res, next) => {
       cancellationPolicy,
       removedImages,
     } = req.body;
-
-    // check if tourId can cast to ObjectId
-    if (!mongoose.Types.ObjectId.isValid(tourId)) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Can not cast tourId to ObjectId",
-          vi: "tourId không hợp lệ",
-        })
-      );
-    }
 
     const tour = await Tour.findOne({
       _id: tourId,

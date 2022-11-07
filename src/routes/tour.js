@@ -11,10 +11,12 @@ const multer = require("../middlewares/multer");
 // validators
 const reviewTourValidator = require("../validators/reviewTour");
 const addItineraryValidator = require("../validators/addItinerary.js");
+const addTourValidator = require("../validators/addTour");
+const editTourValidator = require("../validators/editTour");
 
 // routes
-router.post("/", multer.multiple, tourController.addTour); // tao tour
-router.put("/", multer.multiple, tourController.editTour);
+router.post("/", addTourValidator, multer.multiple, tourController.addTour); // tao tour
+router.put("/", editTourValidator, multer.multiple, tourController.editTour);
 router.delete("/", tourController.deleteTour);
 router.get("/", tourController.getTours);
 router.get("/:tourId", tourController.getSingleTour);
