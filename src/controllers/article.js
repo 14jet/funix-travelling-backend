@@ -1,6 +1,6 @@
 const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
-const Article = require("../models/article.model");
+const Article = require("../models/article");
 const createError = require("../helpers/errorCreator");
 
 module.exports.addArticle = async (req, res, next) => {

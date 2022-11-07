@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const BookTour = require("../models/bookTour.model");
-const Tour = require("../models/tour.model");
-const Review = require("../models/review.model");
+const Tour = require("../models/tour");
+const Review = require("../models/review");
 const createError = require("../helpers/errorCreator");
 
 module.exports.bookTour = async (req, res, next) => {

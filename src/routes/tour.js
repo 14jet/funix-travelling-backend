@@ -2,16 +2,16 @@ const express = require("express");
 const router = express.Router();
 
 // controllers
-const tourController = require("../controllers/tour.controller");
+const tourController = require("../controllers/tour");
 
 // middlewares
-const requireAdmin = require("../middlewares/requireAdmin.middleware");
-const multer = require("../middlewares/multer.middleware");
+const requireAdmin = require("../middlewares/requireAdmin");
+const multer = require("../middlewares/multer");
 
 // validators
 const bookTourValidator = require("../validators/booktour.validator");
-const reviewTourValidator = require("../validators/reviewTour.validator");
-const addItineraryValidator = require("../validators/addItinerary.validator.js");
+const reviewTourValidator = require("../validators/reviewTour");
+const addItineraryValidator = require("../validators/addItinerary.js");
 
 // routes
 router.post("/", multer.multiple, tourController.addTour); // tao tour

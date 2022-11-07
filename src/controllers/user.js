@@ -3,7 +3,7 @@ const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const config = require("config");
 var jwt = require("jsonwebtoken");
-const User = require("../models/user.model");
+const User = require("../models/user");
 const createError = require("../helpers/errorCreator");
 
 module.exports.login = async (req, res, next) => {

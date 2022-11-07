@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 // controllers
-const articleControllers = require("../controllers/article.controller");
+const articleControllers = require("../controllers/article");
 
 // middlewares
-const requireAdmin = require("../middlewares/requireAdmin.middleware");
+const requireAdmin = require("../middlewares/requireAdmin");
 
 // validators
-const addArticleValidator = require("../validators/addArticle.validator");
-const editArticleValidator = require("../validators/editArticle.validator");
+const addArticleValidator = require("../validators/addArtilce");
+const editArticleValidator = require("../validators/editArticle");
 
 // routes
 router.get("/", articleControllers.getArticles);
