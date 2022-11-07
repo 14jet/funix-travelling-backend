@@ -25,8 +25,7 @@ app.use(require("./middlewares/errorHandler.middleware"));
 // connect to database
 require("./helpers/connectDB")();
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log(
     `Server is running on port ${PORT} in ${process.env.NODE_ENV} environment`
   );
