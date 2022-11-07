@@ -15,16 +15,6 @@ module.exports.addReview = async (req, res, next) => {
 
     const { name, email, comment, rate, tourId, reviewId } = req.body;
 
-    // check if tourId can cast to ObjectId
-    if (!mongoose.Types.ObjectId.isValid(tourId)) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Can not cast tourId to ObjectId",
-          vi: "tourId không hợp lệ",
-        })
-      );
-    }
-
     // check if there is a tour with _id = tourId
     const tour = await Tour.findOne({ _id: tourId });
     if (!tour) {
@@ -233,58 +223,6 @@ module.exports.deleteTour = async (req, res, next) => {
   }
 };
 
-module.exports.addReview = async (req, res, next) => {
-  try {
-    // validation
-    const result = validationResult(req);
-    const hasError = !result.isEmpty();
-    if (hasError) {
-      return res.status(400).json({ message: result.array()[0].msg });
-    }
-
-    const { name, email, comment, rate, tourId } = req.body;
-
-    // check if tourId can cast to ObjectId
-    if (!mongoose.Types.ObjectId.isValid(tourId)) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Can not cast tourId to ObjectId",
-          vi: "tourId không hợp lệ",
-        })
-      );
-    }
-
-    // check if there is a tour with _id = tourId
-    const tour = await Tour.findOne({ _id: tourId });
-    if (!tour) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Tour not found",
-          vi: "Không tìm thấy tour",
-        })
-      );
-    }
-
-    const review = await Review.create({
-      name,
-      email,
-      comment,
-      rate,
-      tourId,
-    });
-
-    return res.status(200).json({
-      message: {
-        en: "Sent successfully",
-        vi: "Đánh giá thành công",
-      },
-      review,
-    });
-  } catch (error) {
-    next(createError(error, 500));
-  }
-};
-
 module.exports.getReviews = async (req, res, next) => {
   try {
     let { page, limit } = req.query;
@@ -319,30 +257,35 @@ module.exports.getReviews = async (req, res, next) => {
 
 module.exports.getTours = async (req, res, next) => {
   try {
-    let { page, limit } = req.query;
-    if (!limit) {
-      limit = 8;
-    }
+    // let { page, limit } = req.query;
+    // if (!limit) {
+    //   limit = 8;
+    // }
 
-    if (!page) {
-      page = 1;
-    }
+    // if (!page) {
+    //   page = 1;
+    // }
 
-    const tours = await Tour.find()
-      .skip((page - 1) * limit)
-      .limit(limit);
+    // const tours = await Tour.find()
+    //   .skip((page - 1) * limit)
+    //   .limit(limit);
 
-    const totalCount = await Tour.countDocuments();
-    const remainCount = totalCount - ((page - 1) * limit + tours.length);
-    const totalPages = Math.ceil(totalCount / limit);
-    const remailPages = totalPages - page;
+    // const totalCount = await Tour.countDocuments();
+    // const remainCount = totalCount - ((page - 1) * limit + tours.length);
+    // const totalPages = Math.ceil(totalCount / limit);
+    // const remailPages = totalPages - page;
 
+    // return res.status(200).json({
+    //   items: tours,
+    //   totalCount,
+    //   remainCount,
+    //   totalPages,
+    //   remailPages,
+    // });
+
+    const tours = await Tour.find();
     return res.status(200).json({
       items: tours,
-      totalCount,
-      remainCount,
-      totalPages,
-      remailPages,
     });
   } catch (error) {
     next(createError(error, 500));

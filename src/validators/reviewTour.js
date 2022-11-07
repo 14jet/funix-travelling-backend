@@ -1,10 +1,24 @@
 const { body } = require("express-validator");
+const mongoose = require("mongoose");
 
 module.exports = [
-  body("tourId").trim().notEmpty().withMessage({
-    en: "Missing tourId",
-    vi: "Thiếu tourId",
-  }),
+  body("tourId")
+    .trim()
+    .notEmpty()
+    .withMessage({
+      en: "Missing tourId",
+      vi: "Thiếu tourId",
+    })
+    .custom((value) => {
+      if (!mongoose.Types.ObjectId.isValid(value)) {
+        return false;
+      }
+      return true;
+    })
+    .withMessage({
+      en: "Can not cast tourId to ObjectId",
+      vi: "tourId không hợp lệ",
+    }),
   body("name").trim().notEmpty().withMessage({
     en: "Missing name",
     vi: "Tên không được bỏ trống",
