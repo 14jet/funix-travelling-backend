@@ -5,8 +5,8 @@ process.env["NODE_CONFIG_DIR"] = __dirname + "/config/";
 const app = require("express")();
 
 // middlewares
-app.set("trust proxy", 1);
 app.use(require("./middlewares/cors.middleware"));
+app.set("trust proxy", 1);
 app.use(require("body-parser").json());
 app.use("/images", require("./middlewares/staticFiles.middleware"));
 

@@ -1,5 +1,5 @@
 var jwt = require("jsonwebtoken");
-const config = require("config");
+// const config = require("config");
 const User = require("../models/user.model");
 const createError = require("../helpers/errorCreator");
 
@@ -28,7 +28,7 @@ module.exports = async (req, res, next) => {
       );
     }
 
-    jwt.verify(token, config.get("jwtSecret"), async (error, decoded) => {
+    jwt.verify(token, "funix-secret", async (error, decoded) => {
       if (error) {
         if (error.name === "TokenExpiredError") {
           return next(
