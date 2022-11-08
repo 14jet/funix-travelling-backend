@@ -11,5 +11,13 @@
   "jwtSecret": "funix-secret",
   "bcrypt": {
     "saltRounds": 10
+  },
+  "firebaseConfig": {
+    "apiKey": "AIzaSyC_arnzKyxfPyHZqn8zCdWkdN2Zlazx9Uc",
+    "authDomain": "travelling-website-funix-v1.firebaseapp.com",
+    "projectId": "travelling-website-funix-v1",
+    "storageBucket": "travelling-website-funix-v1.appspot.com",
+    "messagingSenderId": "620610351963",
+    "appId": "1:620610351963:web:ca9c821a8958f22d99e07e"
   }
 }

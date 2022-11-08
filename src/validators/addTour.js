@@ -1,4 +1,12 @@
 const { body } = require("express-validator");
+const isArrayJSON = (json) => {
+  try {
+    const parsed = JSON.parse(json);
+    return Array.isArray(parsed);
+  } catch (error) {
+    return false;
+  }
+};
 
 module.exports = [
   body("name").notEmpty().withMessage({
@@ -19,13 +27,15 @@ module.exports = [
       en: "Missing tour's departure dates",
       vi: "Ngày khởi hành không được bỏ trống!",
     })
-    .isCurrency()
+    .custom((value) => isArrayJSON(value))
     .withMessage({
-      en: "Depature dates must be an array",
-      vi: "Ngày khởi hành phải là một mảng!",
+      en: "Departure dates must be an array",
+      vi: "Ngày khởi hành phải là mảng!",
     })
     .custom((value) => {
-      const isInValid = value.some((item) => !Number.isInteger(item));
+      const isInValid = JSON.parse(value).some(
+        (item) => !Number.isInteger(Number(item))
+      );
       if (isInValid) {
         return false;
       }
@@ -42,10 +52,10 @@ module.exports = [
       en: "Missing tour's highlights",
       vi: "Điểm nổi bật không được bỏ trống!",
     })
-    .isCurrency()
+    .custom((value) => isArrayJSON(value))
     .withMessage({
       en: "Highlights must be an array",
-      vi: "Điểm nổi bật phải là một mảng!",
+      vi: "Điểm nổi bật phải là mảng!",
     }),
   body("cancellationPolicy")
     .notEmpty()
@@ -53,9 +63,9 @@ module.exports = [
       en: "Missing tour's cancellation Policy",
       vi: "Điều kiện hoàn hủy đổi không được bỏ trống!",
     })
-    .isCurrency()
+    .custom((value) => isArrayJSON(value))
     .withMessage({
-      en: "Cancellation Policy must be an array",
-      vi: "Điều kiện hoàn hủy đổi phải là một mảng!",
+      en: "Cancellation policy must be an array",
+      vi: "Điều kiện hoàn hủy đổi phải là mảng!",
     }),
 ];
