@@ -2043,3 +2043,26 @@ c60887e1-bdfc-4066-8b7f-cbca8efd7c73	08-11-2022	07:42:07	PUT	/api/tour	validatio
     at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
     at middleware (D:\ntav-workspace\job\travelling-website\backend\node_modules\express-validator\src\middlewares\check.js:16:13)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+a4efa88d-9e91-42d0-b838-a14934d66803	08-11-2022	08:04:28	POST	/api/tour	ref._throwIfRoot is not a function	TypeError: ref._throwIfRoot is not a function
+    at getDownloadURL$1 (D:\ntav-workspace\job\travelling-website\backend\node_modules\@firebase\storage\dist\index.node.cjs.js:3078:9)
+    at getDownloadURL (D:\ntav-workspace\job\travelling-website\backend\node_modules\@firebase\storage\dist\index.node.cjs.js:3534:12)
+    at D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:106:59
+    at Array.map (<anonymous>)
+    at module.exports.addTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:106:46)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+69c28c1c-80a8-4cf7-973c-863d06a1e8bd	08-11-2022	08:05:40	POST	/api/tour	storageRef is not defined	ReferenceError: storageRef is not defined
+    at D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:102:28
+    at Array.map (<anonymous>)
+    at module.exports.addTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:101:12)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+3b9556c5-cb57-449f-87e9-46ccfdfffddc	08-11-2022	08:26:51	PUT	/api/tour	Tour validation failed: time.departureDates.0: Cast to [date] failed for value "[ '[218330010000000]' ]" (type string) at path "time.departureDates.0" because of "CastError"	ValidationError: Tour validation failed: time.departureDates.0: Cast to [date] failed for value "[ '[218330010000000]' ]" (type string) at path "time.departureDates.0" because of "CastError"
+    at model.Document.invalidate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\document.js:3097:32)
+    at model.$set (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\document.js:1452:12)
+    at Document.set [as departureDates] (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\document\compile.js:194:19)
+    at module.exports.editTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:191:30)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+7e99b2e0-8f2c-45d8-8cf1-ae5003298a55	08-11-2022	08:42:40	DELETE	/api/tour/	Cast to ObjectId failed for value "{}" (type Object) at path "_id" for model "Tour"	CastError: Cast to ObjectId failed for value "{}" (type Object) at path "_id" for model "Tour"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+a25263ff-0358-4a3f-a3fb-4d4ee9f64388	08-11-2022	08:50:13	PUT	/api/tour	Firebase Storage: The operation 'deleteObject' cannot be performed on a root reference, create a non-root reference using child, such as .child('file.png'). (storage/invalid-root-operation)	FirebaseError: Firebase Storage: The operation 'deleteObject' cannot be performed on a root reference, create a non-root reference using child, such as .child('file.png'). (storage/invalid-root-operation)

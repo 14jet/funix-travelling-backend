@@ -13,11 +13,12 @@ const reviewTourValidator = require("../validators/reviewTour");
 const addItineraryValidator = require("../validators/addItinerary.js");
 const addTourValidator = require("../validators/addTour");
 const editTourValidator = require("../validators/editTour");
+const deleteTourValidator = require("../validators/deleteTour");
 
 // routes
 router.post("/", multer.multiple, addTourValidator, tourController.addTour); // tao tour
 router.put("/", multer.multiple, editTourValidator, tourController.editTour);
-router.delete("/", tourController.deleteTour);
+router.delete("/", deleteTourValidator, tourController.deleteTour);
 router.get("/", tourController.getTours);
 router.get("/:tourId", tourController.getSingleTour);
 router.get("/review", tourController.getReviews);

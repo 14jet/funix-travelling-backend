@@ -5,16 +5,13 @@ const Review = require("../models/review");
 const createError = require("../helpers/errorCreator");
 const fbStorage = require("../helpers/firebase");
 const {
-  getStorage,
   ref,
   uploadBytes,
-  uploadBytesResumable,
   getDownloadURL,
+  deleteObject,
 } = require("firebase/storage");
-
-const metadata = {
-  contentType: "image/jpeg",
-};
+const { v4: uuid } = require("uuid");
+const getFileExtension = require("../helpers/getFileExtension");
 
 module.exports.addReview = async (req, res, next) => {
   try {
@@ -83,36 +80,23 @@ module.exports.addTour = async (req, res, next) => {
     const files = req.files;
 
     // upload files to firebase storage
+    const refs = files.map((file) => ({
+      file: file.buffer,
+      ref: ref(
+        fbStorage,
+        "images/" + uuid() + "." + getFileExtension(file.originalname)
+      ),
+    }));
 
-    let fileURLs = [];
-    for (const file of files) {
-      const storageRef = ref(fbStorage, "images/" + file.filename);
-      const result = await uploadBytes(storageRef, file.buffer);
-      console.log(result);
-      // const uploadTask = uploadBytesResumable(
-      //   storageRef,
-      //   file.buffer,
-      //   metadata
-      // );
+    await Promise.all(
+      refs.map((ref) => {
+        return uploadBytes(ref.ref, ref.file);
+      })
+    );
 
-      // uploadTask.on(
-      //   "state_changed",
-      //   (snapshot) => {},
-      //   (error) => {
-      //     console.error(error.message);
-      //     return next(createError(error, 500));
-      //   },
-      //   () => {
-      //     // Upload completed successfully, now we can get the download URL
-      //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-      //       console.log("File available at", downloadURL);
-      //       fileURLs.push(downloadURL);
-      //     });
-      //   }
-      // );
-    }
-
-    // const fileURLs = files.map((item) => item.path);
+    const imageURLs = await Promise.all(
+      refs.map((ref) => getDownloadURL(ref.ref))
+    );
 
     await Tour.create({
       name,
@@ -125,7 +109,7 @@ module.exports.addTour = async (req, res, next) => {
         includes: JSON.parse(priceIncludes),
         excludes: JSON.parse(priceExcludes),
       },
-      images: fileURLs,
+      images: imageURLs,
       time: {
         departureDates: JSON.parse(departureDates),
         duration: duration,
@@ -181,33 +165,52 @@ module.exports.editTour = async (req, res, next) => {
       );
     }
 
+    // upload new images to firebase storage
     const files = req.files;
-    // const fileURLs = files.map(
-    //   (item) => new URL(item.filename, "http://localhost:5000/images/")
-    // );
+    const refs = files.map((file) => ({
+      file: file.buffer,
+      ref: ref(
+        fbStorage,
+        "images/" + uuid() + "." + getFileExtension(file.originalname)
+      ),
+    }));
 
-    const fileURLs = files.map((item) => item.path);
-    // loại những hình người dùng loại ra
-    // thêm những hình người dùng thêm vào
-    // còn 1 bước xóa ở storage nữa nhưng tính sau, để đọc về firebase đã
-    let newImages = tour.images;
-    if (removedImages) {
-      newImages = tour.images.filter((item) => !removedImages.includes(item));
+    await Promise.all(
+      refs.map((ref) => {
+        return uploadBytes(ref.ref, ref.file);
+      })
+    );
+
+    const imageURLs = await Promise.all(
+      refs.map((ref) => getDownloadURL(ref.ref))
+    );
+
+    const tourUpdatedImages = tour.images
+      .filter((item) => !JSON.parse(removedImages).includes(item))
+      .concat(imageURLs);
+
+    // delete old files from firebase storage
+    for (const image of JSON.parse(removedImages)) {
+      deleteObject(ref(fbStorage, image))
+        .then(() => {
+          return true;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
-
-    newImages = newImages.concat(fileURLs);
 
     tour.name = name;
     tour.journey = journey;
     tour.description = description;
-    tour.highlights = highlights;
-    tour.time.departureDates = departureDates;
+    tour.highlights = JSON.parse(highlights);
+    tour.time.departureDates = JSON.parse(departureDates);
     tour.time.duration = duration;
     tour.price.from = lowestPrice;
-    tour.price.includes = priceIncludes;
-    tour.price.excludes = priceExcludes;
-    tour.cancellationPolicy = cancellationPolicy;
-    tour.images = newImages;
+    tour.price.includes = JSON.parse(priceIncludes);
+    tour.price.excludes = JSON.parse(priceExcludes);
+    tour.cancellationPolicy = JSON.parse(cancellationPolicy);
+    tour.images = tourUpdatedImages;
 
     await tour.save();
 
@@ -224,15 +227,14 @@ module.exports.editTour = async (req, res, next) => {
 
 module.exports.deleteTour = async (req, res, next) => {
   try {
-    const { tourId } = req.body;
-    if (!mongoose.Types.ObjectId.isValid(tourId)) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Can not cast tourId to ObjectId",
-          vi: "tourId không hợp lệ",
-        })
-      );
+    // validation;
+    const result = validationResult(req);
+    const hasError = !result.isEmpty();
+    if (hasError) {
+      return res.status(400).json({ message: result.array()[0].msg });
     }
+
+    const { tourId } = req.body;
 
     const tour = await Tour.findOne({ _id: tourId });
     if (!tour) {
@@ -242,6 +244,17 @@ module.exports.deleteTour = async (req, res, next) => {
           vi: "Không tìm thấy tour",
         })
       );
+    }
+
+    const images = tour.images;
+    for (const image of images) {
+      deleteObject(ref(fbStorage, image))
+        .then(() => {
+          return true;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
 
     await tour.remove();
