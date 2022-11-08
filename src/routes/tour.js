@@ -15,8 +15,8 @@ const addTourValidator = require("../validators/addTour");
 const editTourValidator = require("../validators/editTour");
 
 // routes
-router.post("/", addTourValidator, multer.multiple, tourController.addTour); // tao tour
-router.put("/", editTourValidator, multer.multiple, tourController.editTour);
+router.post("/", multer.multiple, addTourValidator, tourController.addTour); // tao tour
+router.put("/", multer.multiple, editTourValidator, tourController.editTour);
 router.delete("/", tourController.deleteTour);
 router.get("/", tourController.getTours);
 router.get("/:tourId", tourController.getSingleTour);

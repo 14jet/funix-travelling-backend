@@ -3,6 +3,18 @@ const { validationResult } = require("express-validator");
 const Tour = require("../models/tour");
 const Review = require("../models/review");
 const createError = require("../helpers/errorCreator");
+const fbStorage = require("../helpers/firebase");
+const {
+  getStorage,
+  ref,
+  uploadBytes,
+  uploadBytesResumable,
+  getDownloadURL,
+} = require("firebase/storage");
+
+const metadata = {
+  contentType: "image/jpeg",
+};
 
 module.exports.addReview = async (req, res, next) => {
   try {
@@ -47,12 +59,12 @@ module.exports.addReview = async (req, res, next) => {
 
 module.exports.addTour = async (req, res, next) => {
   try {
-    // validation
-    // const result = validationResult(req);
-    // const hasError = !result.isEmpty();
-    // if (hasError) {
-    //   return res.status(400).json({ message: result.array()[0].msg });
-    // }
+    // validation;
+    const result = validationResult(req);
+    const hasError = !result.isEmpty();
+    if (hasError) {
+      return res.status(400).json({ message: result.array()[0].msg });
+    }
 
     const {
       name,
@@ -69,28 +81,56 @@ module.exports.addTour = async (req, res, next) => {
     } = req.body;
 
     const files = req.files;
-    // const fileURLs = files.map(
-    //   (item) => new URL(item.filename, "http://localhost:5000/images/")
-    // );
-    const fileURLs = files.map((item) => item.path);
+
+    // upload files to firebase storage
+
+    let fileURLs = [];
+    for (const file of files) {
+      const storageRef = ref(fbStorage, "images/" + file.filename);
+      const result = await uploadBytes(storageRef, file.buffer);
+      console.log(result);
+      // const uploadTask = uploadBytesResumable(
+      //   storageRef,
+      //   file.buffer,
+      //   metadata
+      // );
+
+      // uploadTask.on(
+      //   "state_changed",
+      //   (snapshot) => {},
+      //   (error) => {
+      //     console.error(error.message);
+      //     return next(createError(error, 500));
+      //   },
+      //   () => {
+      //     // Upload completed successfully, now we can get the download URL
+      //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+      //       console.log("File available at", downloadURL);
+      //       fileURLs.push(downloadURL);
+      //     });
+      //   }
+      // );
+    }
+
+    // const fileURLs = files.map((item) => item.path);
 
     await Tour.create({
       name,
       journey,
       description,
-      highlights,
+      highlights: JSON.parse(highlights),
       itinerary,
       price: {
         from: lowestPrice,
-        includes: priceIncludes,
-        excludes: priceExcludes,
+        includes: JSON.parse(priceIncludes),
+        excludes: JSON.parse(priceExcludes),
       },
       images: fileURLs,
       time: {
-        departureDates: departureDates,
+        departureDates: JSON.parse(departureDates),
         duration: duration,
       },
-      cancellationPolicy,
+      cancellationPolicy: JSON.parse(cancellationPolicy),
     });
 
     return res.status(200).json({
@@ -106,7 +146,7 @@ module.exports.addTour = async (req, res, next) => {
 
 module.exports.editTour = async (req, res, next) => {
   try {
-    validation;
+    // validation;
     const result = validationResult(req);
     const hasError = !result.isEmpty();
     if (hasError) {
