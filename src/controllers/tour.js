@@ -394,6 +394,34 @@ module.exports.updateItinerary = async (req, res, next) => {
         })
       );
     }
+
+    // get removed images
+    const removedImgs = tour.itinerary.filter(
+      (img) => !JSON.stringify(itinerary).includes(img)
+    );
+
+    // lấy tất cả các image trong itinerary mới được cập nhật
+    const updatedImgs = itinerary.reduce((prev, cur) => {
+      if (cur.type === "para") {
+        let imgs = [];
+        cur.content.ops.forEach((insert) => {
+          if (insert.image) {
+            imgs.push(insert.image);
+          }
+        });
+        return [...prev, ...imgs];
+      }
+    }, []);
+
+    console.log("remove: ", removedImgs);
+    console.log("update: ", updatedImgs);
+    return res.status(200).json({
+      message: {
+        en: "Updated itinerary successfully",
+        vi: "Cập nhật tour thành công",
+      },
+    });
+
     tour.itinerary = itinerary;
     await tour.save();
     return res.status(200).json({
