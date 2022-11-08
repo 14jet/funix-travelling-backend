@@ -106,7 +106,7 @@ module.exports.addTour = async (req, res, next) => {
 
 module.exports.editTour = async (req, res, next) => {
   try {
-    validation;
+    // validation;
     const result = validationResult(req);
     const hasError = !result.isEmpty();
     if (hasError) {
