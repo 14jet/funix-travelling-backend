@@ -7,7 +7,7 @@ const app = require("express")();
 // middlewares
 app.use(require("./middlewares/cors"));
 app.set("trust proxy", 1);
-app.use(require("body-parser").json());
+app.use(require("body-parser").json({ limit: "50mb" }));
 app.use("/images", require("./middlewares/staticFile"));
 
 // routes

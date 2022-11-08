@@ -9,9 +9,11 @@ const {
   uploadBytes,
   getDownloadURL,
   deleteObject,
+  uploadString,
 } = require("firebase/storage");
 const { v4: uuid } = require("uuid");
-const getFileExtension = require("../helpers/getFileExtension");
+const getExt = require("../helpers/getFileExtension");
+const getItineraryImgs = require("../helpers/getItineraryImgs");
 
 module.exports.addReview = async (req, res, next) => {
   try {
@@ -84,7 +86,7 @@ module.exports.addTour = async (req, res, next) => {
       file: file.buffer,
       ref: ref(
         fbStorage,
-        "images/" + uuid() + "." + getFileExtension(file.originalname)
+        "images/" + uuid() + "." + getExt.filename(file.originalname)
       ),
     }));
 
@@ -171,7 +173,7 @@ module.exports.editTour = async (req, res, next) => {
       file: file.buffer,
       ref: ref(
         fbStorage,
-        "images/" + uuid() + "." + getFileExtension(file.originalname)
+        "images/" + uuid() + "." + getExt.filename(file.originalname)
       ),
     }));
 
@@ -303,32 +305,6 @@ module.exports.getReviews = async (req, res, next) => {
 
 module.exports.getTours = async (req, res, next) => {
   try {
-    // let { page, limit } = req.query;
-    // if (!limit) {
-    //   limit = 8;
-    // }
-
-    // if (!page) {
-    //   page = 1;
-    // }
-
-    // const tours = await Tour.find()
-    //   .skip((page - 1) * limit)
-    //   .limit(limit);
-
-    // const totalCount = await Tour.countDocuments();
-    // const remainCount = totalCount - ((page - 1) * limit + tours.length);
-    // const totalPages = Math.ceil(totalCount / limit);
-    // const remailPages = totalPages - page;
-
-    // return res.status(200).json({
-    //   items: tours,
-    //   totalCount,
-    //   remainCount,
-    //   totalPages,
-    //   remailPages,
-    // });
-
     const tours = await Tour.find();
     return res.status(200).json({
       items: tours,
@@ -351,7 +327,8 @@ module.exports.getSingleTour = async (req, res, next) => {
       );
     }
 
-    const tour = await Tour.findOne({ _id: tourId });
+    const tours = await Tour.find();
+    const tour = tours.find((item) => item._id.toString() === tourId);
     if (!tour) {
       return next(
         createError(new Error(""), 404, {
@@ -361,9 +338,7 @@ module.exports.getSingleTour = async (req, res, next) => {
       );
     }
 
-    const relatedTours = (await Tour.find()).filter(
-      (item) => item._id.toString() !== tourId
-    );
+    const relatedTours = tours.filter((item) => item._id.toString() !== tourId);
 
     return res.status(200).json({
       item: tour,
@@ -395,34 +370,55 @@ module.exports.updateItinerary = async (req, res, next) => {
       );
     }
 
-    // get removed images
-    const removedImgs = tour.itinerary.filter(
+    // lấy hình đã xóa:
+    const removedImgs = getItineraryImgs(tour.itinerary).filter(
       (img) => !JSON.stringify(itinerary).includes(img)
     );
 
-    // lấy tất cả các image trong itinerary mới được cập nhật
-    const updatedImgs = itinerary.reduce((prev, cur) => {
-      if (cur.type === "para") {
-        let imgs = [];
-        cur.content.ops.forEach((insert) => {
-          if (insert.image) {
-            imgs.push(insert.image);
-          }
+    // xóa hình
+    for (const image of removedImgs) {
+      deleteObject(ref(fbStorage, image))
+        .then(() => {
+          return true;
+        })
+        .catch((error) => {
+          console.error(error);
         });
-        return [...prev, ...imgs];
-      }
-    }, []);
+    }
 
-    console.log("remove: ", removedImgs);
-    console.log("update: ", updatedImgs);
-    return res.status(200).json({
-      message: {
-        en: "Updated itinerary successfully",
-        vi: "Cập nhật tour thành công",
-      },
+    // lấy hình mới thêm vào (là hình base64)
+    const newImgs = getItineraryImgs(itinerary).filter((text) =>
+      text.startsWith("data:image")
+    );
+
+    // upload lên firebase
+    let refs = newImgs.map((text) => {
+      return {
+        base64text: text,
+        ref: ref(fbStorage, "images/" + uuid() + "." + getExt.base64(text)[1]),
+      };
     });
 
-    tour.itinerary = itinerary;
+    await Promise.all(
+      refs.map((ref) => {
+        return uploadString(ref.ref, ref.base64text, "data_url");
+      })
+    );
+
+    const imageURLs = await Promise.all(
+      refs.map((ref) => getDownloadURL(ref.ref))
+    );
+
+    // ráp url ảnh mới upload lên firebase vào mảng refs
+    refs = refs.map((item, index) => ({ ...item, newUrl: imageURLs[index] }));
+
+    // thay tương ứng vào itinerary
+    let itineraryText = JSON.stringify(itinerary);
+    refs.forEach((item) => {
+      itineraryText = itineraryText.replace(item.base64text, item.newUrl);
+    });
+
+    tour.itinerary = JSON.parse(itineraryText);
     await tour.save();
     return res.status(200).json({
       message: {
