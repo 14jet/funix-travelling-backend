@@ -16,16 +16,20 @@ router.get("/", articleControllers.getArticles);
 router.get("/:articleId", articleControllers.getSingleArticle);
 router.post(
   "/",
-  requireAdmin,
+  // requireAdmin,
   addArticleValidator,
   articleControllers.addArticle
 );
 router.put(
   "/",
-  requireAdmin,
+  // requireAdmin,
   editArticleValidator,
   articleControllers.editArticle
 );
-router.delete("/", requireAdmin, articleControllers.deleteArticle);
+router.delete(
+  "/", 
+  // requireAdmin, 
+  articleControllers.deleteArticle
+);
 
 module.exports = router;

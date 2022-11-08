@@ -13,9 +13,10 @@ module.exports.addArticle = async (req, res, next) => {
     // }
 
     const { title, authorId, content } = req.body;
-
+    const objectid=mongoose.Types.ObjectId
+    console.log(req.body)
     // check if authorId can cast to ObjectId
-    if (!mongoose.Types.ObjectId.isValid(authorId)) {
+    if (new objectid(authorId)!==authorId) {  
       return next(
         createError(new Error(""), 400, {
           en: "Can not cast authorId to ObjectId",
@@ -23,12 +24,16 @@ module.exports.addArticle = async (req, res, next) => {
         })
       );
     }
-
+    console.log({
+      title,
+      authorId,
+      content,
+    })
     await Article.create({
       title,
       authorId,
       content,
-    });
+    }).save();
 
     return res.status(200).json({
       message: {
@@ -129,11 +134,11 @@ module.exports.getArticles = async (req, res, next) => {
       page = 1;
     }
 
-    const articles = await Tour.find()
+    const articles = await Article.find()
       .skip((page - 1) * limit)
       .limit(limit);
 
-    const totalCount = await Tour.countDocuments();
+    const totalCount = await Article.countDocuments();
     const remainCount = totalCount - ((page - 1) * limit + articles.length);
     const totalPages = Math.ceil(totalCount / limit);
     const remailPages = totalPages - page;
@@ -164,7 +169,7 @@ module.exports.getSingleArticle = async (req, res, next) => {
     }
 
     const article = await Article.findOne({ _id: articleId });
-    if (!tour) {
+    if (!Article) {
       return next(
         createError(new Error(""), 404, {
           en: "Article Not Found",
@@ -175,11 +180,10 @@ module.exports.getSingleArticle = async (req, res, next) => {
 
     // get some random tours
     const relatedArticles = (
-      await tour.aggregate([{ $sample: { size: 8 } }])
+      await article.aggregate([{ $sample: { size: 8 } }])
     ).filter((item) => item._id !== articleId);
 
     return res.status(200).json({
-      item: tour,
       relatedItems: relatedArticles,
     });
   } catch (error) {

@@ -2066,3 +2066,68 @@ a4efa88d-9e91-42d0-b838-a14934d66803	08-11-2022	08:04:28	POST	/api/tour	ref._thr
     at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
 a25263ff-0358-4a3f-a3fb-4d4ee9f64388	08-11-2022	08:50:13	PUT	/api/tour	Firebase Storage: The operation 'deleteObject' cannot be performed on a root reference, create a non-root reference using child, such as .child('file.png'). (storage/invalid-root-operation)	FirebaseError: Firebase Storage: The operation 'deleteObject' cannot be performed on a root reference, create a non-root reference using child, such as .child('file.png'). (storage/invalid-root-operation)
+0868515e-4460-4e4f-98ec-6e2c41d33134	08-11-2022	10:53:29	GET	/api/article	Tour is not defined	ReferenceError: Tour is not defined
+    at module.exports.getArticles (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:132:22)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:47:12)
+a81ba06e-5caf-4bbe-a0d9-ae27fc8b0b01	08-11-2022	11:01:42	GET	/api/article	Tour is not defined	ReferenceError: Tour is not defined
+    at module.exports.getArticles (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:132:22)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:47:12)
+a19335c0-a5c8-44bc-b7cf-22275bba4507	08-11-2022	11:02:36	GET	/api/article	Tour is not defined	ReferenceError: Tour is not defined
+    at module.exports.getArticles (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:132:22)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:47:12)
+5cedd971-52ba-42d5-8aa2-e7fee58716b5	08-11-2022	11:03:42	GET	/api/article	Tour is not defined	ReferenceError: Tour is not defined
+    at module.exports.getArticles (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:132:22)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\index.js:47:12)
+dcef80cf-2c7e-46a1-b982-1bcd44235e4d	08-11-2022	11:05:54	POST	/api/article	
+6000b1d7-03aa-4767-b9ef-9e6d24ad0e8e	08-11-2022	11:07:34	POST	/api/article	
+69785bc1-21bc-4a94-beba-f259b846ba4c	08-11-2022	11:07:37	POST	/api/article	
+dc4b383a-34ae-4be2-b8e5-495231c3ebf4	08-11-2022	11:08:13	POST	/api/article	
+56f05b92-f752-437a-9cff-efc72e7a23ce	08-11-2022	11:17:32	POST	/api/article	
+b78929e1-5fe4-49f4-b43d-af8130a97407	08-11-2022	11:20:27	POST	/api/article	
+654f47db-efc2-4f37-8190-27c1e0d57c00	08-11-2022	03:09:27	POST	/api/article	
+25a1acbb-07fe-488d-b5fc-c626120be0a4	08-11-2022	03:30:38	POST	/api/article	
+dd16035d-ac32-47b8-8789-c29e53068290	08-11-2022	03:41:04	POST	/api/article	
+5daccf6a-8031-41d1-a512-fec5622f3de8	08-11-2022	03:50:02	POST	/api/article	Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer	BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+    at new BSONTypeError (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\bson\lib\error.js:41:28)
+    at new ObjectId (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\bson\lib\objectid.js:67:23)
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:23:9)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+00782378-b08e-4e5c-9491-4163230cd38f	08-11-2022	03:51:11	POST	/api/article	
+3b60c485-6b2a-44e0-96f0-fcf7cd550648	08-11-2022	03:52:17	POST	/api/article	
+2bac6423-69a1-40c5-8fce-7e68cd6f0261	08-11-2022	03:53:18	POST	/api/article	
