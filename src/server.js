@@ -15,6 +15,7 @@ app.use("/api/user", require("./routes/user"));
 app.use("/api/tour", require("./routes/tour"));
 app.use("/api/article", require("./routes/article"));
 app.use("/api/file", require("./routes/file"));
+app.use("/api/visa", require("./routes/visa"));
 
 // 404 handler
 app.all("*", require("./middlewares/notFound"));
