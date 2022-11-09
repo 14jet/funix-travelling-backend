@@ -2365,3 +2365,120 @@ d7864107-7db6-448f-9a23-62611b4ec17a	08-11-2022	12:15:18	PUT	/api/tour/itinerary
 9efd1882-b05d-484b-88e9-6945f3534b6f	08-11-2022	12:21:13	PUT	/api/tour/itinerary	request entity too large
 93641829-1335-4c14-a8ee-8e3352ff8402	08-11-2022	02:38:43	PUT	/api/tour	
 >>>>>>> 49f2900fbcbf6ef9a54d4400af887a3af62fe6b2
+9945e8c3-f0bc-4403-952e-ffb86f0cc96f	08-11-2022	04:03:01	POST	/api/article	
+a6c56546-7aa4-4960-bdfb-52a539ad2d82	08-11-2022	04:03:36	POST	/api/article	
+eec01bbf-82d2-472d-a83b-719c375d4bbd	08-11-2022	04:06:47	POST	/api/article	
+33aae607-7d0e-423d-ab12-9ab04437eee8	08-11-2022	04:08:53	POST	/api/article	
+1e311a27-e90c-495c-889d-9cecf310412f	08-11-2022	04:10:58	POST	/api/article	
+127f0930-be54-4855-a7b1-87413a7cd83b	08-11-2022	04:20:41	POST	/api/article	
+a164f859-0ba4-4353-a359-eecadabd1212	08-11-2022	04:26:49	POST	/api/article	
+abce9bf5-f091-486c-a6c9-26a982a3aba1	08-11-2022	04:33:05	POST	/api/article	
+5b987682-1192-4ae0-9798-3c4835e6d56b	08-11-2022	04:35:24	POST	/api/article	
+deeb76cd-7ec6-4328-92eb-303272f01e80	08-11-2022	04:40:49	POST	/api/article	
+2327b666-e9b7-4a6d-85a3-47c2c3dc921e	08-11-2022	04:42:43	POST	/api/article	
+81aaa219-c80e-40a1-a71f-f1ae96428cdb	08-11-2022	04:45:40	POST	/api/article	
+d6ac3995-1292-4cf6-8d4b-50ee0f0f35cb	08-11-2022	04:49:10	POST	/api/article	
+82d4cf75-d3ec-4656-b343-216e4e8ef278	08-11-2022	04:52:59	POST	/api/article	Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer	BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+    at new BSONTypeError (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\bson\lib\error.js:41:28)
+    at new ObjectId (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\bson\lib\objectid.js:67:23)
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:24:59)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+338e6ba3-ead2-4c72-b828-3c4d12f050c0	08-11-2022	04:56:01	POST	/api/article	Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer	BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+    at new BSONTypeError (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\bson\lib\error.js:41:28)
+    at new ObjectId (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\bson\lib\objectid.js:67:23)
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:25:23)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+379d16b6-d7ce-460e-a11f-85a6501896d7	08-11-2022	05:18:19	POST	/api/article	Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer	BSONTypeError: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer
+    at new BSONTypeError (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\bson\lib\error.js:41:28)
+    at new ObjectId (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\bson\lib\objectid.js:67:23)
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:25:23)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+0c220cc6-ce5f-482a-a1d6-9663a2bd601d	08-11-2022	05:23:00	POST	/api/article	Article.create(...).save is not a function	TypeError: Article.create(...).save is not a function
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:24:8)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+99ec56a4-abc0-4f1c-b747-2b8b48c5da45	08-11-2022	05:31:15	POST	/api/article	Article validation failed: authorId: Path `authorId` is required.	ValidationError: Article validation failed: authorId: Path `authorId` is required.
+    at model.Document.invalidate (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\mongoose\lib\document.js:3097:32)
+    at C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\mongoose\lib\document.js:2885:17
+    at C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\mongoose\lib\schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+a6ace139-76b1-4db0-bd3d-8100d975500b	08-11-2022	05:36:37	GET	/api/tour/undefined	
+1dd8d709-8b14-4993-b762-b2bc4aeb7458	08-11-2022	05:43:26	DELETE	/api/article/636a31243c55da7a77934dff	Route Not Found
+dafed6ef-8fdd-484e-a71a-441e03b5d114	08-11-2022	06:23:01	POST	/api/article	Unexpected token o in JSON at position 1	SyntaxError: Unexpected token o in JSON at position 1
+    at JSON.parse (<anonymous>)
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:19:20)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+43f2b0f8-15b8-46ec-9558-e5263e7edc39	08-11-2022	08:51:47	POST	/api/article	Unexpected token o in JSON at position 1	SyntaxError: Unexpected token o in JSON at position 1
+    at JSON.parse (<anonymous>)
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:19:20)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+b45efd82-41a0-4556-8ef0-fdcfc7c9a112	08-11-2022	08:55:08	POST	/api/article	getItineraryImgs is not defined	ReferenceError: getItineraryImgs is not defined
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:30:21)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+f268861f-0fd8-4a96-acb1-bd5a067d1a50	08-11-2022	08:55:25	GET	/favicon.ico	Route Not Found
+faf95ec5-af10-488d-bd49-5c17683d3d8e	08-11-2022	08:59:04	POST	/api/article	getItineraryImgs is not defined	ReferenceError: getItineraryImgs is not defined
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:30:21)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+3431b819-d803-4829-a2e5-5ea37411b3f2	08-11-2022	09:01:32	POST	/api/article	getItineraryImgs is not defined	ReferenceError: getItineraryImgs is not defined
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:30:21)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+d3ee1242-fdbc-4ec8-81a9-5caae027d6ee	08-11-2022	09:12:18	POST	/api/article	itinerary.forEach is not a function	TypeError: itinerary.forEach is not a function
+    at getItineraryImgs (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\helpers\getItineraryImgs.js:15:13)
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:32:21)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+80bc7afb-4f16-4606-9707-5413838f7db2	08-11-2022	09:15:37	POST	/api/article	itinerary.forEach is not a function	TypeError: itinerary.forEach is not a function
+    at getItineraryImgs (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\helpers\getItineraryImgs.js:15:13)
+    at module.exports.addArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:32:21)
+    at Layer.handle [as handle_request] (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+7890d526-d246-48fc-9eee-ef359dd58dff	09-11-2022	09:13:41	GET	/api/tour/undefined	
+3de4c010-58f8-4cab-a540-e192c9b12264	09-11-2022	09:15:10	GET	/api/article/undefined	
+856fde97-e211-4be8-9be8-d4b00e978a85	09-11-2022	09:16:27	GET	/api/article/undefined	
+d06930c4-0179-441b-a877-684ab5e81981	09-11-2022	09:16:42	GET	/api/article/undefined	
+c318e073-0124-4f28-ade6-9a26b47efb77	09-11-2022	09:17:04	GET	/api/article/undefined	
+e0182ef7-6042-474f-bc9a-c764796de556	09-11-2022	09:18:23	GET	/api/article/[object%20Object]	
+70d3175d-75fe-4159-9499-d6c34029accf	09-11-2022	09:18:46	GET	/api/article/undefined	
+220d1f8f-016b-4a12-a6c4-3a19eba2d101	09-11-2022	09:54:22	GET	/api/article/636a7d6efcfe5cbe05345f3f	article.aggregate is not a function	TypeError: article.aggregate is not a function
+    at module.exports.getSingleArticle (C:\Users\toan1\OneDrive\Máy tính\webgotravel\sourcode\backend\funix-travelling-backend\src\controllers\article.js:221:21)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+661343bc-b9b7-42af-a5de-8bcedfe60d80	09-11-2022	10:46:35	GET	/api/article/636a7d6efcfe5cbe05345f3f	
+9d3ad9a5-9a4c-4a47-af99-e19c8a6b80a8	09-11-2022	10:47:48	GET	/api/article/636a7d6efcfe5cbe05345f3f	
+37bba09f-e25b-45e0-8ef8-38b290c67a44	09-11-2022	10:48:43	GET	/api/article/636a7d6efcfe5cbe05345f3f	
+78c3b3cf-b6a5-4655-a517-5b64379763f3	09-11-2022	10:49:14	GET	/api/article/636a7d6efcfe5cbe05345f3f	
+325c5c4b-c406-4d68-97fb-f58f79950244	09-11-2022	10:50:42	GET	/api/article/636a7d6efcfe5cbe05345f3f	
+dc5679b4-3001-4dfb-bf5d-da946e55c953	09-11-2022	03:21:13	DELETE	/api/article/636b5b94e0a64a10c6bc5d37	Route Not Found
+4d90f50d-e768-4587-bd1d-f27fb710bbe1	09-11-2022	03:23:46	DELETE	/api/article/636b5b94e0a64a10c6bc5d37	

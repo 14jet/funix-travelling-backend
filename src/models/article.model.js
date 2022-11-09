@@ -7,6 +7,11 @@ const articleSchema = new Schema(
       type: String,
       required: true,
     },
+    authorId: {
+      type: String,
+      required: true,
+      ref: "User",
+    },
     content: Object,
   },
   { timestamps: true }
