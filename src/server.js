@@ -4,6 +4,7 @@ process.env["NODE_CONFIG_DIR"] = __dirname + "/config/";
 
 const app = require("express")();
 
+
 // middlewares
 app.use(require("./middlewares/cors"));
 app.set("trust proxy", 1);
