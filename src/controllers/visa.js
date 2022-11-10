@@ -12,13 +12,22 @@ module.exports.addVisa = async (req, res, next) => {
       return next(createError(error, 400, result.array()[0].msg));
     }
 
-    const { name, country, detail, price, term, cancellationPolicy } = req.body;
+    const {
+      name,
+      country,
+      detail,
+      price,
+      priceIncludes,
+      term,
+      cancellationPolicy,
+    } = req.body;
 
     await Visa.create({
       name,
       country,
       detail,
       price,
+      priceIncludes,
       term,
       cancellationPolicy,
     });
@@ -42,8 +51,16 @@ module.exports.editVisa = async (req, res, next) => {
       return next(createError(error, 400, result.array()[0].msg));
     }
 
-    const { visaId, name, country, detail, price, term, cancellationPolicy } =
-      req.body;
+    const {
+      visaId,
+      name,
+      country,
+      detail,
+      price,
+      priceIncludes,
+      term,
+      cancellationPolicy,
+    } = req.body;
 
     const visa = await Visa.find({ _id: visaId });
     if (!visa) {
@@ -60,6 +77,7 @@ module.exports.editVisa = async (req, res, next) => {
     visa.detail = detail;
     visa.price = price;
     visa.term = term;
+    visa.priceIncludes = priceIncludes;
     visa.cancellationPolicy = cancellationPolicy;
 
     await visa.save();
