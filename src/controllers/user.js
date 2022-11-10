@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const config = require("config");
@@ -38,7 +37,7 @@ module.exports.login = async (req, res, next) => {
     }
 
     var token = jwt.sign({ username: user.username }, config.get("jwtSecret"), {
-      expiresIn: "1h",
+      expiresIn: "3h",
     });
     return res.status(200).json({
       user: {

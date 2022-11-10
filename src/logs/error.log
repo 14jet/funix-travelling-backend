@@ -2066,8 +2066,6 @@ a4efa88d-9e91-42d0-b838-a14934d66803	08-11-2022	08:04:28	POST	/api/tour	ref._thr
     at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
 a25263ff-0358-4a3f-a3fb-4d4ee9f64388	08-11-2022	08:50:13	PUT	/api/tour	Firebase Storage: The operation 'deleteObject' cannot be performed on a root reference, create a non-root reference using child, such as .child('file.png'). (storage/invalid-root-operation)	FirebaseError: Firebase Storage: The operation 'deleteObject' cannot be performed on a root reference, create a non-root reference using child, such as .child('file.png'). (storage/invalid-root-operation)
-
-
 512d6ffb-f852-47e6-be7b-05b8453a7195	08-11-2022	10:06:50	PUT	/api/tour/itinerary	Cannot read properties of undefined (reading 'insert')	TypeError: Cannot read properties of undefined (reading 'insert')
     at D:\ntav-workspace\job\travelling-website\backend\src\helpers\getItineraryImgs.js:5:26
     at Array.forEach (<anonymous>)
@@ -2364,6 +2362,8 @@ d7864107-7db6-448f-9a23-62611b4ec17a	08-11-2022	12:15:18	PUT	/api/tour/itinerary
 9e34db3a-b076-4db5-bce0-169600107b68	08-11-2022	12:18:22	PUT	/api/tour/itinerary	request entity too large
 9efd1882-b05d-484b-88e9-6945f3534b6f	08-11-2022	12:21:13	PUT	/api/tour/itinerary	request entity too large
 93641829-1335-4c14-a8ee-8e3352ff8402	08-11-2022	02:38:43	PUT	/api/tour	
+0eb6b3a5-440f-41b5-8327-c995875e2c71	08-11-2022	03:58:08	PUT	/api/tour	
+c98d7519-5843-456c-8073-19abeec90452	08-11-2022	04:00:05	PUT	/api/tour	
 >>>>>>> 49f2900fbcbf6ef9a54d4400af887a3af62fe6b2
 9945e8c3-f0bc-4403-952e-ffb86f0cc96f	08-11-2022	04:03:01	POST	/api/article	
 a6c56546-7aa4-4960-bdfb-52a539ad2d82	08-11-2022	04:03:36	POST	/api/article	
