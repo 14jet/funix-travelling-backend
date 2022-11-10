@@ -22,24 +22,24 @@ module.exports.addArticle = async (req, res, next) => {
     //   return res.status(400).json({ message: result.array()[0].msg });
     // }
 
-    const  title = req.body.title;
-    const content=JSON.parse(req.body.content).ops
-    
+    const title = req.body.title;
+    const content = JSON.parse(req.body.content).ops;
+
     // lấy image base64
-    const imagebase64=()=>{
-      const img=[]
-      content.map((item)=>{
-        item.insert.image?img.push(item.insert.image):item
-      })
-      console.log(img)
-      return img
-    }
+    const imagebase64 = () => {
+      const img = [];
+      content.map((item) => {
+        item.insert.image ? img.push(item.insert.image) : item;
+      });
+      console.log(img);
+      return img;
+    };
 
     // lấy hình mới thêm vào (là hình base64)
     const newImgs = imagebase64().filter((text) =>
       text.startsWith("data:image")
     );
-    console.log('newImgs',newImgs)
+    console.log("newImgs", newImgs);
     // upload lên firebase
     let refs = newImgs.map((text) => {
       return {
@@ -57,11 +57,11 @@ module.exports.addArticle = async (req, res, next) => {
     const imageURLs = await Promise.all(
       refs.map((ref) => getDownloadURL(ref.ref))
     );
-    console.log('imageURLs',imageURLs)
+    console.log("imageURLs", imageURLs);
 
     // ráp url ảnh mới upload lên firebase vào mảng refs
     refs = refs.map((item, index) => ({ ...item, newUrl: imageURLs[index] }));
-    console.log('refs',refs)
+    console.log("refs", refs);
     // thay tương ứng vào content
     let contentText = JSON.stringify(content);
     refs.forEach((item) => {
@@ -70,8 +70,8 @@ module.exports.addArticle = async (req, res, next) => {
 
     await Article.create({
       title,
-      content:JSON.parse(contentText)
-    })
+      content: JSON.parse(contentText),
+    });
 
     return res.status(200).json({
       message: {
@@ -86,10 +86,8 @@ module.exports.addArticle = async (req, res, next) => {
 
 module.exports.editArticle = async (req, res, next) => {
   try {
-    
-
     const { postsId, title } = req.body;
-    const content=JSON.parse(req.body.content).ops
+    const content = JSON.parse(req.body.content).ops;
 
     // check if authorId can cast to ObjectId
     if (!mongoose.Types.ObjectId.isValid(postsId)) {
@@ -100,29 +98,29 @@ module.exports.editArticle = async (req, res, next) => {
         })
       );
     }
-    console.log('content',content)
+    console.log("content", content);
     const article = await Article.findOne({ _id: postsId });
 
     //lấy image mới thêm vào base64
-    const imagebase64=()=>{
-      const img=[]
-      content.map((item)=>{
-        item.insert.image?img.push(item.insert.image):item
-      })
-      console.log(img)
-      return img
-    }
+    const imagebase64 = () => {
+      const img = [];
+      content.map((item) => {
+        item.insert.image ? img.push(item.insert.image) : item;
+      });
+      console.log(img);
+      return img;
+    };
 
     // lấy url image trong bài viết củ
-    const urlImageRemove=()=>{
-      const img=[]
-      article.content.map((item)=>{
-        item.insert.image?img.push(item.insert.image):item
-      })
-      console.log(img)
-      return img
-    }
-    
+    const urlImageRemove = () => {
+      const img = [];
+      article.content.map((item) => {
+        item.insert.image ? img.push(item.insert.image) : item;
+      });
+      console.log(img);
+      return img;
+    };
+
     // lấy hình đã xóa:
     const removedImgs = urlImageRemove().filter(
       (img) => !JSON.stringify(content).includes(img)
@@ -143,7 +141,7 @@ module.exports.editArticle = async (req, res, next) => {
     const newImgs = imagebase64().filter((text) =>
       text.startsWith("data:image")
     );
-    console.log('newImgs',newImgs)
+    console.log("newImgs", newImgs);
     // upload lên firebase
     let refs = newImgs.map((text) => {
       return {
@@ -161,24 +159,23 @@ module.exports.editArticle = async (req, res, next) => {
     const imageURLs = await Promise.all(
       refs.map((ref) => getDownloadURL(ref.ref))
     );
-    console.log('imageURLs',imageURLs)
+    console.log("imageURLs", imageURLs);
 
     // ráp url ảnh mới upload lên firebase vào mảng refs
     refs = refs.map((item, index) => ({ ...item, newUrl: imageURLs[index] }));
-    console.log('refs',refs)
+    console.log("refs", refs);
     // thay tương ứng vào content
     let contentText = JSON.stringify(content);
     refs.forEach((item) => {
       contentText = contentText.replace(item.base64text, item.newUrl);
     });
 
-
     await Article.updateOne(
-      { postsId },
+      { _id: postsId },
       {
         $set: {
           title,
-          content:JSON.parse(contentText)
+          content: JSON.parse(contentText),
         },
       },
       { upsert: false }
@@ -198,7 +195,7 @@ module.exports.editArticle = async (req, res, next) => {
 module.exports.deleteArticle = async (req, res, next) => {
   try {
     const { articleId } = req.params;
-    
+
     if (!mongoose.Types.ObjectId.isValid(articleId)) {
       return next(
         createError(new Error(""), 400, {
@@ -210,19 +207,18 @@ module.exports.deleteArticle = async (req, res, next) => {
 
     const articleDelete = await Article.findOne({ _id: articleId });
 
-    
     // lấy url image trong bài viết củ
-    const urlImageRemove=()=>{
-      const img=[]
-      articleDelete.content.map((item)=>{
-        item.insert.image?img.push(item.insert.image):item
-      })
-      console.log(img)
-      return img
-    }
-    
+    const urlImageRemove = () => {
+      const img = [];
+      articleDelete.content.map((item) => {
+        item.insert.image ? img.push(item.insert.image) : item;
+      });
+      console.log(img);
+      return img;
+    };
+
     // lấy hình để xóa:
-    const removedImgs = urlImageRemove()
+    const removedImgs = urlImageRemove();
 
     // xóa hình
     for (const image of removedImgs) {
@@ -312,7 +308,6 @@ module.exports.getSingleArticle = async (req, res, next) => {
       );
     }
 
-   
     return res.status(200).json({
       article,
     });

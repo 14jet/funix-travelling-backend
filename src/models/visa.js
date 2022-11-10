@@ -6,7 +6,7 @@ const visaSchema = new Schema({
   country: String,
   detail: Object,
   price: Number,
-  priceIncludes: OBject,
+  priceIncludes: Object,
   term: Object,
   cancellationPolicy: Object,
 });

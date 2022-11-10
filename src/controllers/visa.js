@@ -62,7 +62,7 @@ module.exports.editVisa = async (req, res, next) => {
       cancellationPolicy,
     } = req.body;
 
-    const visa = await Visa.find({ _id: visaId });
+    const visa = await Visa.findOne({ _id: visaId });
     if (!visa) {
       return next(
         createError(new Error(""), 400, {
@@ -152,7 +152,7 @@ module.exports.getSingleVisa = async (req, res, next) => {
       );
     }
 
-    const visa = await Visa.find({ _id: visaId });
+    const visa = await Visa.findOne({ _id: visaId });
 
     if (!visa) {
       return next(

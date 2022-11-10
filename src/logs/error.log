@@ -2482,3 +2482,6 @@ e0182ef7-6042-474f-bc9a-c764796de556	09-11-2022	09:18:23	GET	/api/article/[objec
 325c5c4b-c406-4d68-97fb-f58f79950244	09-11-2022	10:50:42	GET	/api/article/636a7d6efcfe5cbe05345f3f	
 dc5679b4-3001-4dfb-bf5d-da946e55c953	09-11-2022	03:21:13	DELETE	/api/article/636b5b94e0a64a10c6bc5d37	Route Not Found
 4d90f50d-e768-4587-bd1d-f27fb710bbe1	09-11-2022	03:23:46	DELETE	/api/article/636b5b94e0a64a10c6bc5d37	
+74ee6c52-7057-4d8c-8350-3c877024bfda	10-11-2022	11:27:07	PUT	/api/visa	visa.save is not a function	TypeError: visa.save is not a function
+    at module.exports.editVisa (D:\ntav-workspace\job\travelling-website\backend\src\controllers\visa.js:83:16)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
