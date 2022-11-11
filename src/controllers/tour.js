@@ -192,14 +192,29 @@ module.exports.editTour = async (req, res, next) => {
       .concat(imageURLs);
 
     // delete old files from firebase storage
+    // for (const image of JSON.parse(removedImages)) {
+    //   deleteObject(ref(fbStorage, image))
+    //     .then(() => {
+    //       return true;
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //     });
+    // }
+
     for (const image of JSON.parse(removedImages)) {
-      deleteObject(ref(fbStorage, image))
-        .then(() => {
-          return true;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      try {
+        const ref = ref(fbStorage, image);
+        deleteObject(ref)
+          .then(() => {
+            return true;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     tour.name = name;
