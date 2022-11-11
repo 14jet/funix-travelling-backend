@@ -13,6 +13,7 @@ const editArticleValidator = require("../validators/editArticle");
 
 // routes
 router.get("/", articleControllers.getArticles);
+router.get("/new-articles", articleControllers.getNewArticles);
 router.get("/:articleId", articleControllers.getSingleArticle);
 router.post(
   "/",
@@ -27,8 +28,8 @@ router.put(
   articleControllers.editArticle
 );
 router.delete(
-  "/:articleId", 
-  // requireAdmin, 
+  "/:articleId",
+  // requireAdmin,
   articleControllers.deleteArticle
 );
 

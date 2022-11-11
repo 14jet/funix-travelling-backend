@@ -285,6 +285,38 @@ module.exports.getArticles = async (req, res, next) => {
   }
 };
 
+module.exports.getNewArticles = async (req, res, next) => {
+  try {
+    let { page, limit } = req.query;
+    if (!limit) {
+      limit = 8;
+    }
+
+    if (!page) {
+      page = 1;
+    }
+
+    const articles = await Article.find()
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    const totalCount = await Article.countDocuments();
+    const remainCount = totalCount - ((page - 1) * limit + articles.length);
+    const totalPages = Math.ceil(totalCount / limit);
+    const remailPages = totalPages - page;
+
+    return res.status(200).json({
+      items: articles,
+      totalCount,
+      remainCount,
+      totalPages,
+      remailPages,
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
 module.exports.getSingleArticle = async (req, res, next) => {
   try {
     const { articleId } = req.params;

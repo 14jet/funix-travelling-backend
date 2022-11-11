@@ -305,6 +305,8 @@ module.exports.getReviews = async (req, res, next) => {
 
 module.exports.getTours = async (req, res, next) => {
   try {
+    const { trending } = req.query;
+
     const tours = await Tour.find();
     return res.status(200).json({
       items: tours,
