@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const Tour = require("../models/tour");
+const Category = require("../models/category");
 const createError = require("../helpers/errorCreator");
 const fbStorage = require("../helpers/firebase");
 const {
@@ -62,7 +63,7 @@ module.exports.deleteTour = async (req, res, next) => {
 
 module.exports.getTours = async (req, res, next) => {
   try {
-    let { hot, lang, page, page_size } = req.query;
+    let { lang, page, page_size, country } = req.query;
     if (!lang) {
       lang = "vie";
     }
@@ -76,12 +77,13 @@ module.exports.getTours = async (req, res, next) => {
     }
 
     const conditions = {};
-
-    if (hot) {
-      conditions.hot = hot;
+    if (country) {
+      const cat = await Category.findOne({ type: "country", code: country });
+      conditions.category = { $in: [cat._id.toString()] };
     }
 
     const tours = await Tour.find(conditions)
+      .populate("category")
       .limit(page_size)
       .skip((page - 1) * page_size);
 

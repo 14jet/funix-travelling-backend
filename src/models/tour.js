@@ -5,7 +5,7 @@ const tourSchema = new Schema({
   category: [
     {
       type: String,
-      ref: "Category.categories",
+      ref: "Category",
     },
   ],
   language: {

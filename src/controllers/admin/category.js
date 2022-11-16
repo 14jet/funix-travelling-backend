@@ -1,9 +1,10 @@
 const createError = require("../../helpers/errorCreator");
 const Category = require("../../models/category");
+const orderCat = require("../../helpers/orderCat");
 
 module.exports.getCategories = async (req, res, next) => {
   try {
-    const categories = await Category.find();
+    const categories = await Category.find().populate("parent");
     return res.status(200).json({ data: categories });
   } catch (error) {
     next(createError(error, 500));
@@ -12,20 +13,26 @@ module.exports.getCategories = async (req, res, next) => {
 
 module.exports.addCategorieItem = async (req, res, next) => {
   try {
-    const { cat_type, cat_name, cat_code } = req.body;
-    console.log(cat_code, cat_name, cat_type);
+    const { code, type, parent } = req.body;
 
-    let category = await Category.findOne({ cat_type });
+    let category = await Category.findOne({
+      $or: [{ parent, code }],
+    });
+
     if (!category) {
-      category = await Category.create({
-        cat_type,
-        categories: [{ cat_name, cat_code }],
-      });
-    } else {
-      category.categories.push({ cat_name, cat_code });
+      if (parent) {
+        await Category.create({
+          code,
+          parent,
+          type,
+        });
+      } else {
+        await Category.create({
+          code,
+          type,
+        });
+      }
     }
-
-    await category.save();
 
     return res.status(200).json({
       code: 200,

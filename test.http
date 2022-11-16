@@ -4,7 +4,7 @@ GET http://localhost:5000/api/article/?lang=en&page=3&page_size=8 HTTP/1.1
 
 
 ###
-GET http://localhost:5000/api/tour/?lang=en&page=1&page_size=8 HTTP/1.1
+GET http://localhost:5000/api/tour/?lang=vi&page=1&page_size=3&country=fr HTTP/1.1
 
 
 ###
@@ -14,3 +14,7 @@ GET http://localhost:5000/api/admin/tour/63735baa79e312fc09f5aa5a HTTP/1.1
 
 ###
 GET http://localhost:5000/api/admin/tour/6373b81fcb83feb6b27c3d88 HTTP/1.1
+
+
+### 
+GET http://localhost:5000/api/admin/categories?lang=vie HTTP/1.1

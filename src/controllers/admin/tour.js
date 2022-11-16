@@ -1,11 +1,7 @@
-const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 const Tour = require("../../models/tour");
+const Category = require("../../models/category");
 const createError = require("../../helpers/errorCreator");
-const fbStorage = require("../../helpers/firebase");
-
-const { v4: uuid } = require("uuid");
-const getExt = require("../../helpers/getFileExtension");
 const getItineraryImgs = require("../../helpers/getItineraryImgs");
 const uploadFilesToFirebase = require("../../helpers/uploadFilesToFirebase.js");
 const deleteFilesFromFirebase = require("../../helpers/deleteFilesFromFirebase");
@@ -49,6 +45,7 @@ module.exports.addTour = async (req, res, next) => {
     const [thumbUrl] = await uploadFilesToFirebase([thumb]);
 
     await Tour.create({
+      category: JSON.parse(category),
       currentPrice,
       oldPrice,
       priceIncludes: JSON.parse(priceIncludes),
@@ -98,51 +95,13 @@ module.exports.getSingleTour = async (req, res, next) => {
     const data = has_lang ? getItemWithLang(tour, cat_lang) : null;
     const original = getItemWithLang(tour, "vi");
 
+    const categories = await Category.find().populate("parent");
+
     return res.status(200).json({
       data: data,
       metadata: {
         available_lang,
-        categories: [
-          {
-            type: "language",
-            items: [
-              {
-                code: "en",
-                name: "English",
-              },
-              {
-                code: "vi",
-                name: "Tiếng Việt",
-              },
-            ],
-          },
-          {
-            type: "country",
-            items: [
-              {
-                code: "en",
-                name: "England",
-              },
-              {
-                code: "vi",
-                name: "Vietnam",
-              },
-            ],
-          },
-          {
-            type: "city",
-            items: [
-              {
-                code: "paris",
-                name: "Paris",
-              },
-              {
-                code: "hcm",
-                name: "Thành phố Hồ Chí Minh",
-              },
-            ],
-          },
-        ],
+        categories,
         original: original,
       },
     });
@@ -156,6 +115,7 @@ module.exports.updateTour = async (req, res, next) => {
     let {
       tourId,
       language,
+      category,
 
       currentPrice,
       oldPrice,
@@ -174,8 +134,6 @@ module.exports.updateTour = async (req, res, next) => {
       cancellationPolicy,
       removedImages,
     } = req.body;
-
-    console.log(removedImages);
 
     const tour = await Tour.findOne({ _id: tourId });
 
@@ -258,6 +216,7 @@ module.exports.updateTour = async (req, res, next) => {
       }
     }
 
+    tour.category = JSON.parse(category);
     await tour.save();
     return res.status(200).json({
       code: 200,

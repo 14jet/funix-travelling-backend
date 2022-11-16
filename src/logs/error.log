@@ -5721,3 +5721,181 @@ aa670a00-cf1d-48f5-bcdc-0352e2043dca	16-11-2022	01:49:33	GET	/api/admin/categori
     at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:2289:19
     at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\query\completeMany.js:37:32
     at processTicksAndRejections (node:internal/process/task_queues:78:11)
+5a19a994-edda-4444-aa94-2a2ef984fd62	16-11-2022	01:58:36	GET	/api/tour/?lang=en&page=1&page_size=8	Cannot populate path `categories` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError: Cannot populate path `categories` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:48:12)
+    at populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4677:21)
+    at _populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4637:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4614:5
+    at promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:11:14)
+    at Mongoose._promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\index.js:1270:10)
+    at Function.Model.populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4612:23)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:2289:19
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\query\completeMany.js:37:32
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+76768564-7f4f-4d65-81ff-0990c6266502	16-11-2022	01:59:00	GET	/api/tour/?lang=en&page=1&page_size=8	Cannot populate path `Category` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError: Cannot populate path `Category` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:48:12)
+    at populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4677:21)
+    at _populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4637:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4614:5
+    at promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:11:14)
+    at Mongoose._promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\index.js:1270:10)
+    at Function.Model.populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4612:23)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:2289:19
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\query\completeMany.js:37:32
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+d136d3a4-b46c-45e1-b9b8-f48c6702c0b9	16-11-2022	01:59:16	GET	/api/tour/?lang=en&page=1&page_size=8	Cannot populate path `Category.categories` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError: Cannot populate path `Category.categories` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:48:12)
+    at populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4677:21)
+    at _populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4637:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4614:5
+    at promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:11:14)
+    at Mongoose._promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\index.js:1270:10)
+    at Function.Model.populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4612:23)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:2289:19
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\query\completeMany.js:37:32
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+bc5d8320-a65d-4157-9cc6-bf7a2469b48d	16-11-2022	01:59:38	GET	/api/tour/?lang=en&page=1&page_size=8	Cannot populate path `Category` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError: Cannot populate path `Category` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:48:12)
+    at populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4677:21)
+    at _populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4637:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4614:5
+    at promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:11:14)
+    at Mongoose._promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\index.js:1270:10)
+    at Function.Model.populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4612:23)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:2289:19
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\query\completeMany.js:37:32
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+6d157b99-2d93-494e-a8bc-b14443d73fb8	16-11-2022	02:00:04	GET	/api/tour/?lang=en&page=1&page_size=8	Cannot populate path `Category` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError: Cannot populate path `Category` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:48:12)
+    at populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4677:21)
+    at _populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4637:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4614:5
+    at promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:11:14)
+    at Mongoose._promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\index.js:1270:10)
+    at Function.Model.populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4612:23)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:2289:19
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\query\completeMany.js:37:32
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+33e750a1-6ac3-408f-a0c0-0430707fe4b4	16-11-2022	02:00:18	GET	/api/tour/?lang=en&page=1&page_size=8	Cannot populate path `categories` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError: Cannot populate path `categories` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:48:12)
+    at populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4677:21)
+    at _populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4637:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4614:5
+    at promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:11:14)
+    at Mongoose._promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\index.js:1270:10)
+    at Function.Model.populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4612:23)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:2289:19
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\query\completeMany.js:37:32
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+bea75de3-093e-4754-a19b-b5995773c97c	16-11-2022	02:00:38	GET	/api/tour/?lang=en&page=1&page_size=8	Cannot populate path `categories` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError: Cannot populate path `categories` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:48:12)
+    at populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4677:21)
+    at _populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4637:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4614:5
+    at promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:11:14)
+    at Mongoose._promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\index.js:1270:10)
+    at Function.Model.populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4612:23)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:2289:19
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\query\completeMany.js:37:32
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+3855bb08-4fd3-464a-84c3-6a5c9c166f5a	16-11-2022	02:06:46	GET	/api/tour/?lang=en&page=1&page_size=8	Cannot populate path `categories.categories` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError: Cannot populate path `categories.categories` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:48:12)
+    at populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4677:21)
+    at _populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4637:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4614:5
+    at promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:11:14)
+    at Mongoose._promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\index.js:1270:10)
+    at Function.Model.populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4612:23)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:2289:19
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\query\completeMany.js:37:32
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+5ce6eef3-755a-4555-a88d-0bd2e49b73b7	16-11-2022	02:06:48	GET	/api/tour/?lang=en&page=1&page_size=8	Cannot populate path `categories.categories` because it is not in your schema. Set the `strictPopulate` option to false to override.	StrictPopulateError: Cannot populate path `categories.categories` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:48:12)
+    at populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4677:21)
+    at _populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4637:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4614:5
+    at promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:11:14)
+    at Mongoose._promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\index.js:1270:10)
+    at Function.Model.populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4612:23)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:2289:19
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\query\completeMany.js:37:32
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+e61d8283-fa3e-477b-bb50-2417cc290240	16-11-2022	02:11:10	GET	/api/admin/tour/63735baa79e312fc09f5aa5a	Cannot read properties of null (reading 'translation')	TypeError: Cannot read properties of null (reading 'translation')
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:92:33)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+b3bf94e4-4a73-4fb2-8536-473fa7679ed7	16-11-2022	02:11:37	GET	/api/admin/tour/63735baa79e312fc09f5aa5a	Cannot read properties of null (reading 'translation')	TypeError: Cannot read properties of null (reading 'translation')
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:92:33)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+37ba4685-9c59-42ce-9cee-a6c04ffdd131	16-11-2022	02:15:32	GET	/api/tour/?lang=vi&page=1&page_size=100	Schema hasn't been registered for model "Category.categories".
+Use mongoose.model(name, schema)	MissingSchemaError: Schema hasn't been registered for model "Category.categories".
+Use mongoose.model(name, schema)
+    at NativeConnection.Connection.model (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\connection.js:1236:13)
+    at _getModelFromConn (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:578:15)
+    at addModelNamesToMap (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:504:17)
+    at getModelsMapForPopulate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\populate\getModelsMapForPopulate.js:198:7)
+    at populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4677:21)
+    at _populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4637:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4614:5
+    at promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:11:14)
+    at Mongoose._promiseOrCallback (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\index.js:1270:10)
+    at Function.Model.populate (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\model.js:4612:23)
+9b3c2bb2-dfcc-40bf-8ff5-e08706b978eb	16-11-2022	03:24:42	POST	/api/admin/categories?lang=vie	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.addCategorieItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:24:27)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+2ff778d9-861c-4a27-a4b6-9e442e060292	16-11-2022	03:25:20	POST	/api/admin/categories?lang=vie	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.addCategorieItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:24:27)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+4b6eb497-5a0f-4247-933e-f91985432c96	16-11-2022	03:27:20	POST	/api/admin/categories?lang=vie	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.addCategorieItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:24:27)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+52f032c3-b54e-4131-ab8a-6e9a8f4fc639	16-11-2022	03:28:02	POST	/api/admin/categories?lang=vie	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.addCategorieItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:25:27)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+88f04523-8b53-465f-b84a-e64343357a7f	16-11-2022	03:28:57	POST	/api/admin/categories?lang=vie	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.addCategorieItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:25:27)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+ea877155-a249-4b29-a26e-55c00ed15e63	16-11-2022	03:29:25	POST	/api/admin/categories?lang=vie	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.addCategorieItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:25:27)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+457b958a-c353-4286-ab21-c21fb29aa39d	16-11-2022	03:30:24	POST	/api/admin/categories?lang=vie	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.addCategorieItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:25:27)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+59f758df-0557-4b41-b0df-8dfc0e4b8774	16-11-2022	03:31:31	POST	/api/admin/categories?lang=vie	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.addCategorieItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:25:27)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+42d15283-d873-463a-b34b-eae8e43a5919	16-11-2022	03:31:50	POST	/api/admin/categories?lang=vie	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.addCategorieItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:26:27)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+0ddbf420-f08f-48b0-97b5-7a078976dfe0	16-11-2022	03:34:19	POST	/api/admin/categories?lang=vie	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.addCategorieItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:26:27)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+258a0cc8-47bb-4366-b68d-66ce84f3305f	16-11-2022	04:14:31	GET	/api/admin/categories?lang=vie	Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"	CastError: Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+370c4082-f267-4b77-8696-163c50dcaf32	16-11-2022	04:19:43	GET	/api/admin/categories?lang=vie	Cast to ObjectId failed for value "Ngôn ngữ" (type string) at path "_id" for model "Category"	CastError: Cast to ObjectId failed for value "Ngôn ngữ" (type string) at path "_id" for model "Category"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+5f8604dd-7fd3-4d5d-b722-547a2ee11e3e	16-11-2022	05:53:27	POST	/api/admin/categories?lang=vie	name is not defined	ReferenceError: name is not defined
+    at module.exports.addCategorieItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:20:19)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at multerMiddleware (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:13:41)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+bdec64e9-b996-428d-a59d-b06978d5c2ec	16-11-2022	06:53:12	GET	/api/tour/?lang=vi&page=1&page_size=3&country=fr	Category is not defined	ReferenceError: Category is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:80:19)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)

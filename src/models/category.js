@@ -2,11 +2,22 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const categorySchema = new Schema({
-  cat_type: { type: String, required: true },
-  categories: [
+  type: String,
+  name: String,
+  code: String,
+  language: {
+    type: String,
+    default: "vi",
+  },
+  parent: {
+    type: String,
+    ref: "Category",
+    default: null,
+  },
+  translation: [
     {
-      cat_name: { type: String, required: true },
-      cat_code: { type: String, required: true },
+      language: String,
+      name: String,
     },
   ],
 });
