@@ -5899,3 +5899,7 @@ bdec64e9-b996-428d-a59d-b06978d5c2ec	16-11-2022	06:53:12	GET	/api/tour/?lang=vi&
     at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
     at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
     at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+b18a7701-34ce-481e-8d5f-46940a96c5b1	16-11-2022	07:39:11	POST	/api/tour/63740ea87b47b2d148c53752?lang=vie	Cannot read properties of undefined (reading 'itinerary')	TypeError: Cannot read properties of undefined (reading 'itinerary')
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:155:30)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
