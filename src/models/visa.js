@@ -9,6 +9,7 @@ const visaSchema = new Schema({
   priceIncludes: Object,
   term: Object,
   cancellationPolicy: Object,
+  translations: Object,
 });
 
 module.exports = mongoose.model("Visa", visaSchema);

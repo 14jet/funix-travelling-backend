@@ -14,14 +14,6 @@ const { v4: uuid } = require("uuid");
 //   api_secret: "5m3VvAO3sOfJb1dUyQXPTFt4qI4",
 // });
 
-const getFileExtension = (filename) => {
-  let text = filename;
-  while (text.indexOf(".") !== -1) {
-    text = text.slice(text.indexOf(".") + 1);
-  }
-  return "." + text;
-};
-
 // const storage = new CloudinaryStorage({
 //   cloudinary,
 //   allowedFormats: ["jpg", "png", "jpeg"],
@@ -41,9 +33,13 @@ const storage = multer.memoryStorage();
 //   },
 // });
 
-const upload = multer({ storage: storage });
+const upload = multer({
+  storage: storage,
+  limits: { fieldSize: 25 * 1024 * 1024 },
+});
 
 module.exports = {
   single: upload.single("image"),
   multiple: upload.array("images", 100),
+  upload: upload,
 };

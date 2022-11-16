@@ -15,18 +15,7 @@ const editArticleValidator = require("../validators/editArticle");
 router.get("/", articleControllers.getArticles);
 router.get("/new-articles", articleControllers.getNewArticles);
 router.get("/:articleId", articleControllers.getSingleArticle);
-router.post(
-  "/",
-  // requireAdmin,
-  addArticleValidator,
-  articleControllers.addArticle
-);
-router.put(
-  "/",
-  // requireAdmin,
-  editArticleValidator,
-  articleControllers.editArticle
-);
+
 router.delete(
   "/:articleId",
   // requireAdmin,

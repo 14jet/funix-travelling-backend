@@ -4,7 +4,6 @@ process.env["NODE_CONFIG_DIR"] = __dirname + "/config/";
 
 const app = require("express")();
 
-
 // middlewares
 app.use(require("./middlewares/cors"));
 app.set("trust proxy", 1);
@@ -17,6 +16,11 @@ app.use("/api/tour", require("./routes/tour"));
 app.use("/api/article", require("./routes/article"));
 app.use("/api/file", require("./routes/file"));
 app.use("/api/visa", require("./routes/visa"));
+
+// admin
+app.use("/api/admin/categories", require("./routes/admin/category"));
+app.use("/api/admin/article", require("./routes/admin/article"));
+app.use("/api/admin/tour", require("./routes/admin/tour"));
 
 // 404 handler
 app.all("*", require("./middlewares/notFound"));

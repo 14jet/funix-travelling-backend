@@ -2,22 +2,53 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const tourSchema = new Schema({
+  category: [
+    {
+      type: String,
+      ref: "Category.categories",
+    },
+  ],
+  language: {
+    type: String,
+    default: "vi",
+  },
+
   name: String,
   journey: String,
   description: String,
-  highlights: [String],
   itinerary: Array,
-  price: {
-    from: Number,
-    includes: [String],
-    excludes: [String],
-  },
-  images: [String],
-  time: {
-    departureDates: [Date],
-    duration: String,
-  },
+
+  currentPrice: Number,
+  oldPrice: Number,
+  priceIncludes: [String],
+  priceExcludes: [String],
+
+  departureDates: [Date],
+  days: Number,
+  nights: Number,
+
+  highlights: [String],
   cancellationPolicy: [String],
+
+  slider: [String],
+  thumb: String,
+
+  translation: [
+    {
+      language: { type: String, required: true },
+
+      name: String,
+      journey: String,
+      description: String,
+      itinerary: Array,
+
+      priceIncludes: [String],
+      priceExcludes: [String],
+
+      highlights: [String],
+      cancellationPolicy: [String],
+    },
+  ],
 });
 
 // review
