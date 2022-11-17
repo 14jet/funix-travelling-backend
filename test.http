@@ -7,7 +7,7 @@ GET http://localhost:5000/api/article/63733950577e41c952f46df4/?lang=en HTTP/1.1
 
 
 ###
-GET http://localhost:5000/api/tour/?lang=vi&page=1&page_size=3 HTTP/1.1
+GET http://localhost:5000/api/tour/?lang=vi&page=1&page_size=100&continent=europe HTTP/1.1
 
 
 

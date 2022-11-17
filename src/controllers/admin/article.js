@@ -4,8 +4,8 @@ const Article = require("../../models/article");
 const createError = require("../../helpers/errorCreator");
 const uploadFilesToFirebase = require("../../helpers/uploadFilesToFirebase");
 const deleteFilesFromFirebase = require("../../helpers/deleteFilesFromFirebase");
-const sharp = require("sharp");
 const { getItemWithLang } = require("../../services/all");
+const { getDeltaImgs } = require("../../helpers/getItineraryImgs");
 
 module.exports.addArticle = async (req, res, next) => {
   try {
@@ -132,6 +132,7 @@ module.exports.updateArticle = async (req, res, next) => {
     let { title, author, origin, lead, content, language, articleId } =
       req.body;
     const file = req.file;
+    console.log(content);
 
     const article = await Article.findOne({ _id: articleId });
 
@@ -151,7 +152,7 @@ module.exports.updateArticle = async (req, res, next) => {
       language === "vi"
         ? article.content
         : article.translation.find((item) => item.language === language)
-            .content;
+            ?.content;
 
     if (oldContent) {
       let oldImgs = [];
@@ -206,6 +207,45 @@ module.exports.updateArticle = async (req, res, next) => {
       message: {
         en: "Updated",
         vi: "Đã cập nhật",
+      },
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.deleteArticle = async (req, res, next) => {
+  try {
+    const { articleId } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(articleId)) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Can not cast articleId to ObjectId",
+          vi: "articleId không hợp lệ",
+        })
+      );
+    }
+
+    const article = await Article.findOne({ _id: articleId });
+    if (!article) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Article Not Found",
+          vi: "Không tìm thấy bài viết",
+        })
+      );
+    }
+
+    let imgs = getDeltaImgs(article.content).concat([article.thumb]);
+
+    deleteFilesFromFirebase(imgs);
+
+    await article.remove();
+    return res.status(200).json({
+      message: {
+        en: "Deleted article",
+        vi: "Xóa bài viết thành công",
       },
     });
   } catch (error) {

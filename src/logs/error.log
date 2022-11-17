@@ -1,0 +1,662 @@
+5cfd3548-d829-4bc6-93e0-8e0396a6d07a	17-11-2022	12:17:55	POST	/api/admin/article?lang=vie	Cannot read properties of undefined (reading 'buffer')	TypeError: Cannot read properties of undefined (reading 'buffer')
+    at D:\ntav-workspace\job\travelling-website\backend\src\helpers\uploadFilesToFirebase.js:16:18
+    at Array.map (<anonymous>)
+    at uploadFilesToFirebase (D:\ntav-workspace\job\travelling-website\backend\src\helpers\uploadFilesToFirebase.js:15:18)
+    at module.exports.addArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:15:31)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at done (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:45:7)
+    at indicateDone (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:49:68)
+    at Multipart.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:166:7)
+    at Multipart.emit (node:events:513:28)
+54c39455-e602-4fb8-97c4-59ea540660ee	17-11-2022	01:00:45	PUT	/api/admin/article?lang=vie	Cannot read properties of undefined (reading 'content')	TypeError: Cannot read properties of undefined (reading 'content')
+    at module.exports.updateArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:154:13)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+92f6fc0f-24a3-4c67-804f-58323c86e74f	17-11-2022	02:02:38	DELETE	/api/admin/article?lang=vie	Route Not Found
+bc96b2b7-9d1f-47df-9620-1a26312a49e5	17-11-2022	02:02:40	DELETE	/api/admin/article?lang=vie	Route Not Found
+3daae5a3-4772-42d9-9f3f-b893f4e37a62	17-11-2022	02:03:32	DELETE	/api/admin/article?lang=vie	
+6a76ea86-9fe5-4c1d-a932-c2741b7e43ec	17-11-2022	02:15:05	GET	/api/tour?page=1&page_size=6&lang=vie	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:19:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+35e96976-5106-4de6-bddf-8e5a7e6c8a1c	17-11-2022	02:16:07	GET	/api/tour?page=1&page_size=6&lang=vie	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:19:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+7828d84d-13af-414b-ad52-2c83a1ee08e4	17-11-2022	02:16:11	GET	/api/tour?page=1&page_size=6&lang=vie	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:19:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+1bc2f7eb-0442-45cf-a1cc-b7e4b5890a44	17-11-2022	02:16:24	GET	/api/tour?page=1&page_size=6&lang=vie	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:19:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+d44887e2-8897-44ab-9974-1331eeffc91a	17-11-2022	02:17:28	GET	/api/tour?page=1&page_size=6&lang=vie	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:19:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+841f8683-5143-418b-b409-05d9e4db768a	17-11-2022	02:17:33	GET	/api/tour?page=1&page_size=6&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:19:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+017f0c51-db89-47d2-9faa-36aa021bede1	17-11-2022	02:18:02	GET	/api/tour?page=1&page_size=6&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:19:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+cac74d73-8182-4915-a428-3c20c01c677e	17-11-2022	02:18:12	GET	/api/tour?page=1&page_size=6&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:19:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+38c0f813-b20e-49de-834c-c5f8eabfdd3c	17-11-2022	02:19:06	GET	/api/tour?page=1&page_size=6&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:19:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+43c30a27-6db8-4cae-a4a7-62164606e52c	17-11-2022	02:43:02	DELETE	/api/admin/tour?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.deleteTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:287:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+ee3d334c-bda0-422b-92ef-7843f6777479	17-11-2022	02:43:13	DELETE	/api/admin/tour?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.deleteTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:287:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+28c446ac-f19a-452c-b9f1-3e946c422eb2	17-11-2022	02:44:55	DELETE	/api/admin/tour?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.deleteTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:287:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+3d924390-fdfb-4005-a994-a9a250cd330b	17-11-2022	02:45:21	DELETE	/api/admin/tour?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.deleteTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:287:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+3e8fb7fa-404f-48b4-86b6-b4534df18f05	17-11-2022	02:48:31	GET	/api/tour?page=1&page_size=6&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:9:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+69e3a72e-76ea-430c-b986-4eecfbcb491b	17-11-2022	02:56:25	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:68:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+5147a05f-3cf0-4941-9bd2-f59f7d805c3e	17-11-2022	03:10:01	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:68:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+8d2a14d3-4f66-4c1c-bdd4-491daab1e609	17-11-2022	03:10:18	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:68:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+752a6373-1b8b-44c6-b553-fe70bb1f5091	17-11-2022	03:10:42	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:68:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+cc190941-2274-4941-8b4f-d26c956eb0cb	17-11-2022	03:11:43	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:68:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+ca41015f-450d-46f2-aa50-4f4144403f24	17-11-2022	03:11:47	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:68:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+779482b8-fc05-4561-9245-11dde151a28d	17-11-2022	03:12:14	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:68:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+d2cc67f8-51f5-4ec3-aa59-52f28024f57c	17-11-2022	03:12:48	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:68:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+fa860418-77d6-42ac-af5f-56b69eb593bc	17-11-2022	03:13:00	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:68:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+82fdeb6f-1068-4b10-ac79-7576766d09af	17-11-2022	03:13:15	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:68:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+a31cbd76-7aac-4cba-8514-1050063d9d89	17-11-2022	03:13:18	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:68:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+d76f4e7f-54d9-4db6-b6cc-3045254ac6cc	17-11-2022	03:30:09	GET	/api/article?page=1&page_size=6&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:13:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+0e70e317-b04f-4df8-b82e-f4048a3257b1	17-11-2022	03:31:20	GET	/api/article?page=1&page_size=6&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:13:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+927d68a5-6652-4b2f-9a5c-9a1c0b1e10e9	17-11-2022	03:32:02	DELETE	/api/admin/article?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.deleteArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:219:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+f67b89f9-2c0a-4d93-a5cb-f2d39ca0e1d2	17-11-2022	03:33:11	DELETE	/api/admin/article?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.deleteArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:219:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+774e7f54-6d6a-4b53-b3fb-129ea40261c7	17-11-2022	03:33:14	DELETE	/api/admin/article?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.deleteArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:219:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+cecdf998-d9c8-4dbc-8655-440dc325be82	17-11-2022	03:33:24	DELETE	/api/admin/article?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.deleteArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:219:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+f63a281f-8da2-49e8-a16d-940e4807ed3e	17-11-2022	03:33:51	GET	/api/admin/article/637338eae4c70bedcacd5b74/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:61:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+a53690c6-44af-4275-85a2-a6a402b73891	17-11-2022	03:34:41	GET	/api/admin/article/637338eae4c70bedcacd5b74/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:61:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+4fb7e2fa-7340-44f3-8bef-be46da12cf47	17-11-2022	03:35:14	GET	/api/admin/article/637338eae4c70bedcacd5b74/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:61:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+b964f9b1-09ce-4b2b-8668-83df2b84a3f8	17-11-2022	03:35:29	GET	/api/admin/article/637338eae4c70bedcacd5b74/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:61:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+08802862-adbe-4f59-bd14-084fa2779bbb	17-11-2022	03:35:33	GET	/api/admin/article/637338eae4c70bedcacd5b74/?cat_lang=vi&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getSingleArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:61:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+ae2d2bf1-4e15-447e-9e7f-f48d6cc3b595	17-11-2022	03:39:46	GET	/api/article?page=1&page_size=6&lang=vi	Cannot read properties of undefined (reading 'find')	TypeError: Cannot read properties of undefined (reading 'find')
+    at Object.module.exports.getItemWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:3:39)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:34
+    at Array.map (<anonymous>)
+    at Object.module.exports.getItemsWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:15)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:60:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+8ab94730-1556-49c2-b66a-0a9c43606c58	17-11-2022	03:43:15	GET	/api/article?page=2&page_size=6&lang=vi	Cannot read properties of undefined (reading 'find')	TypeError: Cannot read properties of undefined (reading 'find')
+    at Object.module.exports.getItemWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:3:39)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:34
+    at Array.map (<anonymous>)
+    at Object.module.exports.getItemsWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:15)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:58:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+4d58f3fb-f8cb-4f6c-8c08-e367e7ed5121	17-11-2022	03:45:14	GET	/api/article?page=1&page_size=6&lang=vi	Cannot read properties of undefined (reading 'find')	TypeError: Cannot read properties of undefined (reading 'find')
+    at Object.module.exports.getItemWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:3:39)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:34
+    at Array.map (<anonymous>)
+    at Object.module.exports.getItemsWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:15)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:58:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+cb956920-b958-4ea4-bb70-cba70761ab03	17-11-2022	03:45:15	GET	/api/article?page=2&page_size=6&lang=vi	Cannot read properties of undefined (reading 'find')	TypeError: Cannot read properties of undefined (reading 'find')
+    at Object.module.exports.getItemWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:3:39)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:34
+    at Array.map (<anonymous>)
+    at Object.module.exports.getItemsWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:15)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:58:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+254ea128-60ce-45df-8e5e-df1673adf996	17-11-2022	03:45:16	GET	/api/article?page=1&page_size=6&lang=vi	Cannot read properties of undefined (reading 'find')	TypeError: Cannot read properties of undefined (reading 'find')
+    at Object.module.exports.getItemWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:3:39)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:34
+    at Array.map (<anonymous>)
+    at Object.module.exports.getItemsWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:15)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:58:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+42ab156d-af82-431a-9160-2b7d4f5c2e98	17-11-2022	03:45:16	GET	/api/article?page=2&page_size=6&lang=vi	Cannot read properties of undefined (reading 'find')	TypeError: Cannot read properties of undefined (reading 'find')
+    at Object.module.exports.getItemWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:3:39)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:34
+    at Array.map (<anonymous>)
+    at Object.module.exports.getItemsWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:15)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:58:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+ed0e5d5e-83e1-4111-8521-cc5dde71ac4c	17-11-2022	03:46:08	GET	/api/article?page=1&page_size=6&lang=vi	Cannot do exclusion on field skip in inclusion projection	MongoServerError: Cannot do exclusion on field skip in inclusion projection
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+f8844cdc-2c64-4aba-9ac2-0b133fde175e	17-11-2022	03:46:08	GET	/api/article?page=2&page_size=6&lang=vi	Cannot read properties of undefined (reading 'find')	TypeError: Cannot read properties of undefined (reading 'find')
+    at Object.module.exports.getItemWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:3:39)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:34
+    at Array.map (<anonymous>)
+    at Object.module.exports.getItemsWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:15)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:62:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+3e37daa8-526c-4603-aef7-120c6bdc5327	17-11-2022	03:46:09	GET	/api/article?page=1&page_size=6&lang=vi	Cannot do exclusion on field skip in inclusion projection	MongoServerError: Cannot do exclusion on field skip in inclusion projection
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+1dc107ff-4f31-43e6-862c-468c11d928bb	17-11-2022	03:46:09	GET	/api/article?page=2&page_size=6&lang=vi	Cannot read properties of undefined (reading 'find')	TypeError: Cannot read properties of undefined (reading 'find')
+    at Object.module.exports.getItemWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:3:39)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:34
+    at Array.map (<anonymous>)
+    at Object.module.exports.getItemsWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:15)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:62:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+29c00e7f-c165-4f15-83b1-fbde5e0ba2a8	17-11-2022	03:46:10	GET	/api/article?page=1&page_size=6&lang=vi	Cannot do exclusion on field skip in inclusion projection	MongoServerError: Cannot do exclusion on field skip in inclusion projection
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+a246a811-968c-4c64-9c2f-d5d02177f6e6	17-11-2022	03:46:10	GET	/api/article?page=2&page_size=6&lang=vi	Cannot read properties of undefined (reading 'find')	TypeError: Cannot read properties of undefined (reading 'find')
+    at Object.module.exports.getItemWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:3:39)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:34
+    at Array.map (<anonymous>)
+    at Object.module.exports.getItemsWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:15)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:62:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+d610b942-63d4-48ab-8d3d-8e4a6387e24b	17-11-2022	03:46:11	GET	/api/article?page=1&page_size=6&lang=vi	Cannot do exclusion on field skip in inclusion projection	MongoServerError: Cannot do exclusion on field skip in inclusion projection
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+5b78533f-3349-43af-a10b-b4d5564a736b	17-11-2022	03:46:11	GET	/api/article?page=2&page_size=6&lang=vi	Cannot read properties of undefined (reading 'find')	TypeError: Cannot read properties of undefined (reading 'find')
+    at Object.module.exports.getItemWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:3:39)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:34
+    at Array.map (<anonymous>)
+    at Object.module.exports.getItemsWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:15)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:62:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+f0534173-8aa9-4f6e-b018-54b7b0f3c0e4	17-11-2022	03:46:19	GET	/api/article?page=1&page_size=6&lang=vi	Cannot do exclusion on field skip in inclusion projection	MongoServerError: Cannot do exclusion on field skip in inclusion projection
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+29b6f860-dbe2-4b5c-80a4-f5f27d0e3f36	17-11-2022	03:46:55	GET	/api/article?page=1&page_size=6&lang=vi	Cannot read properties of undefined (reading 'find')	TypeError: Cannot read properties of undefined (reading 'find')
+    at Object.module.exports.getItemWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:3:39)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:34
+    at Array.map (<anonymous>)
+    at Object.module.exports.getItemsWithLang (D:\ntav-workspace\job\travelling-website\backend\src\services\article.js:12:15)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\article.js:58:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+87fbe2e4-c310-43ea-a6f5-7f01970f830d	17-11-2022	04:22:31	PUT	/api/admin/tour?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.updateTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:103:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at done (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:45:7)
+    at indicateDone (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:49:68)
+    at Multipart.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:166:7)
+    at Multipart.emit (node:events:513:28)
+    at emitCloseNT (node:internal/streams/destroy:138:10)
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+f0e0074f-5123-45d4-943b-04f7b7a5ab4d	17-11-2022	04:22:36	PUT	/api/admin/tour?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.updateTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:103:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at done (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:45:7)
+    at indicateDone (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:49:68)
+    at Multipart.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:166:7)
+    at Multipart.emit (node:events:513:28)
+    at emitCloseNT (node:internal/streams/destroy:138:10)
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+757e6189-65e3-43dd-b60a-70e270252a82	17-11-2022	04:23:13	PUT	/api/admin/tour?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.updateTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:103:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at done (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:45:7)
+    at indicateDone (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:49:68)
+    at Multipart.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:166:7)
+    at Multipart.emit (node:events:513:28)
+    at emitCloseNT (node:internal/streams/destroy:138:10)
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+3f12c955-b23b-45cf-afbf-4cb739a3982a	17-11-2022	04:53:41	GET	/api/tour/?lang=vi&page=1&page_size=10	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:25:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+56049ffe-60f2-46e2-94e9-c20502f4c0e9	17-11-2022	04:55:11	GET	/api/tour/?lang=vi&page=1&page_size=10	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:32:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+9548d123-3997-422e-a224-ff4cb0f7e5c7	17-11-2022	04:56:03	GET	/api/tour/?lang=vi&page=1&page_size=10	Cast to string failed for value "{
+  _id: new ObjectId("6374c21661e90e5726279764"),
+  type: 'country',
+  code: 'vi',
+  language: 'vi',
+  parent: '6374c1ce61e90e5726279757',
+  translation: [],
+  __v: 0
+}" (type Object) at path "category" for model "Tour"	CastError: Cast to string failed for value "{
+  _id: new ObjectId("6374c21661e90e5726279764"),
+  type: 'country',
+  code: 'vi',
+  language: 'vi',
+  parent: '6374c1ce61e90e5726279757',
+  translation: [],
+  __v: 0
+}" (type Object) at path "category" for model "Tour"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+f7328000-aea7-491f-ae10-a2fda99aad00	17-11-2022	04:56:35	GET	/api/tour/?lang=vi&page=1&page_size=10	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:33:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+54ded3b9-8cc2-4db3-bfc1-e0044e4bb71e	17-11-2022	04:56:53	GET	/api/tour?page=1&page_size=6&lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:33:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+e9067fa2-2295-4708-a97f-ff2bf1e1ed0e	17-11-2022	04:57:20	GET	/api/tour/?lang=vi&page=1&page_size=10	error is not defined	ReferenceError: error is not defined
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:33:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+28a082fd-2920-4ebd-8dd1-5fca28a906d3	17-11-2022	05:14:35	GET	/api/tour/?lang=vi&page=1&page_size=6&country=vi	Cast to string failed for value "{
+  _id: new ObjectId("6374c21661e90e5726279764"),
+  type: 'country',
+  code: 'vi',
+  language: 'vi',
+  parent: '6374c1ce61e90e5726279757',
+  translation: [],
+  __v: 0
+}" (type Object) at path "category" for model "Tour"	CastError: Cast to string failed for value "{
+  _id: new ObjectId("6374c21661e90e5726279764"),
+  type: 'country',
+  code: 'vi',
+  language: 'vi',
+  parent: '6374c1ce61e90e5726279757',
+  translation: [],
+  __v: 0
+}" (type Object) at path "category" for model "Tour"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+fa9402fa-97b7-41a1-8e89-06023cc72b0c	17-11-2022	05:15:45	GET	/api/tour/?lang=vi&page=1&page_size=6&country=vi	Cannot read properties of undefined (reading 'toString')	TypeError: Cannot read properties of undefined (reading 'toString')
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:25:11)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+61c7c634-1e24-48bc-b201-0dc658a1da0e	17-11-2022	05:16:20	GET	/api/tour/?lang=vi&page=1&page_size=6&country=vi	Cast to string failed for value "{
+  _id: new ObjectId("6374c21661e90e5726279764"),
+  type: 'country',
+  code: 'vi',
+  language: 'vi',
+  parent: '6374c1ce61e90e5726279757',
+  translation: [],
+  __v: 0
+}" (type Object) at path "category" for model "Tour"	CastError: Cast to string failed for value "{
+  _id: new ObjectId("6374c21661e90e5726279764"),
+  type: 'country',
+  code: 'vi',
+  language: 'vi',
+  parent: '6374c1ce61e90e5726279757',
+  translation: [],
+  __v: 0
+}" (type Object) at path "category" for model "Tour"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

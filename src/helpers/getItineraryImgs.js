@@ -21,4 +21,4 @@ const getItineraryImgs = (itinerary) => {
   return imgs;
 };
 
-module.exports = getItineraryImgs;
+module.exports = { getItineraryImgs, getDeltaImgs };

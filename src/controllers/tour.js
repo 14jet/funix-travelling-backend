@@ -1,22 +1,12 @@
 const mongoose = require("mongoose");
-const { validationResult } = require("express-validator");
 const Tour = require("../models/tour");
 const Category = require("../models/category");
 const createError = require("../helpers/errorCreator");
-const fbStorage = require("../helpers/firebase");
-const {
-  ref,
-  getDownloadURL,
-  deleteObject,
-  uploadString,
-} = require("firebase/storage");
-const { v4: uuid } = require("uuid");
-const getExt = require("../helpers/getFileExtension");
 const modelServices = require("../services/article");
 
 module.exports.getTours = async (req, res, next) => {
   try {
-    let { lang, page, page_size, country } = req.query;
+    let { lang, page, page_size, country, country_not, continent } = req.query;
     if (!lang) {
       lang = "vie";
     }
@@ -29,10 +19,34 @@ module.exports.getTours = async (req, res, next) => {
       page_size = 6;
     }
 
-    const conditions = {};
-    if (country) {
-      const cat = await Category.findOne({ type: "country", code: country });
-      conditions.category = { $in: [cat._id.toString()] };
+    const cat_id_country_vn = (
+      await Category.findOne({
+        type: "country",
+        code: "vi",
+      })
+    )._id;
+
+    const cat_id_continent_europe = (
+      await Category.findOne({
+        type: "continent",
+        code: "europe",
+      })
+    )._id;
+
+    console.log(cat_id_country_vn);
+
+    let conditions = {};
+
+    if (country === "vi") {
+      conditions = { category: { $in: [cat_id_country_vn] } };
+    }
+
+    if (country_not === "vi") {
+      conditions = { category: { $nin: [cat_id_country_vn] } };
+    }
+
+    if (continent === "europe") {
+      conditions = { category: { $in: [cat_id_continent_europe] } };
     }
 
     const tours = await Tour.find(conditions)
@@ -41,7 +55,7 @@ module.exports.getTours = async (req, res, next) => {
       .skip((page - 1) * page_size);
 
     // metadata
-    const total_count = await Tour.countDocuments();
+    const total_count = await Tour.find(conditions).countDocuments();
     const page_count = Math.ceil(total_count / page_size);
     const remain_count = total_count - (page_size * (page - 1) + tours.length);
     const remain_page_count = page_count - page;

@@ -1,7 +1,7 @@
 const Tour = require("../../models/tour");
 const Category = require("../../models/category");
 const createError = require("../../helpers/errorCreator");
-const getItineraryImgs = require("../../helpers/getItineraryImgs");
+const { getItineraryImgs } = require("../../helpers/getItineraryImgs");
 const uploadFilesToFirebase = require("../../helpers/uploadFilesToFirebase.js");
 const deleteFilesFromFirebase = require("../../helpers/deleteFilesFromFirebase");
 const { getItemWithLang } = require("../../services/all");
@@ -295,8 +295,16 @@ module.exports.deleteTour = async (req, res, next) => {
       );
     }
 
-    const images = tour.slider.concat([tour.thumb]);
-    deleteFilesFromFirebase(images);
+    let imgs = [];
+
+    imgs = imgs.concat(tour.slider);
+    imgs = imgs.concat([tour.thumb]);
+    imgs = imgs.concat(getItineraryImgs(tour.itinerary));
+    tour.translation.forEach((item) => {
+      imgs = imgs.concat(getItineraryImgs(item.itinerary));
+    });
+    imgs = Array.from(new Set(imgs));
+    deleteFilesFromFirebase(imgs);
 
     await tour.remove();
     return res.status(200).json({

@@ -8,67 +8,6 @@ const { v4: uuid } = require("uuid");
 const getExt = require("../helpers/getFileExtension");
 const articleServices = require("../services/article");
 
-module.exports.deleteArticle = async (req, res, next) => {
-  try {
-    const { articleId } = req.params;
-
-    if (!mongoose.Types.ObjectId.isValid(articleId)) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Can not cast articleId to ObjectId",
-          vi: "articleId không hợp lệ",
-        })
-      );
-    }
-
-    const articleDelete = await Article.findOne({ _id: articleId });
-
-    // lấy url image trong bài viết củ
-    const urlImageRemove = () => {
-      const img = [];
-      articleDelete.content.map((item) => {
-        item.insert.image ? img.push(item.insert.image) : item;
-      });
-      console.log(img);
-      return img;
-    };
-
-    // lấy hình để xóa:
-    const removedImgs = urlImageRemove();
-
-    // xóa hình
-    for (const image of removedImgs) {
-      deleteObject(ref(fbStorage, image))
-        .then(() => {
-          return true;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-
-    const article = await Article.findOne({ _id: articleId });
-    if (!article) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Article Not Found",
-          vi: "Không tìm thấy bài viết",
-        })
-      );
-    }
-
-    await article.remove();
-    return res.status(200).json({
-      message: {
-        en: "Deleted article",
-        vi: "Xóa bài viết thành công",
-      },
-    });
-  } catch (error) {
-    next(createError(error, 500));
-  }
-};
-
 module.exports.getArticles = async (req, res, next) => {
   try {
     let { lang, page, page_size } = req.query;
@@ -84,7 +23,15 @@ module.exports.getArticles = async (req, res, next) => {
       page_size = 6;
     }
 
-    let articles = await Article.find({})
+    let articles = await Article.find()
+      .select({
+        title: 1,
+        lead: 1,
+        thumb: 1,
+        createdAt: 1,
+        is_lang: 1,
+        translation: 1,
+      })
       .limit(page_size)
       .skip((page - 1) * page_size);
 
@@ -115,7 +62,10 @@ module.exports.getArticles = async (req, res, next) => {
     };
 
     return res.status(200).json({
-      data: articleServices.getItemsWithLang(articles, lang),
+      data: articleServices.getItemsWithLang(articles, lang).map((item) => {
+        const { content, ...other } = item;
+        return other;
+      }),
       metadata,
     });
   } catch (error) {
