@@ -1,11 +1,6 @@
-const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 const Article = require("../models/article");
 const createError = require("../helpers/errorCreator");
-const fbStorage = require("../helpers/firebase");
-const { ref, deleteObject } = require("firebase/storage");
-const { v4: uuid } = require("uuid");
-const getExt = require("../helpers/getFileExtension");
 const articleServices = require("../services/article");
 
 module.exports.getArticles = async (req, res, next) => {

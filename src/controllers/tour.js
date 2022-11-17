@@ -117,8 +117,8 @@ module.exports.getSingleTour = async (req, res, next) => {
 
     return res.status(200).json({
       data: {
-        item: modelServices.getItemWithLang(tour),
-        relatedItems: modelServices.getItemsWithLang(relatedTours),
+        item: modelServices.getItemWithLang(tour, lang),
+        relatedItems: modelServices.getItemsWithLang(relatedTours, lang),
       },
     });
   } catch (error) {

@@ -676,3 +676,5 @@ de306664-bbd4-4ffa-9b5b-daa00b1a6500	17-11-2022	06:02:32	GET	/api/article/637339
 c9188a3c-9d34-4d0b-890e-e6c07722a933	17-11-2022	06:15:07	POST	/api/tour/6374153c577e41c952f46e1b?lang=vi	Cannot read properties of undefined (reading 'itinerary')	TypeError: Cannot read properties of undefined (reading 'itinerary')
     at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:121:30)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+367c95df-a812-493f-860f-f4f73f7a12b9	18-11-2022	12:26:40	POST	/api/tour/63740ee77b47b2d148c53759?lang=en	
+344c2e39-fbbd-40d4-8e1c-f141e3cd94f8	18-11-2022	12:28:08	POST	/api/tour/63740ee77b47b2d148c53759?lang=vi	
