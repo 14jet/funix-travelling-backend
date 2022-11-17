@@ -660,3 +660,19 @@ fa9402fa-97b7-41a1-8e89-06023cc72b0c	17-11-2022	05:15:45	GET	/api/tour/?lang=vi&
     at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
     at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+d04e4d71-7987-4790-8516-76e3c5837dc3	17-11-2022	05:37:58	POST	/api/tour/63741539577e41c952f46e1a?lang=vie	Cannot read properties of undefined (reading 'itinerary')	TypeError: Cannot read properties of undefined (reading 'itinerary')
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:122:30)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+0c25f1e0-7e0c-4818-8120-158aa338c39a	17-11-2022	05:38:13	POST	/api/tour/63741539577e41c952f46e1a?lang=vie	Cannot read properties of undefined (reading 'itinerary')	TypeError: Cannot read properties of undefined (reading 'itinerary')
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:122:30)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+de306664-bbd4-4ffa-9b5b-daa00b1a6500	17-11-2022	06:02:32	GET	/api/article/63733935e4c70bedcacd5b7a?lang=en	
+809d2ab9-6a17-4caa-9103-9ebb81110adf	17-11-2022	06:02:47	GET	/api/article/63733935e4c70bedcacd5b7a?lang=vi	
+6771a70e-23bc-49c4-a375-ec7e4d5f577c	17-11-2022	06:03:04	GET	/api/article/63733935e4c70bedcacd5b7a?lang=vi	
+5ab0cc8a-5ef2-4781-89e9-7269f43d4f9d	17-11-2022	06:10:38	POST	/api/tour/6374153c577e41c952f46e1b?lang=vi	Cannot read properties of undefined (reading 'itinerary')	TypeError: Cannot read properties of undefined (reading 'itinerary')
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:122:30)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+c9188a3c-9d34-4d0b-890e-e6c07722a933	17-11-2022	06:15:07	POST	/api/tour/6374153c577e41c952f46e1b?lang=vi	Cannot read properties of undefined (reading 'itinerary')	TypeError: Cannot read properties of undefined (reading 'itinerary')
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:121:30)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

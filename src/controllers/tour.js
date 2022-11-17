@@ -103,8 +103,9 @@ module.exports.getSingleTour = async (req, res, next) => {
       );
     }
 
-    const tours = await Tour.find();
-    let tour = tours.find((item) => item._id.toString() === tourId);
+    const tour = await Tour.findById(tourId);
+    const relatedTours = await Tour.find({ _id: { $ne: tourId } }).limit(6);
+
     if (!tour) {
       return next(
         createError(new Error(""), 404, {
@@ -114,27 +115,11 @@ module.exports.getSingleTour = async (req, res, next) => {
       );
     }
 
-    const relatedTours = tours.filter((item) => item._id.toString() !== tourId);
-
-    // lấy lộ trình đã được viết
-    const theOtherLanguage = language === "vie" ? "eng" : "vie";
-    const completedItinerary =
-      tour[theOtherLanguage].itinerary.length > 0
-        ? tour[theOtherLanguage].itinerary
-        : null;
-
     return res.status(200).json({
-      item: {
-        location: tour.location,
-        currentPrice: tour.currentPrice,
-        oldPrice: tour.oldPrice,
-        departureDates: tour.departureDates,
-        duration: tour.duration,
-        images: tour.images,
-        ...tour[language || lang],
+      data: {
+        item: modelServices.getItemWithLang(tour),
+        relatedItems: modelServices.getItemsWithLang(relatedTours),
       },
-      completedItinerary,
-      relatedItems: relatedTours.map((item) => item[language || lang]),
     });
   } catch (error) {
     next(createError(error, 500));
