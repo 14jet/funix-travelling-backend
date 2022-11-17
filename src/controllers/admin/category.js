@@ -16,22 +16,29 @@ module.exports.addCategorieItem = async (req, res, next) => {
     const { code, type, parent } = req.body;
 
     let category = await Category.findOne({
-      $or: [{ parent, code }],
+      $or: [{ code, type, parent: parent ? parent : null }],
     });
 
-    if (!category) {
-      if (parent) {
-        await Category.create({
-          code,
-          parent,
-          type,
-        });
-      } else {
-        await Category.create({
-          code,
-          type,
-        });
-      }
+    if (category) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "The category already exists",
+          vi: "Đã tồn tại",
+        })
+      );
+    }
+
+    if (parent) {
+      await Category.create({
+        code,
+        parent,
+        type,
+      });
+    } else {
+      await Category.create({
+        code,
+        type,
+      });
     }
 
     return res.status(200).json({

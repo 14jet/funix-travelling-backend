@@ -42,4 +42,8 @@ module.exports = {
   single: upload.single("image"),
   multiple: upload.array("images", 100),
   upload: upload,
+  uploadTourImgs: upload.fields([
+    { name: "thumb", maxCount: 1 },
+    { name: "slider" },
+  ]),
 };

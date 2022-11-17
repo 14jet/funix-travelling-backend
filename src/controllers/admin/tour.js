@@ -1,4 +1,3 @@
-const { validationResult } = require("express-validator");
 const Tour = require("../../models/tour");
 const Category = require("../../models/category");
 const createError = require("../../helpers/errorCreator");
@@ -11,32 +10,22 @@ const { getItemWithLang } = require("../../services/all");
 
 module.exports.addTour = async (req, res, next) => {
   try {
-    // validation;
-    const result = validationResult(req);
-    const hasError = !result.isEmpty();
-    if (hasError) {
-      return res.status(400).json({ message: result.array()[0].msg });
-    }
+    const category = JSON.parse(req.body.category);
+    const highlights = JSON.parse(req.body.highlights);
+    const cancellationPolicy = JSON.parse(req.body.cancellationPolicy);
+    const departureDates = JSON.parse(req.body.departureDates);
+    const priceIncludes = JSON.parse(req.body.priceIncludes);
+    const priceExcludes = JSON.parse(req.body.priceExcludes);
 
-    const {
-      category,
+    const name = req.body.name;
+    const journey = req.body.journey;
+    const description = req.body.description;
 
-      currentPrice,
-      oldPrice,
-      priceIncludes,
-      priceExcludes,
+    const currentPrice = req.body.currentPrice;
+    const oldPrice = req.body.oldPrice;
 
-      departureDates,
-      days,
-      nights,
-
-      name,
-      journey,
-      description,
-
-      highlights,
-      cancellationPolicy,
-    } = req.body;
+    const days = req.body.days;
+    const nights = req.body.nights;
 
     const thumb = req.files["thumb"][0];
     const slider = req.files["slider"];
@@ -45,25 +34,21 @@ module.exports.addTour = async (req, res, next) => {
     const [thumbUrl] = await uploadFilesToFirebase([thumb]);
 
     await Tour.create({
-      category: JSON.parse(category),
+      category,
+      highlights,
+      cancellationPolicy,
+      departureDates,
+      priceIncludes,
+      priceExcludes,
       currentPrice,
       oldPrice,
-      priceIncludes: JSON.parse(priceIncludes),
-      priceExcludes: JSON.parse(priceExcludes),
-
-      departureDates: JSON.parse(departureDates),
       days,
       nights,
-
       name,
       journey,
       description,
-
       slider: sliderURLs,
       thumb: thumbUrl,
-
-      highlights: JSON.parse(highlights),
-      cancellationPolicy: JSON.parse(cancellationPolicy),
     });
 
     return res.status(200).json({
@@ -86,7 +71,9 @@ module.exports.getSingleTour = async (req, res, next) => {
     }
 
     const tour = await Tour.findOne({ _id: tourId });
-    const available_lang = tour.translation.map((item) => item.language);
+    const available_lang = tour.translation
+      .map((item) => item.language)
+      .concat(["vi"]);
 
     const has_lang =
       cat_lang === "vi" ||
@@ -139,7 +126,7 @@ module.exports.updateTour = async (req, res, next) => {
 
     const thumb = req.files["thumb"] ? req.files["thumb"][0] : null;
     if (thumb) {
-      const [thumbUrl] = await uploadFileToFirebase([thumb]);
+      const [thumbUrl] = await uploadFilesToFirebase([thumb]);
       deleteFilesFromFirebase([tour.thumb]);
       tour.thumb = thumbUrl;
     }
@@ -149,7 +136,7 @@ module.exports.updateTour = async (req, res, next) => {
 
     const slider = req.files["slider"];
     if (slider?.length > 0) {
-      const sliderURLs = await uploadFileToFirebase(slider);
+      const sliderURLs = await uploadFilesToFirebase(slider);
       tour.slider = [...tour.slider, ...sliderURLs];
     }
 
@@ -278,7 +265,7 @@ module.exports.updateItinerary = async (req, res, next) => {
       const tid = tour.translation.findIndex(
         (item) => item.language === lang_ver
       );
-      console.log(tid);
+      console.log("xxx", tid);
       tour.translation[tid].itinerary = JSON.parse(itineraryText);
     }
 
@@ -287,6 +274,35 @@ module.exports.updateItinerary = async (req, res, next) => {
       message: {
         en: "Updated itinerary successfully",
         vi: "Cập nhật tour thành công",
+      },
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.deleteTour = async (req, res, next) => {
+  try {
+    const { tourId } = req.body;
+
+    const tour = await Tour.findOne({ _id: tourId });
+    if (!tour) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Tour Not Found",
+          vi: "Không tìm thấy tour",
+        })
+      );
+    }
+
+    const images = tour.slider.concat([tour.thumb]);
+    deleteFilesFromFirebase(images);
+
+    await tour.remove();
+    return res.status(200).json({
+      message: {
+        en: "Deleted tour",
+        vi: "Xóa tour thành công",
       },
     });
   } catch (error) {

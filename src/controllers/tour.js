@@ -12,54 +12,7 @@ const {
 } = require("firebase/storage");
 const { v4: uuid } = require("uuid");
 const getExt = require("../helpers/getFileExtension");
-const getItineraryImgs = require("../helpers/getItineraryImgs");
-const uploadFileToFirebase = require("../helpers/uploadFilesToFirebase.js");
-const deleteFilesFromFirebase = require("../helpers/deleteFilesFromFirebase");
 const modelServices = require("../services/article");
-
-module.exports.deleteTour = async (req, res, next) => {
-  try {
-    // validation;
-    const result = validationResult(req);
-    const hasError = !result.isEmpty();
-    if (hasError) {
-      return res.status(400).json({ message: result.array()[0].msg });
-    }
-
-    const { tourId } = req.body;
-
-    const tour = await Tour.findOne({ _id: tourId });
-    if (!tour) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Tour Not Found",
-          vi: "Không tìm thấy tour",
-        })
-      );
-    }
-
-    const images = tour.images;
-    for (const image of images) {
-      deleteObject(ref(fbStorage, image))
-        .then(() => {
-          return true;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-
-    await tour.remove();
-    return res.status(200).json({
-      message: {
-        en: "Deleted tour",
-        vi: "Xóa tour thành công",
-      },
-    });
-  } catch (error) {
-    next(createError(error, 500));
-  }
-};
 
 module.exports.getTours = async (req, res, next) => {
   try {
@@ -168,73 +121,6 @@ module.exports.getSingleTour = async (req, res, next) => {
       },
       completedItinerary,
       relatedItems: relatedTours.map((item) => item[language || lang]),
-    });
-  } catch (error) {
-    next(createError(error, 500));
-  }
-};
-
-module.exports.updateItinerary = async (req, res, next) => {
-  try {
-    const { tourId, itinerary, language } = req.body;
-
-    const tour = await Tour.findOne({ _id: tourId });
-    if (!tour) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Tour Not Found",
-          vi: "Không tìm thấy tour",
-        })
-      );
-    }
-
-    // lấy hình đã xóa:
-    const removedImgs = getItineraryImgs(tour[language].itinerary).filter(
-      (img) => !JSON.stringify(itinerary).includes(img)
-    );
-
-    // xóa hình
-    deleteFilesFromFirebase(removedImgs);
-
-    // lấy hình mới thêm vào (là hình base64)
-    const newImgs = getItineraryImgs(itinerary).filter((text) =>
-      text.startsWith("data:image")
-    );
-
-    // upload lên firebase
-    let refs = newImgs.map((text) => {
-      return {
-        base64text: text,
-        ref: ref(fbStorage, "images/" + uuid() + "." + getExt.base64(text)[1]),
-      };
-    });
-
-    await Promise.all(
-      refs.map((ref) => {
-        return uploadString(ref.ref, ref.base64text, "data_url");
-      })
-    );
-
-    const imageURLs = await Promise.all(
-      refs.map((ref) => getDownloadURL(ref.ref))
-    );
-
-    // ráp url ảnh mới upload lên firebase vào mảng refs
-    refs = refs.map((item, index) => ({ ...item, newUrl: imageURLs[index] }));
-
-    // thay tương ứng vào itinerary
-    let itineraryText = JSON.stringify(itinerary);
-    refs.forEach((item) => {
-      itineraryText = itineraryText.replace(item.base64text, item.newUrl);
-    });
-
-    tour[language].itinerary = JSON.parse(itineraryText);
-    await tour.save();
-    return res.status(200).json({
-      message: {
-        en: "Updated itinerary successfully",
-        vi: "Cập nhật tour thành công",
-      },
     });
   } catch (error) {
     next(createError(error, 500));
