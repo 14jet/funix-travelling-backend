@@ -92,7 +92,6 @@ module.exports.getSingleTour = async (req, res, next) => {
   try {
     const { tourId } = req.params;
     const { lang } = req.query;
-    const { language } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(tourId)) {
       return next(

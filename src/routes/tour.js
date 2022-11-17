@@ -12,6 +12,6 @@ const multer = require("../middlewares/multer");
 
 // routes
 router.get("/", getTours);
-router.post("/:tourId", getSingleTour);
+router.get("/:tourId", getSingleTour);
 
 module.exports = router;
