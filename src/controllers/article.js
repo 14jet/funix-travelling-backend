@@ -56,11 +56,15 @@ module.exports.getArticles = async (req, res, next) => {
       ],
     };
 
+    const x = articleServices.getItemsWithLang(articles, lang).map((item) => {
+      const { content, ...other } = item;
+      return other;
+    });
+
+    // console.log(x.map((item) => item._id.toString()));
+
     return res.status(200).json({
-      data: articleServices.getItemsWithLang(articles, lang).map((item) => {
-        const { content, ...other } = item;
-        return other;
-      }),
+      data: x,
       metadata,
     });
   } catch (error) {

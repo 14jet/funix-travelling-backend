@@ -5,7 +5,7 @@ module.exports.getItemWithLang = (data, lang) => {
     return { ...other, is_lang: lang === "vi" ? true : false };
   }
 
-  return { ...other, ...translationItem._doc, is_lang: true };
+  return { ...other, ...translationItem._doc, _id: data._id, is_lang: true };
 };
 
 module.exports.getItemsWithLang = (data, lang) => {
