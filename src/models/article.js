@@ -62,7 +62,7 @@ articleSchema.index(
     title: "text",
     "translation.title": "text",
   },
-  { language_override: "title" }
+  { language_override: "dummy" }
 );
 
 module.exports = mongoose.model("Article", articleSchema);
