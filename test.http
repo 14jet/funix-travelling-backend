@@ -22,3 +22,8 @@ GET http://localhost:5000/api/admin/tour/6373b81fcb83feb6b27c3d88 HTTP/1.1
 
 ### 
 GET http://localhost:5000/api/admin/categories?lang=vie HTTP/1.1
+
+
+
+### search
+GET http://localhost:5000/api/tour/search/?lang=vi&page=1&page_size=100&text=heod HTTP/1.1

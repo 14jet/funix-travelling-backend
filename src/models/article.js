@@ -7,12 +7,7 @@ const articleSchema = new Schema(
       type: String,
       default: "vi",
     },
-    category: [
-      {
-        cat_type: String,
-        cat_code: String,
-      },
-    ],
+    category: [String],
     title: {
       type: String,
       required: true,
@@ -60,6 +55,14 @@ const articleSchema = new Schema(
     ],
   },
   { timestamps: true }
+);
+
+articleSchema.index(
+  {
+    title: "text",
+    "translation.title": "text",
+  },
+  { language_override: "title" }
 );
 
 module.exports = mongoose.model("Article", articleSchema);

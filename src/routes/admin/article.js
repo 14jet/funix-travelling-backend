@@ -12,8 +12,6 @@ const {
 // middlewares
 const multer = require("../../middlewares/multer");
 
-// validators
-
 // routes
 router.post("/", multer.single, addArticle);
 router.put("/", multer.single, updateArticle);

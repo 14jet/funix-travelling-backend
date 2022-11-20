@@ -1,5 +1,5 @@
-const createError = require("../helpers/errorCreator");
-const Visa = require("../models/visa");
+const createError = require("../../helpers/errorCreator");
+const Visa = require("../../models/visa");
 const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 

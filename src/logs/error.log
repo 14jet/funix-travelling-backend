@@ -730,3 +730,264 @@ a28826b8-aa1b-4283-9ead-cb5e1e1f429c	18-11-2022	08:39:34	GET	/api/article/637339
 07dea8fc-7610-4287-9582-5cae32dbb17c	18-11-2022	08:41:04	GET	/api/article/63733935e4c70bedcacd5b7a?lang=vi	
 aae5de12-cc03-45e2-a03a-c403acaec240	18-11-2022	08:41:04	GET	/api/article/63733935e4c70bedcacd5b7a?lang=vi	
 c66fdee5-43a2-48ed-9138-3d9f24f7931c	18-11-2022	08:43:50	GET	/api/article/63733935e4c70bedcacd5b7a?lang=vi	
+8f897b50-e3cf-49f4-acb4-ee83743339eb	20-11-2022	02:40:13	GET	/api?lang=vi	Route Not Found
+2241468d-4252-4b9f-8724-12a2efebadba	20-11-2022	02:41:20	GET	/api?lang=vi	Route Not Found
+d1aac604-314e-403e-87f2-672e9eac36bb	20-11-2022	02:43:25	DELETE	/api/admin/categories?lang=vi	Cannot access 'catItem' before initialization	ReferenceError: Cannot access 'catItem' before initialization
+    at module.exports.deleteCatItem (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:59:51)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+6992de65-1317-4bcd-b960-64f36d11ab1f	20-11-2022	03:56:29	PUT	/api/admin/categories?lang=vi	
+306c9f8e-29e0-42ce-903c-8c87d3f91668	20-11-2022	03:57:19	GET	/api/admin/categories?lang=vi	Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"	CastError: Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+0dc95981-bd83-425b-afcc-db10ad70b2b5	20-11-2022	03:58:22	GET	/api/admin/categories?lang=vi	Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"	CastError: Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+36c3a64a-ca0e-4b25-8d25-26c31193c280	20-11-2022	03:58:55	GET	/api/admin/categories?lang=vi	Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"	CastError: Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+413be680-9dff-4d1c-9fe9-7f64782f8461	20-11-2022	03:59:03	GET	/api/admin/categories?lang=vi	Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"	CastError: Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+28fe612e-403b-43b6-b0b9-59fdbee154ef	20-11-2022	03:59:33	GET	/api/admin/categories?lang=vi	Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"	CastError: Cast to ObjectId failed for value "" (type string) at path "_id" for model "Category"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+b1142060-0ef0-4ec5-add0-fde6b347313a	20-11-2022	04:06:10	GET	/api/admin/categories?lang=vi	categories is not defined	ReferenceError: categories is not defined
+    at module.exports.getCategories (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\category.js:13:41)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+4418a410-f872-4228-a788-e15dff926c11	20-11-2022	04:21:37	GET	/api/admin/categories?lang=vi	Cast to ObjectId failed for value "ffff" (type string) at path "_id" for model "Category"	CastError: Cast to ObjectId failed for value "ffff" (type string) at path "_id" for model "Category"
+    at model.Query.exec (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4891:21)
+    at model.Query.Query.then (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongoose\lib\query.js:4990:15)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+65ee3b2e-fc9c-433d-abf2-bf0f403b2b48	20-11-2022	09:49:12	GET	/api/tour?page=1&page_size=6&lang=vi	tours.map is not a function	TypeError: tours.map is not a function
+    at Object.module.exports.getTourBasicData (D:\ntav-workspace\job\travelling-website\backend\src\services\tour.js:35:16)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\tour.js:35:35
+    at Array.map (<anonymous>)
+    at Object.module.exports.getTourBasicData (D:\ntav-workspace\job\travelling-website\backend\src\services\tour.js:35:16)
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:82:25)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+e51bc1cb-49e5-482d-8137-3d4196ad78b0	20-11-2022	09:49:30	GET	/api/tour?page=1&page_size=6&lang=vi	tours.map is not a function	TypeError: tours.map is not a function
+    at Object.module.exports.getTourBasicData (D:\ntav-workspace\job\travelling-website\backend\src\services\tour.js:35:16)
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\tour.js:35:35
+    at Array.map (<anonymous>)
+    at Object.module.exports.getTourBasicData (D:\ntav-workspace\job\travelling-website\backend\src\services\tour.js:35:16)
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:82:25)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+55921aa0-3f14-4df1-8b98-b076a0689a5d	20-11-2022	09:50:17	GET	/api/tour?page=1&page_size=6&lang=vi	tourService.getToursBasicData is not a function	TypeError: tourService.getToursBasicData is not a function
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:82:25)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+2b515be1-d46d-4fc9-a519-c48ed51a06d3	20-11-2022	10:25:22	GET	/api/admin/tour/63741539577e41c952f46e1a/?cat_lang=vi&lang=vi	getItemWithLang is not defined	ReferenceError: getItemWithLang is not defined
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:83:18)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+467b0332-afda-498d-9e3a-86e3c7245ee3	20-11-2022	11:08:26	PUT	/api/admin/categories?lang=vi	
+3dcd5b7c-06b6-4b97-8204-0f873f152a2e	20-11-2022	11:12:53	PUT	/api/admin/categories?lang=vi	
+3ef6af07-e9db-459d-a07c-650679db8150	20-11-2022	12:13:38	POST	/api/admin/tour?lang=vi	imgResizer is not a function	TypeError: imgResizer is not a function
+    at module.exports.addTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:36:39)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+6a177f6a-37bd-4068-a1fc-9b1190f5e762	20-11-2022	12:13:54	POST	/api/admin/tour?lang=vi	Cannot read properties of undefined (reading 'indexOf')	TypeError: Cannot read properties of undefined (reading 'indexOf')
+    at Object.baseOnFilename [as filename] (D:\ntav-workspace\job\travelling-website\backend\src\helpers\getFileExtension.js:11:15)
+    at D:\ntav-workspace\job\travelling-website\backend\src\helpers\uploadFilesToFirebase.js:19:43
+    at Array.map (<anonymous>)
+    at uploadFilesToFirebase (D:\ntav-workspace\job\travelling-website\backend\src\helpers\uploadFilesToFirebase.js:15:18)
+    at module.exports.addTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:41:15)
+23caed8c-5fda-4fca-9b98-dbe5aa1ff868	20-11-2022	12:57:17	POST	/api/admin/article?lang=vi	imgResizer is not defined	ReferenceError: imgResizer is not defined
+    at module.exports.addArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:15:33)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at done (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:45:7)
+    at indicateDone (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:49:68)
+    at Multipart.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:166:7)
+    at Multipart.emit (node:events:513:28)
+    at emitCloseNT (node:internal/streams/destroy:138:10)
+    at processTicksAndRejections (node:internal/process/task_queues:82:21)
+e373067f-8985-4922-ac47-e8849a5d2172	20-11-2022	01:11:57	GET	/api/admin/article/6379c1e12a2c564156ba458d/?cat_lang=vi&lang=vi	Category is not defined	ReferenceError: Category is not defined
+    at module.exports.getSingleArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:89:24)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+461201cc-94aa-4343-8401-47bba26e7447	20-11-2022	01:16:12	PUT	/api/admin/article?lang=vi	category is not defined	ReferenceError: category is not defined
+    at module.exports.updateArticle (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\article.js:188:35)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+6e6cae46-32aa-4408-be58-5e084effed7f	20-11-2022	03:42:53	GET	/api/tour/search?lang=vi&page=1&page_size=100&text=europe	
+1c2b392b-9d42-4a15-bd7e-85d43ba9d235	20-11-2022	03:43:03	GET	/api/tour/search/?lang=vi&page=1&page_size=100&text=europe	
+2476e429-dff1-4ae7-a5c6-4789d498ca99	20-11-2022	03:43:57	GET	/api/tour/search/?lang=vi&page=1&page_size=100&text=europe	cat is not defined	ReferenceError: cat is not defined
+    at module.exports.searchForTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:138:5)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+04d9fd87-e727-47b9-bcd9-bfdafbb1d6b4	20-11-2022	03:45:15	GET	/api/tour/search/?lang=vi&page=1&page_size=100&text=europe	extra fields in $text	MongoServerError: extra fields in $text
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+b3e559c3-12b7-4ee0-ae1b-5d6d9dcea488	20-11-2022	03:46:05	GET	/api/tour/search/?lang=vi&page=1&page_size=100&text=europe	extra fields in $text	MongoServerError: extra fields in $text
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+3087cea8-5241-4a4e-ba65-bd11a70cd1da	20-11-2022	03:48:00	GET	/api/tour/search/?lang=vi&page=1&page_size=100&text=europe	text index required for $text query	MongoServerError: text index required for $text query
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+7b7b7ad9-1e64-4c2a-9ecd-36fae735c5f4	20-11-2022	03:48:42	GET	/api/tour/search/?lang=vi&page=1&page_size=100&text=europe	text index required for $text query	MongoServerError: text index required for $text query
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+6fa7fd8e-d201-4fc1-8820-695eb36b99c8	20-11-2022	03:51:19	GET	/api/tour/search/?lang=vi&page=1&page_size=100&text=europe	text index required for $text query	MongoServerError: text index required for $text query
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+be055d69-a62d-4f8e-ac31-868d9ed673fb	20-11-2022	03:52:53	GET	/api/tour/search/?lang=vi&page=1&page_size=100&text=europe	conditions is not defined	ReferenceError: conditions is not defined
+    at module.exports.searchForTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\tour.js:151:10)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+0aff0d82-3f71-4b48-bfcd-80457d62af96	20-11-2022	03:53:12	GET	/api/tour/search/?lang=vi&page=1&page_size=100&text=europe	extra fields in $text	MongoServerError: extra fields in $text
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+65ac23ce-b59f-4153-9b9b-066012ffad0b	20-11-2022	03:56:10	POST	/api/admin/tour?lang=vi	language override unsupported: vi	MongoServerError: language override unsupported: vi
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\operations\insert.js:53:33
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection_pool.js:308:25
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:219:9)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+7ad327a8-2e93-4241-b799-e2c8b7ea55ed	20-11-2022	04:02:43	POST	/api/admin/tour?lang=vi	language override unsupported: vi	MongoServerError: language override unsupported: vi
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\operations\insert.js:53:33
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection_pool.js:308:25
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:219:9)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+ee594a46-a26c-4c93-86d5-e25db372dfe7	20-11-2022	04:05:44	POST	/api/admin/tour?lang=vi	language override unsupported: vi	MongoServerError: language override unsupported: vi
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\operations\insert.js:53:33
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection_pool.js:308:25
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:219:9)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+3ece8f47-a379-416c-ad2f-cdf065b50070	20-11-2022	04:15:11	POST	/api/admin/tour?lang=vi	language override unsupported: vi	MongoServerError: language override unsupported: vi
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\operations\insert.js:53:33
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection_pool.js:308:25
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:219:9)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+fd2f9731-d204-4352-a8f5-43443b5894ce	20-11-2022	04:17:30	POST	/api/admin/tour?lang=vi	language override unsupported: vi	MongoServerError: language override unsupported: vi
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\operations\insert.js:53:33
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection_pool.js:308:25
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:219:9)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+3cd8ff42-54a8-496f-af5f-da8cd22b4e82	20-11-2022	04:24:40	POST	/api/admin/tour?lang=vi	language override unsupported: vi	MongoServerError: language override unsupported: vi
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\operations\insert.js:53:33
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection_pool.js:308:25
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:219:9)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+848b18b5-56d8-461b-a1f0-2398042e1aa0	20-11-2022	04:26:24	POST	/api/admin/tour?lang=vi	language override unsupported: vi	MongoServerError: language override unsupported: vi
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\operations\insert.js:53:33
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection_pool.js:308:25
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:213:17
+    at handleOperationResult (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\server.js:329:20)
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:219:9)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+d81e9ba1-24a9-4ac6-aba7-bddaf54349e1	20-11-2022	04:31:28	GET	/api/tour/search/?lang=vi&page=1&page_size=100&text=europe	text index required for $text query	MongoServerError: text index required for $text query
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+0ad28e87-40a5-4426-9335-1311df27c443	20-11-2022	04:35:33	GET	/api/admin/tour/6379f47725cac572909b7d3c/?cat_lang=vi&lang=vi	Cannot read properties of null (reading 'translation')	TypeError: Cannot read properties of null (reading 'translation')
+    at module.exports.getSingleTour (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:88:33)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

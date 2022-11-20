@@ -2,12 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const tourSchema = new Schema({
-  category: [
-    {
-      type: String,
-      ref: "Category",
-    },
-  ],
+  category: [String],
   language: {
     type: String,
     default: "vi",
@@ -15,6 +10,7 @@ const tourSchema = new Schema({
 
   name: String,
   journey: String,
+  countries: String,
   description: String,
   itinerary: Array,
 
@@ -39,6 +35,7 @@ const tourSchema = new Schema({
 
       name: String,
       journey: String,
+      countries: String,
       description: String,
       itinerary: Array,
 
@@ -51,5 +48,16 @@ const tourSchema = new Schema({
   ],
 });
 
-// review
+tourSchema.index(
+  {
+    name: "text",
+    journey: "text",
+    countries: "text",
+    "translation.name": "text",
+    "translation.journey": "text",
+    "translation.countries": "text",
+  },
+  { language_override: "none" }
+);
+
 module.exports = mongoose.model("Tour", tourSchema);

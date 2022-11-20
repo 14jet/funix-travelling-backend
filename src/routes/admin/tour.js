@@ -13,8 +13,6 @@ const {
 // middlewares
 const multer = require("../../middlewares/multer");
 
-// validators
-
 // routes
 router.get("/:tourId", getSingleTour);
 router.post("/", multer.uploadTourImgs, addTour);

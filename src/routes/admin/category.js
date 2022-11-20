@@ -2,15 +2,20 @@ const express = require("express");
 const router = express.Router();
 
 // controllers
-const categoryControllers = require("../../controllers/admin/category");
+const {
+  getCategories,
+  addCategoryItem,
+  deleteCatItem,
+  updateCatItem,
+} = require("../../controllers/admin/category");
 
 // middlewares
 const multer = require("../../middlewares/multer");
 
-// validators
-
 // routes
-router.get("/", categoryControllers.getCategories);
-router.post("/", multer.single, categoryControllers.addCategorieItem);
+router.get("/", getCategories);
+router.post("/", multer.single, addCategoryItem);
+router.delete("/", deleteCatItem);
+router.put("/", updateCatItem);
 
 module.exports = router;

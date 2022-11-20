@@ -1,19 +1,11 @@
-const { validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
 const config = require("config");
 var jwt = require("jsonwebtoken");
-const User = require("../models/user");
-const createError = require("../helpers/errorCreator");
+const User = require("../../models/user");
+const createError = require("../../helpers/errorCreator");
 
 module.exports.login = async (req, res, next) => {
   try {
-    // validation
-    const result = validationResult(req);
-    const hasError = !result.isEmpty();
-    if (hasError) {
-      return res.status(400).json({ message: result.array()[0].msg });
-    }
-
     const { username, password } = req.body;
 
     const user = await User.findOne({ username });
@@ -54,13 +46,6 @@ module.exports.login = async (req, res, next) => {
 
 module.exports.changePassword = async (req, res, next) => {
   try {
-    // validation
-    const result = validationResult(req);
-    const hasError = !result.isEmpty();
-    if (hasError) {
-      return res.status(400).json({ message: result.array()[0].msg });
-    }
-
     const { password, newPassword } = req.body;
 
     const user = req.user;

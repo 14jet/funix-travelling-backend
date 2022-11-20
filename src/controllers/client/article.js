@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const Article = require("../models/article");
-const createError = require("../helpers/errorCreator");
-const articleServices = require("../services/article");
+const Article = require("../../models/article");
+const createError = require("../../helpers/errorCreator");
+const articleServices = require("../../services/article");
 
 module.exports.getArticles = async (req, res, next) => {
   try {
@@ -56,15 +56,8 @@ module.exports.getArticles = async (req, res, next) => {
       ],
     };
 
-    const x = articleServices.getItemsWithLang(articles, lang).map((item) => {
-      const { content, ...other } = item;
-      return other;
-    });
-
-    // console.log(x.map((item) => item._id.toString()));
-
     return res.status(200).json({
-      data: x,
+      data: articleServices.getArticlesBasicData(articles, lang),
       metadata,
     });
   } catch (error) {
@@ -137,9 +130,81 @@ module.exports.getSingleArticle = async (req, res, next) => {
 
     return res.status(200).json({
       data: {
-        item: articleServices.getItemWithLang(article, lang),
-        relatedItems: articleServices.getItemsWithLang(relatedArticles, lang),
+        item: articleServices.getFullArticle(article, lang),
+        relatedItems: articleServices.getArticlesBasicData(
+          relatedArticles,
+          lang
+        ),
       },
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.searchForArticles = async (req, res, next) => {
+  try {
+    let { lang, page, page_size, text } = req.query;
+    if (!text) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Missing search text",
+          vi: "Thiếu text",
+        })
+      );
+    }
+
+    if (!page) {
+      page = 1;
+    }
+
+    if (!page_size) {
+      page_size = 6;
+    }
+
+    if (!lang) {
+      lang = "vi";
+    }
+
+    const articles = await Article.find({
+      $text: {
+        $search: text,
+        $language: "none",
+        $caseSensitive: false,
+      },
+    })
+      .limit(page_size)
+      .skip((page - 1) * page_size);
+
+    // metadata
+    const total_count = await Article.find({
+      $text: {
+        $search: text,
+        $language: "none",
+        $caseSensitive: false,
+      },
+    }).countDocuments();
+    const page_count = Math.ceil(total_count / page_size);
+    const remain_count = total_count - (page_size * (page - 1) + tours.length);
+    const remain_page_count = page_count - page;
+    const has_more = page < page_count;
+
+    const metadata = {
+      page,
+      page_size,
+      page_count,
+      remain_page_count,
+      total_count,
+      remain_count,
+      has_more,
+      lang,
+      text,
+      links: [],
+    };
+
+    return res.status(200).json({
+      data: articleServices.getArticlesBasicData(articles, lang),
+      metadata,
     });
   } catch (error) {
     next(createError(error, 500));

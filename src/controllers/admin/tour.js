@@ -4,7 +4,8 @@ const createError = require("../../helpers/errorCreator");
 const { getItineraryImgs } = require("../../helpers/getItineraryImgs");
 const uploadFilesToFirebase = require("../../helpers/uploadFilesToFirebase.js");
 const deleteFilesFromFirebase = require("../../helpers/deleteFilesFromFirebase");
-const { getItemWithLang } = require("../../services/all");
+const tourServices = require("../../services/tour");
+const { imgResizer } = require("../../helpers/imgResizer");
 
 // ============================== IMPORT ==========================================
 
@@ -19,6 +20,7 @@ module.exports.addTour = async (req, res, next) => {
 
     const name = req.body.name;
     const journey = req.body.journey;
+    const countries = req.body.countries;
     const description = req.body.description;
 
     const currentPrice = req.body.currentPrice;
@@ -31,7 +33,18 @@ module.exports.addTour = async (req, res, next) => {
     const slider = req.files["slider"];
 
     const sliderURLs = await uploadFilesToFirebase(slider);
-    const [thumbUrl] = await uploadFilesToFirebase([thumb]);
+    const [error, resizedImg] = await imgResizer(thumb.buffer);
+
+    let thumbUrl;
+    if (resizedImg) {
+      thumbUrl = (
+        await uploadFilesToFirebase([
+          { buffer: resizedImg, originalname: thumb.originalname },
+        ])
+      )[0];
+    } else {
+      thumbUrl = (await uploadFilesToFirebase([thumb]))[0];
+    }
 
     await Tour.create({
       category,
@@ -46,6 +59,7 @@ module.exports.addTour = async (req, res, next) => {
       nights,
       name,
       journey,
+      countries,
       description,
       slider: sliderURLs,
       thumb: thumbUrl,
@@ -79,8 +93,8 @@ module.exports.getSingleTour = async (req, res, next) => {
       cat_lang === "vi" ||
       tour.translation.find((item) => item.language === cat_lang);
 
-    const data = has_lang ? getItemWithLang(tour, cat_lang) : null;
-    const original = getItemWithLang(tour, "vi");
+    const data = has_lang ? tourServices.getFullTour(tour, cat_lang) : null;
+    const original = tourServices.getFullTour(tour, "vi");
 
     const categories = await Category.find().populate("parent");
 
@@ -125,8 +139,20 @@ module.exports.updateTour = async (req, res, next) => {
     const tour = await Tour.findOne({ _id: tourId });
 
     const thumb = req.files["thumb"] ? req.files["thumb"][0] : null;
+
+    let thumbUrl;
     if (thumb) {
-      const [thumbUrl] = await uploadFilesToFirebase([thumb]);
+      const [error, resizedImg] = await imgResizer(thumb.buffer);
+      if (resizedImg) {
+        thumbUrl = (
+          await uploadFilesToFirebase([
+            { buffer: resizedImg, originalname: thumb.originalname },
+          ])
+        )[0];
+      } else {
+        thumbUrl = (await uploadFilesToFirebase([thumb]))[0];
+      }
+
       deleteFilesFromFirebase([tour.thumb]);
       tour.thumb = thumbUrl;
     }

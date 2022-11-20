@@ -1,18 +1,30 @@
-const { validationResult } = require("express-validator");
 const mongoose = require("mongoose");
 const Article = require("../../models/article");
+const Category = require("../../models/category");
 const createError = require("../../helpers/errorCreator");
 const uploadFilesToFirebase = require("../../helpers/uploadFilesToFirebase");
 const deleteFilesFromFirebase = require("../../helpers/deleteFilesFromFirebase");
-const { getItemWithLang } = require("../../services/all");
 const { getDeltaImgs } = require("../../helpers/getItineraryImgs");
+const { getFullArticle } = require("../../services/article");
+const { imgResizer } = require("../../helpers/imgResizer");
 
 module.exports.addArticle = async (req, res, next) => {
   try {
-    let { title, author, origin, lead, content } = req.body;
-    const file = req.file;
+    let { title, author, origin, lead, content, category } = req.body;
+    const thumb = req.file;
 
-    const [thumb_url] = await uploadFilesToFirebase([file]);
+    const [error, resizedImg] = await imgResizer(thumb.buffer);
+
+    let thumbUrl;
+    if (resizedImg) {
+      thumbUrl = (
+        await uploadFilesToFirebase([
+          { buffer: resizedImg, originalname: thumb.originalname },
+        ])
+      )[0];
+    } else {
+      thumbUrl = (await uploadFilesToFirebase([thumb]))[0];
+    }
 
     // lấy image base64
     let contentImgs = [];
@@ -40,7 +52,8 @@ module.exports.addArticle = async (req, res, next) => {
       author,
       origin,
       lead,
-      thumb: thumb_url,
+      category: JSON.parse(category),
+      thumb: thumbUrl,
       content: JSON.parse(content),
     });
 
@@ -71,54 +84,16 @@ module.exports.getSingleArticle = async (req, res, next) => {
       cat_lang === "vi" ||
       article.translation.find((item) => item.language === cat_lang);
 
-    const data = has_lang ? getItemWithLang(article, cat_lang) : null;
-    const original = getItemWithLang(article, "vi");
+    const data = has_lang ? getFullArticle(article, cat_lang) : null;
+    const original = getFullArticle(article, "vi");
+
+    const categories = await Category.find().populate("parent");
 
     return res.status(200).json({
       data: data,
       metadata: {
         available_lang,
-        categories: [
-          {
-            type: "language",
-            items: [
-              {
-                code: "en",
-                name: "English",
-              },
-              {
-                code: "vi",
-                name: "Tiếng Việt",
-              },
-            ],
-          },
-          {
-            type: "country",
-            items: [
-              {
-                code: "en",
-                name: "England",
-              },
-              {
-                code: "vi",
-                name: "Vietnam",
-              },
-            ],
-          },
-          {
-            type: "city",
-            items: [
-              {
-                code: "paris",
-                name: "Paris",
-              },
-              {
-                code: "hcm",
-                name: "Thành phố Hồ Chí Minh",
-              },
-            ],
-          },
-        ],
+        categories,
         original: original,
       },
     });
@@ -129,10 +104,17 @@ module.exports.getSingleArticle = async (req, res, next) => {
 
 module.exports.updateArticle = async (req, res, next) => {
   try {
-    let { title, author, origin, lead, content, language, articleId } =
-      req.body;
-    const file = req.file;
-    console.log(content);
+    let {
+      title,
+      author,
+      origin,
+      lead,
+      content,
+      language,
+      articleId,
+      category,
+    } = req.body;
+    const thumb = req.file;
 
     const article = await Article.findOne({ _id: articleId });
 
@@ -194,12 +176,25 @@ module.exports.updateArticle = async (req, res, next) => {
       }
     }
 
-    if (file) {
-      const [thumb_url] = await uploadFilesToFirebase([file]);
+    let thumbUrl;
+    if (thumb) {
+      const [error, resizedImg] = await imgResizer(thumb.buffer);
+      if (resizedImg) {
+        thumbUrl = (
+          await uploadFilesToFirebase([
+            { buffer: resizedImg, originalname: thumb.originalname },
+          ])
+        )[0];
+      } else {
+        thumbUrl = (await uploadFilesToFirebase([thumb]))[0];
+      }
 
       deleteFilesFromFirebase([article.thumb]);
-      article.thumb = thumb_url;
+      article.thumb = thumbUrl;
     }
+
+    article.category = JSON.parse(category);
+    console.log(category);
 
     await article.save();
     return res.status(200).json({
