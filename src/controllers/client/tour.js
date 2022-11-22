@@ -136,24 +136,73 @@ module.exports.searchForTours = async (req, res, next) => {
       lang = "vi";
     }
 
-    const tours = await Tour.find({
-      $text: {
-        $search: text,
-        $language: "none",
-        $caseSensitive: false,
+    const agg = [
+      {
+        $search: {
+          index: "tour",
+          compound: {
+            should: [
+              {
+                autocomplete: {
+                  query: text,
+                  path: "name",
+                },
+              },
+              {
+                autocomplete: {
+                  query: text,
+                  path: "journey",
+                },
+              },
+              {
+                autocomplete: {
+                  query: text,
+                  path: "countries",
+                },
+              },
+              {
+                autocomplete: {
+                  query: text,
+                  path: "translation.name",
+                },
+              },
+              {
+                autocomplete: {
+                  query: text,
+                  path: "translation.countries",
+                },
+              },
+              {
+                autocomplete: {
+                  query: text,
+                  path: "translation.journey",
+                },
+              },
+            ],
+          },
+          count: {
+            type: "total",
+          },
+        },
       },
-    })
-      .limit(page_size)
-      .skip((page - 1) * page_size);
+      { $skip: (page - 1) * page_size },
+      { $limit: page_size },
+      {
+        $project: {
+          _id: 1,
+          name: 1,
+          journey: 1,
+          countries: 1,
+          thumb: 1,
+          meta: "$$SEARCH_META",
+        },
+      },
+    ];
 
-    // metadata
-    const total_count = await Tour.find({
-      $text: {
-        $search: text,
-        $language: "none",
-        $caseSensitive: false,
-      },
-    }).countDocuments();
+    const tours = await Tour.aggregate(agg);
+
+    const total_count = tours.length > 0 ? tours[0].meta.count.total : 0;
+
     const page_count = Math.ceil(total_count / page_size);
     const remain_count = total_count - (page_size * (page - 1) + tours.length);
     const remain_page_count = page_count - page;

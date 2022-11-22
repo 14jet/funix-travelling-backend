@@ -25,5 +25,10 @@ GET http://localhost:5000/api/admin/categories?lang=vie HTTP/1.1
 
 
 
-### search
+### search tour
 GET http://localhost:5000/api/tour/search/?lang=vi&page=1&page_size=100&text=heod HTTP/1.1
+
+
+
+### search
+GET http://localhost:5000/api/article/search/?lang=vi&page=1&page_size=100&text=funixfunix HTTP/1.1

@@ -59,8 +59,8 @@ const articleSchema = new Schema(
 
 articleSchema.index(
   {
-    title: "text",
-    "translation.title": "text",
+    title: "autocomplete",
+    "translation.title": "autocomplete",
   },
   { language_override: "dummy" }
 );

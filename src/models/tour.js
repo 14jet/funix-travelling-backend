@@ -50,12 +50,12 @@ const tourSchema = new Schema({
 
 tourSchema.index(
   {
-    name: "text",
-    journey: "text",
-    countries: "text",
-    "translation.name": "text",
-    "translation.journey": "text",
-    "translation.countries": "text",
+    name: "autocomplete",
+    journey: "autocomplete",
+    countries: "autocomplete",
+    "translation.name": "autocomplete",
+    "translation.journey": "autocomplete",
+    "translation.countries": "autocomplete",
   },
   { language_override: "none" }
 );

@@ -55,6 +55,12 @@ const MESSAGES = {
       vi: "Điều kiện hoàn hủy đổi phải là mảng!",
     },
   },
+  category: {
+    isArray: {
+      en: "category must be an array",
+      vi: "category hoàn hủy đổi phải là mảng!",
+    },
+  },
 };
 
 module.exports = [
@@ -64,7 +70,7 @@ module.exports = [
   body("departureDates")
     .notEmpty()
     .withMessage(MESSAGES.departure_dates.missing)
-    .custom((value) => isArrayJSON(value))
+    .custom(isArrayJSON)
     .withMessage(MESSAGES.departure_dates.isArray)
     .custom((value) => {
       const isInValid = JSON.parse(value).some(
@@ -80,11 +86,12 @@ module.exports = [
   body("highlights")
     .notEmpty()
     .withMessage(MESSAGES.highlights.missing)
-    .custom((value) => isArrayJSON(value))
+    .custom(isArrayJSON)
     .withMessage(MESSAGES.highlights.isArray),
   body("cancellationPolicy")
     .notEmpty()
     .withMessage(MESSAGES.cancellation_policy.missing)
-    .custom((value) => isArrayJSON(value))
+    .custom(isArrayJSON)
     .withMessage(MESSAGES.cancellation_policy.isArray),
+  body("category").custom(isArrayJSON).withMessage(MESSAGES.category.isArray),
 ];

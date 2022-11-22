@@ -166,26 +166,57 @@ module.exports.searchForArticles = async (req, res, next) => {
       lang = "vi";
     }
 
-    const articles = await Article.find({
-      $text: {
-        $search: text,
-        $language: "none",
-        $caseSensitive: false,
-      },
-    })
-      .limit(page_size)
-      .skip((page - 1) * page_size);
+    // const articles = await Article.find({
+    //   $text: {
+    //     $search: text,
+    //     $language: "none",
+    //     $caseSensitive: false,
+    //   },
+    // })
+    //   .limit(page_size)
+    //   .skip((page - 1) * page_size);
 
     // metadata
-    const total_count = await Article.find({
-      $text: {
-        $search: text,
-        $language: "none",
-        $caseSensitive: false,
+    // const total_count = await Article.find({
+    //   $text: {
+    //     $search: text,
+    //     $language: "none",
+    //     $caseSensitive: false,
+    //   },
+    // }).countDocuments();
+
+    const agg = [
+      {
+        $search: {
+          index: "article",
+          autocomplete: { query: text, path: "title" },
+          count: {
+            type: "total",
+          },
+        },
       },
-    }).countDocuments();
+      { $skip: (page - 1) * page_size },
+      { $limit: page_size },
+      {
+        $project: {
+          _id: 1,
+          title: 1,
+          thumb: 1,
+          lead: 1,
+          meta: "$$SEARCH_META",
+        },
+      },
+    ];
+
+    const articles = await Article.aggregate(agg);
+    console.log(articles[0]);
+
+    const total_count = articles.length > 0 ? articles[0].meta.count.total : 0;
+    console.log(total_count);
+
     const page_count = Math.ceil(total_count / page_size);
-    const remain_count = total_count - (page_size * (page - 1) + tours.length);
+    const remain_count =
+      total_count - (page_size * (page - 1) + articles.length);
     const remain_page_count = page_count - page;
     const has_more = page < page_count;
 

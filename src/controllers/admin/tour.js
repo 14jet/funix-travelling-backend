@@ -130,6 +130,7 @@ module.exports.updateTour = async (req, res, next) => {
       name,
       journey,
       description,
+      countries,
 
       highlights,
       cancellationPolicy,
@@ -137,7 +138,16 @@ module.exports.updateTour = async (req, res, next) => {
     } = req.body;
 
     const tour = await Tour.findOne({ _id: tourId });
+    if (!tour) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Tour not found",
+          vi: "Không tìm thấy tour",
+        })
+      );
+    }
 
+    // =============== cập nhật hình đại diện ===========================
     const thumb = req.files["thumb"] ? req.files["thumb"][0] : null;
 
     let thumbUrl;
@@ -157,6 +167,7 @@ module.exports.updateTour = async (req, res, next) => {
       tour.thumb = thumbUrl;
     }
 
+    // =============== cập nhật slider ===========================
     removedImages = JSON.parse(removedImages);
     tour.slider = tour.slider.filter((item) => !removedImages.includes(item));
 
@@ -169,42 +180,44 @@ module.exports.updateTour = async (req, res, next) => {
     // xóa hình cũ
     deleteFilesFromFirebase(removedImages);
 
+    // ========== bắt đầu cập nhật ===========
+    // fields chính
+    tour.departureDates = JSON.parse(departureDates);
+    tour.days = days;
+    tour.nights = nights;
+    tour.currentPrice = currentPrice;
+    tour.oldPrice = oldPrice;
+    tour.category = JSON.parse(category);
+
+    // fields ngôn ngữ
     if (language === "vi") {
-      tour.currentPrice = currentPrice;
-      tour.oldPrice = oldPrice;
       tour.priceIncludes = JSON.parse(priceIncludes);
       tour.priceExcludes = JSON.parse(priceExcludes);
-
-      tour.departureDates = JSON.parse(departureDates);
-      tour.days = days;
-      tour.nights = nights;
 
       tour.name = name;
       tour.journey = journey;
       tour.description = description;
+      tour.countries = countries;
 
       tour.highlights = JSON.parse(highlights);
       tour.cancellationPolicy = JSON.parse(cancellationPolicy);
     }
 
-    if (language === "en") {
-      let tid = tour.translation.findIndex((item) => item.language === "en");
+    if (language !== "vi") {
+      let tid = tour.translation.findIndex(
+        (item) => item.language === language
+      );
       if (tid === -1) {
         tour.translation.push({
           language,
 
-          currentPrice,
-          oldPrice,
           priceIncludes: JSON.parse(priceIncludes),
           priceExcludes: JSON.parse(priceExcludes),
-
-          departureDates: JSON.parse(departureDates),
-          days,
-          nights,
 
           name,
           journey,
           description,
+          countries,
 
           highlights: JSON.parse(highlights),
           cancellationPolicy: JSON.parse(cancellationPolicy),
@@ -218,18 +231,11 @@ module.exports.updateTour = async (req, res, next) => {
         tour.translation[tid].cancellationPolicy =
           JSON.parse(cancellationPolicy);
 
-        tour.translation[tid].days = days;
-        tour.translation[tid].nights = nights;
-        tour.translation[tid].departureDates = JSON.parse(departureDates);
-
-        tour.translation[tid].currentPrice = currentPrice;
-        tour.translation[tid].oldPrice = oldPrice;
         tour.translation[tid].priceIncludes = JSON.parse(priceIncludes);
         tour.translation[tid].priceExcludes = JSON.parse(priceExcludes);
       }
     }
 
-    tour.category = JSON.parse(category);
     await tour.save();
     return res.status(200).json({
       code: 200,
@@ -245,7 +251,7 @@ module.exports.updateTour = async (req, res, next) => {
 
 module.exports.updateItinerary = async (req, res, next) => {
   try {
-    const { tourId, itinerary, lang_ver } = req.body;
+    const { tourId, itinerary, language } = req.body;
 
     const tour = await Tour.findOne({ _id: tourId });
     if (!tour) {
@@ -258,9 +264,9 @@ module.exports.updateItinerary = async (req, res, next) => {
     }
 
     const cur_plan =
-      lang_ver === "vi"
+      language === "vi"
         ? tour.itinerary
-        : tour.translation.find((item) => item.language === lang_ver)
+        : tour.translation.find((item) => item.language === language)
             ?.itinerary;
 
     // lấy hình đã xóa:
@@ -285,13 +291,12 @@ module.exports.updateItinerary = async (req, res, next) => {
       itineraryText = itineraryText.replace(item, imageURLs[index]);
     });
 
-    if (lang_ver === "vi") {
+    if (language === "vi") {
       tour.itinerary = JSON.parse(itineraryText);
     } else {
       const tid = tour.translation.findIndex(
-        (item) => item.language === lang_ver
+        (item) => item.language === language
       );
-      console.log("xxx", tid);
       tour.translation[tid].itinerary = JSON.parse(itineraryText);
     }
 

@@ -23,5 +23,9 @@ module.exports = [
       en: "removedImages must be an array",
       vi: "removedImages phải là mảng",
     }),
+  body("language").notEmpty().withMessage({
+    en: "Missing language",
+    vi: "Thiếu ngôn ngữ",
+  }),
   ...addTourValidator,
 ];

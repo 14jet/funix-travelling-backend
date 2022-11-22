@@ -31,4 +31,8 @@ module.exports = [
       en: "itinerary must be an array",
       vi: "itinerary phải lả một mảng",
     }),
+  body("language").notEmpty().withMessage({
+    en: "Missing language",
+    vi: "Ngôn ngữ không được để trống!",
+  }),
 ];
