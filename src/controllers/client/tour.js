@@ -81,9 +81,9 @@ module.exports.getSingleTour = async (req, res, next) => {
 
     if (!mongoose.Types.ObjectId.isValid(tourId)) {
       return next(
-        createError(new Error(""), 400, {
-          en: "Can not cast tourId to ObjectId",
-          vi: "tourId không hợp lệ",
+        createError(new Error(""), 404, {
+          en: "Tour Not Found",
+          vi: "Tour không tồn tại",
         })
       );
     }

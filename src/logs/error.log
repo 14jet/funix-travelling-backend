@@ -1258,3 +1258,20 @@ f3dd8a22-dec5-4d3a-abee-af107f938cba	22-11-2022	07:04:00	GET	/api/article/search
     at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
     at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
     at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+0f52e3b2-5cfd-4e43-b9e5-8655a0e91021	22-11-2022	07:20:17	GET	/api/tour/637a32a0662c0102e21e48b?lang=vi	
+2440f4af-6d60-4392-bc6e-d95ede4bf252	22-11-2022	07:21:08	GET	/api/tour/637a32a0662c0102e21e48b?lang=vi	
+c49f2f0c-6a52-4185-bc15-ccac68cfe22e	22-11-2022	07:22:16	GET	/api/tour/637a32a0662c0102e21e48b?lang=vi	
+9621a34c-499f-46b3-8c67-b10aebea7974	22-11-2022	07:22:21	GET	/api/tour/637a32a0662c0102e21e48b?lang=vi	
+236f1d5c-a116-44af-b343-082ed960cc4e	22-11-2022	07:22:49	GET	/api/tour/637a32a0662c0102e21e48b?lang=vi	
+abefd76a-a07d-43d2-8a76-324b0dacfdd4	22-11-2022	07:23:00	GET	/api/tour/637a32a0662c0102e21e48b?lang=vi	
+38031b8b-83aa-4325-8dc3-47c2322e68c6	22-11-2022	07:25:27	GET	/api/tour/637a32a0662c0102e21e48b?lang=vi	
+2c84df38-1c9e-4ff6-9706-245bbd57d1ce	22-11-2022	07:25:47	GET	/api/tour/637a32a0662c0102e21e48b?lang=vi	
+c7f415a8-f09d-4e40-829c-42e959554bae	22-11-2022	07:26:22	GET	/api/tour/637a32a0662c0102e21e48b?lang=vi	
+a0e8b178-a4b1-49a9-ab6e-306ed3de9621	22-11-2022	07:26:44	GET	/api/tour/637a3f2c9233c5e61e1a79?lang=vi	
+bf38d0a2-d15c-4163-8db2-704fb58d1300	22-11-2022	07:28:20	GET	/api/tour/637a3f2c9233c5e61e1a79?lang=vi	
+d0674283-066c-4c6f-b229-fcae31dd1270	22-11-2022	07:28:27	GET	/api/tour/637a3f2c9233c5e61e1a79?lang=vi	
+56d2fa8b-ca05-40b7-82e6-409fb7066a12	22-11-2022	07:28:49	GET	/api/article/637c7dd503ec909264fc47?lang=vi	
+58490a14-71ba-4781-afeb-1e8dc5f41389	22-11-2022	07:28:57	GET	/api/article/637c7dd503ec909264?lang=vi	
+5b217b96-a088-4e97-9115-c0963dabfb97	22-11-2022	07:31:00	GET	/api/article/637c7dd503ec909264?lang=vi	
+e155fd03-f572-413d-b9fe-ab28300517db	22-11-2022	07:31:30	GET	/api/article/637c7dd503ec909264?lang=vi	
+e84e0872-6a14-41c1-bbe7-d39f7cba12ee	22-11-2022	07:31:37	GET	/api/article/637c7dd503ec909264fc47?lang=vi	

@@ -104,9 +104,9 @@ module.exports.getSingleArticle = async (req, res, next) => {
 
     if (!mongoose.Types.ObjectId.isValid(articleId)) {
       return next(
-        createError(new Error(""), 400, {
-          en: "Can not cast articleId to ObjectId",
-          vi: "articleId không hợp lệ",
+        createError(new Error(""), 404, {
+          en: "Article Not Found",
+          vi: "Bài viết không tồn tại",
         })
       );
     }
@@ -165,25 +165,6 @@ module.exports.searchForArticles = async (req, res, next) => {
     if (!lang) {
       lang = "vi";
     }
-
-    // const articles = await Article.find({
-    //   $text: {
-    //     $search: text,
-    //     $language: "none",
-    //     $caseSensitive: false,
-    //   },
-    // })
-    //   .limit(page_size)
-    //   .skip((page - 1) * page_size);
-
-    // metadata
-    // const total_count = await Article.find({
-    //   $text: {
-    //     $search: text,
-    //     $language: "none",
-    //     $caseSensitive: false,
-    //   },
-    // }).countDocuments();
 
     const agg = [
       {
