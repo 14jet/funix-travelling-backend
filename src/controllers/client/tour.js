@@ -163,7 +163,7 @@ module.exports.searchForTours = async (req, res, next) => {
               {
                 autocomplete: {
                   query: text,
-                  path: "translation.name",
+                  path: "translation.$.name",
                 },
               },
               {

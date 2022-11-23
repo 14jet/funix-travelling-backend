@@ -48,16 +48,4 @@ const tourSchema = new Schema({
   ],
 });
 
-tourSchema.index(
-  {
-    name: "autocomplete",
-    journey: "autocomplete",
-    countries: "autocomplete",
-    "translation.name": "autocomplete",
-    "translation.journey": "autocomplete",
-    "translation.countries": "autocomplete",
-  },
-  { language_override: "none" }
-);
-
 module.exports = mongoose.model("Tour", tourSchema);
