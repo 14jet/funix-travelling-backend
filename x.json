@@ -1,0 +1,25 @@
+{
+  "analyzer": "lucene.english",
+  "searchAnalyzer": "lucene.english",
+  "mappings": {
+    "dynamic": true,
+    "fields": [
+      {
+        "dynamic": true,
+        "type": "document"
+      },
+      {
+        "analyzer": "lucene.italian",
+        "multi": {
+          "fullplot_english": {
+            "analyzer": "lucene.english",
+            "searchAnalyzer": "lucene.english",
+            "type": "string"
+          }
+        },
+        "searchAnalyzer": "lucene.italian",
+        "type": "string"
+      }
+    ]
+  }
+}
