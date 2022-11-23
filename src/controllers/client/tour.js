@@ -114,7 +114,6 @@ module.exports.getSingleTour = async (req, res, next) => {
 module.exports.searchForTours = async (req, res, next) => {
   try {
     let { lang, page, page_size, text } = req.query;
-    console.log(text, "xxxx}}}}}}}}]");
     if (!text) {
       return next(
         createError(new Error(""), 400, {
@@ -148,60 +147,34 @@ module.exports.searchForTours = async (req, res, next) => {
                   path: "name",
                 },
               },
-              {
-                autocomplete: {
-                  query: text,
-                  path: "journey",
-                },
-              },
-              {
-                autocomplete: {
-                  query: text,
-                  path: "countries",
-                },
-              },
-              {
-                autocomplete: {
-                  query: text,
-                  path: "translation.$.name",
-                },
-              },
-              {
-                autocomplete: {
-                  query: text,
-                  path: "translation.countries",
-                },
-              },
-              {
-                autocomplete: {
-                  query: text,
-                  path: "translation.journey",
-                },
-              },
+              // {
+              //   embeddedDocument: {
+              //     path: "translation",
+              //     operator: {
+              //       compound: {
+              //         should: [
+              //           {
+              //             autocomplete: {
+              //               path: "translation.name",
+              //               query: text,
+              //             },
+              //           },
+              //         ],
+              //       },
+              //     },
+              //   },
+              // },
             ],
           },
-          count: {
-            type: "total",
-          },
-        },
-      },
-      { $skip: (page - 1) * page_size },
-      { $limit: page_size },
-      {
-        $project: {
-          _id: 1,
-          name: 1,
-          journey: 1,
-          countries: 1,
-          thumb: 1,
-          meta: "$$SEARCH_META",
         },
       },
     ];
 
     const tours = await Tour.aggregate(agg);
+    console.log(tours);
 
-    const total_count = tours.length > 0 ? tours[0].meta.count.total : 0;
+    // const total_count = tours.length > 0 ? tours[0].meta.count.total : 0;
+    const total_count = 10;
 
     const page_count = Math.ceil(total_count / page_size);
     const remain_count = total_count - (page_size * (page - 1) + tours.length);
