@@ -2,6 +2,9 @@ module.exports.aggCreator = (queries) => {
   const notEmpty = (obj) => Object.keys(obj).length > 0;
 
   let { cat, page, page_size, sort, search, lang } = queries;
+  if (!Array.isArray(cat)) {
+    cat = [cat];
+  }
 
   let $search = {};
   let $match = {};
