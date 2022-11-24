@@ -39,10 +39,6 @@ const articleSchema = new Schema(
           type: String,
           required: true,
         },
-        author: {
-          type: String,
-          required: true,
-        },
         lead: {
           type: String,
           required: true,

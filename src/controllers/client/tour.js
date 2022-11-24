@@ -30,8 +30,6 @@ module.exports.getTours = async (req, res, next) => {
       })
     );
 
-    console.log(results);
-
     const tours = results[0].tours;
     const total_count = results[0].count[0]?.total_count || 0;
 
@@ -50,13 +48,7 @@ module.exports.getTours = async (req, res, next) => {
       remain_count,
       has_more,
       lang,
-      links: [
-        { self: `/article?page=${page}&page_size=${page_size}` },
-        { first: `/article?page=${1}&page_size=${page_size}` },
-        { previous: `/article?page=${page - 1}&page_size=${page_size}` },
-        { next: `/article?page=${page + 1}&page_size=${page_size}` },
-        { last: `/article?page=${page_count}&page_size=${page_size}` },
-      ],
+      links: [],
     };
 
     return res.status(200).json({

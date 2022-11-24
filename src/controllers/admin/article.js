@@ -155,12 +155,13 @@ module.exports.updateArticle = async (req, res, next) => {
       article.content = JSON.parse(content);
     }
 
-    if (language === "en") {
-      let tid = article.translation.findIndex((item) => item.language === "en");
+    if (language === language) {
+      let tid = article.translation.findIndex(
+        (item) => item.language === language
+      );
       if (tid === -1) {
         article.translation.push({
           title,
-          author,
           origin,
           lead,
           content: JSON.parse(content),
@@ -168,8 +169,6 @@ module.exports.updateArticle = async (req, res, next) => {
         });
       } else {
         article.translation[tid].title = title;
-        article.translation[tid].language = language;
-        article.translation[tid].author = author;
         article.translation[tid].origin = origin;
         article.translation[tid].lead = lead;
         article.translation[tid].content = JSON.parse(content);

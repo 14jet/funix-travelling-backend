@@ -1,0 +1,39 @@
+f8b67556-93e4-446c-bf49-cc0cf78c7075	24-11-2022	05:48:03	GET	/api/article/	cat is not defined	ReferenceError: cat is not defined
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\client\article.js:26:9)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+683f2bff-ceae-44b8-9359-a19890194dd0	24-11-2022	05:48:29	GET	/api/article/	sort is not defined	ReferenceError: sort is not defined
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\client\article.js:27:9)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+a90c853b-c528-4764-bc44-ed22cea8054a	24-11-2022	05:48:44	GET	/api/article/	search is not defined	ReferenceError: search is not defined
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\client\article.js:28:9)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\index.js:47:12)
+92e8e7e8-1b3c-4b55-8605-6cec838c496e	24-11-2022	05:48:59	GET	/api/article/	this.getSingleTour is not a function	TypeError: this.getSingleTour is not a function
+    at D:\ntav-workspace\job\travelling-website\backend\src\services\client\article.js:153:26
+    at Array.map (<anonymous>)
+    at Object.module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\services\client\article.js:152:28)
+    at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\client\article.js:56:36)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

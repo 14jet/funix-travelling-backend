@@ -1,7 +1,9 @@
 ### client get single tour
-http://localhost:5000/api/tour/637edea0d7218f5e786cb7c0/?lang=en
+http://localhost:5000/api/tour/637f31c6145e1699a820f61a/?lang=vi
 
 
 ### client get tours
 http://localhost:5000/api/tour/?search=tte&lang=vi
 
+### client get tours
+http://localhost:5000/api/article/?search=eng&lang=en

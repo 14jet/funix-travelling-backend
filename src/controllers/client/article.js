@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 const Article = require("../../models/article");
 const createError = require("../../helpers/errorCreator");
 const articleServices = require("../../services/article");
+const client_articleServices = require("../../services/client/article");
 
 module.exports.getArticles = async (req, res, next) => {
   try {
-    let { lang, page, page_size } = req.query;
+    let { lang, page, page_size, cat, sort, search } = req.query;
     if (!lang) {
       lang = "vi";
     }
@@ -18,20 +19,21 @@ module.exports.getArticles = async (req, res, next) => {
       page_size = 6;
     }
 
-    let articles = await Article.find()
-      .select({
-        title: 1,
-        lead: 1,
-        thumb: 1,
-        createdAt: 1,
-        is_lang: 1,
-        translation: 1,
+    const results = await Article.aggregate(
+      client_articleServices.aggCreator({
+        page,
+        page_size,
+        cat,
+        sort,
+        search,
+        lang,
       })
-      .limit(page_size)
-      .skip((page - 1) * page_size);
+    );
+
+    const articles = results[0].articles;
+    const total_count = results[0].count[0]?.total_count || 0;
 
     // metadata
-    const total_count = await Article.countDocuments();
     const page_count = Math.ceil(total_count / page_size);
     const remain_count =
       total_count - (page_size * (page - 1) + articles.length);
@@ -47,17 +49,11 @@ module.exports.getArticles = async (req, res, next) => {
       remain_count,
       has_more,
       lang,
-      links: [
-        { self: `/article?page=${page}&page_size=${page_size}` },
-        { first: `/article?page=${1}&page_size=${page_size}` },
-        { previous: `/article?page=${page - 1}&page_size=${page_size}` },
-        { next: `/article?page=${page + 1}&page_size=${page_size}` },
-        { last: `/article?page=${page_count}&page_size=${page_size}` },
-      ],
+      links: [],
     };
 
     return res.status(200).json({
-      data: articleServices.getArticlesBasicData(articles, lang),
+      data: client_articleServices.getArticles(articles, lang),
       metadata,
     });
   } catch (error) {
