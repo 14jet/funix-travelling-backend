@@ -7,32 +7,13 @@ const deleteFilesFromFirebase = require("../../helpers/deleteFilesFromFirebase")
 const tourServices = require("../../services/tour");
 const { imgResizer } = require("../../helpers/imgResizer");
 
+const admin_tourServices = require("../../services/admin/tour");
+
 // ============================== IMPORT ==========================================
 
 module.exports.addTour = async (req, res, next) => {
   try {
-    const category = JSON.parse(req.body.category);
-    const highlights = JSON.parse(req.body.highlights);
-    const cancellationPolicy = JSON.parse(req.body.cancellationPolicy);
-    const departureDates = JSON.parse(req.body.departureDates);
-    const priceIncludes = JSON.parse(req.body.priceIncludes);
-    const priceExcludes = JSON.parse(req.body.priceExcludes);
-
-    const name = req.body.name;
-    const journey = req.body.journey;
-    const countries = req.body.countries;
-    const description = req.body.description;
-
-    const currentPrice = req.body.currentPrice;
-    const oldPrice = req.body.oldPrice;
-
-    const days = req.body.days;
-    const nights = req.body.nights;
-
     const thumb = req.files["thumb"][0];
-    const slider = req.files["slider"];
-
-    const sliderURLs = await uploadFilesToFirebase(slider);
     const [error, resizedImg] = await imgResizer(thumb.buffer);
 
     let thumbUrl;
@@ -47,21 +28,35 @@ module.exports.addTour = async (req, res, next) => {
     }
 
     await Tour.create({
-      category,
-      highlights,
-      cancellationPolicy,
-      departureDates,
-      priceIncludes,
-      priceExcludes,
-      currentPrice,
-      oldPrice,
-      days,
-      nights,
-      name,
-      journey,
-      countries,
-      description,
-      slider: sliderURLs,
+      code: req.body.code,
+      name: req.body.name,
+      countries: req.body.countries,
+      journey: req.body.journey,
+      description: req.body.description,
+      highlights: JSON.parse(req.body.highlights),
+
+      category: JSON.parse(req.body.category),
+
+      price: Number(req.body.price),
+      duration: {
+        days: Number(req.body.days),
+        nights: Number(req.body.nights),
+      },
+      departureDates: JSON.parse(req.body.departureDates),
+
+      price_policies: {
+        includes: JSON.parse(req.body.priceIncludes),
+        excludes: JSON.parse(req.body.priceExcludes),
+        other: JSON.parse(req.body.priceOther),
+      },
+
+      terms: {
+        registration: JSON.parse(req.body.registrationPolicy),
+        cancellation: JSON.parse(req.body.cancellationPolicy),
+        payment: JSON.parse(req.body.paymentPolicy),
+        notes: JSON.parse(req.body.notes),
+      },
+
       thumb: thumbUrl,
     });
 
@@ -79,25 +74,29 @@ module.exports.addTour = async (req, res, next) => {
 module.exports.getSingleTour = async (req, res, next) => {
   try {
     let { tourId } = req.params;
-    let { cat_lang } = req.query;
-    if (!cat_lang) {
-      cat_lang = "vi";
+    let { language } = req.query;
+    if (!language) {
+      language = "vi";
     }
 
     const tour = await Tour.findOne({ _id: tourId });
+
+    // các ver ngôn ngữ mà tour này hiện có
     const available_lang = tour.translation
       .map((item) => item.language)
       .concat(["vi"]);
 
     const has_lang =
-      cat_lang === "vi" ||
-      tour.translation.find((item) => item.language === cat_lang);
+      language === "vi" ||
+      tour.translation.find((item) => item.language === language);
 
-    const data = has_lang ? tourServices.getFullTour(tour, cat_lang) : null;
-    const original = tourServices.getFullTour(tour, "vi");
+    const data = has_lang
+      ? admin_tourServices.getSingleTour(tour, language)
+      : null;
+
+    const original = admin_tourServices.getSingleTour(tour, "vi");
 
     const categories = await Category.find().populate("parent");
-
     return res.status(200).json({
       data: data,
       metadata: {
@@ -113,31 +112,10 @@ module.exports.getSingleTour = async (req, res, next) => {
 
 module.exports.updateTour = async (req, res, next) => {
   try {
-    let {
-      tourId,
-      language,
-      category,
+    let { language } = req.body;
+    console.log("xxx", language);
 
-      currentPrice,
-      oldPrice,
-      priceIncludes,
-      priceExcludes,
-
-      departureDates,
-      days,
-      nights,
-
-      name,
-      journey,
-      description,
-      countries,
-
-      highlights,
-      cancellationPolicy,
-      removedImages,
-    } = req.body;
-
-    const tour = await Tour.findOne({ _id: tourId });
+    const tour = await Tour.findOne({ _id: req.body.tourId });
     if (!tour) {
       return next(
         createError(new Error(""), 400, {
@@ -167,40 +145,31 @@ module.exports.updateTour = async (req, res, next) => {
       tour.thumb = thumbUrl;
     }
 
-    // =============== cập nhật slider ===========================
-    removedImages = JSON.parse(removedImages);
-    tour.slider = tour.slider.filter((item) => !removedImages.includes(item));
-
-    const slider = req.files["slider"];
-    if (slider?.length > 0) {
-      const sliderURLs = await uploadFilesToFirebase(slider);
-      tour.slider = [...tour.slider, ...sliderURLs];
-    }
-
-    // xóa hình cũ
-    deleteFilesFromFirebase(removedImages);
-
     // ========== bắt đầu cập nhật ===========
-    // fields chính
-    tour.departureDates = JSON.parse(departureDates);
-    tour.days = days;
-    tour.nights = nights;
-    tour.currentPrice = currentPrice;
-    tour.oldPrice = oldPrice;
-    tour.category = JSON.parse(category);
+    // fields không phụ thuộc language
+    tour.category = JSON.parse(req.body.category);
+    tour.code = req.body.code;
+    tour.price = Number(req.body.price);
+    tour.duration.days = Number(req.body.days);
+    tour.duration.nights = Number(req.body.nights);
+    tour.departureDates = JSON.parse(req.body.departureDates);
 
     // fields ngôn ngữ
     if (language === "vi") {
-      tour.priceIncludes = JSON.parse(priceIncludes);
-      tour.priceExcludes = JSON.parse(priceExcludes);
+      tour.price_policies.includes = JSON.parse(req.body.priceIncludes);
+      tour.price_policies.excludes = JSON.parse(req.body.priceExcludes);
+      tour.price_policies.other = JSON.parse(req.body.priceOther);
 
-      tour.name = name;
-      tour.journey = journey;
-      tour.description = description;
-      tour.countries = countries;
+      tour.name = req.body.name;
+      tour.countries = req.body.countries;
+      tour.journey = req.body.journey;
+      tour.description = req.body.description;
+      tour.highlights = JSON.parse(req.body.highlights);
 
-      tour.highlights = JSON.parse(highlights);
-      tour.cancellationPolicy = JSON.parse(cancellationPolicy);
+      tour.terms.cancellation = JSON.parse(req.body.cancellationPolicy);
+      tour.terms.registration = JSON.parse(req.body.registrationPolicy);
+      tour.terms.payment = JSON.parse(req.body.paymentPolicy);
+      tour.terms.notes = JSON.parse(req.body.notes);
     }
 
     if (language !== "vi") {
@@ -211,28 +180,52 @@ module.exports.updateTour = async (req, res, next) => {
         tour.translation.push({
           language,
 
-          priceIncludes: JSON.parse(priceIncludes),
-          priceExcludes: JSON.parse(priceExcludes),
+          name: req.body.name,
+          countries: req.body.countries,
+          journey: req.body.journey,
+          description: req.body.description,
+          highlights: JSON.parse(req.body.highlights),
 
-          name,
-          journey,
-          description,
-          countries,
+          price_policies: {
+            includes: JSON.parse(req.body.priceIncludes),
+            excludes: JSON.parse(req.body.priceExcludes),
+            other: JSON.parse(req.body.priceOther),
+          },
 
-          highlights: JSON.parse(highlights),
-          cancellationPolicy: JSON.parse(cancellationPolicy),
+          terms: {
+            cancellation: JSON.parse(req.body.cancellationPolicy),
+            registration: JSON.parse(req.body.registrationPolicy),
+            payment: JSON.parse(req.body.paymentPolicy),
+            notes: JSON.parse(req.body.notes),
+          },
         });
       } else {
-        tour.translation[tid].name = name;
-        tour.translation[tid].journey = journey;
-        tour.translation[tid].description = description;
+        tour.translation[tid].price_policies.includes = JSON.parse(
+          req.body.priceIncludes
+        );
+        tour.translation[tid].price_policies.excludes = JSON.parse(
+          req.body.priceExcludes
+        );
+        tour.translation[tid].price_policies.other = JSON.parse(
+          req.body.priceOther
+        );
 
-        tour.translation[tid].highlights = JSON.parse(highlights);
-        tour.translation[tid].cancellationPolicy =
-          JSON.parse(cancellationPolicy);
+        tour.translation[tid].name = req.body.name;
+        tour.translation[tid].countries = req.body.countries;
+        tour.translation[tid].journey = req.body.journey;
+        tour.translation[tid].description = req.body.description;
+        tour.translation[tid].highlights = JSON.parse(req.body.highlights);
 
-        tour.translation[tid].priceIncludes = JSON.parse(priceIncludes);
-        tour.translation[tid].priceExcludes = JSON.parse(priceExcludes);
+        tour.translation[tid].terms.cancellation = JSON.parse(
+          req.body.cancellationPolicy
+        );
+        tour.translation[tid].terms.registration = JSON.parse(
+          req.body.registrationPolicy
+        );
+        tour.translation[tid].terms.payment = JSON.parse(
+          req.body.paymentPolicy
+        );
+        tour.translation[tid].terms.notes = JSON.parse(req.body.notes);
       }
     }
 
@@ -251,8 +244,7 @@ module.exports.updateTour = async (req, res, next) => {
 
 module.exports.updateItinerary = async (req, res, next) => {
   try {
-    const { tourId, itinerary, language } = req.body;
-
+    let { tourId, itinerary, language } = req.body;
     const tour = await Tour.findOne({ _id: tourId });
     if (!tour) {
       return next(
@@ -263,41 +255,46 @@ module.exports.updateItinerary = async (req, res, next) => {
       );
     }
 
-    const cur_plan =
-      language === "vi"
-        ? tour.itinerary
-        : tour.translation.find((item) => item.language === language)
-            ?.itinerary;
-
-    // lấy hình đã xóa:
-    const removedImgs = cur_plan
-      ? getItineraryImgs(cur_plan).filter(
-          (img) => !JSON.stringify(itinerary).includes(img)
-        )
-      : [];
-
-    // xóa hình
-    deleteFilesFromFirebase(removedImgs);
-
-    // lấy hình mới thêm vào (là hình base64)
-    const base64Imgs = getItineraryImgs(itinerary).filter((text) =>
-      text.startsWith("data:image")
-    );
-
-    const imageURLs = await uploadFilesToFirebase(base64Imgs, true);
-
-    let itineraryText = JSON.stringify(itinerary);
-    base64Imgs.forEach((item, index) => {
-      itineraryText = itineraryText.replace(item, imageURLs[index]);
-    });
-
     if (language === "vi") {
-      tour.itinerary = JSON.parse(itineraryText);
-    } else {
-      const tid = tour.translation.findIndex(
+      let removedImgs = [];
+      let old_itinerary = tour.itinerary || [];
+      let images_arr = await Promise.all(
+        JSON.parse(itinerary) // map cái này chỉ để lấy độ dài của mảng thôi
+          .map((item, index) => {
+            if (req.files[`plan${index}`]) {
+              if (old_itinerary[index]?.images) {
+                removedImgs = removedImgs.concat(old_itinerary[index].images);
+              }
+              return req.files[`plan${index}`];
+            } else {
+              return old_itinerary[index].images || [];
+            }
+          })
+          .map((images) => {
+            if (images.length > 0 && images[0].buffer) {
+              return uploadFilesToFirebase(images);
+            } else {
+              return Promise.resolve(images);
+            }
+          })
+      );
+
+      itinerary = JSON.parse(itinerary).map((item, index) => ({
+        ...item,
+        images: images_arr[index],
+      }));
+
+      tour.itinerary = itinerary;
+      deleteFilesFromFirebase(removedImgs);
+    }
+
+    if (language !== "vi") {
+      // chỉ cập nhật các trường trong translation
+      // chỉ thêm itinerary ngôn ngữ khác đc khi đã có ver ngôn ngữ tương ứng
+      const index = tour.translation.findIndex(
         (item) => item.language === language
       );
-      tour.translation[tid].itinerary = JSON.parse(itineraryText);
+      tour.translation[index].itinerary = JSON.parse(itinerary);
     }
 
     await tour.save();

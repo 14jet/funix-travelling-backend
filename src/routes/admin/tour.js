@@ -23,21 +23,9 @@ const validationResultHandler = require("../../validators/validationResultHandle
 
 // routes
 router.get("/:tourId", getSingleTour);
-router.post(
-  "/",
-  multer.uploadTourImgs,
-  addTourValidator,
-  validationResultHandler,
-  addTour
-);
-router.put(
-  "/",
-  multer.uploadTourImgs,
-  editTourValidator,
-  validationResultHandler,
-  updateTour
-);
-router.put("/itinerary", addItineraryValidator, updateItinerary);
+router.post("/", multer.uploadTourImgs, addTourValidator, addTour);
+router.put("/", multer.uploadTourImgs, editTourValidator, updateTour);
+router.put("/itinerary", multer.uploadTourImgs, updateItinerary);
 router.delete("/", deleteTour);
 
 module.exports = router;

@@ -1,25 +1,31 @@
 {
-  "analyzer": "lucene.english",
-  "searchAnalyzer": "lucene.english",
   "mappings": {
-    "dynamic": true,
-    "fields": [
-      {
-        "dynamic": true,
-        "type": "document"
+    "dynamic": false,
+    "fields": {
+      "name": {
+        "type": "autocomplete"
       },
-      {
-        "analyzer": "lucene.italian",
-        "multi": {
-          "fullplot_english": {
-            "analyzer": "lucene.english",
-            "searchAnalyzer": "lucene.english",
-            "type": "string"
+      "countries": {
+        "type": "autocomplete"
+      },
+      "journey": {
+        "type": "autocomplete"
+      },
+      "translation": {
+        "dynamic": true,
+        "type": "embeddedDocuments",
+        "fields": {
+          "name": {
+            "type": "autocomplete"
+          },
+          "countries": {
+            "type": "autocomplete"
+          },
+          "journey": {
+            "type": "autocomplete"
           }
-        },
-        "searchAnalyzer": "lucene.italian",
-        "type": "string"
+        }
       }
-    ]
+    }
   }
 }
