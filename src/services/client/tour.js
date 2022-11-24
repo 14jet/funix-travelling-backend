@@ -102,11 +102,11 @@ module.exports.aggCreator = (queries) => {
   const notEmpty = (obj) => Object.keys(obj).length > 0;
 
   let { cat, cat_not, page, page_size, sort, search, lang } = queries;
-  if (!Array.isArray(cat)) {
+  if (cat && !Array.isArray(cat)) {
     cat = [cat];
   }
 
-  if (!Array.isArray(cat_not)) {
+  if (cat_not && !Array.isArray(cat_not)) {
     cat_not = [cat_not];
   }
 
@@ -129,7 +129,7 @@ module.exports.aggCreator = (queries) => {
   }
 
   if (cat_not) {
-    $match = { ...$match, category: { $nin: cat } };
+    $match = { ...$match, category: { $nin: cat_not } };
   }
 
   // sort
