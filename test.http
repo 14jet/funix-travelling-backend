@@ -6,7 +6,7 @@ http://localhost:5000/api/tour/637f31c6145e1699a820f61a/?lang=vi
 http://localhost:5000/api/tour/?search=tte&lang=vi
 
 ### client get tours
-http://localhost:5000/api/article/?search=eng&lang=en
+http://localhost:5000/api/article/
 
 
 ### client get tours

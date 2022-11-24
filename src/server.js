@@ -23,11 +23,8 @@ app.use("/api/admin/article", require("./routes/admin/article"));
 app.use("/api/admin/tour", require("./routes/admin/tour"));
 app.use("/api/admin/layout", require("./routes/admin/layout"));
 
-// 404 handler
 app.all("*", require("./middlewares/notFound"));
-
-// error handler
-app.use(require("./middlewares/erroHandler"));
+app.use(require("./middlewares/errorHandler"));
 
 // connect to database
 require("./helpers/connectDB")();
