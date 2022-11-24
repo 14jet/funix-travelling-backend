@@ -1,10 +1,8 @@
 const Tour = require("../../models/tour");
 const Category = require("../../models/category");
 const createError = require("../../helpers/errorCreator");
-const { getItineraryImgs } = require("../../helpers/getItineraryImgs");
 const uploadFilesToFirebase = require("../../helpers/uploadFilesToFirebase.js");
 const deleteFilesFromFirebase = require("../../helpers/deleteFilesFromFirebase");
-const tourServices = require("../../services/tour");
 const { imgResizer } = require("../../helpers/imgResizer");
 
 const admin_tourServices = require("../../services/admin/tour");
@@ -323,15 +321,10 @@ module.exports.deleteTour = async (req, res, next) => {
       );
     }
 
-    let imgs = [];
+    let imgs = tour.itinerary
+      .reduce((prev, cur) => [...prev, ...cur.images], [])
+      .concat(tour.thumb);
 
-    imgs = imgs.concat(tour.slider);
-    imgs = imgs.concat([tour.thumb]);
-    imgs = imgs.concat(getItineraryImgs(tour.itinerary));
-    tour.translation.forEach((item) => {
-      imgs = imgs.concat(getItineraryImgs(item.itinerary));
-    });
-    imgs = Array.from(new Set(imgs));
     deleteFilesFromFirebase(imgs);
 
     await tour.remove();

@@ -86,14 +86,6 @@ const tourSchema = new Schema(
           notes: Object,
         },
 
-        rating: {
-          items: [
-            {
-              content: String,
-            },
-          ],
-        },
-
         itinerary: [
           {
             day: String,

@@ -100,8 +100,7 @@ module.exports.getTours = (tours, language = "vi") => {
 module.exports.aggCreator = (queries) => {
   const notEmpty = (obj) => Object.keys(obj).length > 0;
 
-  let { cat, cat_not, page, page_size, sort, search } = queries;
-  console.log(search);
+  let { cat, cat_not, page, page_size, sort, search, lang } = queries;
 
   let $search = {};
   let $match = {};
@@ -152,62 +151,67 @@ module.exports.aggCreator = (queries) => {
 
   // search
   if (search) {
-    $search = {
-      compound: {
-        should: [
-          {
-            autocomplete: {
-              query: search,
-              path: "name",
-            },
-          },
-          {
-            autocomplete: {
-              query: search,
-              path: "journey",
-            },
-          },
-          {
-            autocomplete: {
-              query: search,
-              path: "countries",
-            },
-          },
-          {
-            embeddedDocument: {
-              path: "translation",
-              operator: {
-                compound: {
-                  should: [
-                    {
-                      autocomplete: {
-                        path: "translation.name",
-                        query: search,
-                      },
-                    },
-                    {
-                      autocomplete: {
-                        path: "translation.countries",
-                        query: search,
-                      },
-                    },
-                    {
-                      autocomplete: {
-                        path: "translation.journey",
-                        query: search,
-                      },
-                    },
-                  ],
+    $search =
+      lang === "vi"
+        ? {
+            compound: {
+              should: [
+                {
+                  autocomplete: {
+                    query: search,
+                    path: "name",
+                  },
                 },
-              },
+                {
+                  autocomplete: {
+                    query: search,
+                    path: "journey",
+                  },
+                },
+                {
+                  autocomplete: {
+                    query: search,
+                    path: "countries",
+                  },
+                },
+              ],
             },
-          },
-        ],
-      },
-      count: {
-        type: "total",
-      },
-    };
+          }
+        : {
+            compound: {
+              should: [
+                {
+                  embeddedDocument: {
+                    path: "translation",
+                    operator: {
+                      compound: {
+                        should: [
+                          {
+                            autocomplete: {
+                              path: "translation.name",
+                              query: search,
+                            },
+                          },
+                          {
+                            autocomplete: {
+                              path: "translation.countries",
+                              query: search,
+                            },
+                          },
+                          {
+                            autocomplete: {
+                              path: "translation.journey",
+                              query: search,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  },
+                },
+              ],
+            },
+          };
   }
 
   // limit

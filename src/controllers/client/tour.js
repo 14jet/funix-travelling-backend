@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const Tour = require("../../models/tour");
-const Category = require("../../models/category");
 const createError = require("../../helpers/errorCreator");
-const tourService = require("../../services/tour");
 const client_tourServices = require("../../services/client/tour");
 
 module.exports.getTours = async (req, res, next) => {
@@ -28,11 +26,14 @@ module.exports.getTours = async (req, res, next) => {
         cat_not,
         sort,
         search,
+        lang,
       })
     );
 
+    console.log(results);
+
     const tours = results[0].tours;
-    const total_count = results[0].count[0].total_count;
+    const total_count = results[0].count[0]?.total_count || 0;
 
     // metadata
     const page_count = Math.ceil(total_count / page_size);

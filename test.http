@@ -3,5 +3,5 @@ http://localhost:5000/api/tour/637edea0d7218f5e786cb7c0/?lang=en
 
 
 ### client get tours
-http://localhost:5000/api/tour/?sort=price-desc&search=cu&lang=en
+http://localhost:5000/api/tour/?search=tte&lang=vi
 

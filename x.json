@@ -2,29 +2,29 @@
   "mappings": {
     "dynamic": false,
     "fields": {
-      "name": {
-        "type": "autocomplete"
-      },
       "countries": {
         "type": "autocomplete"
       },
       "journey": {
         "type": "autocomplete"
       },
+      "name": {
+        "type": "autocomplete"
+      },
       "translation": {
         "dynamic": true,
-        "type": "embeddedDocuments",
         "fields": {
-          "name": {
-            "type": "autocomplete"
-          },
           "countries": {
             "type": "autocomplete"
           },
           "journey": {
             "type": "autocomplete"
+          },
+          "name": {
+            "type": "autocomplete"
           }
-        }
+        },
+        "type": "embeddedDocuments"
       }
     }
   }
