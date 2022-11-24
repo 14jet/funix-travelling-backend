@@ -11,7 +11,6 @@ const {
 
 // routes
 router.get("/", getArticles);
-router.get("/new-articles", getNewArticles);
 router.get("/search", searchForArticles);
 router.get("/:articleId", getSingleArticle);
 

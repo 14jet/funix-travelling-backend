@@ -32,7 +32,7 @@ module.exports.getArticles = async (req, res, next) => {
 
     const articles = results[0].articles;
     const total_count = results[0].count[0]?.total_count || 0;
-
+    console.log(results);
     // metadata
     const page_count = Math.ceil(total_count / page_size);
     const remain_count =
