@@ -8,7 +8,7 @@ const {
   getDownloadURL,
 } = require("firebase/storage");
 
-async function uploadFilesToFirebase(files, base64 = false) {
+async function uploadFilesToFirebase(files, base64 = false, path = "") {
   let refs = [];
 
   if (!base64) {
@@ -16,7 +16,7 @@ async function uploadFilesToFirebase(files, base64 = false) {
       file: file.buffer,
       ref: ref(
         fbStorage,
-        "images/" + uuid() + "." + getExt.filename(file.originalname)
+        `images/${path}` + uuid() + "." + getExt.filename(file.originalname)
       ),
       metadata: {
         contentType: `image/${getExt.filename(file.originalname)}`,
@@ -25,7 +25,10 @@ async function uploadFilesToFirebase(files, base64 = false) {
   } else {
     refs = files.map((item) => ({
       file: item,
-      ref: ref(fbStorage, "images/" + uuid() + "." + getExt.base64(item)[1]),
+      ref: ref(
+        fbStorage,
+        `images/${path}` + uuid() + "." + getExt.base64(item)[1]
+      ),
       metadata: {
         contentType: `image/${getExt.base64(item)[1]}`,
       },

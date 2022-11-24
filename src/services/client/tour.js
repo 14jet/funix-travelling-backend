@@ -91,6 +91,7 @@ module.exports.getTours = (tours, language = "vi") => {
       countries: tour.countries,
       journey: tour.journey,
       price: tour.price,
+      duration: tour.duration,
     };
   });
 

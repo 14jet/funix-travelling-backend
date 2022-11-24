@@ -37,3 +37,14 @@ a90c853b-c528-4764-bc44-ed22cea8054a	24-11-2022	05:48:44	GET	/api/article/	searc
     at Object.module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\services\client\article.js:152:28)
     at module.exports.getArticles (D:\ntav-workspace\job\travelling-website\backend\src\controllers\client\article.js:56:36)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+dc189967-251b-4844-83bc-7cdf0d68eb1b	24-11-2022	08:14:35	POST	/api/admin/layout/image?lang=vi	Cannot read properties of null (reading 'home')	TypeError: Cannot read properties of null (reading 'home')
+    at module.exports.updateLayoutPictures (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\layout.js:15:38)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+fe098cac-7cff-48bd-b3c2-c6495cf64605	24-11-2022	08:15:57	POST	/api/admin/layout/image?lang=vi	newArticle is not defined	ReferenceError: newArticle is not defined
+    at module.exports.updateLayoutPictures (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\layout.js:65:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+c5a6a796-7045-4470-85bf-d509d34dc1b5	24-11-2022	09:36:44	GET	/api/tour/search?text=t&lang=vi	
+5fda9175-9c93-4be8-bf97-83c5f4bb14b6	24-11-2022	09:41:33	GET	/api/tour/search?text=t&lang=vi	
+5f0c4003-d130-4c67-a4b1-bef15ec0d1a1	24-11-2022	09:42:57	GET	/api/tour/search?text=tt&lang=vi	
+9fdcb286-c28d-4bed-bcc2-5e54e31faa9f	24-11-2022	09:42:59	GET	/api/tour/search?text=h&lang=vi	
+722e896a-b433-44d5-b796-0693598e6d6b	24-11-2022	09:43:00	GET	/api/tour/search?text=hh&lang=vi	

@@ -15,11 +15,13 @@ app.use("/api/user", require("./routes/client/user"));
 app.use("/api/tour", require("./routes/client/tour"));
 app.use("/api/article", require("./routes/client/article"));
 app.use("/api/visa", require("./routes/client/visa"));
+app.use("/api/layout", require("./routes/client/layout"));
 
 // admin
 app.use("/api/admin/categories", require("./routes/admin/category"));
 app.use("/api/admin/article", require("./routes/admin/article"));
 app.use("/api/admin/tour", require("./routes/admin/tour"));
+app.use("/api/admin/layout", require("./routes/admin/layout"));
 
 // 404 handler
 app.all("*", require("./middlewares/notFound"));
