@@ -1,51 +1,102 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const tourSchema = new Schema({
-  category: [String],
-  language: {
-    type: String,
-    default: "vi",
-  },
-
-  name: String,
-  journey: String,
-  countries: String,
-  description: String,
-  itinerary: Array,
-
-  currentPrice: Number,
-  oldPrice: Number,
-  priceIncludes: [String],
-  priceExcludes: [String],
-
-  departureDates: [Date],
-  days: Number,
-  nights: Number,
-
-  highlights: [String],
-  cancellationPolicy: [String],
-
-  slider: [String],
-  thumb: String,
-
-  translation: [
-    {
-      language: { type: String, required: true },
-
-      name: String,
-      journey: String,
-      countries: String,
-      description: String,
-      itinerary: Array,
-
-      priceIncludes: [String],
-      priceExcludes: [String],
-
-      highlights: [String],
-      cancellationPolicy: [String],
+const tourSchema = new Schema(
+  {
+    language: {
+      type: String,
+      default: "vi",
     },
-  ],
-});
+
+    category: [String],
+
+    code: String,
+    name: String, // trans
+    countries: String, // trans
+    journey: String, // trans
+    description: String, // trans
+    highlights: Object, // quill - trans
+
+    price: Number,
+    duration: {
+      days: Number,
+      nights: Number,
+    },
+    departureDates: [Date],
+
+    price_policies: {
+      includes: Object, // quill - trans
+      excludes: Object, // quill - trans
+      other: Object, // quill - trans
+    },
+
+    terms: {
+      registration: Object, // quill - trans
+      cancellation: Object, // quill, - trans
+      payment: Object, // quill - trans
+      notes: Object, // quill - trans
+    },
+
+    thumb: String,
+
+    rating: {
+      average: {
+        default: -1,
+        type: Number,
+      },
+      items: [
+        {
+          name: String,
+          stars: Number,
+          content: String, // trans
+        },
+      ],
+    },
+
+    itinerary: [
+      {
+        id: String,
+        day: String, // trans
+        destination: String, // trans
+        images: [String],
+        content: Object, // quill - trans
+      },
+    ],
+
+    translation: [
+      {
+        language: { type: String, required: true },
+
+        name: String,
+        countries: String,
+        journey: String,
+        description: String,
+        highlights: Object,
+
+        price_policies: {
+          includes: Object,
+          excludes: Object,
+          other: Object,
+        },
+
+        terms: {
+          registration: Object,
+          cancellation: Object,
+          payment: Object,
+          notes: Object,
+        },
+
+        itinerary: [
+          {
+            day: String,
+            destination: String,
+            content: Object,
+          },
+        ],
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
 module.exports = mongoose.model("Tour", tourSchema);

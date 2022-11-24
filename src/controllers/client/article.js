@@ -192,7 +192,6 @@ module.exports.searchForArticles = async (req, res, next) => {
     const articles = await Article.aggregate(agg);
 
     const total_count = articles.length > 0 ? articles[0].meta.count.total : 0;
-    console.log(total_count);
 
     const page_count = Math.ceil(total_count / page_size);
     const remain_count =

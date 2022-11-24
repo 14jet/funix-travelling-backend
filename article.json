@@ -2,16 +2,17 @@
   "mappings": {
     "dynamic": false,
     "fields": {
-      "name": {
+      "title": {
         "type": "autocomplete"
       },
       "translation": {
-        "type": "embeddedDocuments",
+        "dynamic": true,
         "fields": {
-          "name": {
+          "title": {
             "type": "autocomplete"
           }
-        }
+        },
+        "type": "embeddedDocuments"
       }
     }
   }

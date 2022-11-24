@@ -194,7 +194,6 @@ module.exports.updateArticle = async (req, res, next) => {
     }
 
     article.category = JSON.parse(category);
-    console.log(category);
 
     await article.save();
     return res.status(200).json({

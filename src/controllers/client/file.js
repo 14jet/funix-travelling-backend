@@ -18,7 +18,6 @@ module.exports.uploadFiles = async (req, res, next) => {
 module.exports.uploadFile = async (req, res, next) => {
   try {
     const file = req.file;
-    console.log(file);
 
     // const url = new URL(file.filename, "http://localhost:5000/images/");
     const url = file.path;
