@@ -48,3 +48,140 @@ c5a6a796-7045-4470-85bf-d509d34dc1b5	24-11-2022	09:36:44	GET	/api/tour/search?te
 5f0c4003-d130-4c67-a4b1-bef15ec0d1a1	24-11-2022	09:42:57	GET	/api/tour/search?text=tt&lang=vi	
 9fdcb286-c28d-4bed-bcc2-5e54e31faa9f	24-11-2022	09:42:59	GET	/api/tour/search?text=h&lang=vi	
 722e896a-b433-44d5-b796-0693598e6d6b	24-11-2022	09:43:00	GET	/api/tour/search?text=hh&lang=vi	
+566731fb-82b0-4141-86f6-87a21004ff85	25-11-2022	01:13:38	GET	/api/layout/?lang=vi	
+dbcb3315-0b59-4415-9a9a-863b03e440cf	25-11-2022	01:16:35	GET	/api/layout/?lang=vi	
+db35d903-7cb7-43a8-9db8-5dd0cdf3cfbe	25-11-2022	01:20:22	GET	/api/layout/?lang=vi	
+11ee196d-5fa7-49f7-a683-1edf3a968b90	25-11-2022	02:25:38	PUT	/api/admin/tour/itinerary?lang=vi	Cannot read properties of undefined (reading 'images')	TypeError: Cannot read properties of undefined (reading 'images')
+    at D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:226:43
+    at Array.map (<anonymous>)
+    at module.exports.updateItinerary (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:219:12)
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+d4e96c04-c17d-4b09-9943-ce4578fc32da	25-11-2022	04:36:16	PUT	/api/admin/tour/itinerary?lang=vi	Cannot read properties of undefined (reading 'plan0')	TypeError: Cannot read properties of undefined (reading 'plan0')
+    at module.exports.updateItinerary (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:220:36)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+f14b8aa9-925f-4aa7-a42c-25ee6052d9f9	25-11-2022	04:54:24	PUT	/api/admin/tour/itinerary?lang=vi	Unexpected token o in JSON at position 1	SyntaxError: Unexpected token o in JSON at position 1
+    at JSON.parse (<anonymous>)
+    at module.exports.updateItinerary (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:245:46)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+69881c95-1c57-4e60-9424-a83c5ab4c564	25-11-2022	04:58:34	PUT	/api/admin/tour/itinerary?lang=vi	images is not iterable	TypeError: images is not iterable
+    at deleteFilesFromFirebase (D:\ntav-workspace\job\travelling-website\backend\src\helpers\deleteFilesFromFirebase.js:11:23)
+    at D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:232:15
+    at Array.map (<anonymous>)
+    at module.exports.updateItinerary (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:229:31)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+f5b5d928-2e20-4cb9-bd87-91e32933bddc	25-11-2022	04:59:13	PUT	/api/admin/tour/itinerary?lang=vi	images is not iterable	TypeError: images is not iterable
+    at deleteFilesFromFirebase (D:\ntav-workspace\job\travelling-website\backend\src\helpers\deleteFilesFromFirebase.js:11:23)
+    at D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:233:15
+    at Array.map (<anonymous>)
+    at module.exports.updateItinerary (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:229:31)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+c4d0f8b2-022f-40ed-99b3-60ff9f07dd44	25-11-2022	05:00:07	PUT	/api/admin/tour/itinerary?lang=vi	images is not iterable	TypeError: images is not iterable
+    at deleteFilesFromFirebase (D:\ntav-workspace\job\travelling-website\backend\src\helpers\deleteFilesFromFirebase.js:11:23)
+    at D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:233:15
+    at Array.map (<anonymous>)
+    at module.exports.updateItinerary (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:229:31)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+da2cda4c-1a9e-4405-8caa-8707eb2db62a	25-11-2022	05:01:08	PUT	/api/admin/tour/itinerary?lang=vi	images is not iterable	TypeError: images is not iterable
+    at deleteFilesFromFirebase (D:\ntav-workspace\job\travelling-website\backend\src\helpers\deleteFilesFromFirebase.js:11:23)
+    at D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:233:15
+    at Array.map (<anonymous>)
+    at module.exports.updateItinerary (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\tour.js:229:31)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+d7cf599d-fb8c-4f7d-ae1c-9cbc43fbf90f	25-11-2022	09:26:17	GET	/api/article?page=0&page_size=6&lang=vi	invalid argument to $skip stage: Expected a positive number in: $skip: -6	MongoServerError: invalid argument to $skip stage: Expected a positive number in: $skip: -6
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+f999dbbe-a24a-48bd-b35a-e91bac73008c	25-11-2022	09:42:44	GET	/favicon.ico	Route Not Found
+f1b6c315-9eec-4757-a231-b6e076ebda0a	25-11-2022	10:12:14	GET	/api/article?page=1&page_size=6&lang=vi	invalid argument to $limit stage: Expected a number in: $limit: "6"	MongoServerError: invalid argument to $limit stage: Expected a number in: $limit: "6"
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+d410e32e-ee13-4eef-a0fe-980bdc5cd5e3	26-11-2022	12:01:48	GET	/api/tour/	$sort stage must have at least one sort key	MongoServerError: $sort stage must have at least one sort key
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+902014f2-f932-4928-88fa-60e26ed4564d	26-11-2022	12:07:12	GET	/api/tour/?hehe=chicken&hehe=bird&page=1&page_size=6&lang=vi	getaddrinfo ENOTFOUND ac-du6xjtu-shard-00-01.qfie8nj.mongodb.net	MongoServerSelectionError: getaddrinfo ENOTFOUND ac-du6xjtu-shard-00-01.qfie8nj.mongodb.net
+    at Timeout._onTimeout (D:\ntav-workspace\job\travelling-website\backend\node_modules\mongodb\lib\sdam\topology.js:293:38)
+    at listOnTimeout (node:internal/timers:559:17)
+    at processTimers (node:internal/timers:502:7)
+5593b079-3d77-47bb-9ca2-05ffd7471bdd	26-11-2022	12:46:20	POST	/api/admin/tour?lang=vi	
+f7cc9300-b0a4-4f72-81cb-e4359d78d7d0	26-11-2022	12:46:29	POST	/api/admin/tour?lang=vi	
+62b9c030-8253-4471-b7db-ec86c95204f6	26-11-2022	12:46:32	POST	/api/admin/tour?lang=vi	
+451cb570-6ad0-41f4-8486-78e9489449fd	26-11-2022	12:46:37	POST	/api/admin/tour?lang=vi	
+170a71e0-754c-44a1-99cc-7e50cd8f4ccb	26-11-2022	12:47:38	POST	/api/admin/tour?lang=vi	
+072fe8a2-f57e-44dc-936d-6e67069f36e7	26-11-2022	12:47:42	POST	/api/admin/tour?lang=vi	
+2084ed5b-5cf5-46ff-b382-a4d6987d5ba3	26-11-2022	12:47:45	POST	/api/admin/tour?lang=vi	
+003527eb-a45e-4a35-9d22-09c9d3d4dc0b	26-11-2022	01:59:56	POST	/api/admin/layout/image?lang=vi	uuid is not defined	ReferenceError: uuid is not defined
+    at createPath (D:\ntav-workspace\job\travelling-website\backend\src\helpers\firebase.js:31:38)
+    at D:\ntav-workspace\job\travelling-website\backend\src\helpers\firebase.js:54:9
+    at Array.map (<anonymous>)
+    at uploadFiles (D:\ntav-workspace\job\travelling-website\backend\src\helpers\firebase.js:50:18)
+    at module.exports.updateLayoutPictures (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\layout.js:10:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at done (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:45:7)
+    at indicateDone (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:49:68)
+    at Multipart.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:166:7)
+d4846bb8-a704-4a5c-aea0-ef5d72a5f6de	26-11-2022	02:00:29	POST	/api/admin/layout/image?lang=vi	getExt is not defined	ReferenceError: getExt is not defined
+    at D:\ntav-workspace\job\travelling-website\backend\src\helpers\firebase.js:55:30
+    at Array.map (<anonymous>)
+    at uploadFiles (D:\ntav-workspace\job\travelling-website\backend\src\helpers\firebase.js:51:18)
+    at module.exports.updateLayoutPictures (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\layout.js:10:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at done (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:45:7)
+    at indicateDone (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:49:68)
+    at Multipart.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:166:7)
+    at Multipart.emit (node:events:513:28)
+12ce2be7-3832-44bf-bd0e-59ff173f227c	26-11-2022	02:01:03	POST	/api/admin/layout/image?lang=vi	uploadBytes is not defined	ReferenceError: uploadBytes is not defined
+    at D:\ntav-workspace\job\travelling-website\backend\src\helpers\firebase.js:64:25
+    at Array.map (<anonymous>)
+    at uploadFiles (D:\ntav-workspace\job\travelling-website\backend\src\helpers\firebase.js:64:12)
+    at module.exports.updateLayoutPictures (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\layout.js:10:29)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\backend\node_modules\express\lib\router\route.js:144:13)
+    at done (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:45:7)
+    at indicateDone (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:49:68)
+    at Multipart.<anonymous> (D:\ntav-workspace\job\travelling-website\backend\node_modules\multer\lib\make-middleware.js:166:7)
+    at Multipart.emit (node:events:513:28)
+d5ed9002-01a8-4ef5-8793-cc9cfc9c9a40	26-11-2022	02:01:25	POST	/api/admin/layout/image?lang=vi	getDownloadURL is not defined	ReferenceError: getDownloadURL is not defined
+    at D:\ntav-workspace\job\travelling-website\backend\src\helpers\firebase.js:75:23
+    at Array.map (<anonymous>)
+    at uploadFiles (D:\ntav-workspace\job\travelling-website\backend\src\helpers\firebase.js:75:10)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async module.exports.updateLayoutPictures (D:\ntav-workspace\job\travelling-website\backend\src\controllers\admin\layout.js:10:23)
+7e8b4576-c4df-49c3-aacc-c0255f707943	26-11-2022	03:56:11	GET	/api/tour/?hehe=chicken&hehe=bird&page=2&page_size=6&lang=vi	Cannot read properties of undefined (reading 'tours')	TypeError: Cannot read properties of undefined (reading 'tours')
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\client\tour.js:33:30)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+05e285eb-4851-4c1b-8ebc-501e6d56f54b	26-11-2022	03:57:11	GET	/api/tour/?hehe=chicken&hehe=bird&page=2&page_size=6&lang=vi	Cannot read properties of undefined (reading 'tours')	TypeError: Cannot read properties of undefined (reading 'tours')
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\client\tour.js:33:30)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+cf6c6eaa-372c-4417-b452-dea6c6a1c2e3	26-11-2022	03:58:03	GET	/api/tour/?hehe=chicken&hehe=bird&page=2&page_size=6&lang=vi	Cannot read properties of undefined (reading 'tours')	TypeError: Cannot read properties of undefined (reading 'tours')
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\client\tour.js:35:30)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+a6744174-f575-4386-a768-ef6c847c7983	26-11-2022	04:02:07	GET	/api/tour/?hehe=chicken&hehe=bird&page=2&page_size=6&lang=vi	Cannot read properties of undefined (reading 'count')	TypeError: Cannot read properties of undefined (reading 'count')
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\client\tour.js:34:36)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+3bcb7a87-f521-45bf-b021-ec1fb4af021c	26-11-2022	04:12:36	GET	/favicon.ico	Route Not Found

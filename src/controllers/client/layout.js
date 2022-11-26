@@ -5,12 +5,16 @@ module.exports.getLayoutData = async (req, res, next) => {
   try {
     let layout = await Layout.findOne();
     if (!layout) {
-      return next(
-        createError(new Error(""), 404, {
-          en: "Not Found",
-          vi: "Không tìm thấy layout",
-        })
-      );
+      layout = await Layout.create({
+        images: {
+          home: [],
+          vn_tours: "",
+          eu_tours: "",
+          tour: "",
+          guides: "",
+          article: "",
+        },
+      });
     }
 
     return res.status(200).json({

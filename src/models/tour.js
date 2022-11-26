@@ -39,19 +39,13 @@ const tourSchema = new Schema(
 
     thumb: String,
 
-    rating: {
-      average: {
-        default: -1,
-        type: Number,
+    rating: [
+      {
+        name: String,
+        stars: Number,
+        content: String,
       },
-      items: [
-        {
-          name: String,
-          stars: Number,
-          content: String, // trans
-        },
-      ],
-    },
+    ],
 
     itinerary: [
       {

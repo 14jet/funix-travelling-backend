@@ -23,7 +23,7 @@ const validationResultHandler = require("../../validators/validationResultHandle
 
 // routes
 router.get("/:tourId", getSingleTour);
-router.post("/", multer.uploadTourImgs, addTourValidator, addTour);
+router.post("/", multer.single, addTourValidator, addTour);
 router.put("/", multer.uploadTourImgs, editTourValidator, updateTour);
 router.put("/itinerary", multer.uploadTourImgs, updateItinerary);
 router.delete("/", deleteTour);

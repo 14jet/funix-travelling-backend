@@ -1,7 +1,5 @@
 const createError = require("../../helpers/errorCreator");
 const Category = require("../../models/category");
-const orderCat = require("../../helpers/orderCat");
-const mongoose = require("mongoose");
 
 module.exports.getCategories = async (req, res, next) => {
   try {

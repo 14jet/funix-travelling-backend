@@ -30,8 +30,8 @@ module.exports.getTours = async (req, res, next) => {
       })
     );
 
-    const tours = results[0].tours;
-    const total_count = results[0].count[0]?.total_count || 0;
+    const tours = results[0]?.tours || [];
+    const total_count = results[0]?.count[0]?.total_count || 0;
 
     // metadata
     const page_count = Math.ceil(total_count / page_size);

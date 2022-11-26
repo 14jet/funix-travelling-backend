@@ -2,8 +2,7 @@ const mongoose = require("mongoose");
 const Article = require("../../models/article");
 const Category = require("../../models/category");
 const createError = require("../../helpers/errorCreator");
-const uploadFilesToFirebase = require("../../helpers/uploadFilesToFirebase");
-const deleteFilesFromFirebase = require("../../helpers/deleteFilesFromFirebase");
+const { uploadFiles, deleteFiles } = require("../../helpers/firebase");
 const { getDeltaImgs } = require("../../helpers/getItineraryImgs");
 const { getFullArticle } = require("../../services/article");
 const { imgResizer } = require("../../helpers/imgResizer");
@@ -18,12 +17,12 @@ module.exports.addArticle = async (req, res, next) => {
     let thumbUrl;
     if (resizedImg) {
       thumbUrl = (
-        await uploadFilesToFirebase([
+        await uploadFiles([
           { buffer: resizedImg, originalname: thumb.originalname },
         ])
       )[0];
     } else {
-      thumbUrl = (await uploadFilesToFirebase([thumb]))[0];
+      thumbUrl = (await uploadFiles([thumb]))[0];
     }
 
     // lấy image base64
@@ -40,7 +39,7 @@ module.exports.addArticle = async (req, res, next) => {
     );
 
     // upload lên firebase
-    const imageURLs = await uploadFilesToFirebase(base64Imgs, true);
+    const imageURLs = await uploadFiles(base64Imgs, true);
 
     // thay tương ứng vào content
     base64Imgs.forEach((item, index) => {
@@ -123,7 +122,7 @@ module.exports.updateArticle = async (req, res, next) => {
       .ops.map((item) => (item.insert?.image ? item.insert.image : null))
       .filter((item) => item && item.startsWith("data:image"));
 
-    const imageURLs = await uploadFilesToFirebase(base64Imgs, true);
+    const imageURLs = await uploadFiles(base64Imgs, true);
 
     base64Imgs.forEach((item, index) => {
       content = content.replace(item, imageURLs[index]);
@@ -144,7 +143,7 @@ module.exports.updateArticle = async (req, res, next) => {
         }
       });
 
-      deleteFilesFromFirebase(oldImgs);
+      deleteFiles(oldImgs);
     }
 
     if (language === "vi") {
@@ -180,15 +179,15 @@ module.exports.updateArticle = async (req, res, next) => {
       const [error, resizedImg] = await imgResizer(thumb.buffer);
       if (resizedImg) {
         thumbUrl = (
-          await uploadFilesToFirebase([
+          await uploadFiles([
             { buffer: resizedImg, originalname: thumb.originalname },
           ])
         )[0];
       } else {
-        thumbUrl = (await uploadFilesToFirebase([thumb]))[0];
+        thumbUrl = (await uploadFiles([thumb]))[0];
       }
 
-      deleteFilesFromFirebase([article.thumb]);
+      deleteFiles([article.thumb]);
       article.thumb = thumbUrl;
     }
 
@@ -232,7 +231,7 @@ module.exports.deleteArticle = async (req, res, next) => {
 
     let imgs = getDeltaImgs(article.content).concat([article.thumb]);
 
-    deleteFilesFromFirebase(imgs);
+    deleteFiles(imgs);
 
     await article.remove();
     return res.status(200).json({

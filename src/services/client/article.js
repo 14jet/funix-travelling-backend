@@ -6,13 +6,15 @@ module.exports.aggCreator = (queries) => {
     cat = [cat];
   }
 
+  console.log(sort);
+
   let $search = {};
   let $match = {};
   let $skip = {};
   let $limit = {};
   let $sort = {};
 
-  if (!page) {
+  if (!page || Number(page) < 1) {
     page = 1;
   }
   if (!page_size) {
@@ -26,9 +28,7 @@ module.exports.aggCreator = (queries) => {
 
   if (sort === "time-desc") {
     $sort = { ...$sort, updatedAt: -1 };
-  }
-
-  if (sort === "time-asc") {
+  } else {
     $sort = { ...$sort, updatedAt: 1 };
   }
 
@@ -92,7 +92,11 @@ module.exports.aggCreator = (queries) => {
 
   agg.push({
     $facet: {
-      articles: [{ $skip: 0 }, { $limit: 6 }],
+      articles: [
+        { $skip: (Number(page) - 1) * Number(page_size) },
+        { $limit: Number(page_size) },
+        { $sort },
+      ],
       count: [
         {
           $count: "total_count",
@@ -101,12 +105,7 @@ module.exports.aggCreator = (queries) => {
     },
   });
 
-  agg.push({ $skip });
-  agg.push({ $limit });
-
-  if (notEmpty($sort)) {
-    agg.push({ $sort });
-  }
+  console.log(agg);
 
   return agg;
 };
@@ -115,6 +114,7 @@ module.exports.getSingleArticle = (article, language = "vi") => {
   const origin = {
     _id: article._id,
     language: article.language,
+    category: article.category,
 
     title: article.title,
     lead: article.lead,
@@ -163,6 +163,7 @@ module.exports.getArticles = (articles, language = "vi") => {
       author: article.author,
       lead: article.lead,
       updatedAt: article.updatedAt,
+      category: article.category,
     };
   });
 

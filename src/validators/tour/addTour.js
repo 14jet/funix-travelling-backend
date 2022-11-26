@@ -83,15 +83,5 @@ module.exports = [
       return true;
     })
     .withMessage(MESSAGES.departure_dates.inValid),
-  body("highlights")
-    .notEmpty()
-    .withMessage(MESSAGES.highlights.missing)
-    .custom(isArrayJSON)
-    .withMessage(MESSAGES.highlights.isArray),
-  body("cancellationPolicy")
-    .notEmpty()
-    .withMessage(MESSAGES.cancellation_policy.missing)
-    .custom(isArrayJSON)
-    .withMessage(MESSAGES.cancellation_policy.isArray),
   body("category").custom(isArrayJSON).withMessage(MESSAGES.category.isArray),
 ];

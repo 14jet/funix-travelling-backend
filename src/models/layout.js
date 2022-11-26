@@ -2,13 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const layoutSchema = new Schema({
-  home: {
-    slider: [String],
-  },
-  banner: {
+  images: {
+    home: [String],
     vn_tours: String,
     eu_tours: String,
-    tour_detail: String,
+    tour: String,
     guides: String,
     article: String,
   },

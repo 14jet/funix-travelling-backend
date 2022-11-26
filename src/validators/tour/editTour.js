@@ -17,12 +17,6 @@ module.exports = [
       en: "Can not cast tourId to ObjectId",
       vi: "tourId không hợp lệ",
     }),
-  body("removedImages")
-    .custom((value) => isArrayJSON(value))
-    .withMessage({
-      en: "removedImages must be an array",
-      vi: "removedImages phải là mảng",
-    }),
   body("language").notEmpty().withMessage({
     en: "Missing language",
     vi: "Thiếu ngôn ngữ",

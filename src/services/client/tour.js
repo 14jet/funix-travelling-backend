@@ -157,6 +157,10 @@ module.exports.aggCreator = (queries) => {
     $sort = { ...$sort, updatedAt: 1 };
   }
 
+  if (Object.keys($sort).length === 0) {
+    $sort = { updatedAt: 1 };
+  }
+
   // search
   if (search) {
     $search =
@@ -236,10 +240,15 @@ module.exports.aggCreator = (queries) => {
   if (notEmpty($match)) {
     agg.push({ $match });
   }
-
+  console.log((Number(page) - 1) * Number(page_size));
+  console.log(Number(page_size));
   agg.push({
     $facet: {
-      tours: [{ $skip: 0 }, { $limit: 6 }],
+      tours: [
+        { $skip: (Number(page) - 1) * Number(page_size) },
+        { $limit: Number(page_size) },
+        { $sort },
+      ],
       count: [
         {
           $count: "total_count",
@@ -247,13 +256,6 @@ module.exports.aggCreator = (queries) => {
       ],
     },
   });
-
-  agg.push({ $skip });
-  agg.push({ $limit });
-
-  if (notEmpty($sort)) {
-    agg.push({ $sort });
-  }
 
   return agg;
 };
