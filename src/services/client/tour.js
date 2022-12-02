@@ -240,8 +240,9 @@ module.exports.aggCreator = (queries) => {
   if (notEmpty($match)) {
     agg.push({ $match });
   }
-  console.log((Number(page) - 1) * Number(page_size));
-  console.log(Number(page_size));
+
+  agg.push({ $sort });
+
   agg.push({
     $facet: {
       tours: [
