@@ -29,9 +29,9 @@ app.use(require("./middlewares/errorHandler"));
 
 // connect to database
 require("./helpers/connectDB")();
-
-app.listen(process.env.PORT || 5000, () => {
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
   console.log(
-    `Server is running on port ${process.env.PORT} in ${process.env.NODE_ENV} environment`
+    `Server is running on port ${port} in ${process.env.NODE_ENV} environment`
   );
 });

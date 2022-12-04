@@ -185,3 +185,5 @@ a6744174-f575-4386-a768-ef6c847c7983	26-11-2022	04:02:07	GET	/api/tour/?hehe=chi
     at module.exports.getTours (D:\ntav-workspace\job\travelling-website\backend\src\controllers\client\tour.js:34:36)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
 3bcb7a87-f521-45bf-b021-ec1fb4af021c	26-11-2022	04:12:36	GET	/favicon.ico	Route Not Found
+e3a77fa3-9b7a-4951-8e34-176f26cc218b	03-12-2022	12:22:12	POST	/api/user/login?lang=vi	
+b4d5381f-58af-41dd-8e64-4a487ea7177a	03-12-2022	12:22:48	POST	/api/user/login?lang=vi	
