@@ -12,17 +12,17 @@ app.use(require("body-parser").json({ limit: "50mb" }));
 app.use("/images", require("./middlewares/staticFile"));
 
 // routes
-app.use("/api/user", require("./routes/client/user"));
-app.use("/api/tour", require("./routes/client/tour"));
-app.use("/api/article", require("./routes/client/article"));
-app.use("/api/visa", require("./routes/client/visa"));
-app.use("/api/layout", require("./routes/client/layout"));
+app.use("/user", require("./routes/client/user"));
+app.use("/tour", require("./routes/client/tour"));
+app.use("/article", require("./routes/client/article"));
+app.use("/visa", require("./routes/client/visa"));
+app.use("/layout", require("./routes/client/layout"));
 
 // admin
-app.use("/api/admin/categories", require("./routes/admin/category"));
-app.use("/api/admin/article", require("./routes/admin/article"));
-app.use("/api/admin/tour", require("./routes/admin/tour"));
-app.use("/api/admin/layout", require("./routes/admin/layout"));
+app.use("/admin/categories", require("./routes/admin/category"));
+app.use("/admin/article", require("./routes/admin/article"));
+app.use("/admin/tour", require("./routes/admin/tour"));
+app.use("/admin/layout", require("./routes/admin/layout"));
 
 app.all("*", require("./middlewares/notFound"));
 app.use(require("./middlewares/errorHandler"));
