@@ -3,6 +3,7 @@ module.exports.getSingleTour = (tour, language) => {
     language: tour.language,
     _id: tour._id,
     code: tour.code,
+    is_special: tour.is_special,
     name: tour.name,
 
     category: tour.category,
@@ -20,6 +21,7 @@ module.exports.getSingleTour = (tour, language) => {
     terms: tour.terms,
 
     thumb: tour.thumb,
+    slider: tour.slider,
     rating: tour.rating,
 
     itinerary: tour.itinerary,

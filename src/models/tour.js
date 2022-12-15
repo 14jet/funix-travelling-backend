@@ -17,6 +17,15 @@ const tourSchema = new Schema(
     description: String, // trans
     highlights: Object, // quill - trans
 
+    is_special: {
+      type: Boolean,
+      default: false,
+    },
+    slider: {
+      type: String,
+      default: "",
+    },
+
     price: Number,
     duration: {
       days: Number,

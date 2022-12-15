@@ -101,7 +101,8 @@ module.exports.getTours = (tours, language = "vi") => {
 module.exports.aggCreator = (queries) => {
   const notEmpty = (obj) => Object.keys(obj).length > 0;
 
-  let { cat, cat_not, page, page_size, sort, search, lang } = queries;
+  let { cat, cat_not, page, page_size, sort, search, lang, special, slider } =
+    queries;
   if (cat && !Array.isArray(cat)) {
     cat = [cat];
   }
@@ -112,8 +113,6 @@ module.exports.aggCreator = (queries) => {
 
   let $search = {};
   let $match = {};
-  // let $skip = {};
-  // let $limit = {};
   let $sort = {};
 
   if (!page) {
@@ -130,6 +129,22 @@ module.exports.aggCreator = (queries) => {
 
   if (cat_not) {
     $match = { ...$match, category: { $nin: cat_not } };
+  }
+
+  if (special === "1") {
+    $match = { ...$match, special: true };
+  }
+
+  if (special === "0") {
+    $match = { ...$match, special: false };
+  }
+
+  if (slider === "1") {
+    $match = { ...$match, slider: { $neq: "" } };
+  }
+
+  if (slider === "0") {
+    $match = { ...$match, slider: "" };
   }
 
   // sort
@@ -231,12 +246,6 @@ module.exports.aggCreator = (queries) => {
             },
           };
   }
-
-  // limit
-  // $limit = Number(page_size);
-
-  // skip
-  // $skip = (Number(page) - 1) * Number(page_size);
 
   let agg = [];
   if (notEmpty($search)) {

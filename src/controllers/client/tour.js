@@ -5,7 +5,8 @@ const client_tourServices = require("../../services/client/tour");
 
 module.exports.getTours = async (req, res, next) => {
   try {
-    let { lang, page, page_size, cat, cat_not, sort, search } = req.query;
+    let { lang, page, page_size, cat, cat_not, sort, search, slider, special } =
+      req.query;
     if (!lang) {
       lang = "vi";
     }
@@ -27,6 +28,8 @@ module.exports.getTours = async (req, res, next) => {
         sort,
         search,
         lang,
+        slider,
+        special,
       })
     );
 

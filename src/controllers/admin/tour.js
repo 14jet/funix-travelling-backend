@@ -46,6 +46,7 @@ module.exports.addTour = async (req, res, next) => {
 
     const newTour = await Tour.create({
       code: req.body.code,
+      is_special: req.body.is_special === "true" ? true : false,
       name: req.body.name,
       countries: req.body.countries,
       journey: req.body.journey,
@@ -109,6 +110,8 @@ module.exports.updateTour = async (req, res, next) => {
     // ========== bắt đầu cập nhật ===========
     // fields không phụ thuộc ngôn ngữ
     tour.code = req.body.code;
+    tour.slider = req.body.slider;
+    tour.is_special = req.body.is_special === "true" ? true : false;
     tour.category = JSON.parse(req.body.category);
     tour.price = Number(req.body.price);
     tour.duration = JSON.parse(req.body.duration);
