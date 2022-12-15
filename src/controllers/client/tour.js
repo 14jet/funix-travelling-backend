@@ -68,16 +68,7 @@ module.exports.getSingleTour = async (req, res, next) => {
       lang = "vi";
     }
 
-    if (!mongoose.Types.ObjectId.isValid(tourId)) {
-      return next(
-        createError(new Error(""), 404, {
-          en: "Tour Not Found",
-          vi: "Tour không tồn tại",
-        })
-      );
-    }
-
-    const tour = await Tour.findById(tourId);
+    const tour = await Tour.findOne({ _id: tourId });
 
     if (!tour) {
       return next(

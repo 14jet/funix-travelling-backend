@@ -44,7 +44,7 @@ module.exports.addTour = async (req, res, next) => {
       thumbUrl = (await uploadFiles([thumb], false, "tour/"))[0];
     }
 
-    await Tour.create({
+    const newTour = await Tour.create({
       code: req.body.code,
       name: req.body.name,
       countries: req.body.countries,
@@ -61,6 +61,7 @@ module.exports.addTour = async (req, res, next) => {
     });
 
     return res.status(200).json({
+      data: newTour,
       message: {
         en: "Created a new tour",
         vi: "Tạo một tour mới thành công",
@@ -172,6 +173,7 @@ module.exports.getSingleTour = async (req, res, next) => {
   try {
     let { tourId } = req.params;
     let { language } = req.query;
+
     if (!language) {
       language = "vi";
     }
@@ -316,6 +318,117 @@ module.exports.deleteTour = async (req, res, next) => {
       message: {
         en: "Deleted tour",
         vi: "Xóa tour thành công",
+      },
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.rate = async (req, res, next) => {
+  try {
+    const { tourId, name, stars, content } = req.body;
+
+    const tour = await Tour.findOne({ _id: tourId });
+    if (!tour) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Tour Not Found",
+          vi: "Không tìm thấy tour",
+        })
+      );
+    }
+
+    tour.rating.push({
+      name,
+      stars,
+      content,
+    });
+
+    await tour.save();
+
+    return res.status(200).json({
+      message: {
+        en: "rated successfully",
+        vi: "Đã đánh giá thành công",
+      },
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.editRatingItem = async (req, res, next) => {
+  try {
+    const { tourId, ratingId, name, stars, content } = req.body;
+
+    const tour = await Tour.findOne({ _id: tourId });
+    if (!tour) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Tour Not Found",
+          vi: "Không tìm thấy tour",
+        })
+      );
+    }
+
+    const ratingIndex = tour.rating.findIndex((item) => {
+      return item._id.toString() === ratingId;
+    });
+    if (ratingIndex === -1) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Rating item Not Found (bad ratingId)",
+          vi: "Không tìm thấy rating item (ratingId sai)",
+        })
+      );
+    }
+
+    console.log(tour.rating[ratingIndex]);
+
+    tour.rating[ratingIndex] = {
+      name,
+      stars,
+      content,
+    };
+
+    await tour.save();
+
+    return res.status(200).json({
+      message: {
+        en: "rated successfully",
+        vi: "Đã đánh giá thành công",
+      },
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.deleteRatingItem = async (req, res, next) => {
+  try {
+    const { tourId, ratingId } = req.body;
+
+    const tour = await Tour.findOne({ _id: tourId });
+    if (!tour) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Tour Not Found",
+          vi: "Không tìm thấy tour",
+        })
+      );
+    }
+
+    tour.rating = tour.rating.filter(
+      (item) => item._id.toString() !== ratingId
+    );
+
+    await tour.save();
+
+    return res.status(200).json({
+      message: {
+        en: "rated successfully",
+        vi: "Đã đánh giá thành công",
       },
     });
   } catch (error) {

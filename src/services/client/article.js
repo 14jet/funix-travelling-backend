@@ -6,8 +6,6 @@ module.exports.aggCreator = (queries) => {
     cat = [cat];
   }
 
-  console.log(sort);
-
   let $search = {};
   let $match = {};
   let $skip = {};
@@ -104,8 +102,6 @@ module.exports.aggCreator = (queries) => {
       ],
     },
   });
-
-  console.log(agg);
 
   return agg;
 };

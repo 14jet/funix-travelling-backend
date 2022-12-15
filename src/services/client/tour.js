@@ -112,8 +112,8 @@ module.exports.aggCreator = (queries) => {
 
   let $search = {};
   let $match = {};
-  let $skip = {};
-  let $limit = {};
+  // let $skip = {};
+  // let $limit = {};
   let $sort = {};
 
   if (!page) {
@@ -168,6 +168,12 @@ module.exports.aggCreator = (queries) => {
         ? {
             compound: {
               should: [
+                {
+                  autocomplete: {
+                    query: search,
+                    path: "code",
+                  },
+                },
                 {
                   autocomplete: {
                     query: search,
@@ -227,10 +233,10 @@ module.exports.aggCreator = (queries) => {
   }
 
   // limit
-  $limit = Number(page_size);
+  // $limit = Number(page_size);
 
   // skip
-  $skip = (Number(page) - 1) * Number(page_size);
+  // $skip = (Number(page) - 1) * Number(page_size);
 
   let agg = [];
   if (notEmpty($search)) {

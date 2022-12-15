@@ -187,3 +187,35 @@ a6744174-f575-4386-a768-ef6c847c7983	26-11-2022	04:02:07	GET	/api/tour/?hehe=chi
 3bcb7a87-f521-45bf-b021-ec1fb4af021c	26-11-2022	04:12:36	GET	/favicon.ico	Route Not Found
 e3a77fa3-9b7a-4951-8e34-176f26cc218b	03-12-2022	12:22:12	POST	/api/user/login?lang=vi	
 b4d5381f-58af-41dd-8e64-4a487ea7177a	03-12-2022	12:22:48	POST	/api/user/login?lang=vi	
+f7a3e0a8-0dae-427d-9963-55ab4e668b4d	05-12-2022	01:39:40	GET	/api/layout?lang=vi	Route Not Found
+b7dac57b-92b6-4d87-bd83-7dcba160834b	05-12-2022	01:39:40	GET	/api/tour/?hehe=chicken&hehe=bird&page=1&page_size=6&lang=vi	Route Not Found
+7f480cb4-398f-41ef-9550-2d23a20606d2	05-12-2022	01:40:53	GET	/api/layout?lang=vi	Route Not Found
+3fa535f0-cc92-452c-9bb3-24e31eaad23b	05-12-2022	01:40:53	GET	/api/tour/?hehe=chicken&hehe=bird&page=1&page_size=6&lang=vi	Route Not Found
+99a191a7-e2cb-4afc-a418-630018388cc5	05-12-2022	01:41:11	GET	/api/layout?lang=vi	Route Not Found
+fb24934a-313f-4c5b-bd49-cf9739ba24a6	05-12-2022	01:41:11	GET	/api/tour/?hehe=chicken&hehe=bird&page=1&page_size=6&lang=vi	Route Not Found
+e6329ae5-54bb-4205-96a8-200aae95a33c	05-12-2022	01:41:28	GET	/api/layout?lang=vi	Route Not Found
+edd60f4d-e084-49f6-8291-aa087a74f230	05-12-2022	01:41:28	GET	/api/tour/?hehe=chicken&hehe=bird&page=1&page_size=6&lang=vi	Route Not Found
+216454e0-e7db-4e4b-aeea-5e5e964b7a4e	05-12-2022	04:29:46	GET	/api/layout?lang=vi	Route Not Found
+ae1452d8-c0cf-47d6-8854-cf4c42b60fa8	05-12-2022	04:29:46	GET	/api/tour/?hehe=chicken&hehe=bird&page=1&page_size=6&lang=vi	Route Not Found
+09d05811-31d5-49ee-962e-9f8d031dda02	05-12-2022	04:30:01	GET	/api/tour/?hehe=chicken&hehe=bird&sort=time-asc&page=1&page_size=12&cat_not=vi&lang=vi	Route Not Found
+f96feb2f-bd92-4709-a00c-bd046bb52f3f	06-12-2022	01:26:26	GET	/admin/tour/GS-01/?language=vi&lang=vi	
+d2306fe5-9934-4b67-af99-35bbbc93fc61	11-12-2022	05:00:06	POST	/admin/tour?lang=vi	Firebase Storage: User does not have permission to access 'images/tour/ed676bc0-6611-4b68-a93c-8c7c9bd5ef68..jpg'. (storage/unauthorized)	FirebaseError: Firebase Storage: User does not have permission to access 'images/tour/ed676bc0-6611-4b68-a93c-8c7c9bd5ef68..jpg'. (storage/unauthorized)
+2106c382-c643-46ea-88fa-7b33a0766a30	11-12-2022	05:10:08	POST	/admin/tour?lang=vi	Firebase Storage: User does not have permission to access 'images/tour/605dc67e-5b60-4452-b6f6-5747790b088b..jpg'. (storage/unauthorized)	FirebaseError: Firebase Storage: User does not have permission to access 'images/tour/605dc67e-5b60-4452-b6f6-5747790b088b..jpg'. (storage/unauthorized)
+5b5fc5a4-13f5-489b-9d8c-b8a10647f682	13-12-2022	10:32:07	PUT	/admin/tour/rating?lang=vi	
+ac208c7f-3283-421d-94ba-b7bb346acfde	14-12-2022	02:31:56	GET	/tour/63846a4d91fbc57a2f99d267?lang=vi	
+85e21190-1460-40e3-99b1-6a225ee9f0eb	14-12-2022	02:33:16	GET	/tour/63846a4d91fbc57a2f99d267?lang=vi	
+a93a9736-8a7d-479b-8c5b-cb9c11742555	14-12-2022	02:33:59	GET	/tour/63846a4d91fbc57a2f99d267?lang=vi	
+0ebc0e87-dc73-4d00-a8d8-76d2c41aac93	14-12-2022	01:18:51	GET	/admin/term/registration?lang=vi	Route Not Found
+92c5ebdb-2fca-4248-97dc-d2f8f7cc595a	14-12-2022	01:18:51	GET	/admin/term/notes?lang=vi	Route Not Found
+80742bed-36b8-4dd7-b669-eeee0ceb03d9	14-12-2022	01:18:51	GET	/admin/term/payment?lang=vi	Route Not Found
+f5f4171b-0f6d-4af7-8030-150386661439	14-12-2022	01:18:51	GET	/admin/term/privacy?lang=vi	Route Not Found
+aa9be75c-b0b5-4626-b9a4-6ebde5bcd035	14-12-2022	01:19:03	GET	/admin/term/registration?lang=vi	Route Not Found
+63211ab0-939c-4456-a551-4d4af9364235	14-12-2022	01:19:03	GET	/admin/term/notes?lang=vi	Route Not Found
+e7b02027-5f6a-47eb-a4de-5324f8867af2	14-12-2022	01:19:03	GET	/admin/term/payment?lang=vi	Route Not Found
+b663fcbf-2f6d-453e-ac9e-2009da419f22	14-12-2022	01:19:03	GET	/admin/term/privacy?lang=vi	Route Not Found
+76d30023-2b37-434b-b222-ea8b6754a5ed	14-12-2022	01:45:59	PUT	/admin/term?lang=vi	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.updateTerm (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\admin\term.js:69:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+e1b92fcf-5284-4bbe-855f-37308d982f10	14-12-2022	01:47:07	PUT	/admin/term?lang=vi	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.updateTerm (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\admin\term.js:73:29)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

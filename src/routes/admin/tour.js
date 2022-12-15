@@ -8,6 +8,9 @@ const {
   updateTour,
   updateItinerary,
   deleteTour,
+  rate,
+  editRatingItem,
+  deleteRatingItem,
 } = require("../../controllers/admin/tour");
 
 // middlewares
@@ -22,6 +25,9 @@ const addItineraryValidator = require("../../validators/tour/addItinerary");
 const validationResultHandler = require("../../validators/validationResultHandler");
 
 // routes
+router.post("/rating", rate);
+router.put("/rating", editRatingItem);
+router.delete("/rating", deleteRatingItem);
 router.get("/:tourId", getSingleTour);
 router.post("/", multer.single, addTourValidator, addTour);
 router.put("/", multer.uploadTourImgs, editTourValidator, updateTour);

@@ -22,6 +22,7 @@ app.use("/layout", require("./routes/client/layout"));
 app.use("/admin/categories", require("./routes/admin/category"));
 app.use("/admin/article", require("./routes/admin/article"));
 app.use("/admin/tour", require("./routes/admin/tour"));
+app.use("/admin/term", require("./routes/admin/term"));
 app.use("/admin/layout", require("./routes/admin/layout"));
 
 app.all("*", require("./middlewares/notFound"));
