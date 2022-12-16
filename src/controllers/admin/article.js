@@ -9,7 +9,8 @@ const { imgResizer } = require("../../helpers/imgResizer");
 
 module.exports.addArticle = async (req, res, next) => {
   try {
-    let { title, author, origin, lead, content, category } = req.body;
+    let { title, author, origin, lead, content, category, hot, banner } =
+      req.body;
     const thumb = req.file;
 
     const [error, resizedImg] = await imgResizer(thumb.buffer);
@@ -51,10 +52,20 @@ module.exports.addArticle = async (req, res, next) => {
       author,
       origin,
       lead,
+      hot: hot === "true" ? true : false,
+      banner: banner === "true" ? true : false,
       category: JSON.parse(category),
       thumb: thumbUrl,
       content: JSON.parse(content),
     });
+
+    // handle banner
+    if (banner === "true") {
+      const old_banner_tour = await Tour.findOne({ banner: true });
+      if (old_banner_tour) {
+        old_banner_tour.banner = false;
+      }
+    }
 
     return res.status(200).json({
       message: {
@@ -112,6 +123,8 @@ module.exports.updateArticle = async (req, res, next) => {
       language,
       articleId,
       category,
+      hot,
+      banner,
     } = req.body;
     const thumb = req.file;
 
@@ -191,7 +204,17 @@ module.exports.updateArticle = async (req, res, next) => {
       article.thumb = thumbUrl;
     }
 
+    article.hot = hot === "true" ? true : false;
+    article.banner = banner === "true" ? true : false;
     article.category = JSON.parse(category);
+
+    // handle banner
+    if (banner === "true") {
+      const old_banner_tour = await Tour.findOne({ banner: true });
+      if (old_banner_tour) {
+        old_banner_tour.banner = false;
+      }
+    }
 
     await article.save();
     return res.status(200).json({

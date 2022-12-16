@@ -219,3 +219,105 @@ b663fcbf-2f6d-453e-ac9e-2009da419f22	14-12-2022	01:19:03	GET	/admin/term/privacy
 e1b92fcf-5284-4bbe-855f-37308d982f10	14-12-2022	01:47:07	PUT	/admin/term?lang=vi	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
     at module.exports.updateTerm (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\admin\term.js:73:29)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+d915e356-80b0-4873-a338-a1d4214b8f81	16-12-2022	11:48:12	GET	/tour?page=1&page_size=6&lang=vi	banner is not defined	ReferenceError: banner is not defined
+    at Object.module.exports.aggCreator (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\services\client\tour.js:143:3)
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\tour.js:23:27)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+70e30063-e394-4957-b9e9-fb5272ed593b	16-12-2022	11:49:11	GET	/tour?page=1&page_size=6&lang=vi	banner is not defined	ReferenceError: banner is not defined
+    at Object.module.exports.aggCreator (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\services\client\tour.js:143:3)
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\tour.js:23:27)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+478ed8be-f151-4801-bf48-55aa6101d63d	16-12-2022	11:49:14	GET	/tour?page=1&page_size=6&lang=vi	banner is not defined	ReferenceError: banner is not defined
+    at Object.module.exports.aggCreator (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\services\client\tour.js:143:3)
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\tour.js:23:27)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+e9ba1529-b343-40d9-9333-0f2599d85941	16-12-2022	11:49:45	GET	/tour?page=1&page_size=6&lang=vi	banner is not defined	ReferenceError: banner is not defined
+    at Object.module.exports.aggCreator (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\services\client\tour.js:143:3)
+    at module.exports.getTours (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\tour.js:33:27)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+9a6c6a3a-b2fd-44a5-82fd-d9ecee7097b9	16-12-2022	11:50:49	GET	/tour?page=1&page_size=6&banner=home&lang=vi	$in needs an array	MongoServerError: $in needs an array
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+b9c398ba-0c60-4474-abfd-06f09db142fe	16-12-2022	04:52:12	GET	/api/user	Route Not Found
+bda99852-c1b8-4b0f-ac19-840c68d863f6	16-12-2022	09:57:52	POST	/user/change-password?lang=vi	Cannot read properties of undefined (reading 'password')	TypeError: Cannot read properties of undefined (reading 'password')
+    at module.exports.changePassword (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\user.js:53:35)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:47:12)
+784bb6a2-c565-4f56-9547-8f2b2bc794a3	16-12-2022	10:03:46	POST	/user/login?lang=vi	
+9de4781b-6a21-45ad-8bb7-3fca7b2a05bb	16-12-2022	10:06:27	POST	/user/change-password?lang=vi	
+1a419c9f-4697-4407-a63e-2783960bbca8	16-12-2022	10:07:02	POST	/user/change-password?lang=vi	
+d0a5b197-4763-4500-9cc3-2bed5fcbe5bd	16-12-2022	10:07:04	POST	/user/change-password?lang=vi	
+a6e5cf17-9493-47cd-9806-daa55e98d09c	16-12-2022	10:07:06	POST	/user/change-password?lang=vi	
+13e0562e-acfa-4a90-83c2-d19a5204f8c6	16-12-2022	10:07:43	POST	/user/change-password?lang=vi	
+f697505d-7847-4202-a1c4-096987a0f26e	16-12-2022	10:07:44	POST	/user/change-password?lang=vi	
+7ce002f3-55b0-462d-8cba-71d14a8f1fc6	16-12-2022	10:07:51	POST	/user/change-password?lang=vi	
+495d94cd-f2e9-41c5-8e2a-162d176a98e0	16-12-2022	10:07:52	POST	/user/change-password?lang=vi	
+a7e08eda-139e-4089-a4b4-06a696d60382	16-12-2022	10:07:53	POST	/user/change-password?lang=vi	
+39272bee-6b6f-4c0c-9d6d-587e26cb0ed7	16-12-2022	10:07:55	POST	/user/change-password?lang=vi	
+183079b6-a29e-4606-bd9f-59edc690d5ae	16-12-2022	10:08:38	POST	/user/change-password?lang=vi	
+4262dc6e-00b6-44be-8191-adc12d21171e	16-12-2022	10:08:40	POST	/user/change-password?lang=vi	
+c302ad8f-916f-4938-9bd0-78a213209331	16-12-2022	10:08:40	POST	/user/change-password?lang=vi	
+725637c4-61bd-4f81-a04d-57c1b2e2a6ae	16-12-2022	10:08:44	POST	/user/change-password?lang=vi	
+939c80fd-ae18-4b51-95dc-1daeec0074cc	16-12-2022	10:08:47	POST	/user/change-password?lang=vi	
+ea84e54d-65f6-4f12-94e7-e12dea542bb4	16-12-2022	10:08:51	POST	/user/change-password?lang=vi	
+4dcceeb6-8324-400c-815a-3f1960a54ba5	16-12-2022	10:08:55	POST	/user/change-password?lang=vi	
+a1ebb6d1-5011-4223-9835-109eefc7972b	16-12-2022	10:08:58	POST	/user/change-password?lang=vi	
+2824781a-e5ba-410e-b963-001038b98a7b	16-12-2022	10:09:21	POST	/user/change-password?lang=vi	
+4c3dfd58-f1be-45ad-9a6b-fc2aadae7c57	16-12-2022	10:09:26	POST	/user/change-password?lang=vi	
+f19d4232-3c5f-4d8f-b0f1-3c8ee03a76a3	16-12-2022	10:10:57	POST	/user/change-password?lang=vi	
+790dca37-7276-4024-9cbc-8adbb3f49ed2	16-12-2022	10:10:58	POST	/user/change-password?lang=vi	
+6c00dba1-9411-4c97-a82d-03d5b5396674	16-12-2022	10:10:59	POST	/user/change-password?lang=vi	
+015c72dd-eb3b-4be6-8f8c-b5ab661ae324	16-12-2022	10:11:00	POST	/user/change-password?lang=vi	
+9394869c-a78a-4190-90d4-530289ac3508	16-12-2022	10:11:01	POST	/user/change-password?lang=vi	
+659bd993-088a-479b-9713-ca34b21c050f	16-12-2022	10:11:07	POST	/user/change-password?lang=vi	
+98d077c2-e1c0-4da1-be4f-b2fb93c9c684	16-12-2022	10:11:18	POST	/user/change-password?lang=vi	
+2306c9d1-7d05-47db-a0af-2f0609b2cb7b	16-12-2022	10:11:32	POST	/user/change-password?lang=vi	
+d7bfc7ab-9b5a-4881-aea4-1fb0c25b80b5	16-12-2022	10:41:22	PUT	/user/change-role?lang=vi	
+d68a4397-e3e9-4074-a1a2-82d67de37865	16-12-2022	10:42:09	PUT	/user/change-role?lang=vi	
+3be16f30-ad78-4f5c-980e-167a939ff98b	16-12-2022	10:50:18	DELETE	/user/change-role?lang=vi	Route Not Found
+0bc88e7d-7fb4-44a4-9f25-fa9dc5c1524f	16-12-2022	10:50:43	DELETE	/user?lang=vi	user.destroy is not a function	TypeError: user.destroy is not a function
+    at module.exports.deleteUser (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\user.js:207:16)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

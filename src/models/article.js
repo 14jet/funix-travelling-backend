@@ -12,6 +12,11 @@ const articleSchema = new Schema(
       type: String,
       required: true,
     },
+    hot: {
+      type: Boolean,
+      default: false,
+    },
+    banner: { type: Boolean, default: false },
     author: {
       type: String,
       required: true,

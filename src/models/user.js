@@ -6,7 +6,10 @@ const userSchema = new Schema({
   username: String,
   email: String,
   password: String,
-  role: String, // admin
+  role: {
+    type: String,
+    default: "client", // admin | moderator | client
+  },
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -21,9 +21,11 @@ const tourSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    slider: {
-      type: String,
-      default: "",
+
+    banner: {
+      // home | eu-tours | vn-tours
+      type: Array,
+      default: [],
     },
 
     price: Number,
@@ -47,6 +49,7 @@ const tourSchema = new Schema(
     },
 
     thumb: String,
+    thumb_original: String,
 
     rating: [
       {

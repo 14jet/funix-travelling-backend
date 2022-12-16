@@ -1,15 +1,13 @@
 module.exports.aggCreator = (queries) => {
   const notEmpty = (obj) => Object.keys(obj).length > 0;
 
-  let { cat, page, page_size, sort, search, lang } = queries;
+  let { cat, page, page_size, sort, search, lang, hot, banner } = queries;
   if (cat && !Array.isArray(cat)) {
     cat = [cat];
   }
 
   let $search = {};
   let $match = {};
-  let $skip = {};
-  let $limit = {};
   let $sort = {};
 
   if (!page || Number(page) < 1) {
@@ -22,6 +20,22 @@ module.exports.aggCreator = (queries) => {
   // category
   if (cat) {
     $match = { ...$match, category: { $in: cat } };
+  }
+
+  if (hot === "1") {
+    $match = { ...$match, hot: true };
+  }
+
+  if (hot === "0") {
+    $match = { ...$match, hot: false };
+  }
+
+  if (banner === "1") {
+    $match = { ...$match, banner: true };
+  }
+
+  if (banner === "0") {
+    $match = { ...$match, banner: false };
   }
 
   if (sort === "time-desc") {
@@ -113,6 +127,7 @@ module.exports.getSingleArticle = (article, language = "vi") => {
     category: article.category,
 
     title: article.title,
+    hot: article.hot,
     lead: article.lead,
     thumb: article.thumb,
     author: article.author,
@@ -160,6 +175,7 @@ module.exports.getArticles = (articles, language = "vi") => {
       lead: article.lead,
       updatedAt: article.updatedAt,
       category: article.category,
+      hot: article.hot,
     };
   });
 

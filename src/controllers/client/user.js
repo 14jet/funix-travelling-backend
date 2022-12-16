@@ -46,12 +46,13 @@ module.exports.login = async (req, res, next) => {
 
 module.exports.changePassword = async (req, res, next) => {
   try {
-    const { password, newPassword } = req.body;
+    const { username, password, new_password } = req.body;
 
-    const user = req.user;
+    const user = await User.findOne({ username });
 
-    bcrypt.compare(password, user.password, (err) => {
-      if (err) {
+    try {
+      const match = await bcrypt.compare(password, user.password);
+      if (!match) {
         return next(
           createError(new Error(""), 400, {
             en: "Wrong password",
@@ -59,10 +60,17 @@ module.exports.changePassword = async (req, res, next) => {
           })
         );
       }
-    });
+    } catch (error) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Wrong password",
+          vi: "Sai mật khẩu",
+        })
+      );
+    }
 
     bcrypt.hash(
-      newPassword,
+      new_password,
       config.get("bcrypt.saltRounds"),
       async function (err, hash) {
         if (err) {
@@ -87,7 +95,8 @@ module.exports.changePassword = async (req, res, next) => {
 
 module.exports.register = async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, role } = req.body;
+
     const user = await User.findOne({ username });
     if (user) {
       return next(
@@ -106,7 +115,7 @@ module.exports.register = async (req, res, next) => {
           throw error;
         }
 
-        await User.create({ username, password: hash });
+        await User.create({ username, password: hash, role });
         return res.status(200).json({
           message: {
             en: "Registered successfully",
@@ -115,6 +124,94 @@ module.exports.register = async (req, res, next) => {
         });
       }
     );
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.getAll = async (req, res, next) => {
+  try {
+    const users = await User.find({}, { password: 0 });
+
+    return res.status(200).json({
+      data: users,
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.getSingle = async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const user = await User.findOne({ username }, { password: 0 });
+    if (!user) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Username not exist.",
+          vi: "Username không tồn tại",
+        })
+      );
+    }
+
+    return res.status(200).json({
+      data: user,
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.changeRole = async (req, res, next) => {
+  try {
+    const { username, role } = req.body;
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Username not exist.",
+          vi: "Username không tồn tại",
+        })
+      );
+    }
+
+    user.role = role;
+    await user.save();
+
+    return res.status(200).json({
+      message: {
+        en: "changed role",
+        vi: "Đổi role thành công",
+      },
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.deleteUser = async (req, res, next) => {
+  try {
+    const { username } = req.body;
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Username not exist.",
+          vi: "Username không tồn tại",
+        })
+      );
+    }
+
+    await user.remove();
+
+    return res.status(200).json({
+      message: {
+        en: "deleted",
+        vi: "Đã xóa",
+      },
+    });
   } catch (error) {
     next(createError(error, 500));
   }

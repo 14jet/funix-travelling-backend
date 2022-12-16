@@ -6,7 +6,7 @@ const client_articleServices = require("../../services/client/article");
 
 module.exports.getArticles = async (req, res, next) => {
   try {
-    let { lang, page, page_size, cat, sort, search } = req.query;
+    let { lang, page, page_size, cat, sort, search, hot, banner } = req.query;
     if (!lang) {
       lang = "vi";
     }
@@ -27,6 +27,8 @@ module.exports.getArticles = async (req, res, next) => {
         sort,
         search,
         lang,
+        hot,
+        banner,
       })
     );
 

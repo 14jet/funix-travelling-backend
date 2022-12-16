@@ -21,7 +21,8 @@ module.exports.getSingleTour = (tour, language) => {
     terms: tour.terms,
 
     thumb: tour.thumb,
-    slider: tour.slider,
+    thumb_original: tour.thumb_original,
+    banner: tour.banner,
     rating: tour.rating,
 
     itinerary: tour.itinerary,

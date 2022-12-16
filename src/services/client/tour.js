@@ -11,7 +11,8 @@ module.exports.getSingleTour = (tour, language = "vi") => {
     code: tour.code,
     name: tour.name,
     thumb: tour.thumb,
-    slider: slider,
+    banner: tour.banner || [],
+    thumb_original: tour.thumb_original,
     price: tour.price,
 
     countries: tour.countries,
@@ -92,6 +93,7 @@ module.exports.getTours = (tours, language = "vi") => {
       journey: tour.journey,
       price: tour.price,
       duration: tour.duration,
+      banner: tour.banner || [],
     };
   });
 
@@ -101,8 +103,18 @@ module.exports.getTours = (tours, language = "vi") => {
 module.exports.aggCreator = (queries) => {
   const notEmpty = (obj) => Object.keys(obj).length > 0;
 
-  let { cat, cat_not, page, page_size, sort, search, lang, special, slider } =
-    queries;
+  let {
+    cat,
+    cat_not,
+    page,
+    page_size,
+    sort,
+    search,
+    lang,
+    hot,
+    slider,
+    banner,
+  } = queries;
   if (cat && !Array.isArray(cat)) {
     cat = [cat];
   }
@@ -131,16 +143,16 @@ module.exports.aggCreator = (queries) => {
     $match = { ...$match, category: { $nin: cat_not } };
   }
 
-  if (special === "1") {
-    $match = { ...$match, special: true };
+  if (hot === "1") {
+    $match = { ...$match, hot: true };
   }
 
-  if (special === "0") {
-    $match = { ...$match, special: false };
+  if (hot === "0") {
+    $match = { ...$match, hot: false };
   }
 
-  if (slider === "1") {
-    $match = { ...$match, slider: { $neq: "" } };
+  if (banner) {
+    $match = { ...$match, banner: { $in: [banner] } };
   }
 
   if (slider === "0") {

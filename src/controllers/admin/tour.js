@@ -44,13 +44,15 @@ module.exports.addTour = async (req, res, next) => {
       thumbUrl = (await uploadFiles([thumb], false, "tour/"))[0];
     }
 
+    const original_thumbUrl = (await uploadFiles([thumb], false, "tour/"))[0];
+
     const newTour = await Tour.create({
       code: req.body.code,
-      is_special: req.body.is_special === "true" ? true : false,
       name: req.body.name,
       countries: req.body.countries,
       journey: req.body.journey,
       description: req.body.description,
+      banner: JSON.parse(req.body.banner),
       highlights: JSON.parse(req.body.highlights),
       category: JSON.parse(req.body.category),
       price: Number(req.body.price),
@@ -59,7 +61,34 @@ module.exports.addTour = async (req, res, next) => {
       price_policies: JSON.parse(req.body.price_policies),
       terms: JSON.parse(req.body.terms),
       thumb: thumbUrl,
+      thumb_original: original_thumbUrl,
     });
+
+    // handle banner
+    const banner = JSON.parse(req.body.banner);
+    if (banner.includes("vn-tours")) {
+      const banner_vnTour = await Tour.findOne({
+        banner: { $in: ["vn-tours"] },
+      });
+      if (banner_vnTour) {
+        banner_vnTour.banner = banner_vnTour.filter(
+          (item) => item !== "vn-tours"
+        );
+        await banner_vnTour.save();
+      }
+    }
+
+    if (banner.includes("eu-tours")) {
+      const banner_euTour = await Tour.findOne({
+        banner: { $in: ["eu-tours"] },
+      });
+      if (banner_euTour) {
+        banner_euTour.banner = banner_euTour.filter(
+          (item) => item !== "eu-tours"
+        );
+        await banner_euTour.save();
+      }
+    }
 
     return res.status(200).json({
       data: newTour,
@@ -92,6 +121,7 @@ module.exports.updateTour = async (req, res, next) => {
 
     if (thumb) {
       let thumbUrl;
+      let original_thumbUrl = (await uploadFiles([thumb]))[0];
       const [error, resizedImg] = await imgResizer(thumb.buffer);
       if (resizedImg) {
         thumbUrl = (
@@ -104,14 +134,16 @@ module.exports.updateTour = async (req, res, next) => {
       }
 
       deleteFiles([tour.thumb]);
+      deleteFiles([tour.original_thumbUrl]);
       tour.thumb = thumbUrl;
+      tour.thumb_original = original_thumbUrl;
     }
 
     // ========== bắt đầu cập nhật ===========
     // fields không phụ thuộc ngôn ngữ
     tour.code = req.body.code;
-    tour.slider = req.body.slider;
-    tour.is_special = req.body.is_special === "true" ? true : false;
+    tour.banner = JSON.parse(req.body.banner);
+    tour.hot = req.body.hot === "true" ? true : false;
     tour.category = JSON.parse(req.body.category);
     tour.price = Number(req.body.price);
     tour.duration = JSON.parse(req.body.duration);
@@ -312,7 +344,8 @@ module.exports.deleteTour = async (req, res, next) => {
 
     let imgs = tour.itinerary
       .reduce((prev, cur) => [...prev, ...cur.images], [])
-      .concat(tour.thumb);
+      .concat(tour.thumb)
+      .concat(tour.thumb_original);
 
     deleteFiles(imgs);
 
