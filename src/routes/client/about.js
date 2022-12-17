@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 
 // controllers
-const { getTerm } = require("../../controllers/client/term");
+const { getAbout } = require("../../controllers/client/about");
 
 // routes
-router.get("/:type", getTerm);
+router.get("/", getAbout);
 
 module.exports = router;

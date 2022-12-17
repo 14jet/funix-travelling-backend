@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const termSchema = new Schema(
+const aboutSchema = new Schema(
   {
     language: {
       type: String,
       default: "vi",
     },
-    type: String, // registration | privacy | payment | notes | cancellation
     content: Object, // quill
     translation: [
       {
@@ -24,4 +23,4 @@ const termSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Term", termSchema);
+module.exports = mongoose.model("About", aboutSchema);

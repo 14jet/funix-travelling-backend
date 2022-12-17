@@ -3,12 +3,14 @@ const createError = require("../../helpers/errorCreator");
 
 module.exports.getTerms = async (req, res, next) => {
   try {
-    let [registration, privacy, payment, notes] = await Promise.all([
-      Term.findOne({ type: "registration" }),
-      Term.findOne({ type: "cancellation" }),
-      Term.findOne({ type: "payment" }),
-      Term.findOne({ type: "notes" }),
-    ]);
+    let [registration, cancellation, payment, notes, privacy] =
+      await Promise.all([
+        Term.findOne({ type: "registration" }),
+        Term.findOne({ type: "cancellation" }),
+        Term.findOne({ type: "payment" }),
+        Term.findOne({ type: "notes" }),
+        Term.findOne({ type: "privacy" }),
+      ]);
 
     if (!registration) {
       registration = await Term.create({ type: "registration" });
@@ -26,8 +28,12 @@ module.exports.getTerms = async (req, res, next) => {
       notes = await Term.create({ type: "notes" });
     }
 
+    if (!cancellation) {
+      cancellation = await Term.create({ type: "cancellation" });
+    }
+
     return res.status(200).json({
-      data: [registration, privacy, payment, notes],
+      data: [registration, privacy, payment, notes, cancellation],
       metadata: {},
     });
   } catch (error) {
@@ -88,7 +94,11 @@ module.exports.getTerm = async (req, res, next) => {
   try {
     let { type } = req.params;
 
-    if (!["registration", "privacy", "payment", "notes"].includes(type)) {
+    if (
+      !["registration", "privacy", "payment", "notes", "cancellation"].includes(
+        type
+      )
+    ) {
       return next(
         createError(new Error(""), 400, {
           en: "Wrong term type",

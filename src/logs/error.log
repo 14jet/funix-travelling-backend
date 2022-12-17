@@ -321,3 +321,46 @@ d68a4397-e3e9-4074-a1a2-82d67de37865	16-12-2022	10:42:09	PUT	/user/change-role?l
 0bc88e7d-7fb4-44a4-9f25-fa9dc5c1524f	16-12-2022	10:50:43	DELETE	/user?lang=vi	user.destroy is not a function	TypeError: user.destroy is not a function
     at module.exports.deleteUser (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\user.js:207:16)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+b3fd3327-ec09-4f71-b09b-39ea9676896b	17-12-2022	01:09:52	GET	/term/cancellation?lang=vi	Route Not Found
+b1a12ce7-7f32-4e24-acc3-30c8a6ef77ff	17-12-2022	01:17:17	GET	/term/cancellation?lang=vi	Route Not Found
+39d55095-67b0-4470-bb5e-794bdee86556	17-12-2022	01:17:20	GET	/term/cancellation?lang=vi	Route Not Found
+1f04f705-431d-4e8b-b7c8-594e5b0d726c	17-12-2022	01:17:47	GET	/term/cancellation?lang=vi	Route Not Found
+e8ec2810-9de1-4c9a-bf5e-973c991cd6a8	17-12-2022	01:18:27	GET	/term/cancellation?lang=vi	
+1553f1c1-bf83-4c5a-bf38-0e67fcbf2614	17-12-2022	11:12:58	GET	/about?lang=vi	Route Not Found
+0f6f8434-f81c-4557-9ec6-9735490116f6	17-12-2022	11:21:04	GET	/about?lang=vi	Route Not Found
+c8484793-f6fa-4d07-84b5-4ee822626f73	17-12-2022	11:23:03	GET	/about?lang=vi	Route Not Found
+6a374354-7c92-4c61-8383-16d50cda154d	17-12-2022	11:25:27	GET	/term/registration?lang=vi	Operation `terms.findOne()` buffering timed out after 10000ms	MongooseError: Operation `terms.findOne()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:153:23)
+    at listOnTimeout (node:internal/timers:559:17)
+    at processTimers (node:internal/timers:502:7)
+5f452d9a-ae49-4ce1-9a32-de4726945fc4	17-12-2022	11:25:39	GET	/term/cancellation?lang=vi	Operation `terms.findOne()` buffering timed out after 10000ms	MongooseError: Operation `terms.findOne()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:153:23)
+    at listOnTimeout (node:internal/timers:559:17)
+    at processTimers (node:internal/timers:502:7)
+08cfdedb-0616-4d76-a343-26d732caeafa	17-12-2022	11:25:49	GET	/term/notes?lang=vi	Operation `terms.findOne()` buffering timed out after 10000ms	MongooseError: Operation `terms.findOne()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:153:23)
+    at listOnTimeout (node:internal/timers:559:17)
+    at processTimers (node:internal/timers:502:7)
+f0801f69-4d2b-4032-af23-d43de0af421b	17-12-2022	11:25:57	GET	/term/payment?lang=vi	Operation `terms.findOne()` buffering timed out after 10000ms	MongooseError: Operation `terms.findOne()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:153:23)
+    at listOnTimeout (node:internal/timers:559:17)
+    at processTimers (node:internal/timers:502:7)
+42e7e514-4a10-4ecf-837d-8352a425c668	17-12-2022	11:26:04	GET	/term/privacy?lang=vi	Operation `terms.findOne()` buffering timed out after 10000ms	MongooseError: Operation `terms.findOne()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:153:23)
+    at listOnTimeout (node:internal/timers:559:17)
+    at processTimers (node:internal/timers:502:7)
+0a5ddbb9-e53c-440e-a5f2-8f2de0bfd1ca	17-12-2022	11:26:52	GET	/about?lang=vi	Operation `abouts.findOne()` buffering timed out after 10000ms	MongooseError: Operation `abouts.findOne()` buffering timed out after 10000ms
+    at Timeout.<anonymous> (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js:153:23)
+    at listOnTimeout (node:internal/timers:559:17)
+    at processTimers (node:internal/timers:502:7)
+fbca8ef8-b836-43f2-96dd-d1a43a310121	17-12-2022	11:27:17	GET	/about?lang=vi	Ơ is not defined	ReferenceError: Ơ is not defined
+    at module.exports.getAbout (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\about.js:10:37)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:47:12)

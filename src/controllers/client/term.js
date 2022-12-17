@@ -9,7 +9,11 @@ module.exports.getTerm = async (req, res, next) => {
       lang = "vi";
     }
 
-    if (!["registration", "privacy", "payment", "notes"].includes(type)) {
+    if (
+      !["registration", "privacy", "payment", "notes", "cancellation"].includes(
+        type
+      )
+    ) {
       return next(
         createError(new Error(""), 400, {
           en: "Wrong term type",
