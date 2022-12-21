@@ -20,7 +20,8 @@ module.exports.addTour = async (req, res, next) => {
     }
 
     // handle hình đại diện
-    const thumb = req.file;
+    const thumb = req.files["thumb"][0];
+    const banner = req.files["banner"][0];
     if (!thumb) {
       return next(
         createError(new Error(""), 400, {
@@ -29,22 +30,44 @@ module.exports.addTour = async (req, res, next) => {
         })
       );
     }
-    const [error, resizedImg] = await imgResizer(thumb.buffer);
 
-    let thumbUrl;
-    if (resizedImg) {
-      thumbUrl = (
-        await uploadFiles(
-          [{ buffer: resizedImg, originalname: thumb.originalname }],
-          false,
-          "tour/"
-        )
-      )[0];
-    } else {
-      thumbUrl = (await uploadFiles([thumb], false, "tour/"))[0];
+    if (!banner) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Missing banner image",
+          vi: "Thiếu hình banner",
+        })
+      );
     }
 
-    const original_thumbUrl = (await uploadFiles([thumb], false, "tour/"))[0];
+    const thumbUrl = (await uploadFiles([thumb], false, "tour/"))[0];
+    const bannerUrl = (await uploadFiles([banner], false, "tour/"))[0];
+
+    // handle layout
+    const layout = JSON.parse(req.body.layout);
+    if (layout.includes("vn-tours")) {
+      const old_vn_banner = await Tour.findOne({
+        layout: { $in: ["vn-tours"] },
+      });
+      if (old_vn_banner) {
+        old_vn_banner.layout = old_vn_banner.layout.filter(
+          (item) => item !== "vn-tours"
+        );
+        await old_vn_banner.save();
+      }
+    }
+
+    if (layout.includes("eu-tours")) {
+      const old_eu_banner = await Tour.findOne({
+        layout: { $in: ["eu-tours"] },
+      });
+      if (old_eu_banner) {
+        old_eu_banner.layout = old_eu_banner.layout.filter(
+          (item) => item !== "eu-tours"
+        );
+        await old_eu_banner.save();
+      }
+    }
 
     const newTour = await Tour.create({
       code: req.body.code,
@@ -52,7 +75,6 @@ module.exports.addTour = async (req, res, next) => {
       countries: req.body.countries,
       journey: req.body.journey,
       description: req.body.description,
-      banner: JSON.parse(req.body.banner),
       highlights: JSON.parse(req.body.highlights),
       category: JSON.parse(req.body.category),
       price: Number(req.body.price),
@@ -60,35 +82,10 @@ module.exports.addTour = async (req, res, next) => {
       departureDates: JSON.parse(req.body.departureDates),
       price_policies: JSON.parse(req.body.price_policies),
       terms: JSON.parse(req.body.terms),
+      banner: bannerUrl,
       thumb: thumbUrl,
-      thumb_original: original_thumbUrl,
+      layout: JSON.parse(req.body.layout),
     });
-
-    // handle banner
-    const banner = JSON.parse(req.body.banner);
-    if (banner.includes("vn-tours")) {
-      const banner_vnTour = await Tour.findOne({
-        banner: { $in: ["vn-tours"] },
-      });
-      if (banner_vnTour) {
-        banner_vnTour.banner = banner_vnTour.filter(
-          (item) => item !== "vn-tours"
-        );
-        await banner_vnTour.save();
-      }
-    }
-
-    if (banner.includes("eu-tours")) {
-      const banner_euTour = await Tour.findOne({
-        banner: { $in: ["eu-tours"] },
-      });
-      if (banner_euTour) {
-        banner_euTour.banner = banner_euTour.filter(
-          (item) => item !== "eu-tours"
-        );
-        await banner_euTour.save();
-      }
-    }
 
     return res.status(200).json({
       data: newTour,
@@ -118,36 +115,28 @@ module.exports.updateTour = async (req, res, next) => {
 
     // =============== cập nhật hình đại diện ===========================
     const thumb = req.files["thumb"] ? req.files["thumb"][0] : null;
+    const banner = req.files["banner"] ? req.files["banner"][0] : null;
 
     if (thumb) {
-      let thumbUrl;
-      let original_thumbUrl = (await uploadFiles([thumb]))[0];
-      const [error, resizedImg] = await imgResizer(thumb.buffer);
-      if (resizedImg) {
-        thumbUrl = (
-          await uploadFiles([
-            { buffer: resizedImg, originalname: thumb.originalname },
-          ])
-        )[0];
-      } else {
-        thumbUrl = (await uploadFiles([thumb]))[0];
-      }
-
+      const thumbUrl = (await uploadFiles([thumb]))[0];
       deleteFiles([tour.thumb]);
-      deleteFiles([tour.original_thumbUrl]);
       tour.thumb = thumbUrl;
-      tour.thumb_original = original_thumbUrl;
     }
 
-    // ========== bắt đầu cập nhật ===========
+    if (banner) {
+      const bannerUrl = (await uploadFiles([banner]))[0];
+      deleteFiles([tour.banner]);
+      tour.banner = bannerUrl;
+    }
+
     // fields không phụ thuộc ngôn ngữ
     tour.code = req.body.code;
-    tour.banner = JSON.parse(req.body.banner);
     tour.hot = req.body.hot === "true" ? true : false;
     tour.category = JSON.parse(req.body.category);
     tour.price = Number(req.body.price);
     tour.duration = JSON.parse(req.body.duration);
     tour.departureDates = JSON.parse(req.body.departureDates);
+    tour.layout = JSON.parse(req.body.layout);
 
     // fields phụ thuộc ngôn ngữ
     if (language === "vi") {
@@ -191,7 +180,34 @@ module.exports.updateTour = async (req, res, next) => {
       }
     }
 
+    // handle layout
+    const layout = JSON.parse(req.body.layout);
+    if (layout.includes("vn-tours")) {
+      const old_vn_banner = await Tour.findOne({
+        layout: { $in: ["vn-tours"] },
+      });
+      if (old_vn_banner) {
+        old_vn_banner.layout = old_vn_banner.layout.filter(
+          (item) => item !== "vn-tours"
+        );
+        await old_vn_banner.save();
+      }
+    }
+
+    if (layout.includes("eu-tours")) {
+      const old_eu_banner = await Tour.findOne({
+        layout: { $in: ["eu-tours"] },
+      });
+      if (old_eu_banner) {
+        old_eu_banner.layout = old_eu_banner.layout.filter(
+          (item) => item !== "eu-tours"
+        );
+        await old_eu_banner.save();
+      }
+    }
+
     await tour.save();
+
     return res.status(200).json({
       code: 200,
       message: {
@@ -345,7 +361,7 @@ module.exports.deleteTour = async (req, res, next) => {
     let imgs = tour.itinerary
       .reduce((prev, cur) => [...prev, ...cur.images], [])
       .concat(tour.thumb)
-      .concat(tour.thumb_original);
+      .concat(tour.banner);
 
     deleteFiles(imgs);
 
@@ -419,8 +435,6 @@ module.exports.editRatingItem = async (req, res, next) => {
         })
       );
     }
-
-    console.log(tour.rating[ratingIndex]);
 
     tour.rating[ratingIndex] = {
       name,

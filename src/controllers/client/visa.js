@@ -12,24 +12,23 @@ module.exports.addVisa = async (req, res, next) => {
       return next(createError(error, 400, result.array()[0].msg));
     }
 
-    const {
-      name,
-      country,
-      detail,
-      price,
-      priceIncludes,
-      term,
-      cancellationPolicy,
-    } = req.body;
-
     await Visa.create({
-      name,
-      country,
-      detail,
-      price,
-      priceIncludes,
-      term,
-      cancellationPolicy,
+      name: req.body.name,
+      country: req.body.country,
+      category: req.body.category,
+      detail: req.body.detail,
+      price: req.body.price,
+      price_policies: {
+        includes: req.body.priceIncludes,
+        excludes: req.body.priceExcludes,
+        other: req.body.priceOther,
+      },
+      terms: {
+        registration: req.body.cancellationPolicy,
+        cancellation: req.body.registrationPolicy,
+        payment: req.body.paymentPolicy,
+        notes: req.body.notes,
+      },
     });
     return res.status(200).json({
       message: {

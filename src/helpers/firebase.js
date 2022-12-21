@@ -18,6 +18,11 @@ const storage = getStorage(app);
 // delete files handler
 // images: array of urls
 function deleteFiles(images) {
+  if (!Array.isArray(images)) {
+    console.error("From deleteFiles - ntav: images must be an array");
+    return;
+  }
+
   for (const image of images) {
     try {
       const imageRef = ref(storage, image);
@@ -36,6 +41,7 @@ function deleteFiles(images) {
 
 // upload files handler
 async function uploadFiles(files, base64 = false, path = "") {
+  console.log(files);
   let refs = [];
   const createPath = () => `images/${path}` + uuid() + ".";
 

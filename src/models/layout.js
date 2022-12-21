@@ -18,7 +18,7 @@ const layoutSchema = new Schema({
   },
   guides: {
     type: mongoose.Types.ObjectId,
-    ref: "Tour",
+    ref: "Article",
   },
 });
 

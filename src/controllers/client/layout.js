@@ -1,24 +1,59 @@
 const createError = require("../../helpers/errorCreator");
-const Layout = require("../../models/layout");
+const Tour = require("../../models/tour");
+const Article = require("../../models/article");
 
 module.exports.getLayoutData = async (req, res, next) => {
   try {
-    let layout = await Layout.findOne();
-    if (!layout) {
-      layout = await Layout.create({
-        images: {
-          home: [],
-          vn_tours: "",
-          eu_tours: "",
-          tour: "",
-          guides: "",
-          article: "",
-        },
-      });
-    }
+    const homeSliders = await Tour.find(
+      { layout: { $in: ["home-slider"] } },
+      { _id: 1, code: 1, banner: 1 }
+    );
+    const euTours = await Tour.findOne(
+      { layout: { $in: ["eu-tours"] } },
+      { _id: 1, code: 1, banner: 1 }
+    );
+    const vnTours = await Tour.findOne(
+      { layout: { $in: ["vn-tours"] } },
+      { _id: 1, code: 1, banner: 1 }
+    );
+    const guides = await Article.findOne(
+      { layout: { $in: ["guides"] } },
+      { _id: 1, code: 1, banner: 1 }
+    );
+    const handbook = await Article.findOne(
+      {
+        layout: { $in: ["cam-nang"] },
+      },
+      { _id: 1, code: 1, banner: 1 }
+    );
+    const diary = await Article.findOne(
+      { layout: { $in: ["nhat-ky"] } },
+      { _id: 1, code: 1, banner: 1 }
+    );
+    const destination = await Article.findOne(
+      {
+        layout: { $in: ["diem-den"] },
+      },
+      { _id: 1, code: 1, banner: 1 }
+    );
+    const experience = await Article.findOne(
+      {
+        layout: { $in: ["trai-nghiem"] },
+      },
+      { _id: 1, code: 1, banner: 1 }
+    );
 
     return res.status(200).json({
-      data: layout,
+      data: {
+        homeSliders,
+        euTours,
+        vnTours,
+        guides,
+        handbook,
+        diary,
+        destination,
+        experience,
+      },
     });
   } catch (error) {
     next(createError(error, 500));

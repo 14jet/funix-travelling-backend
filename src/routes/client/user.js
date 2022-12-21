@@ -12,8 +12,21 @@ const {
   deleteUser,
 } = require("../../controllers/client/user");
 
+// validator
+const changePasswordValidator = require("../../validators/user/changePassword.validator");
+const validationResultHandler = require("../../validators/validationResultHandler");
+
+// middlewares
+const requireAdmin = require("../../middlewares/requireAdmin");
+
 router.post("/login", login);
-router.post("/change-password", changePassword);
+router.post(
+  "/change-password",
+  requireAdmin,
+  changePasswordValidator,
+  validationResultHandler,
+  changePassword
+);
 router.put("/change-role", changeRole);
 router.post("/register", register);
 router.get("/", getAll);

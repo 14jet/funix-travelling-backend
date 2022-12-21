@@ -13,8 +13,8 @@ const {
 const multer = require("../../middlewares/multer");
 
 // routes
-router.post("/", multer.single, addArticle);
-router.put("/", multer.single, updateArticle);
+router.post("/", multer.uploadTourImgs, addArticle);
+router.put("/", multer.uploadTourImgs, updateArticle);
 router.delete("/", deleteArticle);
 router.get("/:articleId", getSingleArticle);
 

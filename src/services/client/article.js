@@ -30,8 +30,8 @@ module.exports.aggCreator = (queries) => {
     $match = { ...$match, hot: false };
   }
 
-  if (banner === "1") {
-    $match = { ...$match, banner: true };
+  if (banner) {
+    $match = { ...$match, layout: { $in: [banner] } };
   }
 
   if (banner === "0") {
@@ -130,6 +130,7 @@ module.exports.getSingleArticle = (article, language = "vi") => {
     hot: article.hot,
     lead: article.lead,
     thumb: article.thumb,
+    layout: article.layout,
     author: article.author,
     lead: article.lead,
     content: article.content,
@@ -171,6 +172,7 @@ module.exports.getArticles = (articles, language = "vi") => {
       title: article.title,
       lead: article.lead,
       thumb: article.thumb,
+      layout: article.layout || [],
       author: article.author,
       lead: article.lead,
       updatedAt: article.updatedAt,

@@ -7,6 +7,8 @@ module.exports.getArticleBasicData = (article, lang) => {
     createdAt: article.createdAt,
     updatedAt: article.updatedAt,
     thumb: article.thumb,
+    layout: article.layout,
+    banner: article.banner,
   };
 
   if (lang === "vi" || !article.translation) {
@@ -36,6 +38,8 @@ module.exports.getFullArticle = (article, lang) => {
     createdAt: article.createdAt,
     updatedAt: article.updatedAt,
     thumb: article.thumb,
+    banner: article.banner,
+    layout: article.layout,
     author: article.author,
     content: article.content,
   };

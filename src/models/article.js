@@ -16,7 +16,6 @@ const articleSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    banner: { type: Boolean, default: false },
     author: {
       type: String,
       required: true,
@@ -34,6 +33,9 @@ const articleSchema = new Schema(
       type: String,
       required: true,
     },
+    banner: String,
+    layout: [String], // guides |
+
     translation: [
       {
         language: {

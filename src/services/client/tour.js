@@ -11,9 +11,11 @@ module.exports.getSingleTour = (tour, language = "vi") => {
     code: tour.code,
     name: tour.name,
     thumb: tour.thumb,
-    banner: tour.banner || [],
-    thumb_original: tour.thumb_original,
+    banner: tour.banner,
+    layout: tour.layout || [],
     price: tour.price,
+    slider: slider,
+    hot: tour.hot,
 
     countries: tour.countries,
     journey: tour.journey,
@@ -89,11 +91,13 @@ module.exports.getTours = (tours, language = "vi") => {
       code: tour.code,
       name: tour.name,
       thumb: tour.thumb,
+      layout: tour.layout || [],
       countries: tour.countries,
+      category: tour.category,
       journey: tour.journey,
       price: tour.price,
       duration: tour.duration,
-      banner: tour.banner || [],
+      banner: tour.banner,
     };
   });
 
@@ -152,7 +156,7 @@ module.exports.aggCreator = (queries) => {
   }
 
   if (banner) {
-    $match = { ...$match, banner: { $in: [banner] } };
+    $match = { ...$match, layout: { $in: [banner] } };
   }
 
   if (slider === "0") {
@@ -202,9 +206,25 @@ module.exports.aggCreator = (queries) => {
                   },
                 },
                 {
+                  phrase: {
+                    query: search,
+                    path: "code",
+                    score: { boost: { value: 15 } },
+                    slop: 5,
+                  },
+                },
+                {
                   autocomplete: {
                     query: search,
                     path: "name",
+                  },
+                },
+                {
+                  phrase: {
+                    query: search,
+                    path: "name",
+                    score: { boost: { value: 15 } },
+                    slop: 5,
                   },
                 },
                 {
@@ -214,9 +234,25 @@ module.exports.aggCreator = (queries) => {
                   },
                 },
                 {
+                  phrase: {
+                    query: search,
+                    path: "journey",
+                    score: { boost: { value: 15 } },
+                    slop: 5,
+                  },
+                },
+                {
                   autocomplete: {
                     query: search,
                     path: "countries",
+                  },
+                },
+                {
+                  phrase: {
+                    query: search,
+                    path: "countries",
+                    score: { boost: { value: 15 } },
+                    slop: 5,
                   },
                 },
               ],
@@ -268,14 +304,15 @@ module.exports.aggCreator = (queries) => {
     agg.push({ $match });
   }
 
-  agg.push({ $sort });
+  if (!search) {
+    agg.push({ $sort });
+  }
 
   agg.push({
     $facet: {
       tours: [
         { $skip: (Number(page) - 1) * Number(page_size) },
         { $limit: Number(page_size) },
-        { $sort },
       ],
       count: [
         {

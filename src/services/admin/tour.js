@@ -23,6 +23,7 @@ module.exports.getSingleTour = (tour, language) => {
     thumb: tour.thumb,
     thumb_original: tour.thumb_original,
     banner: tour.banner,
+    layout: tour.layout,
     rating: tour.rating,
 
     itinerary: tour.itinerary,

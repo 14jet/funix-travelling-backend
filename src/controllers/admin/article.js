@@ -5,26 +5,16 @@ const createError = require("../../helpers/errorCreator");
 const { uploadFiles, deleteFiles } = require("../../helpers/firebase");
 const { getDeltaImgs } = require("../../helpers/getItineraryImgs");
 const { getFullArticle } = require("../../services/article");
-const { imgResizer } = require("../../helpers/imgResizer");
 
 module.exports.addArticle = async (req, res, next) => {
   try {
-    let { title, author, origin, lead, content, category, hot, banner } =
+    let { title, author, origin, lead, content, category, hot, layout } =
       req.body;
-    const thumb = req.file;
+    const thumb = req.files["thumb"][0];
+    const banner = req.files["banner"][0];
 
-    const [error, resizedImg] = await imgResizer(thumb.buffer);
-
-    let thumbUrl;
-    if (resizedImg) {
-      thumbUrl = (
-        await uploadFiles([
-          { buffer: resizedImg, originalname: thumb.originalname },
-        ])
-      )[0];
-    } else {
-      thumbUrl = (await uploadFiles([thumb]))[0];
-    }
+    const thumbUrl = (await uploadFiles([thumb]))[0];
+    const bannerUrl = (await uploadFiles([banner]))[0];
 
     // lấy image base64
     let contentImgs = [];
@@ -53,8 +43,9 @@ module.exports.addArticle = async (req, res, next) => {
       origin,
       lead,
       hot: hot === "true" ? true : false,
-      banner: banner === "true" ? true : false,
       category: JSON.parse(category),
+      layout: JSON.parse(layout),
+      banner: bannerUrl,
       thumb: thumbUrl,
       content: JSON.parse(content),
     });
@@ -124,9 +115,8 @@ module.exports.updateArticle = async (req, res, next) => {
       articleId,
       category,
       hot,
-      banner,
+      layout,
     } = req.body;
-    const thumb = req.file;
 
     const article = await Article.findOne({ _id: articleId });
 
@@ -164,10 +154,11 @@ module.exports.updateArticle = async (req, res, next) => {
       article.author = author;
       article.origin = origin;
       article.lead = lead;
+      article.layout = JSON.parse(layout);
       article.content = JSON.parse(content);
     }
 
-    if (language === language) {
+    if (language !== language) {
       let tid = article.translation.findIndex(
         (item) => item.language === language
       );
@@ -187,25 +178,22 @@ module.exports.updateArticle = async (req, res, next) => {
       }
     }
 
-    let thumbUrl;
-    if (thumb) {
-      const [error, resizedImg] = await imgResizer(thumb.buffer);
-      if (resizedImg) {
-        thumbUrl = (
-          await uploadFiles([
-            { buffer: resizedImg, originalname: thumb.originalname },
-          ])
-        )[0];
-      } else {
-        thumbUrl = (await uploadFiles([thumb]))[0];
-      }
+    const thumb = req.files["thumb"] && req.files["thumb"][0];
+    const banner = req.files["banner"] && req.files["banner"][0];
 
+    if (thumb) {
+      const thumbUrl = (await uploadFiles([thumb]))[0];
       deleteFiles([article.thumb]);
       article.thumb = thumbUrl;
     }
 
+    if (banner) {
+      const bannerUrl = (await uploadFiles([banner]))[0];
+      deleteFiles([article.banner]);
+      article.banner = bannerUrl;
+    }
+
     article.hot = hot === "true" ? true : false;
-    article.banner = banner === "true" ? true : false;
     article.category = JSON.parse(category);
 
     // handle banner

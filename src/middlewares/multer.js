@@ -44,6 +44,7 @@ module.exports = {
   upload: upload,
   uploadTourImgs: upload.fields([
     { name: "thumb", maxCount: 1 },
+    { name: "banner", maxCount: 1 },
     { name: "slider" },
     { name: "plan0" },
     { name: "plan1" },

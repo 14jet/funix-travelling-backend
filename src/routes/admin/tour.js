@@ -25,11 +25,14 @@ const addItineraryValidator = require("../../validators/tour/addItinerary");
 const validationResultHandler = require("../../validators/validationResultHandler");
 
 // routes
+// rating
 router.post("/rating", rate);
 router.put("/rating", editRatingItem);
 router.delete("/rating", deleteRatingItem);
+
 router.get("/:tourId", getSingleTour);
-router.post("/", multer.single, addTourValidator, addTour);
+router.post("/", multer.uploadTourImgs, addTourValidator, addTour);
+
 router.put("/", multer.uploadTourImgs, editTourValidator, updateTour);
 router.put("/itinerary", multer.uploadTourImgs, updateItinerary);
 router.delete("/", deleteTour);

@@ -47,6 +47,14 @@ module.exports.login = async (req, res, next) => {
 module.exports.changePassword = async (req, res, next) => {
   try {
     const { username, password, new_password } = req.body;
+    if (req.user.username !== username) {
+      return next(
+        createError(new Error(""), 403, {
+          en: "Forbidden",
+          vi: "Cấm",
+        })
+      );
+    }
 
     const user = await User.findOne({ username });
 

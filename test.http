@@ -14,3 +14,6 @@ http://localhost:5000/api/layout/?search=eng&lang=en
 
 ### fetch users
 http://localhost:5000/user
+
+### fetch layout
+http://localhost:5000/layout

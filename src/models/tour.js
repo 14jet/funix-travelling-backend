@@ -17,18 +17,17 @@ const tourSchema = new Schema(
     description: String, // trans
     highlights: Object, // quill - trans
 
-    is_special: {
+    hot: {
       type: Boolean,
       default: false,
     },
 
-    banner: {
-      // home | eu-tours | vn-tours
-      type: Array,
-      default: [],
-    },
+    thumb: String,
+    banner: String,
+    layout: [String], // home-slider | vn-tours | eu-tours | guides
 
     price: Number,
+
     duration: {
       days: Number,
       nights: Number,
@@ -47,9 +46,6 @@ const tourSchema = new Schema(
       payment: Object, // quill - trans
       notes: Object, // quill - trans
     },
-
-    thumb: String,
-    thumb_original: String,
 
     rating: [
       {
