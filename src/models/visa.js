@@ -7,8 +7,8 @@ const visaSchema = new Schema({
     default: "vi",
   },
   name: String,
-  country: String,
-  category: [String],
+  type: String, //
+  country: String, // country code
   detail: Object,
   price: Number,
   price_policies: {
@@ -22,11 +22,10 @@ const visaSchema = new Schema({
     payment: Object, // quill - trans
     notes: Object, // quill - trans
   },
-  translations: [
+  translation: [
     {
       language: String,
       name: String,
-      country: String,
       detail: Object,
       price_policies: {
         includes: Object, // quill - trans

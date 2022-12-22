@@ -27,6 +27,7 @@ app.use("/admin/tour", require("./routes/admin/tour"));
 app.use("/admin/term", require("./routes/admin/term"));
 app.use("/admin/layout", require("./routes/admin/layout"));
 app.use("/admin/about", require("./routes/admin/about"));
+app.use("/admin/visa", require("./routes/admin/visa"));
 
 app.all("*", require("./middlewares/notFound"));
 app.use(require("./middlewares/errorHandler"));

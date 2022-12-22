@@ -675,3 +675,60 @@ b7e6c238-b2ef-48c3-87dd-6cab90c91939	21-12-2022	04:50:43	GET	/layout?lang=vi	hom
     at module.exports.getLayoutData (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\layout.js:48:9)
     at runMicrotasks (<anonymous>)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+5b3dfbea-1710-4a5a-b5ec-89631346401a	21-12-2022	09:27:49	POST	/visa?lang=vi	error is not defined	ReferenceError: error is not defined
+    at module.exports.addVisa (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\visa.js:12:31)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+8066387c-5689-44a0-8145-80785f0632fb	21-12-2022	09:28:31	POST	/visa?lang=vi	Cannot set properties of null (setting 'httpCode')	TypeError: Cannot set properties of null (setting 'httpCode')
+    at errorCreator (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\helpers\errorCreator.js:16:18)
+    at module.exports.addVisa (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\visa.js:12:19)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at middleware (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express-validator\src\middlewares\check.js:16:13)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+8df9b541-bc1e-4e7a-b96f-9b54538ce246	21-12-2022	09:28:56	POST	/visa?lang=vi	
+aa798c4f-4bec-4575-8567-0ab1df32b745	21-12-2022	09:57:30	PUT	/visa?lang=vi	_id is not defined	ReferenceError: _id is not defined
+    at module.exports.editVisa (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\visa.js:53:44)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:47:12)
+fc0a2268-2c70-4d2e-ae5f-29e0c373a80e	21-12-2022	09:58:33	PUT	/visa?lang=vi	_id is not defined	ReferenceError: _id is not defined
+    at module.exports.editVisa (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\visa.js:53:44)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:144:13)
+    at Route.dispatch (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\route.js:114:3)
+    at Layer.handle [as handle_request] (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\layer.js:95:5)
+    at D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:346:12)
+    at next (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:175:3)
+    at router (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\express\lib\router\index.js:47:12)
+d2cf8cbb-8b5d-43f0-b266-5c6a581614c5	21-12-2022	10:00:10	PUT	/visa?lang=vi	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.editVisa (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\visa.js:102:31)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+9ea8faea-acb9-4471-9dbb-375d308d5ca3	21-12-2022	10:01:53	PUT	/visa?lang=vi	Cannot read properties of undefined (reading 'push')	TypeError: Cannot read properties of undefined (reading 'push')
+    at module.exports.editVisa (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\src\controllers\client\visa.js:105:31)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+49655f02-14f7-4020-beb6-53ecd2104fc8	22-12-2022	12:02:18	GET	/visa	PlanExecutor error during aggregation :: caused by :: Failed to optimize pipeline :: caused by :: Failed to optimize expression :: caused by :: Failed to parse objectId '_id' in $convert with no onError value: Invalid string length for parsing to OID, expected 24 but found 3	MongoServerError: PlanExecutor error during aggregation :: caused by :: Failed to optimize pipeline :: caused by :: Failed to optimize expression :: caused by :: Failed to parse objectId '_id' in $convert with no onError value: Invalid string length for parsing to OID, expected 24 but found 3
+    at Connection.onMessage (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongodb\lib\cmap\connection.js:207:30)
+    at MessageStream.<anonymous> (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongodb\lib\cmap\connection.js:60:60)
+    at MessageStream.emit (node:events:513:28)
+    at processIncomingData (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongodb\lib\cmap\message_stream.js:132:20)
+    at MessageStream._write (D:\ntav-workspace\job\travelling-website\funix-travelling-backend\node_modules\mongodb\lib\cmap\message_stream.js:33:9)
+    at writeOrBuffer (node:internal/streams/writable:391:12)
+    at _write (node:internal/streams/writable:332:10)
+    at MessageStream.Writable.write (node:internal/streams/writable:336:10)
+    at TLSSocket.ondata (node:internal/streams/readable:754:22)
+    at TLSSocket.emit (node:events:513:28)
+332ea60c-aca4-45c3-a5b7-e9a819cd38aa	22-12-2022	03:37:45	GET	/visa/available-countries	
+6fdb8ee9-70f8-432f-b5a5-4c6a17413014	22-12-2022	04:42:41	GET	/?lang=vi	Route Not Found
+3c1d55f4-ea54-4a28-adda-950ca5b720e7	22-12-2022	04:42:53	GET	/?lang=vi	Route Not Found
+85f5530d-15b5-4e1e-bc98-c59a9bac3462	22-12-2022	04:42:59	GET	/?lang=vi	Route Not Found
