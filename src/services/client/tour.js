@@ -34,52 +34,47 @@ module.exports.getSingleTour = (tour, language = "vi") => {
 
     is_requested_lang: true,
   };
-  if (language === "vi") {
-    return origin;
+
+  if (language === "vi") return origin;
+
+  const tid = tour.translation.findIndex((item) => item.language === language);
+  if (tid === -1) {
+    return { ...origin, is_requested_lang: false };
   }
 
-  if (language !== "vi") {
-    const tid = tour.translation.findIndex(
-      (item) => item.language === language
-    );
-    if (tid === -1) {
-      return { ...origin, is_requested_lang: false };
-    }
+  const t = tour.translation[tid];
+  const trans_itinerary = t.itinerary.map((item, index) => ({
+    ...item,
+    images: tour.itinerary[index].images,
+  }));
 
-    const t = tour.translation[tid];
-    const trans_itinerary = t.itinerary.map((item, index) => ({
-      ...item,
-      images: tour.itinerary[index].images,
-    }));
+  const trans_rating_items = tour.rating.items.map((item, index) => ({
+    _id: item._id,
+    name: item.name,
+    stars: item.stars,
+    content: t.rating[index].content,
+  }));
 
-    const trans_rating_items = tour.rating.items.map((item, index) => ({
-      _id: item._id,
-      name: item.name,
-      stars: item.stars,
-      content: t.rating[index].content,
-    }));
+  return {
+    ...origin,
+    language: t.language,
 
-    return {
-      ...origin,
-      language: t.language,
+    name: t.name,
 
-      name: t.name,
+    countries: t.countries,
+    journey: t.journey,
+    description: t.description,
+    highlights: t.highlights,
 
-      countries: t.countries,
-      journey: t.journey,
-      description: t.description,
-      highlights: t.highlights,
+    price_policies: t.price_policies,
+    terms: t.terms,
 
-      price_policies: t.price_policies,
-      terms: t.terms,
-
-      rating: {
-        average: tour.average,
-        items: trans_rating_items,
-      },
-      itinerary: trans_itinerary,
-    };
-  }
+    rating: {
+      average: tour.average,
+      items: trans_rating_items,
+    },
+    itinerary: trans_itinerary,
+  };
 };
 
 module.exports.getTours = (tours, language = "vi") => {

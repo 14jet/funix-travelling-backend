@@ -11,6 +11,7 @@ const {
   rate,
   editRatingItem,
   deleteRatingItem,
+  getTours,
 } = require("../../controllers/admin/tour");
 
 // middlewares
@@ -30,11 +31,14 @@ router.post("/rating", rate);
 router.put("/rating", editRatingItem);
 router.delete("/rating", deleteRatingItem);
 
+// tour
+router.get("/", getTours);
 router.get("/:tourId", getSingleTour);
 router.post("/", multer.uploadTourImgs, addTourValidator, addTour);
-
 router.put("/", multer.uploadTourImgs, editTourValidator, updateTour);
-router.put("/itinerary", multer.uploadTourImgs, updateItinerary);
 router.delete("/", deleteTour);
+
+// itinerary
+router.put("/itinerary", multer.uploadTourImgs, updateItinerary);
 
 module.exports = router;

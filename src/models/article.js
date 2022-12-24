@@ -7,7 +7,7 @@ const articleSchema = new Schema(
       type: String,
       default: "vi",
     },
-    category: [String],
+    category: [String], // cam-nang | nhat-ky | trai-nghiem | diem-den
     title: {
       type: String,
       required: true,

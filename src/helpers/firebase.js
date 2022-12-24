@@ -41,7 +41,6 @@ function deleteFiles(images) {
 
 // upload files handler
 async function uploadFiles(files, base64 = false, path = "") {
-  console.log(files);
   let refs = [];
   const createPath = () => `images/${path}` + uuid() + ".";
 

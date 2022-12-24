@@ -2,7 +2,6 @@ const Tour = require("../../models/tour");
 const Category = require("../../models/category");
 const createError = require("../../helpers/errorCreator");
 const { uploadFiles, deleteFiles } = require("../../helpers/firebase");
-const { imgResizer } = require("../../helpers/imgResizer");
 const mongoose = require("mongoose");
 const admin_tourServices = require("../../services/admin/tour");
 
@@ -249,9 +248,14 @@ module.exports.getSingleTour = async (req, res, next) => {
     }
 
     // các ver ngôn ngữ mà tour này hiện có
-    const available_lang = tour.translation
+    let available_lang = tour.translation
       .map((item) => item.language)
       .concat(["vi"]);
+
+    available_lang = await Category.find({
+      type: "language",
+      code: { $in: available_lang },
+    });
 
     const has_lang =
       language === "vi" ||
@@ -480,6 +484,77 @@ module.exports.deleteRatingItem = async (req, res, next) => {
         en: "rated successfully",
         vi: "Đã đánh giá thành công",
       },
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.getTours = async (req, res, next) => {
+  try {
+    let {
+      lang,
+      page,
+      page_size,
+      cat,
+      cat_not,
+      sort,
+      search,
+      slider,
+      special,
+      banner,
+    } = req.query;
+    if (!lang) {
+      lang = "vi";
+    }
+
+    if (!page) {
+      page = 1;
+    }
+
+    if (!page_size) {
+      page_size = 6;
+    }
+
+    const results = await Tour.aggregate(
+      admin_tourServices.aggCreator({
+        page,
+        page_size,
+        cat,
+        cat_not,
+        sort,
+        search,
+        lang,
+        slider,
+        special,
+        banner,
+      })
+    );
+
+    const tours = results[0]?.tours || [];
+    const total_count = results[0]?.count[0]?.total_count || 0;
+
+    // metadata
+    const page_count = Math.ceil(total_count / page_size);
+    const remain_count = total_count - (page_size * (page - 1) + tours.length);
+    const remain_page_count = page_count - page;
+    const has_more = page < page_count;
+
+    const metadata = {
+      page,
+      page_size,
+      page_count,
+      remain_page_count,
+      total_count,
+      remain_count,
+      has_more,
+      lang,
+      links: [],
+    };
+
+    return res.status(200).json({
+      data: admin_tourServices.getTours(tours, lang),
+      metadata,
     });
   } catch (error) {
     next(createError(error, 500));
