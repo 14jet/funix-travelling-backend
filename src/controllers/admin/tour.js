@@ -21,52 +21,12 @@ module.exports.addTour = async (req, res, next) => {
     // handle hình đại diện
     const thumb = req.files["thumb"][0];
     const banner = req.files["banner"][0];
-    if (!thumb) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Missing thumb",
-          vi: "Thiếu hình đại diện",
-        })
-      );
-    }
-
-    if (!banner) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Missing banner image",
-          vi: "Thiếu hình banner",
-        })
-      );
-    }
-
-    const thumbUrl = (await uploadFiles([thumb], false, "tour/"))[0];
-    const bannerUrl = (await uploadFiles([banner], false, "tour/"))[0];
-
-    // handle layout
-    const layout = JSON.parse(req.body.layout);
-    if (layout.includes("vn-tours")) {
-      const old_vn_banner = await Tour.findOne({
-        layout: { $in: ["vn-tours"] },
-      });
-      if (old_vn_banner) {
-        old_vn_banner.layout = old_vn_banner.layout.filter(
-          (item) => item !== "vn-tours"
-        );
-        await old_vn_banner.save();
-      }
-    }
-
-    if (layout.includes("eu-tours")) {
-      const old_eu_banner = await Tour.findOne({
-        layout: { $in: ["eu-tours"] },
-      });
-      if (old_eu_banner) {
-        old_eu_banner.layout = old_eu_banner.layout.filter(
-          (item) => item !== "eu-tours"
-        );
-        await old_eu_banner.save();
-      }
-    }
+    const thumbUrl = thumb
+      ? (await uploadFiles([thumb], false, "tour/"))[0]
+      : "";
+    const bannerUrl = banner
+      ? (await uploadFiles([banner], false, "tour/"))[0]
+      : "";
 
     const newTour = await Tour.create({
       code: req.body.code,
@@ -176,32 +136,6 @@ module.exports.updateTour = async (req, res, next) => {
           req.body.price_policies
         );
         tour.translation[tid].terms = JSON.parse(req.body.terms);
-      }
-    }
-
-    // handle layout
-    const layout = JSON.parse(req.body.layout);
-    if (layout.includes("vn-tours")) {
-      const old_vn_banner = await Tour.findOne({
-        layout: { $in: ["vn-tours"] },
-      });
-      if (old_vn_banner) {
-        old_vn_banner.layout = old_vn_banner.layout.filter(
-          (item) => item !== "vn-tours"
-        );
-        await old_vn_banner.save();
-      }
-    }
-
-    if (layout.includes("eu-tours")) {
-      const old_eu_banner = await Tour.findOne({
-        layout: { $in: ["eu-tours"] },
-      });
-      if (old_eu_banner) {
-        old_eu_banner.layout = old_eu_banner.layout.filter(
-          (item) => item !== "eu-tours"
-        );
-        await old_eu_banner.save();
       }
     }
 
@@ -555,6 +489,95 @@ module.exports.getTours = async (req, res, next) => {
     return res.status(200).json({
       data: admin_tourServices.getTours(tours, lang),
       metadata,
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.updateTourImages = async (req, res, next) => {
+  try {
+    const { tourId } = req.body;
+    if (mongoose.Types.ObjectId.isValid(tourId)) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Invalid tourId: can not cast to ObjectId",
+          vi: "tourId không hợp lệ: không thể chuyển thành ObjectId",
+        })
+      );
+    }
+
+    const tour = await Tour.findOne({ _id: tourId });
+    if (!tour) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Tour Not Found",
+          vi: "Không tìm thấy tour",
+        })
+      );
+    }
+
+    // Cập nhật hình thumb, banner
+    const files = req.files;
+
+    const thumb = files?.thumb ? files.thumb[0] : null;
+    const banner = files?.banner ? files.banner[0] : null;
+
+    if (thumb) {
+      const thumbUrl = (await uploadFiles([thumb]))[0];
+      deleteFiles([tour.thumb]);
+      tour.thumb = thumbUrl;
+    }
+
+    if (banner) {
+      const bannerUrl = (await uploadFiles([banner]))[0];
+      deleteFiles([tour.banner]);
+      tour.banner = bannerUrl;
+    }
+
+    // cập nhật hình lộ trình
+    // gồm:
+    // - hình mới: files: req.files.plan0: [file1, file2,...]
+    // - hình cũ: url string: req.files.plan0: [url1, url2,...]
+
+    for (const i = 0; i < itinerary.length; i++) {
+      const remainPlanItemImages = JSON.parse(req.body[`plan${i}`]);
+      const deletedImages = tour.itinerary[i].images.filter(
+        (item) => !remainPlanItemImages.includes(item)
+      );
+      deleteFiles(deletedImages);
+      tour.itinerary[i].images = remainPlanItemImages;
+    }
+
+    if (files) {
+      let planFiles = [];
+
+      for (let i = 0; i < tour.itinerary.length; i++) {
+        planFiles.push(req.files[`plan${i}`] || []);
+      }
+      // planFiles: [ [], [file1, file2], [file3, file4, file5],... ]
+
+      const planUrls = await Promise.all(
+        planFiles.map((item) =>
+          item.length > 0
+            ? uploadFiles(item, false, "tour/")
+            : Promise.resolve([])
+        )
+      );
+      // planUrls:  [ [], [url1, url2], [url3, url4, url5],... ]
+
+      tour.itinerary.map((item, index) => {
+        item.images = [...item.images, ...planUrls[index]];
+      });
+    }
+
+    await tour.save();
+
+    return res.status(200).json({
+      message: {
+        en: "Success",
+        vi: "Thành công",
+      },
     });
   } catch (error) {
     next(createError(error, 500));
