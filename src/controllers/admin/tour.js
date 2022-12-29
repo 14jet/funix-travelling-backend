@@ -487,7 +487,7 @@ module.exports.getTours = async (req, res, next) => {
     };
 
     return res.status(200).json({
-      data: admin_tourServices.getTours(tours, lang),
+      data: admin_tourServices.getTours(tours, lang, itinerary === "true"),
       metadata,
     });
   } catch (error) {
@@ -615,6 +615,68 @@ module.exports.updateTourLayout = async (req, res, next) => {
         en: "Success",
         vi: "Thành công",
       },
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.importJSON = async (req, res, next) => {
+  try {
+    let tours;
+
+    try {
+      tours = JSON.parse(req.body.tours);
+    } catch (error) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Invalid JSON",
+          vi: "JSON không hợp lệ",
+        })
+      );
+    }
+
+    let failures = [];
+
+    for (const [index, tour] of tours.entries()) {
+      try {
+        await Tour.create(tour);
+      } catch (error) {
+        failures.push({ index, code: tour.code, error: error.message });
+      }
+    }
+
+    const success = {
+      count: tours.length - failures.length + "/" + tours.length,
+    };
+    const failed = {
+      data: failures,
+      count: failures.length + "/" + tours.length,
+    };
+
+    let message = {
+      en: "Imported successfully",
+      vi: "Import thành công",
+    };
+
+    if (success.count < tours.count && success.count > 0) {
+      message = {
+        en: "Imported partially successfully",
+        vi: "Import thành công một phần",
+      };
+    }
+
+    if (success.count === 0) {
+      message = {
+        en: "Imported fail",
+        vi: "Import thất bại",
+      };
+    }
+
+    return res.status(200).json({
+      message,
+      success,
+      failures: failed,
     });
   } catch (error) {
     next(createError(error, 500));

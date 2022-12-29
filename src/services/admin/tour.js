@@ -129,10 +129,10 @@ module.exports.getSingleTour1 = (tour, language = "vi") => {
   };
 };
 
-module.exports.getTours = (tours, language = "vi") => {
+module.exports.getTours = (tours, language = "vi", itinerary) => {
   const results = tours.map((item) => {
     const tour = this.getSingleTour1(item, language);
-    return {
+    const output = {
       _id: tour._id,
       language: tour.language,
       code: tour.code,
@@ -145,7 +145,14 @@ module.exports.getTours = (tours, language = "vi") => {
       price: tour.price,
       duration: tour.duration,
       banner: tour.banner,
+      itinerary,
     };
+
+    if (itinerary) {
+      output.itinerary = itinerary;
+    }
+
+    return output;
   });
 
   return results;

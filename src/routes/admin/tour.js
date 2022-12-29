@@ -44,6 +44,6 @@ router.put("/itinerary", multer.uploadTourImgs, updateItinerary);
 
 // images
 router.put("/images", multer.uploadTourImgs, updateTourImages);
-router.put("/layout", updateTourLayout);
+// router.put("/layout", updateTourLayout);
 
 module.exports = router;
