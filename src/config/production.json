@@ -2,7 +2,9 @@
   "cors": {
     "whiteList": [
       "http://localhost:3000",
-      "https://travelling-website-funix-v1.web.app"
+      "http://localhost:3001",
+      "https://travelling-website-funix-v1.web.app",
+      "https://joya-client.web.app"
     ]
   },
   "database": {

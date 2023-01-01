@@ -63,6 +63,6 @@ module.exports.getLayoutData = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };

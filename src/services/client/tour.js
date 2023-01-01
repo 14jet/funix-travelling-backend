@@ -48,13 +48,6 @@ module.exports.getSingleTour = (tour, language = "vi") => {
     images: tour.itinerary[index].images,
   }));
 
-  const trans_rating_items = tour.rating.items.map((item, index) => ({
-    _id: item._id,
-    name: item.name,
-    stars: item.stars,
-    content: t.rating[index].content,
-  }));
-
   return {
     ...origin,
     language: t.language,
@@ -69,10 +62,6 @@ module.exports.getSingleTour = (tour, language = "vi") => {
     price_policies: t.price_policies,
     terms: t.terms,
 
-    rating: {
-      average: tour.average,
-      items: trans_rating_items,
-    },
     itinerary: trans_itinerary,
   };
 };

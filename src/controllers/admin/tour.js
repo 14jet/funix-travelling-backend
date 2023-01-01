@@ -437,6 +437,7 @@ module.exports.getTours = async (req, res, next) => {
       slider,
       special,
       banner,
+      itinerary,
     } = req.query;
     if (!lang) {
       lang = "vi";

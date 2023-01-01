@@ -3,6 +3,12 @@ const createError = require("../../helpers/errorCreator");
 
 module.exports.getTerm = async (req, res, next) => {
   try {
+    return next(
+      createError(new Error(""), 404, {
+        en: "Tour Not Found",
+        vi: "Không tìm thấy tour",
+      })
+    );
     let { type } = req.params;
     let { lang } = req.query;
     if (!lang) {

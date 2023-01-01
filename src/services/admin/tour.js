@@ -145,7 +145,6 @@ module.exports.getTours = (tours, language = "vi", itinerary) => {
       price: tour.price,
       duration: tour.duration,
       banner: tour.banner,
-      itinerary,
     };
 
     if (itinerary) {
