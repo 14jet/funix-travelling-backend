@@ -147,8 +147,13 @@ module.exports.getTours = (tours, language = "vi", itinerary) => {
       banner: tour.banner,
     };
 
+    const missingItineraryImages = tour.itinerary.every(
+      (item) => !item.images || item.images.length === 0
+    );
+    output.missingItineraryImages = missingItineraryImages;
+
     if (itinerary) {
-      output.itinerary = itinerary;
+      output.itinerary = tour.itinerary;
     }
 
     return output;

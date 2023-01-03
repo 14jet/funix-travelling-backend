@@ -499,7 +499,7 @@ module.exports.getTours = async (req, res, next) => {
 module.exports.updateTourImages = async (req, res, next) => {
   try {
     const { tourId } = req.body;
-    if (mongoose.Types.ObjectId.isValid(tourId)) {
+    if (!mongoose.Types.ObjectId.isValid(tourId)) {
       return next(
         createError(new Error(""), 400, {
           en: "Invalid tourId: can not cast to ObjectId",
@@ -541,7 +541,7 @@ module.exports.updateTourImages = async (req, res, next) => {
     // - hình mới: files: req.files.plan0: [file1, file2,...]
     // - hình cũ: url string: req.files.plan0: [url1, url2,...]
 
-    for (const i = 0; i < itinerary.length; i++) {
+    for (let i = 0; i < tour.itinerary.length; i++) {
       const remainPlanItemImages = JSON.parse(req.body[`plan${i}`]);
       const deletedImages = tour.itinerary[i].images.filter(
         (item) => !remainPlanItemImages.includes(item)

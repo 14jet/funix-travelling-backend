@@ -191,7 +191,10 @@ module.exports.callMeBack = async (req, res, next) => {
 
     const auth = await authorize();
     const range = "Sheet1!B2:L2";
+    const d = new Date();
     const values = [
+      format(d, "hh:mm"),
+      format(d, "dd/MM/yyyy"),
       firstname,
       surname,
       gender,
