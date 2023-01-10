@@ -219,3 +219,69 @@ module.exports.getSingleVisa = async (req, res, next) => {
     next(createError(error, 500));
   }
 };
+
+module.exports.getVisasAvailableCountries = async (req, res, next) => {
+  try {
+    let continents = (
+      await Category.find({
+        type: "continent",
+      })
+    ).map((item) => ({
+      _id: item._id,
+      name: item.name,
+      code: item.code,
+    }));
+
+    let availableCountries = await Visa.aggregate([
+      {
+        $project: {
+          country: 1,
+        },
+      },
+      {
+        $group: {
+          _id: "$country",
+        },
+      },
+    ]);
+
+    availableCountries = availableCountries.map((item) => item._id);
+
+    // phân ra châu lục, lấy name
+    const countries = await Category.find(
+      {
+        code: { $in: availableCountries },
+        parent: { $in: continents.map((item) => item._id) },
+      },
+      {
+        _id: 1,
+        type: 1,
+        code: 1,
+        parent: 1,
+        name: 1,
+      }
+    );
+
+    let results = {
+      europe: [],
+      asia: [],
+      africa: [],
+      africa: [],
+      oceania: [],
+    };
+
+    continents.forEach((continent) => {
+      countries.forEach((country) => {
+        if (country.parent === continent._id.toString()) {
+          results[continent.code].push(country);
+        }
+      });
+    });
+
+    return res.status(200).json({
+      data: results,
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};

@@ -26,7 +26,7 @@ const addItineraryValidator = require("../../validators/tour/addItinerary");
 // validation result handler
 const validationResultHandler = require("../../validators/validationResultHandler");
 
-// routes
+// --------- routes -----------
 // rating
 router.post("/rating", rate);
 router.put("/rating", editRatingItem);

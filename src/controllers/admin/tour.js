@@ -47,6 +47,7 @@ module.exports.addTour = async (req, res, next) => {
     });
 
     return res.status(200).json({
+      code: 200,
       data: newTour,
       message: {
         en: "Created a new tour",

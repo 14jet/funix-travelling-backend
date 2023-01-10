@@ -80,14 +80,17 @@ module.exports.addArticle = async (req, res, next) => {
     let contentImgs = [];
     JSON.parse(content).ops.forEach((item) => {
       if (item.insert.image) {
-        contentImgs.push(item.insert.image);
+        contentImgs.push(item.insert.image.src);
+        // contentImgs.push(item.insert.image);
+        // console.log(item.insert.image);
       }
     });
 
     // lấy hình mới thêm vào (là hình base64)
-    let base64Imgs = contentImgs.filter((item) =>
-      item.startsWith("data:image")
-    );
+    let base64Imgs = contentImgs.filter((item) => {
+      console.log(item);
+      return item.startsWith("data:image");
+    });
 
     // upload lên firebase
     const imageURLs = await uploadFiles(base64Imgs, true);
