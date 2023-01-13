@@ -4,9 +4,11 @@ module.exports.getSingleTour = (tour, language = "vi") => {
     .reduce((prev, cur) => {
       return [...prev, ...cur];
     }, []);
+
   const origin = {
     _id: tour._id,
     language: tour.language,
+    url_endpoint: tour.url_endpoint,
 
     code: tour.code,
     name: tour.name,
@@ -17,14 +19,13 @@ module.exports.getSingleTour = (tour, language = "vi") => {
     slider: slider,
     hot: tour.hot,
 
-    countries: tour.countries,
     journey: tour.journey,
-    category: tour.category,
+    destinations: tour.destinations,
     description: tour.description,
     highlights: tour.highlights,
 
     duration: tour.duration,
-    departureDates: tour.departureDates,
+    departure_dates: tour.departure_dates,
 
     price_policies: tour.price_policies,
     terms: tour.terms,
@@ -33,7 +34,20 @@ module.exports.getSingleTour = (tour, language = "vi") => {
     itinerary: tour.itinerary,
 
     is_requested_lang: true,
+    updated_at: tour.updatedAt,
   };
+
+  const countries = tour.destinations.map((item) => item.country);
+  const is_vn_tour = tour.destinations.every(
+    (item) => item.country === "vietnam"
+  );
+  const is_eu_tour = tour.destinations.some(
+    (item) => item.continent === "europe"
+  );
+
+  origin.countries = countries;
+  origin.is_vn_tour = is_vn_tour;
+  origin.is_eu_tour = is_eu_tour;
 
   if (language === "vi") return origin;
 
@@ -72,15 +86,20 @@ module.exports.getTours = (tours, language = "vi") => {
     return {
       _id: tour._id,
       language: tour.language,
+      url_endpoint: tour.url_endpoint,
+      hot: tour.hot,
       code: tour.code,
       name: tour.name,
       thumb: tour.thumb,
       layout: tour.layout || [],
       countries: tour.countries,
-      category: tour.category,
+      destinations: tour.destinations,
+      is_vn_tour: tour.is_vn_tour,
+      is_eu_tour: tour.is_eu_tour,
       journey: tour.journey,
       price: tour.price,
       duration: tour.duration,
+      updated_at: tour.updated_at,
       banner: tour.banner,
     };
   });

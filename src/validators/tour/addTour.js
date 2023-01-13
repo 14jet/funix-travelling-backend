@@ -9,9 +9,49 @@ const isArrayJSON = (json) => {
 };
 
 const MESSAGES = {
+  missing_code: {
+    en: "Missing tour's code",
+    vi: "Mã tour không được bỏ trống!",
+  },
   missing_name: {
     en: "Missing tour's name",
     vi: "Tên tour không được bỏ trống!",
+  },
+  price: {
+    missing: {
+      en: "Missing tour's price",
+      vi: "Giá tour không được bỏ trống!",
+    },
+    isNumber: {
+      en: "Price must be number",
+      vi: "Giá tour phải là số",
+    },
+  },
+  duration: {
+    days: {
+      missing: {
+        en: "Missing days duration",
+        vi: "Thiếu khoảng thời gian du lịch (số ngày)",
+      },
+      isNumber: {
+        en: "Duration days must be number >= 0",
+        vi: "Số ngày du lịch phải là số >= 0",
+      },
+    },
+    nights: {
+      missing: {
+        en: "Missing nights duration",
+        vi: "Thiếu khoảng thời gian du lịch (số đêm)",
+      },
+      isNumber: {
+        en: "Duration nights must be number >= 0",
+        vi: "Số đêm du lịch phải là số >= 0",
+      },
+    },
+    conflict: {
+      en: "Duration days and nights are not suitable",
+      vi: "Số ngày đêm du lịch không hợp lý",
+    },
   },
   missing_journey: {
     en: "Missing tour's journey",
@@ -55,16 +95,23 @@ const MESSAGES = {
       vi: "Điều kiện hoàn hủy đổi phải là mảng!",
     },
   },
-  category: {
+  destinations: {
     isArray: {
-      en: "category must be an array",
-      vi: "category hoàn hủy đổi phải là mảng!",
+      en: "destinations must be an array",
+      vi: "destinations phải là một mảng!",
     },
   },
 };
 
 module.exports = [
+  body("code").notEmpty().withMessage(MESSAGES.missing_code),
   body("name").notEmpty().withMessage(MESSAGES.missing_name),
+  body("price").notEmpty().withMessage(MESSAGES.price.missing),
+  body("durationDays")
+    .notEmpty()
+    .withMessage(MESSAGES.duration.days.missing)
+    .isNumeric()
+    .withMessage(MESSAGES.duration.days.isNumber),
   body("journey").notEmpty().withMessage(MESSAGES.missing_journey),
   body("description").notEmpty().withMessage(MESSAGES.missing_desc),
   body("departureDates")
@@ -83,5 +130,7 @@ module.exports = [
       return true;
     })
     .withMessage(MESSAGES.departure_dates.inValid),
-  body("category").custom(isArrayJSON).withMessage(MESSAGES.category.isArray),
+  body("destinations")
+    .custom(isArrayJSON)
+    .withMessage(MESSAGES.destinations.isArray),
 ];

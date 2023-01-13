@@ -4,16 +4,21 @@ const createError = require("../../helpers/errorCreator");
 const { uploadFiles, deleteFiles } = require("../../helpers/firebase");
 const mongoose = require("mongoose");
 const admin_tourServices = require("../../services/admin/tour");
+const StringHandler = require("../../helpers/stringHandler");
 
 module.exports.addTour = async (req, res, next) => {
   try {
     // check có trùng code không
-    const tour = await Tour.findOne({ code: req.body.code });
+    const url_endpoint = StringHandler.urlEndpoinConverter(req.body.name);
+    const tour = await Tour.findOne({
+      $or: [{ code: req.body.code }, { url_endpoint: url_endpoint }],
+    });
+
     if (tour) {
       return next(
         createError(new Error(""), 400, {
-          en: "The code already exists",
-          vi: "Code đã tồn tại",
+          en: "The code or name already exists",
+          vi: "Code hoặc tên tour đã tồn tại",
         })
       );
     }
@@ -21,29 +26,39 @@ module.exports.addTour = async (req, res, next) => {
     // handle hình đại diện
     const thumb = req.files["thumb"][0];
     const banner = req.files["banner"][0];
-    const thumbUrl = thumb
+    const thumb_url = thumb
       ? (await uploadFiles([thumb], false, "tour/"))[0]
       : "";
-    const bannerUrl = banner
+    const banner_url = banner
       ? (await uploadFiles([banner], false, "tour/"))[0]
       : "";
 
     const newTour = await Tour.create({
       code: req.body.code,
       name: req.body.name,
-      countries: req.body.countries,
+      hot: req.body.hot === "true",
+      url_endpoint,
       journey: req.body.journey,
       description: req.body.description,
+
       highlights: JSON.parse(req.body.highlights),
-      category: JSON.parse(req.body.category),
       price: Number(req.body.price),
-      duration: JSON.parse(req.body.duration),
-      departureDates: JSON.parse(req.body.departureDates),
+      duration: {
+        days: req.body.durationDays,
+        nights: req.body.durationNights,
+      },
+      destinations: JSON.parse(req.body.destinations).map((item) =>
+        mongoose.Types.ObjectId(item)
+      ),
+
+      departure_dates: JSON.parse(req.body.departureDates),
+      // departure_dates_text: JSON.parse(req.body.departureDatesText),
+
       price_policies: JSON.parse(req.body.price_policies),
       terms: JSON.parse(req.body.terms),
-      banner: bannerUrl,
-      thumb: thumbUrl,
-      layout: JSON.parse(req.body.layout),
+
+      banner: banner_url,
+      thumb: thumb_url,
     });
 
     return res.status(200).json({
@@ -55,14 +70,13 @@ module.exports.addTour = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
 module.exports.updateTour = async (req, res, next) => {
   try {
     let { language } = req.body;
-
     const tour = await Tour.findOne({ _id: req.body.tourId });
     if (!tour) {
       return next(
@@ -92,11 +106,13 @@ module.exports.updateTour = async (req, res, next) => {
     // fields không phụ thuộc ngôn ngữ
     tour.code = req.body.code;
     tour.hot = req.body.hot === "true" ? true : false;
-    tour.category = JSON.parse(req.body.category);
     tour.price = Number(req.body.price);
     tour.duration = JSON.parse(req.body.duration);
-    tour.departureDates = JSON.parse(req.body.departureDates);
-    tour.layout = JSON.parse(req.body.layout);
+    tour.departure_dates = JSON.parse(req.body.departureDates);
+    tour.destinations = JSON.parse(req.body.destinations).map((item) =>
+      mongoose.Types.ObjectId(item)
+    );
+    tour.url_endpoint = StringHandler.urlEndpoinConverter(req.body.name);
 
     // fields phụ thuộc ngôn ngữ
     if (language === "vi") {
@@ -156,23 +172,16 @@ module.exports.updateTour = async (req, res, next) => {
 
 module.exports.getSingleTour = async (req, res, next) => {
   try {
-    let { tourId } = req.params;
+    let { tourCode } = req.params;
     let { language } = req.query;
 
     if (!language) {
       language = "vi";
     }
 
-    if (!mongoose.Types.ObjectId.isValid(tourId)) {
-      return next(
-        createError(new Error(""), 404, {
-          en: "Tour Not Found",
-          vi: "Không tìm thấy tour",
-        })
-      );
-    }
-
-    const tour = await Tour.findOne({ _id: tourId });
+    const tour = await Tour.findOne({ code: tourCode }).populate(
+      "destinations"
+    );
     if (!tour) {
       return next(
         createError(new Error(""), 404, {
@@ -218,10 +227,10 @@ module.exports.getSingleTour = async (req, res, next) => {
 
 module.exports.updateItinerary = async (req, res, next) => {
   try {
-    let { tourId, itinerary, language } = req.body;
+    let { tourCode, itinerary, language } = req.body;
     itinerary = JSON.parse(itinerary);
 
-    const tour = await Tour.findOne({ _id: tourId });
+    const tour = await Tour.findOne({ code: tourCode });
     if (!tour) {
       return next(
         createError(new Error(""), 400, {
@@ -285,9 +294,9 @@ module.exports.updateItinerary = async (req, res, next) => {
 
 module.exports.deleteTour = async (req, res, next) => {
   try {
-    const { tourId } = req.body;
+    const { tourCode } = req.body;
 
-    const tour = await Tour.findOne({ _id: tourId });
+    const tour = await Tour.findOne({ code: tourCode });
     if (!tour) {
       return next(
         createError(new Error(""), 400, {
@@ -309,6 +318,9 @@ module.exports.deleteTour = async (req, res, next) => {
       message: {
         en: "Deleted tour",
         vi: "Xóa tour thành công",
+      },
+      data: {
+        code: tourCode,
       },
     });
   } catch (error) {
@@ -425,7 +437,7 @@ module.exports.deleteRatingItem = async (req, res, next) => {
   }
 };
 
-module.exports.getTours = async (req, res, next) => {
+module.exports.getTours1 = async (req, res, next) => {
   try {
     let {
       lang,
@@ -497,19 +509,34 @@ module.exports.getTours = async (req, res, next) => {
   }
 };
 
-module.exports.updateTourImages = async (req, res, next) => {
+module.exports.getTours = async (req, res, next) => {
   try {
-    const { tourId } = req.body;
-    if (!mongoose.Types.ObjectId.isValid(tourId)) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Invalid tourId: can not cast to ObjectId",
-          vi: "tourId không hợp lệ: không thể chuyển thành ObjectId",
-        })
-      );
+    let { lang } = req.query;
+    if (!lang) {
+      lang = "vi";
     }
 
-    const tour = await Tour.findOne({ _id: tourId });
+    const tours = await Tour.find().populate("destinations");
+
+    const metadata = {
+      total_count: tours.length,
+      lang,
+    };
+
+    return res.status(200).json({
+      data: admin_tourServices.getTours(tours, lang, true),
+      metadata,
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.updateTourImages = async (req, res, next) => {
+  try {
+    const { tourCode } = req.body;
+
+    const tour = await Tour.findOne({ code: tourCode });
     if (!tour) {
       return next(
         createError(new Error(""), 400, {

@@ -34,7 +34,7 @@ router.delete("/rating", deleteRatingItem);
 
 // tour
 router.get("/", getTours);
-router.get("/:tourId", getSingleTour);
+router.get("/:tourCode", getSingleTour);
 router.post("/", multer.uploadTourImgs, addTourValidator, addTour);
 router.put("/", multer.uploadTourImgs, editTourValidator, updateTour);
 router.delete("/", deleteTour);

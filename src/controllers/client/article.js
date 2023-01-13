@@ -4,7 +4,7 @@ const createError = require("../../helpers/errorCreator");
 const articleServices = require("../../services/article");
 const client_articleServices = require("../../services/client/article");
 
-module.exports.getArticles = async (req, res, next) => {
+module.exports.getArticles_old = async (req, res, next) => {
   try {
     let { lang, page, page_size, cat, sort, search, hot, banner } = req.query;
     if (!lang) {
@@ -52,6 +52,27 @@ module.exports.getArticles = async (req, res, next) => {
       has_more,
       lang,
       links: [],
+    };
+
+    return res.status(200).json({
+      data: client_articleServices.getArticles(articles, lang),
+      metadata,
+    });
+  } catch (error) {
+    next(createError(error, 500));
+  }
+};
+
+module.exports.getArticles = async (req, res, next) => {
+  try {
+    const lang = req.query.lang || "vi";
+    const articles = await Article.find();
+
+    const total_count = articles.length;
+
+    const metadata = {
+      total_count,
+      lang,
     };
 
     return res.status(200).json({

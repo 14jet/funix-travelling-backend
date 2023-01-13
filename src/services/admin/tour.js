@@ -3,25 +3,23 @@ module.exports.getSingleTour = (tour, language) => {
     language: tour.language,
     _id: tour._id,
     code: tour.code,
-    is_special: tour.is_special,
+    hot: tour.hot,
     name: tour.name,
+    url_endpoint: tour.url_endpoint,
 
-    category: tour.category,
-
-    countries: tour.countries,
     journey: tour.journey,
     description: tour.description,
     highlights: tour.highlights,
+    destinations: tour.destinations,
 
     price: tour.price,
     duration: tour.duration,
-    departureDates: tour.departureDates,
+    departure_dates: tour.departure_dates,
 
     price_policies: tour.price_policies,
     terms: tour.terms,
 
     thumb: tour.thumb,
-    thumb_original: tour.thumb_original,
     banner: tour.banner,
     layout: tour.layout,
     rating: tour.rating,
@@ -50,16 +48,17 @@ module.exports.getSingleTour = (tour, language) => {
   return { ...originalTour, ...rest, itinerary: itinerary };
 };
 
-module.exports.getSingleTour1 = (tour, language = "vi") => {
+module.exports.serializeTour = (tour, language = "vi") => {
   const slider = tour.itinerary
     .map((item) => item.images)
     .reduce((prev, cur) => {
       return [...prev, ...cur];
     }, []);
+
   const origin = {
-    _id: tour._id,
     language: tour.language,
 
+    _id: tour._id,
     code: tour.code,
     name: tour.name,
     thumb: tour.thumb,
@@ -69,9 +68,8 @@ module.exports.getSingleTour1 = (tour, language = "vi") => {
     slider: slider,
     hot: tour.hot,
 
-    countries: tour.countries,
     journey: tour.journey,
-    category: tour.category,
+    destinations: tour.destinations,
     description: tour.description,
     highlights: tour.highlights,
 
@@ -87,76 +85,53 @@ module.exports.getSingleTour1 = (tour, language = "vi") => {
     is_requested_lang: true,
   };
 
-  if (language === "vi") return origin;
+  // *********** Nước (chỉ dành cho tour châu Âu) ***************
+  let countries = Array.from(
+    new Set(tour.destinations.map((item) => item.country))
+  );
 
-  const tid = tour.translation.findIndex((item) => item.language === language);
-  if (tid === -1) {
-    return { ...origin, is_requested_lang: false };
+  origin.countries = countries;
+
+  // Tỉnh (chỉ dành cho tour việt nam) ***************
+  let provinces = Array.from(
+    new Set(tour.destinations.map((item) => item.province))
+  );
+  origin.provinces = provinces;
+
+  // các versions ngôn ngữ hiện có
+  let language_versions = tour.translation
+    .map((item) => item.language)
+    .concat(["vi"]);
+  origin.language_versions = language_versions;
+
+  // các versions lộ trình ngôn ngữ hiện có
+  let itinerary_language_versions = [];
+  if (tour.itinerary.length > 0) {
+    itinerary_language_versions.push("vi");
   }
 
-  const t = tour.translation[tid];
-  const trans_itinerary = t.itinerary.map((item, index) => ({
-    ...item,
-    images: tour.itinerary[index].images,
-  }));
+  tour.translation.forEach((item) => {
+    if (item.itinerary && item.itinerary.length > 0) {
+      itinerary_language_versions.push(item.language);
+    }
+  });
 
-  const trans_rating_items = tour.rating.items.map((item, index) => ({
-    _id: item._id,
-    name: item.name,
-    stars: item.stars,
-    content: t.rating[index].content,
-  }));
+  origin.itinerary_language_versions = itinerary_language_versions;
 
-  return {
-    ...origin,
-    language: t.language,
+  // hình ảnh lộ trình
+  const missingItineraryImages = tour.itinerary.every(
+    (item) => !item.images || item.images.length === 0
+  );
 
-    name: t.name,
+  origin.missingItineraryImages = missingItineraryImages;
 
-    countries: t.countries,
-    journey: t.journey,
-    description: t.description,
-    highlights: t.highlights,
-
-    price_policies: t.price_policies,
-    terms: t.terms,
-
-    rating: {
-      average: tour.average,
-      items: trans_rating_items,
-    },
-    itinerary: trans_itinerary,
-  };
+  return origin;
 };
 
 module.exports.getTours = (tours, language = "vi", itinerary) => {
   const results = tours.map((item) => {
-    const tour = this.getSingleTour1(item, language);
-    const output = {
-      _id: tour._id,
-      language: tour.language,
-      code: tour.code,
-      name: tour.name,
-      thumb: tour.thumb,
-      layout: tour.layout || [],
-      countries: tour.countries,
-      category: tour.category,
-      journey: tour.journey,
-      price: tour.price,
-      duration: tour.duration,
-      banner: tour.banner,
-    };
-
-    const missingItineraryImages = tour.itinerary.every(
-      (item) => !item.images || item.images.length === 0
-    );
-    output.missingItineraryImages = missingItineraryImages;
-
-    if (itinerary) {
-      output.itinerary = tour.itinerary;
-    }
-
-    return output;
+    const tour = this.serializeTour(item, language);
+    return tour;
   });
 
   return results;
