@@ -32,16 +32,21 @@ module.exports.getArticleBasicData = (article, lang) => {
 module.exports.getFullArticle = (article, lang) => {
   const article_vi = {
     _id: article._id,
+    language: "vi",
     title: article.title,
-    lead: article.lead,
+    author: article.author,
+    hot: article.hot,
     category: article.category,
-    createdAt: article.createdAt,
-    updatedAt: article.updatedAt,
+    layout: article.layout,
+
+    lead: article.lead,
+    content: article.content,
+
     thumb: article.thumb,
     banner: article.banner,
-    layout: article.layout,
-    author: article.author,
-    content: article.content,
+
+    createdAt: article.createdAt,
+    updatedAt: article.updatedAt,
   };
 
   if (lang === "vi" || !article.translation) {

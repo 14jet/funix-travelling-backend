@@ -1,93 +1,36 @@
 const mongoose = require("mongoose");
-const Article = require("../../models/article");
 const createError = require("../../helpers/errorCreator");
-const articleServices = require("../../services/article");
-const client_articleServices = require("../../services/client/article");
-
-module.exports.getArticles_old = async (req, res, next) => {
-  try {
-    let { lang, page, page_size, cat, sort, search, hot, banner } = req.query;
-    if (!lang) {
-      lang = "vi";
-    }
-
-    if (!page) {
-      page = 1;
-    }
-
-    if (!page_size) {
-      page_size = 6;
-    }
-
-    const results = await Article.aggregate(
-      client_articleServices.aggCreator({
-        page,
-        page_size,
-        cat,
-        sort,
-        search,
-        lang,
-        hot,
-        banner,
-      })
-    );
-
-    const articles = results[0].articles;
-    const total_count = results[0].count[0]?.total_count || 0;
-
-    // metadata
-    const page_count = Math.ceil(total_count / page_size);
-    const remain_count =
-      total_count - (page_size * (page - 1) + articles.length);
-    const remain_page_count = page_count - page;
-    const has_more = page < page_count;
-
-    const metadata = {
-      page,
-      page_size,
-      page_count,
-      remain_page_count,
-      total_count,
-      remain_count,
-      has_more,
-      lang,
-      links: [],
-    };
-
-    return res.status(200).json({
-      data: client_articleServices.getArticles(articles, lang),
-      metadata,
-    });
-  } catch (error) {
-    next(createError(error, 500));
-  }
-};
+const articleServices = require("../../services/client/article");
 
 module.exports.getArticles = async (req, res, next) => {
   try {
-    const lang = req.query.lang || "vi";
-    const articles = await Article.find();
+    let language = req.query.lang || "vi";
 
-    const total_count = articles.length;
+    const [err, articles] = await articleServices.getArticles(language);
 
+    if (err) {
+      throw new Error(err.message);
+    }
+
+    // metadata
     const metadata = {
-      total_count,
-      lang,
+      total_count: articles.length,
+      lang: language,
     };
 
     return res.status(200).json({
-      data: client_articleServices.getArticles(articles, lang),
+      data: articles,
       metadata,
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
 module.exports.getSingleArticle = async (req, res, next) => {
   try {
     const { articleId } = req.params;
-    const { lang } = req.query;
+    const language = req.query.lang || "vi";
 
     if (!mongoose.Types.ObjectId.isValid(articleId)) {
       return next(
@@ -98,7 +41,14 @@ module.exports.getSingleArticle = async (req, res, next) => {
       );
     }
 
-    const article = await Article.findOne({ _id: articleId });
+    const [err, article] = await articleServices.getSingleArticle(
+      articleId,
+      language
+    );
+
+    if (err) {
+      throw new Error(err.message);
+    }
 
     if (!article) {
       return next(
@@ -109,22 +59,13 @@ module.exports.getSingleArticle = async (req, res, next) => {
       );
     }
 
-    const relatedArticles = await Article.find({
-      _id: {
-        $ne: articleId,
-      },
-    }).limit(3);
-
     return res.status(200).json({
-      data: {
-        item: articleServices.getFullArticle(article, lang),
-        relatedItems: articleServices.getArticlesBasicData(
-          relatedArticles,
-          lang
-        ),
+      data: article,
+      metadata: {
+        lang: language,
       },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };

@@ -20,7 +20,10 @@ const articleSchema = new Schema(
       type: String,
       required: true,
     },
-    origin: String,
+    origin: {
+      type: String,
+      default: "",
+    },
     lead: {
       type: String,
       required: true,

@@ -162,7 +162,7 @@ module.exports.getSingleArticle = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
@@ -182,10 +182,18 @@ module.exports.updateArticle = async (req, res, next) => {
     } = req.body;
 
     const article = await Article.findOne({ _id: articleId });
+    if (!article) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Article Not Found",
+          vi: "Không tìm thấy bài viết",
+        })
+      );
+    }
 
-    // upload new base64 img in content
+    // upload new base64 imgs in content
     let base64Imgs = JSON.parse(content)
-      .ops.map((item) => (item.insert?.image ? item.insert.image : null))
+      .ops.map((item) => (item.insert?.image ? item.insert.image.src : null))
       .filter((item) => item && item.startsWith("data:image"));
 
     const imageURLs = await uploadFiles(base64Imgs, true);
@@ -196,16 +204,13 @@ module.exports.updateArticle = async (req, res, next) => {
 
     // xóa hình cũ
     const oldContent =
-      language === "vi"
-        ? article.content
-        : article.translation.find((item) => item.language === language)
-            ?.content;
+      language === "vi" ? article.content : article.translation[0]?.content;
 
     if (oldContent) {
       let oldImgs = [];
       oldContent.ops.forEach((item) => {
-        if (item.insert?.image && !content.includes(item.insert.image)) {
-          oldImgs.push(item.insert.image);
+        if (item.insert?.image && !content.includes(item.insert.image.src)) {
+          oldImgs.push(item.insert.image.src);
         }
       });
 
@@ -219,9 +224,10 @@ module.exports.updateArticle = async (req, res, next) => {
       article.lead = lead;
       article.layout = JSON.parse(layout);
       article.content = JSON.parse(content);
+      article.hot = hot === "true" || hot === true ? true : false;
     }
 
-    if (language !== language) {
+    if (language !== "vi") {
       let tid = article.translation.findIndex(
         (item) => item.language === language
       );
@@ -256,7 +262,9 @@ module.exports.updateArticle = async (req, res, next) => {
       article.banner = bannerUrl;
     }
 
-    article.hot = hot === "true" ? true : false;
+    console.log(article.hot);
+
+    article.hot = hot === "true" || hot === true ? true : false;
     article.category = JSON.parse(category);
 
     // handle banner
@@ -276,7 +284,7 @@ module.exports.updateArticle = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 

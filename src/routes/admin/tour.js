@@ -13,6 +13,7 @@ const {
   deleteRatingItem,
   getTours,
   updateTourImages,
+  updateHotTours,
 } = require("../../controllers/admin/tour");
 
 // middlewares
@@ -44,6 +45,7 @@ router.put("/itinerary", multer.uploadTourImgs, updateItinerary);
 
 // images
 router.put("/images", multer.uploadTourImgs, updateTourImages);
+router.put("/hot", updateHotTours);
 // router.put("/layout", updateTourLayout);
 
 module.exports = router;

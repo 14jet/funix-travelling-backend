@@ -14,6 +14,8 @@ module.exports.addTour = async (req, res, next) => {
       $or: [{ code: req.body.code }, { url_endpoint: url_endpoint }],
     });
 
+    // *** chưa check objectId của destinations có hợp lệ không ***
+
     if (tour) {
       return next(
         createError(new Error(""), 400, {
@@ -36,7 +38,6 @@ module.exports.addTour = async (req, res, next) => {
     const newTour = await Tour.create({
       code: req.body.code,
       name: req.body.name,
-      hot: req.body.hot === "true",
       url_endpoint,
       journey: req.body.journey,
       description: req.body.description,
@@ -54,8 +55,17 @@ module.exports.addTour = async (req, res, next) => {
       departure_dates: JSON.parse(req.body.departureDates),
       // departure_dates_text: JSON.parse(req.body.departureDatesText),
 
-      price_policies: JSON.parse(req.body.price_policies),
-      terms: JSON.parse(req.body.terms),
+      price_policies: {
+        includes: JSON.parse(req.body.priceIncludes),
+        excludes: JSON.parse(req.body.priceExcludes),
+        other: JSON.parse(req.body.priceOther),
+      },
+      terms: {
+        registration: JSON.parse(req.body.registrationPolicy),
+        cancellation: JSON.parse(req.body.cancellationPolicy),
+        payment: JSON.parse(req.body.paymentPolicy),
+        notes: JSON.parse(req.body.notes),
+      },
 
       banner: banner_url,
       thumb: thumb_url,
@@ -167,6 +177,73 @@ module.exports.updateTour = async (req, res, next) => {
     });
   } catch (error) {
     next(createError(error, 500));
+  }
+};
+
+module.exports.updateHotTours = async (req, res, next) => {
+  try {
+    const tourCodes = req.body.tourCodes;
+    const type = req.body.type;
+
+    let oldHotTours = [];
+
+    if (type === "europe") {
+      oldHotTours = await Tour.aggregate([
+        {
+          $lookup: {
+            from: "places",
+            localField: "destinations",
+            foreignField: "_id",
+            as: "places",
+          },
+        },
+        {
+          $match: {
+            "places.continent": "europe",
+          },
+        },
+      ]);
+    }
+
+    if (type === "vietnam") {
+      oldHotTours = await Tour.aggregate([
+        {
+          $lookup: {
+            from: "places",
+            localField: "destinations",
+            foreignField: "_id",
+            as: "places",
+          },
+        },
+        {
+          $match: {
+            "places.country": "vietnam",
+          },
+        },
+      ]);
+    }
+
+    for (const tour of oldHotTours) {
+      await Tour.findOneAndUpdate(
+        { code: tour.code },
+        { $set: { hot: false } }
+      );
+    }
+
+    const newHotTours = await Tour.find({ code: { $in: tourCodes } });
+    for (const tour of newHotTours) {
+      await Tour.findOneAndUpdate({ code: tour.code }, { $set: { hot: true } });
+    }
+
+    return res.status(200).json({
+      code: 200,
+      message: {
+        en: "Updated",
+        vi: "Đã cập nhật",
+      },
+    });
+  } catch (error) {
+    return next(createError(error, 500));
   }
 };
 

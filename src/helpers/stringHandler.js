@@ -27,10 +27,19 @@ class StringHandler {
     return t;
   };
 
+  static duplecatedDashesRemover = (s) => {
+    let t = s;
+    while (t.indexOf("--") !== -1) {
+      t = t.replace("--", "-");
+    }
+
+    return t;
+  };
+
   static urlEndpoinConverter = (s) => {
     let t = this.accentsRemover(s);
-    console.log(t);
     t = this.spacesReplacer(t, "-");
+    t = this.duplecatedDashesRemover(t);
     return t;
   };
 }

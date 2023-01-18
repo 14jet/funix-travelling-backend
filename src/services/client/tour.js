@@ -1,3 +1,5 @@
+const Tour = require("../../models/tour");
+
 module.exports.getSingleTour = (tour, language = "vi") => {
   const slider = tour.itinerary
     .map((item) => item.images)
@@ -80,250 +82,87 @@ module.exports.getSingleTour = (tour, language = "vi") => {
   };
 };
 
-module.exports.getTours = (tours, language = "vi") => {
-  const results = tours.map((item) => {
-    const tour = this.getSingleTour(item, language);
-    return {
-      _id: tour._id,
-      language: tour.language,
-      url_endpoint: tour.url_endpoint,
-      hot: tour.hot,
-      code: tour.code,
-      name: tour.name,
-      thumb: tour.thumb,
-      layout: tour.layout || [],
-      countries: tour.countries,
-      destinations: tour.destinations,
-      is_vn_tour: tour.is_vn_tour,
-      is_eu_tour: tour.is_eu_tour,
-      journey: tour.journey,
-      price: tour.price,
-      duration: tour.duration,
-      updated_at: tour.updated_at,
-      banner: tour.banner,
-    };
-  });
+module.exports.getTours = async (language) => {
+  let tours = [];
 
-  return results;
-};
-
-module.exports.aggCreator = (queries) => {
-  const notEmpty = (obj) => Object.keys(obj).length > 0;
-
-  let {
-    cat,
-    cat_not,
-    page,
-    page_size,
-    sort,
-    search,
-    lang,
-    hot,
-    slider,
-    banner,
-  } = queries;
-  if (cat && !Array.isArray(cat)) {
-    cat = [cat];
-  }
-
-  if (cat_not && !Array.isArray(cat_not)) {
-    cat_not = [cat_not];
-  }
-
-  let $search = {};
-  let $match = {};
-  let $sort = {};
-
-  if (!page) {
-    page = 1;
-  }
-  if (!page_size) {
-    page_size = 6;
-  }
-
-  // category
-  if (cat) {
-    $match = { ...$match, category: { $in: cat } };
-  }
-
-  if (cat_not) {
-    $match = { ...$match, category: { $nin: cat_not } };
-  }
-
-  if (hot === "1") {
-    $match = { ...$match, hot: true };
-  }
-
-  if (hot === "0") {
-    $match = { ...$match, hot: false };
-  }
-
-  if (banner) {
-    $match = { ...$match, layout: { $in: [banner] } };
-  }
-
-  if (slider === "0") {
-    $match = { ...$match, slider: "" };
-  }
-
-  // sort
-  if (sort === "price-desc") {
-    $sort = { ...$sort, price: -1 };
-  }
-
-  if (sort === "price-asc") {
-    $sort = { ...$sort, price: 1 };
-  }
-
-  if (sort === "duration-desc") {
-    $sort = { ...$sort, "duration.days": -1 };
-  }
-
-  if (sort === "duration-asc") {
-    $sort = { ...$sort, "duration.days": 1 };
-  }
-
-  if (sort === "time-desc") {
-    $sort = { ...$sort, updatedAt: -1 };
-  }
-
-  if (sort === "time-asc") {
-    $sort = { ...$sort, updatedAt: 1 };
-  }
-
-  if (Object.keys($sort).length === 0) {
-    $sort = { updatedAt: 1 };
-  }
-
-  // search
-  if (search) {
-    $search =
-      lang === "vi"
-        ? {
-            compound: {
-              should: [
-                {
-                  autocomplete: {
-                    query: search,
-                    path: "code",
-                  },
-                },
-                {
-                  phrase: {
-                    query: search,
-                    path: "code",
-                    score: { boost: { value: 15 } },
-                    slop: 5,
-                  },
-                },
-                {
-                  autocomplete: {
-                    query: search,
-                    path: "name",
-                  },
-                },
-                {
-                  phrase: {
-                    query: search,
-                    path: "name",
-                    score: { boost: { value: 15 } },
-                    slop: 5,
-                  },
-                },
-                {
-                  autocomplete: {
-                    query: search,
-                    path: "journey",
-                  },
-                },
-                {
-                  phrase: {
-                    query: search,
-                    path: "journey",
-                    score: { boost: { value: 15 } },
-                    slop: 5,
-                  },
-                },
-                {
-                  autocomplete: {
-                    query: search,
-                    path: "countries",
-                  },
-                },
-                {
-                  phrase: {
-                    query: search,
-                    path: "countries",
-                    score: { boost: { value: 15 } },
-                    slop: 5,
-                  },
-                },
-              ],
-            },
-          }
-        : {
-            compound: {
-              should: [
-                {
-                  embeddedDocument: {
-                    path: "translation",
-                    operator: {
-                      compound: {
-                        should: [
-                          {
-                            autocomplete: {
-                              path: "translation.name",
-                              query: search,
-                            },
-                          },
-                          {
-                            autocomplete: {
-                              path: "translation.countries",
-                              query: search,
-                            },
-                          },
-                          {
-                            autocomplete: {
-                              path: "translation.journey",
-                              query: search,
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  },
-                },
-              ],
-            },
-          };
-  }
-
-  let agg = [];
-  if (notEmpty($search)) {
-    agg.push({ $search });
-  }
-
-  if (notEmpty($match)) {
-    agg.push({ $match });
-  }
-
-  if (!search) {
-    agg.push({ $sort });
-  }
-
-  agg.push({
-    $facet: {
-      tours: [
-        { $skip: (Number(page) - 1) * Number(page_size) },
-        { $limit: Number(page_size) },
-      ],
-      count: [
+  try {
+    if (language === "vi") {
+      tours = await Tour.find(
         {
-          $count: "total_count",
+          thumb: { $ne: "" },
+          banner: { $ne: "" },
+          "itinerary.0": { $exists: true },
         },
-      ],
-    },
-  });
+        {
+          itinerary: 0,
+          translation: 0,
+          terms: 0,
+          highlights: 0,
+          price_policies: 0,
+        }
+      ).populate("destinations");
+    }
 
-  return agg;
+    if (language !== "vi") {
+      tours = await Tour.find(
+        {
+          thumb: { $ne: "" },
+          banner: { $ne: "" },
+          "itinerary.0": { $exists: true },
+          translation: {
+            $elemMatch: {
+              language: language,
+              "translation.itinerary.0": { $exists: true },
+            },
+          },
+        },
+        {
+          _id: 1,
+          language: 1,
+          url_endpoint: 1,
+          code: 1,
+          price: 1,
+          duration: 1,
+          layout: 1,
+          destinations: 1,
+          departure_dates: 1,
+          thumb: 1,
+          banner: 1,
+          updatedAt: 1,
+          createdAt: 1,
+          translation: {
+            $elemMatch: {
+              language: language,
+            },
+          },
+        }
+      ).populate("destinations");
+
+      tours = tours.map((tour) => ({
+        _id: tour._id,
+        language: tour.translation[0].language,
+        url_endpoint: tour.url_endpoint,
+        code: tour.code,
+        name: tour.translation[0].name,
+        price: tour.price,
+        duration: tour.duration,
+        journey: tour.translation[0].journey,
+        layout: tour.layout,
+        destinations: tour.destinations,
+        departure_dates: tour.departure_dates,
+
+        itinerary: tour.translation[0].itinerary,
+
+        thumb: tour.thumb,
+        banner: tour.banner,
+
+        updatedAt: tour.updatedAt,
+        createdAt: tour.createdAt,
+      }));
+    }
+
+    return [null, tours];
+  } catch (error) {
+    return [error, null];
+  }
 };
