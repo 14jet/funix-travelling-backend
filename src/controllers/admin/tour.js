@@ -250,15 +250,12 @@ module.exports.updateHotTours = async (req, res, next) => {
 module.exports.getSingleTour = async (req, res, next) => {
   try {
     let { tourCode } = req.params;
-    let { language } = req.query;
-
-    if (!language) {
-      language = "vi";
-    }
+    let language = req.query.language || "vi";
 
     const tour = await Tour.findOne({ code: tourCode }).populate(
       "destinations"
     );
+
     if (!tour) {
       return next(
         createError(new Error(""), 404, {
@@ -361,11 +358,11 @@ module.exports.updateItinerary = async (req, res, next) => {
     return res.status(200).json({
       message: {
         en: "Updated itinerary successfully",
-        vi: "Cập nhật tour thành công",
+        vi: "Cập nhật lộ trình tour thành công",
       },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
@@ -401,7 +398,7 @@ module.exports.deleteTour = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
@@ -505,107 +502,32 @@ module.exports.deleteRatingItem = async (req, res, next) => {
 
     return res.status(200).json({
       message: {
-        en: "rated successfully",
-        vi: "Đã đánh giá thành công",
+        en: "deleted",
+        vi: "Đã xóa",
       },
     });
   } catch (error) {
-    next(createError(error, 500));
-  }
-};
-
-module.exports.getTours1 = async (req, res, next) => {
-  try {
-    let {
-      lang,
-      page,
-      page_size,
-      cat,
-      cat_not,
-      sort,
-      search,
-      slider,
-      special,
-      banner,
-      itinerary,
-    } = req.query;
-    if (!lang) {
-      lang = "vi";
-    }
-
-    if (!page) {
-      page = 1;
-    }
-
-    if (!page_size) {
-      page_size = 6;
-    }
-
-    const results = await Tour.aggregate(
-      admin_tourServices.aggCreator({
-        page,
-        page_size,
-        cat,
-        cat_not,
-        sort,
-        search,
-        lang,
-        slider,
-        special,
-        banner,
-      })
-    );
-
-    const tours = results[0]?.tours || [];
-    const total_count = results[0]?.count[0]?.total_count || 0;
-
-    // metadata
-    const page_count = Math.ceil(total_count / page_size);
-    const remain_count = total_count - (page_size * (page - 1) + tours.length);
-    const remain_page_count = page_count - page;
-    const has_more = page < page_count;
-
-    const metadata = {
-      page,
-      page_size,
-      page_count,
-      remain_page_count,
-      total_count,
-      remain_count,
-      has_more,
-      lang,
-      links: [],
-    };
-
-    return res.status(200).json({
-      data: admin_tourServices.getTours(tours, lang, itinerary === "true"),
-      metadata,
-    });
-  } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
 module.exports.getTours = async (req, res, next) => {
   try {
-    let { lang } = req.query;
-    if (!lang) {
-      lang = "vi";
+    const [err, tours] = await admin_tourServices.getTours();
+    if (err) {
+      return next(createError(err, 500));
     }
-
-    const tours = await Tour.find().populate("destinations");
 
     const metadata = {
       total_count: tours.length,
-      lang,
     };
 
     return res.status(200).json({
-      data: admin_tourServices.getTours(tours, lang, true),
+      data: tours,
       metadata,
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
@@ -686,7 +608,7 @@ module.exports.updateTourImages = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
@@ -723,7 +645,7 @@ module.exports.updateTourLayout = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
@@ -785,6 +707,6 @@ module.exports.importJSON = async (req, res, next) => {
       failures: failed,
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };

@@ -10,7 +10,7 @@ const tourSchema = new Schema(
 
     code: String,
     name: String, // trans
-    countries: String, // trans => không cần
+    // countries: String, // trans => không cần
     journey: String, // trans => cần, vì nhiều khi đến mấy địa danh đặc biệt: Núi Bà Đen .... ở trong Việt Nam
     description: String, // trans
     highlights: Object, // quill - trans

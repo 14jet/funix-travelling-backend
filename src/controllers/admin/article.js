@@ -7,7 +7,7 @@ const { getDeltaImgs } = require("../../helpers/getItineraryImgs");
 const { getFullArticle } = require("../../services/article");
 const articleServices = require("../../services/admin/article");
 
-module.exports.getArticles = async (req, res, next) => {
+module.exports.getArticles_old = async (req, res, next) => {
   try {
     let { lang, page, page_size, cat, sort, search, hot, banner } = req.query;
     if (!lang) {
@@ -63,6 +63,19 @@ module.exports.getArticles = async (req, res, next) => {
     });
   } catch (error) {
     next(createError(error, 500));
+  }
+};
+
+module.exports.getArticles = async (req, res, next) => {
+  try {
+    const articles = await Article.find({});
+
+    console.log(articles);
+    return res.status(200).json({
+      data: articles,
+    });
+  } catch (error) {
+    return next(createError(error, 500));
   }
 };
 
