@@ -284,19 +284,19 @@ module.exports = async (req, res, next) => {
   next();
 };
 
-// code
-// name
-// price
-// durationDays
-// durationNights
-// journey
-// description
-// depatureDates
-// highlights
-// cancellationPolicy
-// registrationPolicy
-// paymentPolicy
-// priceIncludes
-// priceExcludes
-// priceOther
-// destinations
+// code: string
+// name: string
+// price: number >= 0
+// durationDays: integer > 0
+// durationNights: integer >= 0
+// journey: string
+// description: string
+// depatureDates: ["ddmmyy", "ddmmyy"] hoặc ["ddmmyyyy", "ddmmyyyy"]
+// highlights: delta không trống { ops: [{insert: "222"}] }
+// cancellationPolicy: delta không trống
+// registrationPolicy: delta không trống
+// paymentPolicy: delta không trống
+// priceIncludes: delta không trống
+// priceExcludes: delta không trống
+// priceOther: delta không trống
+// destinations: [ObjectId, ObjectId]
