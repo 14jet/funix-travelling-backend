@@ -5,7 +5,6 @@ content-type: application/json
 {
     "tours": [
         {
-        "name": "sample",
         "price": 1,
         "code": 2,
         "durationDays": 2,
@@ -14,12 +13,32 @@ content-type: application/json
         "description": "kkk",
         "departure_dates": ["101022"],
         "highlights": {"ops": [{"insert": "hehe"}]},
-        "destinations": ["ajsfsaf"]
-        },{
-            "name": "sample",
-            "code": 2,
-        "destinations": ["ajsfsaf"]
-
+        "destinations": ["63bd0d5d9d261113370312e0"],
+        "departureDates": ["020222"],
+        "cancellationPolicy": {"ops": [{"insert": "hehe"}]},
+        "registrationPolicy": {"ops": [{"insert": "hehe"}]},
+        "paymentPolicy": {"ops": [{"insert": "hehe"}]},
+        "priceIncludes": {"ops": [{"insert": "hehe"}]},
+        "priceExcludes": {"ops": [{"insert": "hehe"}]},
+        "priceOther": {"ops": [{"insert": "hehe"}]}
+        },
+                {
+        "price": 1,
+        "code": 2,
+        "durationDays": 2,
+        "durationNights": 2,
+        "journey": "kekkeke",
+        "description": "kkk",
+        "departure_dates": ["101022"],
+        "highlights": {"ops": [{"insert": "hehe"}]},
+        "destinations": ["63bd0d5d9d261113370312e0"],
+        "departureDates": ["020222"],
+        "cancellationPolicy": {"ops": [{"insert": "hehe"}]},
+        "registrationPolicy": {"ops": [{"insert": "hehe"}]},
+        "paymentPolicy": {"ops": [{"insert": "hehe"}]},
+        "priceIncludes": {"ops": [{"insert": "hehe"}]},
+        "priceExcludes": {"ops": [{"insert": "hehe"}]},
+        "priceOther": {"ops": [{"insert": "hehe"}]}
         }
     ]
 }

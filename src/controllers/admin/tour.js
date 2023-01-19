@@ -699,7 +699,8 @@ module.exports.importJSON = async (req, res, next) => {
     const success = {
       count: tours.length - failures.length + "/" + tours.length,
     };
-    const failed = {
+
+    const failure = {
       data: failures,
       count: failures.length + "/" + tours.length,
     };
@@ -725,8 +726,10 @@ module.exports.importJSON = async (req, res, next) => {
 
     return res.status(200).json({
       message,
-      success,
-      failures: failed,
+      data: {
+        success,
+        failure,
+      },
     });
   } catch (error) {
     return next(createError(error, 500));

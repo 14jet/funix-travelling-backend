@@ -36,6 +36,11 @@ module.exports = async (req, res, next) => {
     );
   }
 
+  console.log("++++++++++++++++++++++++++++++++++++++++++++++++++");
+  console.log("++++++++++++++++++++++++++++++++++++++++++++++++++");
+  console.log("++++++++++++++++++++++++++++++++++++++++++++++++++");
+  console.log("++++++++++++++++++++++++++++++++++++++++++++++++++");
+
   tours = req.body.tours;
   if (!Array.isArray(tours)) {
     return next(
@@ -300,3 +305,5 @@ module.exports = async (req, res, next) => {
 // priceExcludes: delta không trống
 // priceOther: delta không trống
 // destinations: [ObjectId, ObjectId]
+// GET http://localhost:5000/admin/places
+// POST http://localhost:5000/admin/tour/json { tours: [tour1, tour2] }
