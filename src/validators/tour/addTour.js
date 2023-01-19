@@ -43,7 +43,7 @@ const M = {
     en: "Missing 'journey'",
     vi: "Lộ trình không được bỏ trống!",
   },
-  desciption: {
+  description: {
     en: "Missing tour's description",
     vi: "Mô tả của tour không được bỏ trống!",
   },
@@ -128,7 +128,7 @@ module.exports = [
     })
     .withMessage(M.durationConflict),
   body("journey").notEmpty().withMessage(M.journey),
-  body("description").notEmpty().withMessage(M.desciption),
+  body("description").notEmpty().withMessage(M.description),
   body("departureDates")
     .notEmpty()
     .withMessage(M.departure_dates)

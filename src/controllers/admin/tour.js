@@ -5,6 +5,7 @@ const { uploadFiles, deleteFiles } = require("../../helpers/firebase");
 const mongoose = require("mongoose");
 const admin_tourServices = require("../../services/admin/tour");
 const StringHandler = require("../../helpers/stringHandler");
+const DateHandler = require("../../helpers/dateHandler");
 
 module.exports.addTour = async (req, res, next) => {
   try {
@@ -651,24 +652,45 @@ module.exports.updateTourLayout = async (req, res, next) => {
 
 module.exports.importJSON = async (req, res, next) => {
   try {
-    let tours;
-
-    try {
-      tours = JSON.parse(req.body.tours);
-    } catch (error) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Invalid JSON",
-          vi: "JSON không hợp lệ",
-        })
-      );
-    }
+    let tours = req.body.tours;
 
     let failures = [];
 
     for (const [index, tour] of tours.entries()) {
       try {
-        await Tour.create(tour);
+        await Tour.create({
+          code: tour.code,
+          name: tour.name,
+          url_endpoint: StringHandler.urlEndpoinConverter(tour.name),
+          journey: tour.journey,
+          description: tour.description,
+
+          highlights: tour.highlights,
+          price: tour.price,
+          duration: {
+            days: tour.durationDays,
+            nights: tour.durationNights,
+          },
+          destinations: tour.destinations.map((item) =>
+            mongoose.Types.ObjectId(item)
+          ),
+
+          departure_dates: tour.departureDates.map((dateString) =>
+            DateHandler.stringToDate(dateString)
+          ),
+
+          price_policies: {
+            includes: tour.priceIncludes,
+            excludes: tour.priceExcludes,
+            other: tour.priceOther,
+          },
+          terms: {
+            registration: tour.registrationPolicy,
+            cancellation: tour.cancellationPolicy,
+            payment: tour.paymentPolicy,
+            notes: tour.notes,
+          },
+        });
       } catch (error) {
         failures.push({ index, code: tour.code, error: error.message });
       }

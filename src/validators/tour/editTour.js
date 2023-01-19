@@ -1,14 +1,6 @@
 const { body } = require("express-validator");
 const mongoose = require("mongoose");
 const addTourValidator = require("./addTour");
-const isArrayJSON = (json) => {
-  try {
-    const parsed = JSON.parse(json);
-    return Array.isArray(parsed);
-  } catch (error) {
-    return false;
-  }
-};
 
 module.exports = [
   body("tourId")

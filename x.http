@@ -1,0 +1,25 @@
+###
+POST http://localhost:5000/admin/tour/json HTTP/1.1
+content-type: application/json
+
+{
+    "tours": [
+        {
+        "name": "sample",
+        "price": 1,
+        "code": 2,
+        "durationDays": 2,
+        "durationNights": 2,
+        "journey": "kekkeke",
+        "description": "kkk",
+        "departure_dates": ["101022"],
+        "highlights": {"ops": [{"insert": "hehe"}]},
+        "destinations": ["ajsfsaf"]
+        },{
+            "name": "sample",
+            "code": 2,
+        "destinations": ["ajsfsaf"]
+
+        }
+    ]
+}

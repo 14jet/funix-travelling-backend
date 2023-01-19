@@ -14,6 +14,7 @@ const {
   getTours,
   updateTourImages,
   updateHotTours,
+  importJSON,
 } = require("../../controllers/admin/tour");
 
 // middlewares
@@ -23,6 +24,7 @@ const multer = require("../../middlewares/multer");
 const addTourValidator = require("../../validators/tour/addTour");
 const editTourValidator = require("../../validators/tour/editTour");
 const addItineraryValidator = require("../../validators/tour/addItinerary");
+const importJSONValidator = require("../../validators/tour/importJSON");
 
 // validation result handler
 const validationResultHandler = require("../../validators/validationResultHandler");
@@ -39,13 +41,14 @@ router.get("/:tourCode", getSingleTour);
 router.post("/", multer.uploadTourImgs, addTourValidator, addTour);
 router.put("/", multer.uploadTourImgs, editTourValidator, updateTour);
 router.delete("/", deleteTour);
+router.put("/hot", updateHotTours);
+router.post("/json", importJSONValidator, importJSON);
 
 // itinerary
 router.put("/itinerary", multer.uploadTourImgs, updateItinerary);
 
 // images
 router.put("/images", multer.uploadTourImgs, updateTourImages);
-router.put("/hot", updateHotTours);
 // router.put("/layout", updateTourLayout);
 
 module.exports = router;

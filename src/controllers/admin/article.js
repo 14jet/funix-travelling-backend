@@ -7,65 +7,6 @@ const { getDeltaImgs } = require("../../helpers/getItineraryImgs");
 const { getFullArticle } = require("../../services/article");
 const articleServices = require("../../services/admin/article");
 
-module.exports.getArticles_old = async (req, res, next) => {
-  try {
-    let { lang, page, page_size, cat, sort, search, hot, banner } = req.query;
-    if (!lang) {
-      lang = "vi";
-    }
-
-    if (!page) {
-      page = 1;
-    }
-
-    if (!page_size) {
-      page_size = 6;
-    }
-
-    const results = await Article.aggregate(
-      articleServices.aggCreator({
-        page,
-        page_size,
-        cat,
-        sort,
-        search,
-        lang,
-        hot,
-        banner,
-      })
-    );
-
-    const articles = results[0].articles;
-    const total_count = results[0].count[0]?.total_count || 0;
-
-    // metadata
-    const page_count = Math.ceil(total_count / page_size);
-    const remain_count =
-      total_count - (page_size * (page - 1) + articles.length);
-    const remain_page_count = page_count - page;
-    const has_more = page < page_count;
-
-    const metadata = {
-      page,
-      page_size,
-      page_count,
-      remain_page_count,
-      total_count,
-      remain_count,
-      has_more,
-      lang,
-      links: [],
-    };
-
-    return res.status(200).json({
-      data: articleServices.getArticles(articles, lang),
-      metadata,
-    });
-  } catch (error) {
-    next(createError(error, 500));
-  }
-};
-
 module.exports.getArticles = async (req, res, next) => {
   try {
     const articles = await Article.find({});

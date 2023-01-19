@@ -1,99 +1,302 @@
 const createError = require("../../helpers/errorCreator");
+const mongoose = require("mongoose");
+const DateHandler = require("../../helpers/dateHandler");
+const Tour = require("../../models/tour");
+const Place = require("../../models/place");
 
-module.exposts = (req, res, next) => {
+const isEmptyDelta = (delta) => {
+  const ops = delta.ops;
+  return ops.length === 1 && !Boolean(ops[0].insert.trim());
+};
+
+const isValidDelta = (delta) => {
+  const type = Object.prototype.toString.call(delta).slice(8, -1);
+  if (type !== "Object") return false;
+
+  if (Object.keys(delta).length > 1) return false;
+
+  if (!delta.ops) return false;
+
+  if (Object.prototype.toString.call(delta.ops).slice(8, -1) !== "Array")
+    return false;
+
+  if (delta.ops.some((item) => !item.insert)) return false;
+
+  return true;
+};
+
+module.exports = async (req, res, next) => {
   let tours;
-  try {
-    tours = JSON.parse(req.body.tours);
-  } catch (error) {
+  if (!req.body.tours) {
     return next(
       createError(new Error(""), 400, {
-        en: "Invalid JSON",
-        vi: "JSON không hợp lệ",
+        en: "Missing tours",
+        vi: "Thiếu tours",
+      })
+    );
+  }
+
+  tours = req.body.tours;
+  if (!Array.isArray(tours)) {
+    return next(
+      createError(new Error(""), 400, {
+        en: "tours must be an array",
+        vi: "Tours phải là array",
       })
     );
   }
 
   let errors = [];
-  // kiểm tra có thiếu trường bắt buộc nào không
-  // gồm:  category, code, name, journey, description, highlights, price, duration, departureDates
-  for (const [index, tour] of tours.entries()) {
-    const tourErr = { code: tour.code, index: index, errors: [] };
 
+  // *** function for checking each element of tours ***
+  const checkTourJson = async (tour) => {
+    let errors = {};
+
+    // ********** code *************
     if (!tour.code) {
-      tourErr.errors.push({ en: "Missing code", vi: "Thiếu code" });
+      errors.code = "missing";
+    } else {
+      const t = await Tour.findOne({ code: tour.code });
+      if (t) {
+        errors.code = "conflict with server"; // There's a tour on server that has the same code as this one
+      }
     }
 
-    if (
-      !tour.category ||
-      (Array.isArray(tour.category) && tour.category.length === 0)
-    ) {
-      tourErr.errors.push({ en: "Missng category", vi: "Thiếu danh mục" });
-    }
-
-    if (tour.category && !Array.isArray(tour.category)) {
-      tourErr.errors.push({
-        en: "Invalid category: must be array",
-        vi: "Category không hợp lệ: phải là mảng",
-      });
-    }
-
+    // ********** name *************
     if (!tour.name) {
-      tourErr.errors.push({ en: "Missing name", vi: "Thiếu tên" });
+      errors.name = "missing";
+    } else {
+      const t = await Tour.findOne({ name: tour.name }); // There's a tour on server that has the same name as this one
+      if (t) {
+        errors.name = "conflict with server";
+      }
     }
 
+    // ********** price *************
+    if (!tour.price && tour.price !== 0) {
+      errors.price = "missing";
+    } else if (isNaN(tour.price) || (!isNaN(tour.price) && tour.price < 0)) {
+      errors.price = "invalid: must be a number >= 0";
+    }
+
+    // ********** durationDays *************
+    if (!tour.durationDays && tour.durationDays !== 0) {
+      errors.durationDays = "missing";
+    } else if (
+      isNaN(tour.durationDays) ||
+      (!isNaN(tour.durationDays) && tour.durationDays <= 0) ||
+      !Number.isInteger(tour.durationDays)
+    ) {
+      errors.durationDays = "invalid: must be integer > 0";
+    }
+
+    // ********** durationNights *************
+    if (!tour.durationNights && tour.durationNights !== 0) {
+      errors.durationNights = "missing";
+    } else if (
+      isNaN(tour.durationNights) ||
+      (!isNaN(tour.durationNights) && tour.durationNights < 0) ||
+      !Number.isInteger(tour.durationNights)
+    ) {
+      errors.durationNights = "invalid: must be integer >= 0";
+    }
+
+    // ********** journey *************
     if (!tour.journey) {
-      tourErr.errors.push({ en: "Missing journey", vi: "Thiếu lỘ trình" });
+      errors.journey = "missing";
     }
 
+    // ********** description *************
     if (!tour.description) {
-      tourErr.errors.push({ en: "Empty description", vi: "Thiếu mô tả" });
+      errors.description = "missing";
     }
 
-    if (!tour.highlights) {
-      tourErr.errors.push({
-        en: "Missing highlights",
-        vi: "Thiếu điểm nổi bật",
-      });
-    }
-
-    if (!tour.price) {
-      tourErr.errors.push({ en: "Missing price", vi: "Thiếu giá" });
-    }
-
-    if (!tour.duration) {
-      tourErr.errors.push({
-        en: "Missing duration",
-        vi: "Thiếu số ngày du lịch",
-      });
-    }
-
+    // ********** departureDates *************
     if (!tour.departureDates) {
-      tourErr.errors.push({
-        en: "Missing departureDates",
-        vi: "Thiếu ngày khởi hành",
-      });
+      errors.departureDates = "missing";
+    } else if (!Array.isArray(tour.departureDates)) {
+      errors.departureDates = "must be array of ddmmyy or ddmmyyyy";
+    } else if (
+      tour.departureDates.some((item) => {
+        try {
+          const d = DateHandler.stringToDate(item);
+          if (!d) return true;
+          return false;
+        } catch (error) {
+          return true;
+        }
+      })
+    ) {
+      errors.departureDates = "must be array of ddmmyy or ddmmyyyy";
+    } else if (
+      Array.isArray(tour.departureDates) &&
+      tour.departureDates.length === 0
+    ) {
+      errors.departureDates = "array must not be empty";
     }
 
-    if (tour.departureDates) {
-      if (!Array.isArray(tour.departureDates)) {
-        tourErr.errors.push({
-          en: "Invalid departure dates: must be an array",
-          vi: "Invalid departure dates: must be an array",
-        });
-      }
+    // ********** highlights *************
+    if (!tour.highlights) {
+      errors.highlights = "missing";
+    } else if (!isValidDelta(tour.highlights)) {
+      errors.highlights = "invalid delta format";
+    } else if (isEmptyDelta(tour.highlights)) {
+      errors.highlights = "empty";
+    }
 
-      if (Array.isArray(tour.departureDates)) {
-        try {
-          for (const date of tour.departureDates) {
-            const d = new Date(date);
-          }
-        } catch (error) {
-          tourErr.errors.push({
-            en: "Invalid departure dates: invalid date in array",
-            vi: "Invalid departure dates: invalid date in array",
-          });
-        }
-      }
+    // ********** cancellationPolicy *************
+    if (!tour.cancellationPolicy) {
+      errors.cancellationPolicy = "missing";
+    } else if (!isValidDelta(tour.cancellationPolicy)) {
+      errors.highlights = "invalid delta format";
+    } else if (isEmptyDelta(tour.cancellationPolicy)) {
+      errors.cancellationPolicy = "empty";
+    }
+
+    // ********** registrationPolicy *************
+    if (!tour.registrationPolicy) {
+      errors.registrationPolicy = "missing";
+    } else if (!isValidDelta(tour.registrationPolicy)) {
+      errors.highlights = "invalid delta format";
+    } else if (isEmptyDelta(tour.registrationPolicy)) {
+      errors.registrationPolicy = "empty";
+    }
+
+    // ********** paymentPolicy *************
+    if (!tour.paymentPolicy) {
+      errors.paymentPolicy = "missing";
+    } else if (!isValidDelta(tour.paymentPolicy)) {
+      errors.highlights = "invalid delta format";
+    } else if (isEmptyDelta(tour.paymentPolicy)) {
+      errors.paymentPolicy = "empty";
+    }
+
+    // ********** priceIncludes *************
+    if (!tour.priceIncludes) {
+      errors.priceIncludes = "missing";
+    } else if (!isValidDelta(tour.priceIncludes)) {
+      errors.highlights = "invalid delta format";
+    } else if (isEmptyDelta(tour.priceIncludes)) {
+      errors.priceIncludes = "empty";
+    }
+
+    // ********** priceExcludes *************
+    if (!tour.priceExcludes) {
+      errors.priceExcludes = "missing";
+    } else if (!isValidDelta(tour.priceExcludes)) {
+      errors.highlights = "invalid delta format";
+    } else if (isEmptyDelta(tour.priceExcludes)) {
+      errors.priceExcludes = "empty";
+    }
+
+    // ********** priceOther *************
+    if (!tour.priceOther) {
+      errors.priceOther = "missing";
+    } else if (!isValidDelta(tour.priceOther)) {
+      errors.highlights = "invalid delta format";
+    } else if (isEmptyDelta(tour.priceOther)) {
+      errors.priceOther = "empty";
+    }
+
+    // ********** destinations *************
+    // destinations: array of objectId
+    if (!tour.destinations) {
+      errors.destinations = "missing";
+    } else if (!Array.isArray(tour.destinations)) {
+      errors.destinations = "invalid: must be an array of objectIds";
+    } else if (
+      tour.destinations.some((id) => !mongoose.Types.ObjectId.isValid(id)) ||
+      tour.destinations.length === 0
+    ) {
+      errors.destinations =
+        "invalid: must be an array of objectIds and not empty";
+    }
+
+    return errors;
+  };
+
+  for (const [index, tour] of Object.entries(tours)) {
+    const err = await checkTourJson(tour);
+    if (Object.keys(err).length > 0) {
+      errors.push({ ...err, index });
     }
   }
+
+  // check code có conflict với client hoặc server không (client nghĩa là trong mảng gửi lên có code bị trùng)
+  if (tours.every((tour) => tour.code)) {
+    const codes = tours.map((tour) => tour.code);
+    const codesSet = Array.from(new Set(codes));
+    if (codes.length > codesSet.length) {
+      errors.push({ code: "confict with client-self" });
+    }
+  }
+
+  // tương tự với tour name
+  if (tours.every((tour) => tour.name)) {
+    const names = tours.map((tour) => tour.name);
+    const namesSet = Array.from(new Set(names));
+    if (names.length > namesSet.length) {
+      errors.push({ name: "confict with client-self" });
+    }
+  }
+
+  // check destinations objectId có hợp lệ/tồn tại trên db không
+  let destIds = [];
+  tours.forEach((tour) => {
+    console.log(tour);
+    destIds = [...destIds, ...tour.destinations];
+  });
+
+  destIds = Array.from(new Set(destIds));
+  let invalidDestinations = [];
+  for (const destId of destIds) {
+    if (mongoose.Types.ObjectId.isValid(destId)) {
+      const place = await Place.findOne({
+        _id: mongoose.Types.ObjectId(destId),
+      });
+      if (!place) {
+        invalidDestinations.push({
+          destinationId: destId,
+          error: "doesn't exist",
+        });
+      }
+    } else {
+      invalidDestinations.push({
+        destinationId: destId,
+        error: "invalid ObjectId",
+      });
+    }
+  }
+
+  if (invalidDestinations.length > 0) {
+    errors.push({ destinations: invalidDestinations });
+  }
+
+  if (errors.length > 0) {
+    return next(
+      createError(new Error(""), 400, {
+        en: errors,
+        vi: errors,
+      })
+    );
+  }
+
+  next();
 };
+
+// code
+// name
+// price
+// durationDays
+// durationNights
+// journey
+// description
+// depatureDates
+// highlights
+// cancellationPolicy
+// registrationPolicy
+// paymentPolicy
+// priceIncludes
+// priceExcludes
+// priceOther
+// destinations
