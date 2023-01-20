@@ -3,7 +3,7 @@ const Category = require("../../models/category");
 const createError = require("../../helpers/errorCreator");
 const { uploadFiles, deleteFiles } = require("../../helpers/firebase");
 const mongoose = require("mongoose");
-const admin_tourServices = require("../../services/admin/tour");
+const tourServices = require("../../services/admin/tour");
 const StringHandler = require("../../helpers/stringHandler");
 const DateHandler = require("../../helpers/dateHandler");
 const TourCode = require("../../models/tourcode");
@@ -205,7 +205,7 @@ module.exports.updateTour = async (req, res, next) => {
       },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
@@ -294,37 +294,17 @@ module.exports.getSingleTour = async (req, res, next) => {
       );
     }
 
-    // các ver ngôn ngữ mà tour này hiện có
-    let available_lang = tour.translation
-      .map((item) => item.language)
-      .concat(["vi"]);
+    const data = tourServices.getSingleTour(tour, language);
+    const original = tourServices.getSingleTour(tour, "vi");
 
-    available_lang = await Category.find({
-      type: "language",
-      code: { $in: available_lang },
-    });
-
-    const has_lang =
-      language === "vi" ||
-      tour.translation.find((item) => item.language === language);
-
-    const data = has_lang
-      ? admin_tourServices.getSingleTour(tour, language)
-      : null;
-
-    const original = admin_tourServices.getSingleTour(tour, "vi");
-
-    const categories = await Category.find().populate("parent");
     return res.status(200).json({
       data: data,
       metadata: {
-        available_lang,
-        categories,
         original,
       },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
@@ -542,7 +522,7 @@ module.exports.deleteRatingItem = async (req, res, next) => {
 
 module.exports.getTours = async (req, res, next) => {
   try {
-    const [err, tours] = await admin_tourServices.getTours();
+    const [err, tours] = await tourServices.getTours();
     if (err) {
       return next(createError(err, 500));
     }
@@ -733,6 +713,9 @@ module.exports.importJSON = async (req, res, next) => {
             payment: tour.paymentPolicy,
             notes: tour.notes,
           },
+
+          translation: tour.translation,
+          itinerary: tour.itinerary,
         });
       } catch (error) {
         failures.push({ index, code: tour.code, error: error.message });

@@ -1,7 +1,7 @@
 const Tour = require("../../models/tour");
 
 module.exports.getSingleTour = (tour, language) => {
-  const originalTour = {
+  const viTour = {
     language: tour.language,
     _id: tour._id,
     code: tour.code,
@@ -29,11 +29,11 @@ module.exports.getSingleTour = (tour, language) => {
     itinerary: tour.itinerary,
   };
 
-  if (language === "vi") return originalTour;
+  if (language === "vi") return viTour;
 
   const tid = tour.translation.findIndex((item) => item.language === language);
 
-  if (tid === -1) return originalTour;
+  if (tid === -1) return null;
 
   const { _id, ...rest } = tour.translation[tid]._doc;
 
@@ -47,7 +47,7 @@ module.exports.getSingleTour = (tour, language) => {
       images: tour.itinerary[index].images,
     });
   });
-  return { ...originalTour, ...rest, itinerary: itinerary };
+  return { ...viTour, ...rest, itinerary: itinerary };
 };
 
 module.exports.getTours = async () => {
