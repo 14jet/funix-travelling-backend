@@ -36,11 +36,6 @@ module.exports = async (req, res, next) => {
     );
   }
 
-  console.log("++++++++++++++++++++++++++++++++++++++++++++++++++");
-  console.log("++++++++++++++++++++++++++++++++++++++++++++++++++");
-  console.log("++++++++++++++++++++++++++++++++++++++++++++++++++");
-  console.log("++++++++++++++++++++++++++++++++++++++++++++++++++");
-
   tours = req.body.tours;
   if (!Array.isArray(tours)) {
     return next(
@@ -60,11 +55,6 @@ module.exports = async (req, res, next) => {
     // ********** code *************
     if (!tour.code) {
       errors.code = "missing";
-    } else {
-      const t = await Tour.findOne({ code: tour.code });
-      if (t) {
-        errors.code = "conflict with server"; // There's a tour on server that has the same code as this one
-      }
     }
 
     // ********** name *************
@@ -224,15 +214,6 @@ module.exports = async (req, res, next) => {
     const err = await checkTourJson(tour);
     if (Object.keys(err).length > 0) {
       errors.push({ ...err, index });
-    }
-  }
-
-  // check code có conflict với client hoặc server không (client nghĩa là trong mảng gửi lên có code bị trùng)
-  if (tours.every((tour) => tour.code)) {
-    const codes = tours.map((tour) => tour.code);
-    const codesSet = Array.from(new Set(codes));
-    if (codes.length > codesSet.length) {
-      errors.push({ code: "confict with client-self" });
     }
   }
 

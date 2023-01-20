@@ -6,14 +6,13 @@ const mongoose = require("mongoose");
 const admin_tourServices = require("../../services/admin/tour");
 const StringHandler = require("../../helpers/stringHandler");
 const DateHandler = require("../../helpers/dateHandler");
+const TourCode = require("../../models/tourcode");
 
 module.exports.addTour = async (req, res, next) => {
   try {
     // check có trùng code không
     const url_endpoint = StringHandler.urlEndpoinConverter(req.body.name);
-    const tour = await Tour.findOne({
-      $or: [{ code: req.body.code }, { url_endpoint: url_endpoint }],
-    });
+    const tour = await Tour.findOne({ url_endpoint: url_endpoint });
 
     // *** chưa check objectId của destinations có hợp lệ không ***
 
@@ -36,8 +35,21 @@ module.exports.addTour = async (req, res, next) => {
       ? (await uploadFiles([banner], false, "tour/"))[0]
       : "";
 
+    // ***************** handle tour code ************
+    let code = req.body.code.toUpperCase();
+    const tourCode = await TourCode.findOne({ code: code });
+    if (tourCode) {
+      tourCode.number = tourCode.number + 1;
+      await tourCode.save();
+      code +=
+        tourCode.number < 10 ? "-0" + tourCode.number : "-" + tourCode.number;
+    } else {
+      await TourCode.create({ code: code, number: 1 });
+      code += "-01";
+    }
+
     const newTour = await Tour.create({
-      code: req.body.code,
+      code: code,
       name: req.body.name,
       url_endpoint,
       journey: req.body.journey,
@@ -114,8 +126,24 @@ module.exports.updateTour = async (req, res, next) => {
       tour.banner = bannerUrl;
     }
 
+    // **************** handle code ***********************8
+    if (req.body.code !== tour.code) {
+      let code = req.body.code.toUpperCase();
+      const tourCode = await TourCode.findOne({ code: code });
+      if (tourCode) {
+        tourCode.number = tourCode.number + 1;
+        await tourCode.save();
+        code +=
+          tourCode.number < 10 ? "-0" + tourCode.number : "-" + tourCode.number;
+      } else {
+        await TourCode.create({ code: code, number: 1 });
+        code += "-01";
+      }
+
+      tour.code = code;
+    }
+
     // fields không phụ thuộc ngôn ngữ
-    tour.code = req.body.code;
     tour.hot = req.body.hot === "true" ? true : false;
     tour.price = Number(req.body.price);
     tour.duration = JSON.parse(req.body.duration);
@@ -658,8 +686,23 @@ module.exports.importJSON = async (req, res, next) => {
 
     for (const [index, tour] of tours.entries()) {
       try {
+        // **************** handle code ***********************
+        let code = tour.code.toUpperCase();
+        const tourCode = await TourCode.findOne({ code: code });
+        if (tourCode) {
+          tourCode.number = tourCode.number + 1;
+          await tourCode.save();
+          code +=
+            tourCode.number < 10
+              ? "-0" + tourCode.number
+              : "-" + tourCode.number;
+        } else {
+          await TourCode.create({ code: code, number: 1 });
+          code += "-01";
+        }
+
         await Tour.create({
-          code: tour.code,
+          code: code,
           name: tour.name,
           url_endpoint: StringHandler.urlEndpoinConverter(tour.name),
           journey: tour.journey,
