@@ -60,7 +60,7 @@ module.exports.getSingleTour = (tour, language = "vi") => {
 
   const t = tour.translation[tid];
   const trans_itinerary = t.itinerary.map((item, index) => ({
-    ...item,
+    ...item._doc,
     images: tour.itinerary[index].images,
   }));
 
@@ -121,6 +121,7 @@ module.exports.getTours = async (language) => {
           language: 1,
           url_endpoint: 1,
           code: 1,
+          hot: 1,
           price: 1,
           duration: 1,
           layout: 1,
@@ -143,6 +144,7 @@ module.exports.getTours = async (language) => {
         language: tour.translation[0].language,
         url_endpoint: tour.url_endpoint,
         code: tour.code,
+        hot: tour.hot,
         name: tour.translation[0].name,
         price: tour.price,
         duration: tour.duration,

@@ -1,5 +1,4 @@
 const Tour = require("../../models/tour");
-const Category = require("../../models/category");
 const createError = require("../../helpers/errorCreator");
 const { uploadFiles, deleteFiles } = require("../../helpers/firebase");
 const mongoose = require("mongoose");
@@ -8,9 +7,112 @@ const StringHandler = require("../../helpers/stringHandler");
 const DateHandler = require("../../helpers/dateHandler");
 const TourCode = require("../../models/tourcode");
 
+module.exports.createTour = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    // *************** handle tour name *******************
+    // không được trùng tên
+    const url_endpoint = StringHandler.urlEndpoinConverter(req.body.name);
+    const tour = await Tour.findOne({ url_endpoint: url_endpoint });
+
+    if (tour) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "The name already exists. Please choose another one",
+          vi: "Tên tour đã tồn tại. Vui lòng chọn 1 tên khác",
+        })
+      );
+    }
+
+    // ***************** handle tour code ************
+    // tạo code có dạng gs-01, không bị trùng, số ở sau tăng dần
+    let code = req.body.code.toUpperCase();
+    const tourCode = await TourCode.findOne({ code: code });
+    if (tourCode) {
+      tourCode.number = tourCode.number + 1;
+      await tourCode.save();
+      code +=
+        tourCode.number < 10 ? "-0" + tourCode.number : "-" + tourCode.number;
+    } else {
+      await TourCode.create({ code: code, number: 1 });
+      code += "-01";
+    }
+
+    // ************** thumbnail - banner *************
+    const thumb = req.files["thumb"][0];
+    const banner = req.files["banner"][0];
+    const thumb_url = thumb
+      ? (await uploadFiles([thumb], false, "tour/"))[0]
+      : "";
+    const banner_url = banner
+      ? (await uploadFiles([banner], false, "tour/"))[0]
+      : "";
+
+    // ************** hình lộ trình *************
+    itinerary = JSON.parse(req.body.itinerary);
+    let sliders = [];
+    // sliders: [ [file1, file2], [file3, file4],... ]
+    for (let i = 0; i < itinerary.length; i++) {
+      sliders.push(req.files[`plan${i}`] || []);
+    }
+
+    // sliders: [ [url1, url2], [url3, url4],... ]
+    const sliders_urls = await Promise.all(
+      sliders.map((item) =>
+        item.length > 0
+          ? uploadFiles(item, false, "tour/")
+          : Promise.resolve([])
+      )
+    );
+
+    itinerary = itinerary.map((item, index) => {
+      return { ...item, images: sliders_urls[index] };
+    });
+
+    const newTour = await Tour.create({
+      code: code,
+      url_endpoint,
+      thumb: thumb_url,
+      banner: banner_url,
+
+      name: req.body.name,
+      journey: req.body.journey,
+      description: req.body.description,
+      highlights: JSON.parse(req.body.highlights),
+
+      price: Number(req.body.price),
+
+      duration: JSON.parse(req.body.duration),
+
+      destinations: JSON.parse(req.body.destinations).map((item) =>
+        mongoose.Types.ObjectId(item)
+      ),
+
+      departure_dates: JSON.parse(req.body.departure_dates),
+
+      price_policies: JSON.parse(req.body.price_policies),
+      terms: JSON.parse(req.body.terms),
+
+      itinerary: itinerary,
+      translation: JSON.parse(req.body.translation),
+    });
+
+    return res.status(200).json({
+      code: 200,
+      data: newTour,
+      message: {
+        en: "Success",
+        vi: "Thành công",
+      },
+    });
+  } catch (error) {
+    return next(createError(error, 500));
+  }
+};
+
 module.exports.addTour = async (req, res, next) => {
   try {
-    // check có trùng code không
+    // check có trùng ten không
     const url_endpoint = StringHandler.urlEndpoinConverter(req.body.name);
     const tour = await Tour.findOne({ url_endpoint: url_endpoint });
 
@@ -143,18 +245,15 @@ module.exports.updateTour = async (req, res, next) => {
       tour.code = code;
     }
 
-    // fields không phụ thuộc ngôn ngữ
-    tour.hot = req.body.hot === "true" ? true : false;
-    tour.price = Number(req.body.price);
-    tour.duration = JSON.parse(req.body.duration);
-    tour.departure_dates = JSON.parse(req.body.departureDates);
-    tour.destinations = JSON.parse(req.body.destinations).map((item) =>
-      mongoose.Types.ObjectId(item)
-    );
-    tour.url_endpoint = StringHandler.urlEndpoinConverter(req.body.name);
-
     // fields phụ thuộc ngôn ngữ
     if (language === "vi") {
+      tour.price = Number(req.body.price);
+      tour.duration = JSON.parse(req.body.duration);
+      tour.departure_dates = JSON.parse(req.body.departureDates);
+      tour.destinations = JSON.parse(req.body.destinations).map((item) =>
+        mongoose.Types.ObjectId(item)
+      );
+
       tour.price_policies = JSON.parse(req.body.price_policies);
       tour.name = req.body.name;
       tour.countries = req.body.countries;
@@ -162,6 +261,7 @@ module.exports.updateTour = async (req, res, next) => {
       tour.description = req.body.description;
       tour.highlights = JSON.parse(req.body.highlights);
       tour.terms = JSON.parse(req.body.terms);
+      tour.url_endpoint = StringHandler.urlEndpoinConverter(req.body.name);
     }
 
     if (language !== "vi") {
@@ -302,6 +402,31 @@ module.exports.getSingleTour = async (req, res, next) => {
       metadata: {
         original,
       },
+    });
+  } catch (error) {
+    return next(createError(error, 500));
+  }
+};
+
+module.exports.fetchTourNew = async (req, res, next) => {
+  try {
+    let { tourCode } = req.params;
+
+    const tour = await Tour.findOne({ code: tourCode }).populate(
+      "destinations"
+    );
+
+    if (!tour) {
+      return next(
+        createError(new Error(""), 404, {
+          en: "Tour Not Found",
+          vi: "Không tìm thấy tour",
+        })
+      );
+    }
+
+    return res.status(200).json({
+      data: tour,
     });
   } catch (error) {
     return next(createError(error, 500));

@@ -73,7 +73,6 @@ const tourSchema = new Schema(
         language: { type: String, required: true },
 
         name: String,
-        countries: String,
         journey: String,
         description: String,
         highlights: Object,

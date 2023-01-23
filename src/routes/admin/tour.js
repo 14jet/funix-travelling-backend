@@ -15,6 +15,8 @@ const {
   updateTourImages,
   updateHotTours,
   importJSON,
+  createTour,
+  fetchTourNew,
 } = require("../../controllers/admin/tour");
 
 // middlewares
@@ -39,6 +41,8 @@ router.delete("/rating", deleteRatingItem);
 router.get("/", getTours);
 router.get("/:tourCode", getSingleTour);
 router.post("/", multer.uploadTourImgs, addTourValidator, addTour);
+router.post("/add-tour-new", multer.uploadTourImgs, createTour);
+router.get("/fetch-tour-new/:tourCode", fetchTourNew);
 router.put("/", multer.uploadTourImgs, editTourValidator, updateTour);
 router.delete("/", deleteTour);
 router.put("/hot", updateHotTours);
