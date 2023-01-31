@@ -1,4 +1,10 @@
 const Tour = require("../../models/tour");
+const TourCode = require("../../models/tourcode");
+const {
+  uploadFromMemoryToGC: uploadImg,
+} = require("../../helpers/firebase-admin");
+const StringHandler = require("../../helpers/stringHandler");
+const { v4: uuid } = require("uuid");
 
 module.exports.getSingleTour = (tour, language) => {
   const viTour = {
@@ -112,4 +118,59 @@ module.exports.getTours = async () => {
   } catch (error) {
     return [error, null];
   }
+};
+
+module.exports.createTourCode = async (code) => {
+  // code: string có dạng 'tet', 'gs',... (không có số)
+  // return code có dạng TET-01, GS-01, không bị trùng, số ở sau tăng dần
+
+  const tourCode = await TourCode.findOne({ code: code });
+  if (tourCode) {
+    tourCode.number = tourCode.number + 1;
+    await tourCode.save();
+
+    if (tourCode.number < 10) return `${code}-0${tourCode.number}`;
+    return code + "-" + tourCode.number;
+  } else {
+    await TourCode.create({ code: code, number: 1 });
+    return code + "-01";
+  }
+};
+
+module.exports.uploadTourImg = async (file, fileName) => {
+  const buffer = file.buffer;
+  const originalname = file.originalname;
+  const extension = StringHandler.getFileExtension(originalname);
+  const uploadName =
+    StringHandler.urlEndpoinConverter(fileName) + "-" + uuid() + extension;
+
+  const url = await uploadImg(`tour/${uploadName}`, buffer);
+  return url;
+};
+
+module.exports.prepareItineraryIMGs = async (files) => {
+  // input: files: [ file ]
+  // file: {buffer, originalname,...}
+  // originalname có dạng: imgId-joyadivider-caption.jpguploadImg
+  // output: [ { imgId, url } ]
+
+  const imgItems = files.map((file) => {
+    const [imgId, fileName] = file.originalname.split("-joyadivider-");
+    const nameWithoutExtension = fileName.slice(0, fileName.lastIndexOf(".")); // bỏ đuôi,... .jpg đi
+
+    return {
+      imgId,
+      fileName: nameWithoutExtension,
+      file,
+    };
+  });
+
+  const urls = await Promise.all(
+    imgItems.map((item) => this.uploadTourImg(item.file, item.fileName))
+  );
+
+  return imgItems.map((item, index) => ({
+    imgId: item.imgId,
+    url: urls[index],
+  }));
 };

@@ -1,3 +1,14 @@
+const StringHandler = require("../../helpers/stringHandler");
+const { v4: uuid } = require("uuid");
+const { uploadFromMemoryToGC } = require("../../helpers/firebase-admin");
+
+const detectMimeType = (s) => {
+  if (s.slice(0, 22).includes("jpg")) return ".jpg";
+  if (s.slice(0, 22).includes("jpeg")) return ".jpeg";
+  if (s.slice(0, 22).includes("png")) return ".png";
+  return ".jpg";
+};
+
 module.exports.getSingleArticle = (article, language = "vi") => {
   const origin = {
     _id: article._id,
@@ -182,4 +193,46 @@ module.exports.aggCreator = (queries) => {
   });
 
   return agg;
+};
+
+module.exports.uploadArticleImg = async (file, fileName) => {
+  const buffer = file.buffer;
+  const originalname = file.originalname;
+  const extension = StringHandler.getFileExtension(originalname);
+
+  const uploadName =
+    StringHandler.urlEndpoinConverter(fileName) + "-" + uuid() + extension;
+
+  const url = await uploadFromMemoryToGC(`guides/${uploadName}`, buffer);
+  return url;
+};
+
+module.exports.getBase64ImgsFromQuillDelta = (delta) => {
+  // return [ { src: base64string, caption, alt } ]
+  let base64Imgs = [];
+  delta.ops.forEach((item) => {
+    if (item.insert.image && item.insert.image.src.startsWith("data:image")) {
+      base64Imgs.push(item.insert.image);
+    }
+  });
+
+  return base64Imgs;
+};
+
+module.exports.uploadBase64ImgsToGC = async (base64Imgs) => {
+  // base64Imgs:  [ { src: base64string, caption, alt } ]
+  // return: [ url ]
+  return await Promise.all(
+    base64Imgs.map((item) => {
+      const extension = detectMimeType(item.src);
+      let fileName = item.caption || item.alt || item.articleTitle;
+
+      fileName += "-" + uuid() + extension;
+
+      return uploadFromMemoryToGC(
+        `guides/${StringHandler.urlEndpoinConverter(fileName)}`,
+        item.src
+      );
+    })
+  );
 };

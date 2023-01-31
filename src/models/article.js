@@ -24,10 +24,6 @@ const articleSchema = new Schema(
       type: String,
       default: "",
     },
-    lead: {
-      type: String,
-      required: true,
-    },
     content: {
       type: Object,
       required: true,
@@ -46,10 +42,6 @@ const articleSchema = new Schema(
           required: true,
         },
         title: {
-          type: String,
-          required: true,
-        },
-        lead: {
           type: String,
           required: true,
         },

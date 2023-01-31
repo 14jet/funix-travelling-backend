@@ -63,4 +63,9 @@ module.exports = {
     { name: "plan14" },
     { name: "plan15" },
   ]),
+  newTour: upload.fields([
+    { name: "thumb", maxCount: 1 },
+    { name: "banner", maxCount: 1 },
+    { name: "itineraryImages" },
+  ]),
 };

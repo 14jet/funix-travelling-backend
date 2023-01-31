@@ -1,15 +1,21 @@
-const mongoose = require("mongoose");
 const Article = require("../../models/article");
-const Category = require("../../models/category");
 const createError = require("../../helpers/errorCreator");
-const { uploadFiles, deleteFiles } = require("../../helpers/firebase");
-const { getDeltaImgs } = require("../../helpers/getItineraryImgs");
-const { getFullArticle } = require("../../services/article");
-const articleServices = require("../../services/admin/article");
+const {
+  uploadArticleImg,
+  getBase64ImgsFromQuillDelta,
+  uploadBase64ImgsToGC,
+} = require("../../services/admin/article");
+const { deleteFileFromGC } = require("../../helpers/firebase-admin");
 
 module.exports.getArticles = async (req, res, next) => {
   try {
-    const articles = await Article.find({});
+    const articles = await Article.find(
+      {},
+      {
+        content: 0,
+        translation: 0,
+      }
+    );
 
     console.log(articles);
     return res.status(200).json({
@@ -22,58 +28,31 @@ module.exports.getArticles = async (req, res, next) => {
 
 module.exports.addArticle = async (req, res, next) => {
   try {
-    let { title, author, origin, lead, content, category, hot, layout } =
-      req.body;
-    const thumb = req.files["thumb"][0];
-    const banner = req.files["banner"][0];
+    let articleString = req.body.article;
+    let article = JSON.parse(articleString);
 
-    const thumbUrl = (await uploadFiles([thumb]))[0];
-    const bannerUrl = (await uploadFiles([banner]))[0];
+    const thumb = req.files.thumb[0];
+    const banner = req.files.banner[0];
+
+    const thumbUrl = await uploadArticleImg(thumb, article.title);
+    const bannerUrl = await uploadArticleImg(banner, article.title);
 
     // lấy image base64
-    let contentImgs = [];
-    JSON.parse(content).ops.forEach((item) => {
-      if (item.insert.image) {
-        contentImgs.push(item.insert.image.src);
-        // contentImgs.push(item.insert.image);
-        // console.log(item.insert.image);
-      }
-    });
-
-    // lấy hình mới thêm vào (là hình base64)
-    let base64Imgs = contentImgs.filter((item) => {
-      console.log(item);
-      return item.startsWith("data:image");
-    });
-
-    // upload lên firebase
-    const imageURLs = await uploadFiles(base64Imgs, true);
-
-    // thay tương ứng vào content
+    let base64Imgs = getBase64ImgsFromQuillDelta(article.content);
+    base64Imgs = base64Imgs.map((item) => ({
+      ...item,
+      articleTitle: article.title,
+    }));
+    const imageURLs = await uploadBase64ImgsToGC(base64Imgs);
     base64Imgs.forEach((item, index) => {
-      content = content.replace(item, imageURLs[index]);
+      articleString = articleString.replaceAll(item.src, imageURLs[index]);
     });
 
     const newArticle = await Article.create({
-      title,
-      author,
-      origin,
-      lead,
-      hot: hot === "true" ? true : false,
-      category: JSON.parse(category),
-      layout: JSON.parse(layout),
+      ...JSON.parse(articleString),
       banner: bannerUrl,
       thumb: thumbUrl,
-      content: JSON.parse(content),
     });
-
-    // handle banner
-    if (banner === "true") {
-      const old_banner_tour = await Tour.findOne({ banner: true });
-      if (old_banner_tour) {
-        old_banner_tour.banner = false;
-      }
-    }
 
     return res.status(200).json({
       message: {
@@ -87,149 +66,76 @@ module.exports.addArticle = async (req, res, next) => {
   }
 };
 
-module.exports.getSingleArticle = async (req, res, next) => {
-  try {
-    let { articleId } = req.params;
-    let { cat_lang } = req.query;
-    if (!cat_lang) {
-      cat_lang = "vi";
-    }
-
-    const article = await Article.findOne({ _id: articleId });
-    const available_lang = article.translation.map((item) => item.language);
-
-    const has_lang =
-      cat_lang === "vi" ||
-      article.translation.find((item) => item.language === cat_lang);
-
-    const data = has_lang ? getFullArticle(article, cat_lang) : null;
-    const original = getFullArticle(article, "vi");
-
-    const categories = await Category.find().populate("parent");
-
-    return res.status(200).json({
-      data: data,
-      metadata: {
-        available_lang,
-        categories,
-        original: original,
-      },
-    });
-  } catch (error) {
-    return next(createError(error, 500));
-  }
-};
-
 module.exports.updateArticle = async (req, res, next) => {
   try {
-    let {
-      title,
-      author,
-      origin,
-      lead,
-      content,
-      language,
-      articleId,
-      category,
-      hot,
-      layout,
-    } = req.body;
+    let articleString = req.body.article;
+    let articleObj = JSON.parse(articleString);
 
-    const article = await Article.findOne({ _id: articleId });
-    if (!article) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Article Not Found",
-          vi: "Không tìm thấy bài viết",
-        })
-      );
-    }
+    let article = await Article.findOne({ _id: articleObj._id });
 
-    // upload new base64 imgs in content
-    let base64Imgs = JSON.parse(content)
-      .ops.map((item) => (item.insert?.image ? item.insert.image.src : null))
-      .filter((item) => item && item.startsWith("data:image"));
-
-    const imageURLs = await uploadFiles(base64Imgs, true);
-
+    // handle: upload hình base64 mới trong content
+    let base64Imgs = getBase64ImgsFromQuillDelta(articleObj.content);
+    base64Imgs = base64Imgs.map((item) => ({
+      ...item,
+      articleTitle: article.title,
+    }));
+    const imageURLs = await uploadBase64ImgsToGC(base64Imgs);
     base64Imgs.forEach((item, index) => {
-      content = content.replace(item, imageURLs[index]);
+      articleString = articleString.replaceAll(item.src, imageURLs[index]);
     });
 
     // xóa hình cũ
-    const oldContent =
-      language === "vi" ? article.content : article.translation[0]?.content;
-
-    if (oldContent) {
-      let oldImgs = [];
-      oldContent.ops.forEach((item) => {
-        if (item.insert?.image && !content.includes(item.insert.image.src)) {
-          oldImgs.push(item.insert.image.src);
-        }
-      });
-
-      deleteFiles(oldImgs);
-    }
-
-    if (language === "vi") {
-      article.title = title;
-      article.author = author;
-      article.origin = origin;
-      article.lead = lead;
-      article.layout = JSON.parse(layout);
-      article.content = JSON.parse(content);
-      article.hot = hot === "true" || hot === true ? true : false;
-    }
-
-    if (language !== "vi") {
-      let tid = article.translation.findIndex(
-        (item) => item.language === language
-      );
-      if (tid === -1) {
-        article.translation.push({
-          title,
-          origin,
-          lead,
-          content: JSON.parse(content),
-          language,
-        });
-      } else {
-        article.translation[tid].title = title;
-        article.translation[tid].origin = origin;
-        article.translation[tid].lead = lead;
-        article.translation[tid].content = JSON.parse(content);
+    let oldImgs = [];
+    article.content.ops.forEach((item) => {
+      if (
+        item.insert?.image &&
+        !articleString.includes(item.insert.image.src)
+      ) {
+        oldImgs.push(item.insert.image.src);
       }
-    }
+    });
 
-    const thumb = req.files["thumb"] && req.files["thumb"][0];
-    const banner = req.files["banner"] && req.files["banner"][0];
+    oldImgs.forEach((url) => {
+      deleteFileFromGC(url).catch((err) => {
+        console.error(err);
+      });
+    });
+
+    // thumbnail and banner
+    const thumb = req.files.thumb && req.files.thumb[0];
+    const banner = req.files.banner && req.files.banner[0];
+    let thumbUrl = article.thumb;
+    let bannerUrl = article.banner;
 
     if (thumb) {
-      const thumbUrl = (await uploadFiles([thumb]))[0];
-      deleteFiles([article.thumb]);
-      article.thumb = thumbUrl;
+      thumbUrl = await uploadArticleImg(thumb, article.title);
+      deleteFileFromGC(article.thumb).catch((err) => {
+        console.error(err);
+      });
     }
 
     if (banner) {
-      const bannerUrl = (await uploadFiles([banner]))[0];
-      deleteFiles([article.banner]);
-      article.banner = bannerUrl;
+      bannerUrl = await uploadArticleImg(banner, article.title);
+      deleteFileFromGC(article.banner).catch((err) => {
+        console.error(err);
+      });
     }
 
-    console.log(article.hot);
+    // save
+    const { title, content, author, origin, category, translation } =
+      JSON.parse(articleString);
 
-    article.hot = hot === "true" || hot === true ? true : false;
-    article.category = JSON.parse(category);
-
-    // handle banner
-    if (banner === "true") {
-      const old_banner_tour = await Tour.findOne({ banner: true });
-      if (old_banner_tour) {
-        old_banner_tour.banner = false;
-      }
-    }
+    article.title = title;
+    article.content = content;
+    article.author = author;
+    article.origin = origin;
+    article.category = category;
+    article.translation = translation;
+    article.thumb = thumbUrl;
+    article.banner = bannerUrl;
 
     await article.save();
+
     return res.status(200).json({
       code: 200,
       message: {
@@ -242,18 +148,23 @@ module.exports.updateArticle = async (req, res, next) => {
   }
 };
 
+module.exports.getSingleArticle = async (req, res, next) => {
+  try {
+    let { articleId } = req.params;
+
+    const article = await Article.findOne({ _id: articleId });
+
+    return res.status(200).json({
+      data: article,
+    });
+  } catch (error) {
+    return next(createError(error, 500));
+  }
+};
+
 module.exports.deleteArticle = async (req, res, next) => {
   try {
     const { articleId } = req.body;
-
-    if (!mongoose.Types.ObjectId.isValid(articleId)) {
-      return next(
-        createError(new Error(""), 400, {
-          en: "Can not cast articleId to ObjectId",
-          vi: "articleId không hợp lệ",
-        })
-      );
-    }
 
     const article = await Article.findOne({ _id: articleId });
     if (!article) {
@@ -265,9 +176,23 @@ module.exports.deleteArticle = async (req, res, next) => {
       );
     }
 
-    let imgs = getDeltaImgs(article.content).concat([article.thumb]);
+    deleteFileFromGC(article.thumb);
+    deleteFileFromGC(article.banner);
+    let imgs = article.content.ops
+      .filter((item) => item.insert?.image)
+      .map((item) => item.insert.image.src);
 
-    deleteFiles(imgs);
+    article.translation.forEach((trans) => {
+      trans.content.ops.forEach((item) => {
+        if (item.insert.image) {
+          imgs.push(item.insert.image.src);
+        }
+      });
+    });
+
+    imgs.forEach((url) => {
+      deleteFileFromGC(url).catch((err) => console.error(err));
+    });
 
     await article.remove();
     return res.status(200).json({

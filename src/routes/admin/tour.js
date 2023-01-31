@@ -3,20 +3,13 @@ const router = express.Router();
 
 // controllers
 const {
-  addTour,
-  getSingleTour,
   updateTour,
-  updateItinerary,
   deleteTour,
-  rate,
-  editRatingItem,
-  deleteRatingItem,
   getTours,
-  updateTourImages,
   updateHotTours,
   importJSON,
   createTour,
-  fetchTourNew,
+  fetchSingleTour,
 } = require("../../controllers/admin/tour");
 
 // middlewares
@@ -32,27 +25,12 @@ const importJSONValidator = require("../../validators/tour/importJSON");
 const validationResultHandler = require("../../validators/validationResultHandler");
 
 // --------- routes -----------
-// rating
-router.post("/rating", rate);
-router.put("/rating", editRatingItem);
-router.delete("/rating", deleteRatingItem);
-
-// tour
+router.post("/", multer.newTour, createTour);
+router.put("/", multer.newTour, updateTour);
 router.get("/", getTours);
-router.get("/:tourCode", getSingleTour);
-router.post("/", multer.uploadTourImgs, addTourValidator, addTour);
-router.post("/add-tour-new", multer.uploadTourImgs, createTour);
-router.get("/fetch-tour-new/:tourCode", fetchTourNew);
-router.put("/", multer.uploadTourImgs, editTourValidator, updateTour);
+router.get("/:tourCode", fetchSingleTour);
 router.delete("/", deleteTour);
 router.put("/hot", updateHotTours);
 router.post("/json", importJSONValidator, importJSON);
-
-// itinerary
-router.put("/itinerary", multer.uploadTourImgs, updateItinerary);
-
-// images
-router.put("/images", multer.uploadTourImgs, updateTourImages);
-// router.put("/layout", updateTourLayout);
 
 module.exports = router;

@@ -1,3 +1,5 @@
+const { v4: uuid } = require("uuid");
+
 class StringHandler {
   static accentsRemover = (s) => {
     var r = s.toLowerCase();
@@ -42,6 +44,16 @@ class StringHandler {
     t = this.duplecatedDashesRemover(t);
     return t;
   };
+
+  static createUniqueName = (s) => {
+    const extension = s.slice(s.lastIndexOf("."));
+    const fileName = s.slice(0, s.lastIndexOf("."));
+    return this.urlEndpoinConverter(fileName) + "-" + uuid() + extension;
+  };
+
+  static getFileExtension(s) {
+    return s.slice(s.lastIndexOf("."));
+  }
 }
 
 module.exports = StringHandler;

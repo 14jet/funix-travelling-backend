@@ -50,7 +50,17 @@ const tourSchema = new Schema(
         id: String,
         day: String, // trans
         destination: String, // trans
-        images: [String],
+        images: [
+          {
+            image: String, // url
+            caption: String,
+            id: String,
+            isSlider: {
+              type: Boolean,
+              default: false,
+            },
+          },
+        ],
         content: Object, // quill - trans
       },
     ],
@@ -95,6 +105,7 @@ const tourSchema = new Schema(
             day: String,
             destination: String,
             content: Object,
+            images: [{ id: String, caption: String }],
           },
         ],
       },
