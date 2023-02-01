@@ -13,7 +13,7 @@ module.exports.getSingleTour = (tour, language) => {
     code: tour.code,
     hot: tour.hot,
     name: tour.name,
-    url_endpoint: tour.url_endpoint,
+    slug: tour.slug,
 
     journey: tour.journey,
     description: tour.description,
@@ -75,7 +75,7 @@ module.exports.getTours = async () => {
         _id: tour._id,
         code: tour.code,
         name: tour.name,
-        url_endpoint: tour.url_endpoint,
+        slug: tour.slug,
         price: tour.price,
         depature_dates: tour.depature_dates,
         destinations: tour.destinations,
@@ -141,8 +141,7 @@ module.exports.uploadTourImg = async (file, fileName) => {
   const buffer = file.buffer;
   const originalname = file.originalname;
   const extension = StringHandler.getFileExtension(originalname);
-  const uploadName =
-    StringHandler.urlEndpoinConverter(fileName) + "-" + uuid() + extension;
+  const uploadName = StringHandler.slugify(fileName) + "-" + uuid() + extension;
 
   const url = await uploadImg(`tour/${uploadName}`, buffer);
   return url;

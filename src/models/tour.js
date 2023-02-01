@@ -13,7 +13,8 @@ const tourSchema = new Schema(
     journey: String, // trans => cần, vì nhiều khi đến mấy địa danh đặc biệt: Núi Bà Đen .... ở trong Việt Nam
     description: String, // trans
     highlights: Object, // quill - trans
-    url_endpoint: String, // tour-du-lich-ha-giang-2023
+    slug: String, // tour-du-lich-ha-giang-2023
+    slug: String,
     destinations: [{ type: mongoose.Types.ObjectId, ref: "Place" }],
 
     hot: {

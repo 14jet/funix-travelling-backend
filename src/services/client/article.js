@@ -1,4 +1,5 @@
 const Article = require("../../models/article");
+const StringHandler = require("../../helpers/stringHandler");
 
 module.exports.getSingleArticle = async (articleId, language) => {
   let article;

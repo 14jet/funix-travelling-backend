@@ -200,8 +200,7 @@ module.exports.uploadArticleImg = async (file, fileName) => {
   const originalname = file.originalname;
   const extension = StringHandler.getFileExtension(originalname);
 
-  const uploadName =
-    StringHandler.urlEndpoinConverter(fileName) + "-" + uuid() + extension;
+  const uploadName = StringHandler.slugify(fileName) + "-" + uuid() + extension;
 
   const url = await uploadFromMemoryToGC(`guides/${uploadName}`, buffer);
   return url;
@@ -230,7 +229,7 @@ module.exports.uploadBase64ImgsToGC = async (base64Imgs) => {
       fileName += "-" + uuid() + extension;
 
       return uploadFromMemoryToGC(
-        `guides/${StringHandler.urlEndpoinConverter(fileName)}`,
+        `guides/${StringHandler.slugify(fileName)}`,
         item.src
       );
     })

@@ -12,6 +12,7 @@ const articleSchema = new Schema(
       type: String,
       required: true,
     },
+    slug: String,
     hot: {
       type: Boolean,
       default: false,

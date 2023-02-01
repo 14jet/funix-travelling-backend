@@ -14,9 +14,9 @@ const {
 
 module.exports.createTour = async (req, res, next) => {
   try {
-    const url_endpoint = StringHandler.urlEndpoinConverter(req.body.name);
-
     let code = await tourServices.createTourCode(req.body.code.toUpperCase());
+    const slug =
+      StringHandler.slugify(req.body.name) + "-" + code.toLowerCase();
 
     const thumb_url = await uploadTourImg(req.files.thumb[0], req.body.name);
     const banner_url = await uploadTourImg(req.files.banner[0], req.body.name);
@@ -37,11 +37,10 @@ module.exports.createTour = async (req, res, next) => {
       return { ...iti, images: images };
     });
 
-    console.log(req.body.price);
     // tạo
     const newTour = await Tour.create({
       code: code,
-      url_endpoint,
+      slug,
       thumb: thumb_url,
       banner: banner_url,
 
@@ -85,8 +84,6 @@ module.exports.updateTour = async (req, res, next) => {
   try {
     const tour = await Tour.findOne({ _id: req.body._id });
 
-    const url_endpoint = StringHandler.urlEndpoinConverter(req.body.name);
-
     // Handle code:
     let newCode = req.body.code.toUpperCase();
     // nếu có đổi code:
@@ -94,6 +91,9 @@ module.exports.updateTour = async (req, res, next) => {
       newCode = await createTourCode(newCode);
       tour.code = newCode;
     }
+
+    const slug =
+      StringHandler.slugify(req.body.name) + "-" + newCode.toLowerCase();
 
     // Handle hình thumbnail, banner
     const thumb = req.files?.thumb?.[0];
@@ -155,7 +155,7 @@ module.exports.updateTour = async (req, res, next) => {
       mongoose.Types.ObjectId(item)
     );
 
-    tour.url_endpoint = url_endpoint;
+    tour.slug = slug;
     tour.name = req.body.name;
     tour.journey = req.body.journey;
     tour.description = req.body.description;
@@ -373,7 +373,7 @@ module.exports.importJSON = async (req, res, next) => {
         await Tour.create({
           code: code,
           name: tour.name,
-          url_endpoint: StringHandler.urlEndpoinConverter(tour.name),
+          slug: StringHandler.slugify(tour.name),
           journey: tour.journey,
           description: tour.description,
 

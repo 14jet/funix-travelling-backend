@@ -5,8 +5,8 @@ const createTourvalidator = async (req, res, next) => {
   try {
     // name
     const name = req.body.name;
-    const url_endpoint = StringHandler.urlEndpoinConverter(name);
-    const tour = await Tour.findOne({ url_endpoint: url_endpoint });
+    const slug = StringHandler.slugify(name);
+    const tour = await Tour.findOne({ slug: slug });
     if (tour)
       return next(
         createError(new Error(""), 400, {

@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Tour = require("../../models/tour");
 const createError = require("../../helpers/errorCreator");
 const client_tourServices = require("../../services/client/tour");
-const googleAuthorize = require("../../helpers/googleSheet");
 const authorize = require("../../helpers/googleSheet");
 const GoogleSheet = require("../../models/googlesheet");
 const appendRow = require("../../helpers/googleSheet/appendRow");

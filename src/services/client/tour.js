@@ -10,7 +10,7 @@ module.exports.getSingleTour = (tour, language = "vi") => {
   const origin = {
     _id: tour._id,
     language: tour.language,
-    url_endpoint: tour.url_endpoint,
+    slug: tour.slug,
 
     code: tour.code,
     name: tour.name,
@@ -119,7 +119,7 @@ module.exports.getTours = async (language) => {
         {
           _id: 1,
           language: 1,
-          url_endpoint: 1,
+          slug: 1,
           code: 1,
           hot: 1,
           price: 1,
@@ -142,7 +142,7 @@ module.exports.getTours = async (language) => {
       tours = tours.map((tour) => ({
         _id: tour._id,
         language: tour.translation[0].language,
-        url_endpoint: tour.url_endpoint,
+        slug: tour.slug,
         code: tour.code,
         hot: tour.hot,
         name: tour.translation[0].name,

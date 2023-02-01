@@ -6,6 +6,8 @@ const {
   uploadBase64ImgsToGC,
 } = require("../../services/admin/article");
 const { deleteFileFromGC } = require("../../helpers/firebase-admin");
+const StringHandler = require("../../helpers/stringHandler");
+const ArticleCounter = require("../../models/articleCounter");
 
 module.exports.getArticles = async (req, res, next) => {
   try {
@@ -17,7 +19,6 @@ module.exports.getArticles = async (req, res, next) => {
       }
     );
 
-    console.log(articles);
     return res.status(200).json({
       data: articles,
     });
@@ -48,10 +49,21 @@ module.exports.addArticle = async (req, res, next) => {
       articleString = articleString.replaceAll(item.src, imageURLs[index]);
     });
 
+    // slug
+    let counter = await ArticleCounter.findOne({});
+    if (!counter) {
+      counter = ArticleCounter.create({ counter: 0 });
+    }
+
+    const slug = StringHandler.slugify(article.title) + "-" + counter.counter;
+    counter.counter += 1;
+    await counter.save();
+
     const newArticle = await Article.create({
       ...JSON.parse(articleString),
       banner: bannerUrl,
       thumb: thumbUrl,
+      slug: slug,
     });
 
     return res.status(200).json({
@@ -121,11 +133,22 @@ module.exports.updateArticle = async (req, res, next) => {
       });
     }
 
+    // slug
+    let counter = await ArticleCounter.findOne({});
+    if (!counter) {
+      counter = ArticleCounter.create({ counter: 0 });
+    }
+
+    const slug = StringHandler.slugify(title) + "-" + counter.counter;
+    counter.counter += 1;
+    await counter.save();
+
     // save
     const { title, content, author, origin, category, translation } =
       JSON.parse(articleString);
 
     article.title = title;
+    article.slug = slug;
     article.content = content;
     article.author = author;
     article.origin = origin;

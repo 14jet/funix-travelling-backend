@@ -38,7 +38,7 @@ class StringHandler {
     return t;
   };
 
-  static urlEndpoinConverter = (s) => {
+  static slugify = (s) => {
     let t = this.accentsRemover(s);
     t = this.spacesReplacer(t, "-");
     t = this.duplecatedDashesRemover(t);
@@ -48,7 +48,7 @@ class StringHandler {
   static createUniqueName = (s) => {
     const extension = s.slice(s.lastIndexOf("."));
     const fileName = s.slice(0, s.lastIndexOf("."));
-    return this.urlEndpoinConverter(fileName) + "-" + uuid() + extension;
+    return this.slugify(fileName) + "-" + uuid() + extension;
   };
 
   static getFileExtension(s) {
