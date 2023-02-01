@@ -133,19 +133,19 @@ module.exports.updateArticle = async (req, res, next) => {
       });
     }
 
+    // save
+    const { title, content, author, origin, category, translation } =
+      JSON.parse(articleString);
+
     // slug
     let counter = await ArticleCounter.findOne({});
     if (!counter) {
       counter = await ArticleCounter.create({ counter: 0 });
     }
 
-    const slug = StringHandler.slugify(title) + "-" + counter.counter;
+    const slug = StringHandler.slugify(article.title) + "-" + counter.counter;
     counter.counter += 1;
     await counter.save();
-
-    // save
-    const { title, content, author, origin, category, translation } =
-      JSON.parse(articleString);
 
     article.title = title;
     article.slug = slug;
