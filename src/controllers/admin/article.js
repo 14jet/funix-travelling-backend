@@ -136,7 +136,7 @@ module.exports.updateArticle = async (req, res, next) => {
     // slug
     let counter = await ArticleCounter.findOne({});
     if (!counter) {
-      counter = ArticleCounter.create({ counter: 0 });
+      counter = await ArticleCounter.create({ counter: 0 });
     }
 
     const slug = StringHandler.slugify(title) + "-" + counter.counter;
