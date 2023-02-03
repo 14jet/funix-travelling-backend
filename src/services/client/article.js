@@ -99,6 +99,14 @@ module.exports.getArticles = async (language) => {
       );
     }
 
+    if (language !== "vi") {
+      articles = articles.map((article) => ({
+        ...article._doc,
+        title: article.translation[0].title,
+        content: article.translation[0].content,
+      }));
+    }
+
     return [null, articles];
   } catch (error) {
     return [error, null];

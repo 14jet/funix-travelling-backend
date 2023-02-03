@@ -145,7 +145,6 @@ module.exports.updateArticle = async (req, res, next) => {
       }
 
       const slug = StringHandler.slugify(title + "-" + counter.counter);
-      console.log(slug);
       counter.counter += 1;
       await counter.save();
       article.slug = slug;

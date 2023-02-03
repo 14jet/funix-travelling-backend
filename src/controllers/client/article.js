@@ -7,6 +7,7 @@ module.exports.getArticles = async (req, res, next) => {
     let language = req.query.lang || "vi";
 
     const [err, articles] = await articleServices.getArticles(language);
+    console.log(articles);
 
     if (err) {
       throw new Error(err.message);
