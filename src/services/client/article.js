@@ -90,7 +90,6 @@ module.exports.getArticles = async (language) => {
         {
           content: 0,
           lead: 0,
-          title: 0,
           translation: {
             $elemMatch: {
               language: language,

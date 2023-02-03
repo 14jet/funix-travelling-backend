@@ -39,9 +39,12 @@ class StringHandler {
   };
 
   static slugify = (s) => {
-    let t = this.accentsRemover(s);
+    let t = this.accentsRemover(s).trim();
+    // t = t.replace(/[^\w \,]/, "");
+    t = t.replace(/[^a-zA-Z0-9 ]/g, "");
     t = this.spacesReplacer(t, "-");
     t = this.duplecatedDashesRemover(t);
+
     return t;
   };
 
