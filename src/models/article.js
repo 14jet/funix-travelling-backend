@@ -56,12 +56,4 @@ const articleSchema = new Schema(
   { timestamps: true }
 );
 
-articleSchema.index(
-  {
-    title: "autocomplete",
-    "translation.title": "autocomplete",
-  },
-  { language_override: "dummy" }
-);
-
 module.exports = mongoose.model("Article", articleSchema);

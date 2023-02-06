@@ -10,8 +10,10 @@ const errorHandler = (error, req, res, next) => {
 
   logger(logMessage);
 
+  const lang = req.query.lang || "vi";
+
   return res.status(error.httpCode).json({
-    message: error.clientMessage,
+    message: error.clientMessage[lang],
     code: error.httpCode,
   });
 };

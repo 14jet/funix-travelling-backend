@@ -11,6 +11,7 @@ const tourServices = require("../../services/client/tour");
 module.exports.getTours = async (req, res, next) => {
   try {
     const lang = req.query.lang || "vi";
+
     const [err, tours] = await tourServices.getTours(lang);
 
     if (err) {
