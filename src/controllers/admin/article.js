@@ -19,7 +19,7 @@ module.exports.getArticles = async (req, res, next) => {
         content: 0,
         translation: 0,
       }
-    );
+    ).populate("category");
 
     return res.status(200).json({
       data: articles,

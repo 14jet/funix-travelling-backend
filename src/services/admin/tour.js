@@ -159,6 +159,8 @@ module.exports.getTours = async () => {
           name: { $first: "$name" },
           code: { $first: "$code" },
           slug: { $first: "$slug" },
+          hot: { $first: "$hot" },
+          layout: { $first: "$layout" },
           itinerary: { $first: "$itinerary" },
           language: { $first: "$language" },
           thumb: { $first: "$thumb" },

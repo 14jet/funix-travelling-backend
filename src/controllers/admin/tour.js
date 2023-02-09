@@ -204,7 +204,6 @@ module.exports.updateTour = async (req, res, next) => {
 module.exports.updateHotTours = async (req, res, next) => {
   try {
     const tourCodes = req.body.tourCodes;
-    console.log(tourCodes);
 
     await Tour.updateMany({ hot: true }, { $set: { hot: false } });
 
