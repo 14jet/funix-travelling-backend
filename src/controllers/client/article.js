@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const createError = require("../../helpers/errorCreator");
+const GuidesCategory = require("../../models/guidesCategory");
 const articleServices = require("../../services/client/article");
 
 module.exports.getArticles = async (req, res, next) => {
@@ -13,9 +14,25 @@ module.exports.getArticles = async (req, res, next) => {
     }
 
     // metadata
+    let category = await GuidesCategory.find();
+    if (language === "vi") {
+      category = category.map((item) => ({
+        name: item.name,
+        slug: item.slug,
+      }));
+    } else {
+      category = category.map((item) => {
+        const transItem = item.translation.find(
+          (trans) => trans.language === language
+        );
+        return { name: transItem.name, slug: item.slug };
+      });
+    }
+
     const metadata = {
       total_count: articles.length,
       lang: language,
+      category,
     };
 
     return res.status(200).json({

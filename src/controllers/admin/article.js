@@ -8,6 +8,8 @@ const {
 const { deleteFileFromGC } = require("../../helpers/firebase-admin");
 const StringHandler = require("../../helpers/stringHandler");
 const ArticleCounter = require("../../models/articleCounter");
+const GuidesCategory = require("../../models/guidesCategory");
+const mongoose = require("mongoose");
 
 module.exports.getArticles = async (req, res, next) => {
   try {
@@ -228,5 +230,146 @@ module.exports.deleteArticle = async (req, res, next) => {
     });
   } catch (error) {
     next(createError(error, 500));
+  }
+};
+
+module.exports.addCategoryItem = async (req, res, next) => {
+  try {
+    const { name, translation } = req.body;
+    const slug = StringHandler.slugify(name);
+    const existCategory = await GuidesCategory.findOne({
+      $or: [
+        {
+          slug: slug,
+        },
+        {
+          name: name,
+        },
+      ],
+    });
+    if (existCategory) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Conflict category name. Please choose another one.",
+          vi: "Tên danh mục đã tồn tại. Vui lòng chọn tên khác.",
+        })
+      );
+    }
+
+    const newCategory = await GuidesCategory.create({
+      name: name.trim(),
+      slug,
+      translation,
+    });
+
+    return res.status(200).json({
+      message: {
+        en: "Success",
+        vi: "Thành công",
+      },
+      data: newCategory,
+    });
+  } catch (error) {
+    return next(createError(error, 500));
+  }
+};
+
+module.exports.updateCategoryItem = async (req, res, next) => {
+  try {
+    const { name, translation, _id } = req.body;
+    const categoryItem = await GuidesCategory.findOne({ _id });
+    if (!categoryItem) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Guides Category item not found",
+          vi: "Không tìm thấy danh mục",
+        })
+      );
+    }
+
+    const slug = StringHandler.slugify(name.trim());
+    const existCategory = await GuidesCategory.findOne({
+      slug: slug,
+      _id: {
+        $ne: mongoose.Types.ObjectId(_id),
+      },
+    });
+    if (existCategory) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Conflict category name. Please choose another one.",
+          vi: "Tên danh mục đã tồn tại. Vui lòng chọn tên khác.",
+        })
+      );
+    }
+
+    categoryItem.name = name;
+    categoryItem.slug = slug;
+    categoryItem.translation = translation;
+    await categoryItem.save();
+
+    return res.status(200).json({
+      message: {
+        en: "Success",
+        vi: "Thành công",
+      },
+      data: categoryItem,
+    });
+  } catch (error) {
+    return next(createError(error, 500));
+  }
+};
+
+module.exports.getCategory = async (req, res, next) => {
+  try {
+    const category = await GuidesCategory.find();
+
+    return res.status(200).json({
+      data: category,
+    });
+  } catch (error) {
+    return next(createError(error, 500));
+  }
+};
+
+module.exports.deleteCategoryItem = async (req, res, next) => {
+  try {
+    const { categoryId } = req.body;
+
+    const articleUsing = await Article.findOne({
+      category: mongoose.Types.ObjectId(categoryId),
+    });
+    if (articleUsing) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "This category is in use.",
+          vi: "Danh mục này đang được sử dụng.",
+        })
+      );
+    }
+
+    const categoryItem = await GuidesCategory.findOne({ _id: categoryId });
+    if (!categoryItem) {
+      return next(
+        createError(new Error(""), 400, {
+          en: "Category Item Not Found.",
+          vi: "Không tìm thấy danh mục.",
+        })
+      );
+    }
+
+    await categoryItem.remove();
+
+    return res.status(200).json({
+      message: {
+        en: "Success",
+        vi: "Thành công",
+      },
+      data: {
+        _id: categoryId,
+      },
+    });
+  } catch (error) {
+    return next(createError(error, 500));
   }
 };

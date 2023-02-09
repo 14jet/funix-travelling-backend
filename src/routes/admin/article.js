@@ -8,6 +8,10 @@ const {
   deleteArticle,
   getSingleArticle,
   getArticles,
+  getCategory,
+  addCategoryItem,
+  updateCategoryItem,
+  deleteCategoryItem,
 } = require("../../controllers/admin/article");
 
 // middlewares
@@ -18,6 +22,10 @@ router.post("/", multer.uploadTourImgs, addArticle);
 router.get("/", getArticles);
 router.put("/", multer.uploadTourImgs, updateArticle);
 router.delete("/", deleteArticle);
-router.get("/:articleId", getSingleArticle);
+router.get("/category", getCategory);
+router.post("/category", addCategoryItem);
+router.put("/category", updateCategoryItem);
+router.delete("/category", deleteCategoryItem);
+router.get("/:articleId", getSingleArticle); // phải để sau route trên chứ k nó ăn vào articleId = category
 
 module.exports = router;

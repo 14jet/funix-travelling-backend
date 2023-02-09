@@ -15,7 +15,7 @@ const tourSchema = new Schema(
     highlights: Object, // quill - trans
     slug: String, // tour-du-lich-ha-giang-2023
     slug: String,
-    destinations: [{ type: mongoose.Types.ObjectId, ref: "Place" }],
+    destinations: [{ type: mongoose.Types.ObjectId, ref: "Destination" }],
 
     hot: {
       type: Boolean,

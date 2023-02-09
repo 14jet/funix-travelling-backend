@@ -58,19 +58,118 @@ module.exports.getSingleTour = (tour, language) => {
 
 module.exports.getTours = async () => {
   try {
-    const tours = await Tour.find({}).populate("destinations");
+    // const tours = await Tour.find({}).populate("destinations");
+    const tours = await Tour.aggregate([
+      {
+        $lookup: {
+          from: "destinations",
+          localField: "destinations",
+          foreignField: "_id",
+          as: "destinations",
+        },
+      },
+      {
+        $unwind: {
+          path: "$destinations",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $lookup: {
+          from: "destinations",
+          localField: "destinations.continent",
+          foreignField: "_id",
+          as: "destinations.continent",
+        },
+      },
+      {
+        $lookup: {
+          from: "destinations",
+          localField: "destinations.country",
+          foreignField: "_id",
+          as: "destinations.country",
+        },
+      },
+      {
+        $lookup: {
+          from: "destinations",
+          localField: "destinations.region",
+          foreignField: "_id",
+          as: "destinations.region",
+        },
+      },
+      {
+        $lookup: {
+          from: "destinations",
+          localField: "destinations.province",
+          foreignField: "_id",
+          as: "destinations.province",
+        },
+      },
+      {
+        $lookup: {
+          from: "destinations",
+          localField: "destinations.city",
+          foreignField: "_id",
+          as: "destinations.city",
+        },
+      },
+      {
+        $addFields: {
+          "destinations.continent": {
+            $cond: [
+              { $ne: ["$continent", null] },
+              { $arrayElemAt: ["$destinations.continent", 0] },
+              "$destinations.continent",
+            ],
+          },
+          "destinations.country": {
+            $cond: [
+              { $ne: ["$country", null] },
+              { $arrayElemAt: ["$destinations.country", 0] },
+              "$destinations.country",
+            ],
+          },
+          "destinations.region": {
+            $cond: [
+              { $ne: ["$region", null] },
+              { $arrayElemAt: ["$destinations.region", 0] },
+              "$destinations.region",
+            ],
+          },
+          "destinations.province": {
+            $cond: [
+              { $ne: ["$province", null] },
+              { $arrayElemAt: ["$destinations.province", 0] },
+              "$destinations.province",
+            ],
+          },
+          "destinations.city": {
+            $cond: [
+              { $ne: ["$city", null] },
+              { $arrayElemAt: ["$destinations.city", 0] },
+              "$destinations.city",
+            ],
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$_id",
+          name: { $first: "$name" },
+          code: { $first: "$code" },
+          slug: { $first: "$slug" },
+          itinerary: { $first: "$itinerary" },
+          language: { $first: "$language" },
+          thumb: { $first: "$thumb" },
+          banner: { $first: "$banner" },
+          translation: { $first: "$translation" },
+          destinations: { $push: "$destinations" },
+        },
+      },
+    ]);
+
     const results = tours.map((tour) => {
-      let itinerary_language_versions = [];
-      if (tour.itinerary.length > 0) {
-        itinerary_language_versions.push("vi");
-      }
-
-      tour.translation.forEach((item) => {
-        if (item.itinerary && item.itinerary.length > 0) {
-          itinerary_language_versions.push(item.language);
-        }
-      });
-
       return {
         _id: tour._id,
         code: tour.code,
@@ -88,28 +187,15 @@ module.exports.getTours = async () => {
         thumb: tour.thumb,
         banner: tour.banner,
 
-        countries: Array.from(
-          new Set(tour.destinations.map((item) => item.country))
-        ),
-        provinces: Array.from(
-          new Set(tour.destinations.map((item) => item.province))
-        ),
-
-        language_versions: tour.translation
-          .map((item) => item.language)
-          .concat(["vi"]),
-
-        itinerary_language_versions,
-
         missingItineraryImages: tour.itinerary.every(
           (item) => !item.images || item.images.length === 0
         ),
 
         is_vn_tour: tour.destinations.every(
-          (dest) => dest.country === "vietnam"
+          (dest) => dest.country?.slug === "viet-nam"
         ),
         is_eu_tour: tour.destinations.some(
-          (dest) => dest.continent === "europe"
+          (dest) => dest.continent?.slug === "chau-au"
         ),
       };
     });

@@ -73,7 +73,7 @@ module.exports.getArticles = async (language) => {
           translation: 0,
           content: 0,
         }
-      );
+      ).populate("category");
     }
 
     if (language !== "vi") {
@@ -88,15 +88,21 @@ module.exports.getArticles = async (language) => {
           },
         },
         {
-          content: 0,
-          lead: 0,
+          // content: 0,
+          thumb: 1,
+          layout: 1,
+          _id: 1,
+          banner: 1,
+          thumb: 1,
+          title: 1,
+          slug: 1,
           translation: {
             $elemMatch: {
               language: language,
             },
           },
         }
-      );
+      ).populate("category");
     }
 
     if (language !== "vi") {

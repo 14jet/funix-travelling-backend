@@ -1,5 +1,101 @@
 const Tour = require("../../models/tour");
 
+module.exports.destinationsLookup = [
+  {
+    $lookup: {
+      from: "destinations",
+      localField: "destinations",
+      foreignField: "_id",
+      as: "destinations",
+    },
+  },
+  {
+    $unwind: {
+      path: "$destinations",
+      preserveNullAndEmptyArrays: true,
+    },
+  },
+  {
+    $lookup: {
+      from: "destinations",
+      localField: "destinations.continent",
+      foreignField: "_id",
+      as: "destinations.continent",
+    },
+  },
+  {
+    $lookup: {
+      from: "destinations",
+      localField: "destinations.country",
+      foreignField: "_id",
+      as: "destinations.country",
+    },
+  },
+  {
+    $lookup: {
+      from: "destinations",
+      localField: "destinations.region",
+      foreignField: "_id",
+      as: "destinations.region",
+    },
+  },
+  {
+    $lookup: {
+      from: "destinations",
+      localField: "destinations.province",
+      foreignField: "_id",
+      as: "destinations.province",
+    },
+  },
+  {
+    $lookup: {
+      from: "destinations",
+      localField: "destinations.city",
+      foreignField: "_id",
+      as: "destinations.city",
+    },
+  },
+  {
+    $addFields: {
+      "destinations.continent": {
+        $cond: [
+          { $ne: ["$continent", null] },
+          { $arrayElemAt: ["$destinations.continent", 0] },
+          "$destinations.continent",
+        ],
+      },
+      "destinations.country": {
+        $cond: [
+          { $ne: ["$country", null] },
+          { $arrayElemAt: ["$destinations.country", 0] },
+          "$destinations.country",
+        ],
+      },
+      "destinations.region": {
+        $cond: [
+          { $ne: ["$region", null] },
+          { $arrayElemAt: ["$destinations.region", 0] },
+          "$destinations.region",
+        ],
+      },
+      "destinations.province": {
+        $cond: [
+          { $ne: ["$province", null] },
+          { $arrayElemAt: ["$destinations.province", 0] },
+          "$destinations.province",
+        ],
+      },
+      "destinations.city": {
+        $cond: [
+          { $ne: ["$city", null] },
+          { $arrayElemAt: ["$destinations.city", 0] },
+          "$destinations.city",
+        ],
+      },
+    },
+  },
+];
+
 module.exports.getSingleTour = (tour, language = "vi") => {
   const slider = tour.itinerary
     .map((item) => item.images)
@@ -39,29 +135,37 @@ module.exports.getSingleTour = (tour, language = "vi") => {
     updated_at: tour.updatedAt,
   };
 
-  const countries = tour.destinations.map((item) => item.country);
-  const is_vn_tour = tour.destinations.every(
-    (item) => item.country === "vietnam"
-  );
-  const is_eu_tour = tour.destinations.some(
-    (item) => item.continent === "europe"
-  );
+  const countries = tour.destinations.map((item) => {
+    if (item.type === "country") {
+      return item.name;
+    }
+
+    return item.country.name;
+  });
 
   origin.countries = countries;
-  origin.is_vn_tour = is_vn_tour;
-  origin.is_eu_tour = is_eu_tour;
+  origin.destinations_text = tour.destinations
+    .map((dest) => {
+      if (language === "vi") return dest.name;
+      const tid = dest.translation.findIndex(
+        (item) => item.language === language
+      );
+
+      if (tid === -1) return dest.name;
+      return dest.translation[tid].name;
+    })
+    .join(" - ");
 
   if (language === "vi") return origin;
 
   const tid = tour.translation.findIndex((item) => item.language === language);
-  if (tid === -1) {
-    return { ...origin, is_requested_lang: false };
-  }
-
   const t = tour.translation[tid];
   const trans_itinerary = t.itinerary.map((item, index) => ({
-    ...item._doc,
-    images: tour.itinerary[index].images,
+    ...item,
+    images: tour.itinerary[index].images.map((imgItem, imgIndex) => ({
+      ...imgItem,
+      caption: item.images[imgIndex].caption,
+    })),
   }));
 
   return {
@@ -85,59 +189,120 @@ module.exports.getSingleTour = (tour, language = "vi") => {
 module.exports.getTours = async (language) => {
   let tours = [];
 
+  const viQuery = [
+    {
+      $match: {
+        thumb: { $ne: "" },
+        banner: { $ne: "" },
+        "itinerary.0": { $exists: true },
+      },
+    },
+    {
+      $project: {
+        itinerary: 0,
+        translation: 0,
+        terms: 0,
+        highlights: 0,
+        price_policies: 0,
+        rating: 0,
+        __v: 0,
+        url_endpoint: 0,
+      },
+    },
+    ...this.destinationsLookup,
+    {
+      $group: {
+        _id: "$_id",
+        name: { $first: "$name" },
+        code: { $first: "$code" },
+        hot: { $first: "$hot" },
+        duration: { $first: "$duration" },
+        price: { $first: "$price" },
+        layout: { $first: "$layout" },
+        slug: { $first: "$slug" },
+        itinerary: { $first: "$itinerary" },
+        language: { $first: "$language" },
+        thumb: { $first: "$thumb" },
+        banner: { $first: "$banner" },
+        translation: { $first: "$translation" },
+        destinations: { $push: "$destinations" },
+      },
+    },
+  ];
+
+  const foreignQuery = [
+    {
+      $match: {
+        thumb: { $ne: "" },
+        banner: { $ne: "" },
+        translation: {
+          $elemMatch: {
+            language: language,
+          },
+        },
+      },
+    },
+    {
+      $project: {
+        name: 0,
+        description: 0,
+        terms: 0,
+        price_policies: 0,
+        itinerary: 0,
+        __v: 0,
+        updatedAt: 0,
+        createdAt: 0,
+      },
+    },
+    ...this.destinationsLookup,
+    {
+      $group: {
+        _id: "$_id",
+        name: { $first: "$name" },
+        hot: { $first: "$hot" },
+        code: { $first: "$code" },
+        duration: { $first: "$duration" },
+        price: { $first: "$price" },
+        slug: { $first: "$slug" },
+        itinerary: { $first: "$itinerary" },
+        language: { $first: "$language" },
+        thumb: { $first: "$thumb" },
+        banner: { $first: "$banner" },
+        translation: { $first: "$translation" },
+        destinations: { $push: "$destinations" },
+      },
+    },
+  ];
+
   try {
     if (language === "vi") {
-      tours = await Tour.find(
-        {
-          thumb: { $ne: "" },
-          banner: { $ne: "" },
-          "itinerary.0": { $exists: true },
-        },
-        {
-          itinerary: 0,
-          translation: 0,
-          terms: 0,
-          highlights: 0,
-          price_policies: 0,
-        }
-      ).populate("destinations");
+      tours = await Tour.aggregate(viQuery);
+      tours = tours.map((tour) => ({
+        _id: tour._id,
+        language: tour.language,
+        slug: tour.slug,
+        code: tour.code,
+        hot: tour.hot,
+        name: tour.name,
+        price: tour.price,
+        duration: tour.duration,
+        journey: tour.journey,
+        layout: tour.layout,
+        destinations: tour.destinations,
+        departure_dates: tour.departure_dates,
+        thumb: tour.thumb,
+        banner: tour.banner,
+        is_vn_tour: tour.destinations.every(
+          (dest) => dest.country?.slug === "viet-nam"
+        ),
+        is_eu_tour: tour.destinations.some(
+          (dest) => dest.continent?.slug === "chau-au"
+        ),
+      }));
     }
 
     if (language !== "vi") {
-      tours = await Tour.find(
-        {
-          thumb: { $ne: "" },
-          banner: { $ne: "" },
-          "itinerary.0": { $exists: true },
-          translation: {
-            $elemMatch: {
-              language: language,
-              "translation.itinerary.0": { $exists: true },
-            },
-          },
-        },
-        {
-          _id: 1,
-          language: 1,
-          slug: 1,
-          code: 1,
-          hot: 1,
-          price: 1,
-          duration: 1,
-          layout: 1,
-          destinations: 1,
-          departure_dates: 1,
-          thumb: 1,
-          banner: 1,
-          updatedAt: 1,
-          createdAt: 1,
-          translation: {
-            $elemMatch: {
-              language: language,
-            },
-          },
-        }
-      ).populate("destinations");
+      tours = await Tour.aggregate(foreignQuery);
 
       tours = tours.map((tour) => ({
         _id: tour._id,
@@ -152,14 +317,14 @@ module.exports.getTours = async (language) => {
         layout: tour.layout,
         destinations: tour.destinations,
         departure_dates: tour.departure_dates,
-
-        itinerary: tour.translation[0].itinerary,
-
         thumb: tour.thumb,
         banner: tour.banner,
-
-        updatedAt: tour.updatedAt,
-        createdAt: tour.createdAt,
+        is_vn_tour: tour.destinations.every(
+          (dest) => dest.country?.slug === "viet-nam"
+        ),
+        is_eu_tour: tour.destinations.some(
+          (dest) => dest.continent?.slug === "chau-au"
+        ),
       }));
     }
 

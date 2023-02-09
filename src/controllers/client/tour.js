@@ -42,9 +42,44 @@ module.exports.getSingleTour = async (req, res, next) => {
       );
     }
 
-    const tour = await Tour.findOne({
-      _id: mongoose.Types.ObjectId(tourId),
-    }).populate("destinations");
+    // const tour = await Tour.findOne({
+    //   _id: mongoose.Types.ObjectId(tourId),
+    // }).populate("destinations");
+
+    const [tour] = await Tour.aggregate([
+      {
+        $match: {
+          _id: mongoose.Types.ObjectId(tourId),
+        },
+      },
+      ...tourServices.destinationsLookup,
+      {
+        $group: {
+          _id: "$_id",
+          name: { $first: "$name" },
+          code: { $first: "$code" },
+          hot: { $first: "$hot" },
+          duration: { $first: "$duration" },
+          description: { $first: "$description" },
+          highlights: { $first: "$highlights" },
+          journey: { $first: "$journey" },
+          departure_dates: { $first: "$departure_dates" },
+          price: { $first: "$price" },
+          layout: { $first: "$layout" },
+          slug: { $first: "$slug" },
+          itinerary: { $first: "$itinerary" },
+          terms: { $first: "$terms" },
+          price_policies: { $first: "$price_policies" },
+          rating: { $first: "$rating" },
+          language: { $first: "$language" },
+          thumb: { $first: "$thumb" },
+          banner: { $first: "$banner" },
+          translation: { $first: "$translation" },
+          destinations: { $push: "$destinations" },
+          translation: { $first: "$translation" },
+        },
+      },
+    ]);
 
     if (!tour) {
       return next(

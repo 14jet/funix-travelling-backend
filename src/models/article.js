@@ -7,7 +7,10 @@ const articleSchema = new Schema(
       type: String,
       default: "vi",
     },
-    category: [String], // cam-nang | nhat-ky | trai-nghiem | diem-den
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "GuidesCategory",
+    },
     title: {
       type: String,
       required: true,
