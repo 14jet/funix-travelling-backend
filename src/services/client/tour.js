@@ -262,6 +262,7 @@ module.exports.getTours = async (language) => {
         hot: { $first: "$hot" },
         code: { $first: "$code" },
         duration: { $first: "$duration" },
+        layout: { $first: "$layout" },
         price: { $first: "$price" },
         slug: { $first: "$slug" },
         itinerary: { $first: "$itinerary" },

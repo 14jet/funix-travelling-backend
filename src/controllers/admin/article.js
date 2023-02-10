@@ -21,8 +21,13 @@ module.exports.getArticles = async (req, res, next) => {
       }
     ).populate("category");
 
+    const category = await GuidesCategory.find();
+
     return res.status(200).json({
       data: articles,
+      metadata: {
+        category,
+      },
     });
   } catch (error) {
     return next(createError(error, 500));
@@ -227,9 +232,12 @@ module.exports.deleteArticle = async (req, res, next) => {
         en: "Deleted article",
         vi: "Xóa bài viết thành công",
       },
+      data: {
+        _id: articleId,
+      },
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 

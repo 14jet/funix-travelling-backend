@@ -1,9 +1,4 @@
-const path = require("path");
-const rootDir = require("../helpers/rootDir");
 const multer = require("multer");
-const cloudinary = require("cloudinary").v2;
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const { v4: uuid } = require("uuid");
 
 // const cloudinaryURL =
 //   "cloudinary://861549496919657:5m3VvAO3sOfJb1dUyQXPTFt4qI4@dqz4j2zua";
