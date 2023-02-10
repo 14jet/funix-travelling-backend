@@ -42,10 +42,6 @@ module.exports.getSingleTour = async (req, res, next) => {
       );
     }
 
-    // const tour = await Tour.findOne({
-    //   _id: mongoose.Types.ObjectId(tourId),
-    // }).populate("destinations");
-
     const [tour] = await Tour.aggregate([
       {
         $match: {
@@ -149,7 +145,13 @@ module.exports.bookTour = async (req, res, next) => {
       format(new Date(departureDate), "dd/MM/yyyy"),
     ];
 
-    await appendRow(auth, spreadsheetId, range, values);
+    await appendRow(
+      auth,
+      "1JeCBKk2eRmCa80iN6rl_MZlBICj85lS4r1VJpWZBBks",
+      range,
+      values
+    );
+    // await appendRow(auth, spreadsheetId, range, values);
 
     return res.status(200).json({
       message: {
@@ -159,7 +161,7 @@ module.exports.bookTour = async (req, res, next) => {
       code: 200,
     });
   } catch (error) {
-    next(createError(error, 500));
+    return next(createError(error, 500));
   }
 };
 
