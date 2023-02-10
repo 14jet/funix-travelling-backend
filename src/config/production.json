@@ -1,8 +1,8 @@
 {
   "cors": {
     "whiteList": [
-      "http://localhost:3001",
       "http://localhost:3000",
+      "http://localhost:3001",
       "https://travelling-website-funix-v1.web.app",
       "https://joya-client.web.app",
       "https://ntav.org",
