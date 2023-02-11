@@ -6,7 +6,6 @@ let mongodbURI = "";
 if (config.has("database.mongodb_URI")) {
   mongodbURI = config.get("database.mongodb_URI");
 } else {
-  console.error("ket noi bang config that bai");
   process.exit(1);
 }
 

@@ -97,11 +97,11 @@ module.exports.destinationsLookup = [
 ];
 
 module.exports.getSingleTour = (tour, language = "vi") => {
-  const slider = tour.itinerary
-    .map((item) => item.images)
-    .reduce((prev, cur) => {
-      return [...prev, ...cur];
-    }, []);
+  // const slider = tour.itinerary
+  //   .map((item) => item.images)
+  //   .reduce((prev, cur) => {
+  //     return [...prev, ...cur];
+  //   }, []);
 
   const origin = {
     _id: tour._id,
@@ -114,11 +114,11 @@ module.exports.getSingleTour = (tour, language = "vi") => {
     banner: tour.banner,
     layout: tour.layout || [],
     price: tour.price,
-    slider: slider,
+    // slider: slider,
     hot: tour.hot,
 
     journey: tour.journey,
-    destinations: tour.destinations,
+    // destinations: tour.destinations,
     description: tour.description,
     highlights: tour.highlights,
 
@@ -144,6 +144,24 @@ module.exports.getSingleTour = (tour, language = "vi") => {
   });
 
   origin.countries = countries;
+  origin.destinations = tour.destinations.map((dest) => ({
+    continent: dest.continent
+      ? { name: dest.continent.name, slug: dest.continent.slug }
+      : null,
+    country: dest.country
+      ? { name: dest.country.name, slug: dest.country.slug }
+      : null,
+    region: dest.region
+      ? { name: dest.region.name, slug: dest.region.slug }
+      : null,
+    province: dest.province
+      ? { name: dest.province.name, slug: dest.province.slug }
+      : null,
+    city: dest.city ? { name: dest.city.name, slug: dest.city.slug } : null,
+    type: dest.type,
+    name: dest.name,
+    slug: dest.slug,
+  }));
   origin.destinations_text = tour.destinations
     .map((dest) => {
       if (language === "vi") return dest.name;
@@ -181,7 +199,29 @@ module.exports.getSingleTour = (tour, language = "vi") => {
 
     price_policies: t.price_policies,
     terms: t.terms,
-
+    destinations: tour.destinations.map((dest) => ({
+      continent: dest.continent
+        ? {
+            name: dest.continent.translation[0].name,
+            slug: dest.continent.slug,
+          }
+        : null,
+      country: dest.country
+        ? { name: dest.country.translation[0].name, slug: dest.country.slug }
+        : null,
+      region: dest.region
+        ? { name: dest.region.translation[0].name, slug: dest.region.slug }
+        : null,
+      province: dest.province
+        ? { name: dest.province.translation[0].name, slug: dest.province.slug }
+        : null,
+      city: dest.city
+        ? { name: dest.city.translation[0].name, slug: dest.city.slug }
+        : null,
+      type: dest.type,
+      name: dest.translation[0].name,
+      slug: dest.slug,
+    })),
     itinerary: trans_itinerary,
   };
 };
@@ -226,6 +266,22 @@ module.exports.getTours = async (language) => {
         banner: { $first: "$banner" },
         translation: { $first: "$translation" },
         destinations: { $push: "$destinations" },
+      },
+    },
+    {
+      $project: {
+        "destinations._id": 0,
+        "destinations.continent._id": 0,
+        "destinations.country._id": 0,
+        "destinations.province._id": 0,
+        "destinations.region._id": 0,
+        "destinations.city._id": 0,
+        "destinations.translation": 0,
+        "destinations.continent.translation": 0,
+        "destinations.country.translation": 0,
+        "destinations.province.translation": 0,
+        "destinations.region.translation": 0,
+        "destinations.city.translation": 0,
       },
     },
   ];
@@ -316,7 +372,35 @@ module.exports.getTours = async (language) => {
         duration: tour.duration,
         journey: tour.translation[0].journey,
         layout: tour.layout,
-        destinations: tour.destinations,
+        destinations: tour.destinations.map((dest) => ({
+          continent: dest.continent
+            ? {
+                name: dest.continent.translation[0].name,
+                slug: dest.continent.slug,
+              }
+            : null,
+          country: dest.country
+            ? {
+                name: dest.country.translation[0].name,
+                slug: dest.country.slug,
+              }
+            : null,
+          region: dest.region
+            ? { name: dest.region.translation[0].name, slug: dest.region.slug }
+            : null,
+          province: dest.province
+            ? {
+                name: dest.province.translation[0].name,
+                slug: dest.province.slug,
+              }
+            : null,
+          city: dest.city
+            ? { name: dest.city.translation[0].name, slug: dest.city.slug }
+            : null,
+          name: dest.translation[0].name,
+          slug: dest.slug,
+          type: dest.type,
+        })),
         departure_dates: tour.departure_dates,
         thumb: tour.thumb,
         banner: tour.banner,

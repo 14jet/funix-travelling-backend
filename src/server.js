@@ -19,6 +19,7 @@ app.use("/visa", require("./routes/client/visa"));
 app.use("/layout", require("./routes/client/layout"));
 app.use("/term", require("./routes/client/term"));
 app.use("/about", require("./routes/client/about"));
+app.use("/company-info", require("./routes/client/company"));
 
 // admin
 app.use("/admin/categories", require("./routes/admin/category"));
@@ -30,6 +31,7 @@ app.use("/admin/visa", require("./routes/admin/visa"));
 app.use("/admin/places", require("./routes/admin/places"));
 app.use("/admin/slider", require("./routes/admin/slider"));
 app.use("/admin/destination", require("./routes/admin/destination"));
+app.use("/admin/company-info", require("./routes/admin/company"));
 
 app.all("*", require("./middlewares/notFound"));
 app.use(require("./middlewares/errorHandler"));

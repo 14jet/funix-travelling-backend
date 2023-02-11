@@ -4,7 +4,7 @@ class StringHandler {
   static accentsRemover = (s) => {
     var r = s.toLowerCase();
     // r = r.replace(new RegExp("\\s", "g"), "");
-    r = r.replace(new RegExp("[àáảãạãäåâấầậẩẫăắặẳẫẩ]", "g"), "a");
+    r = r.replace(new RegExp("[àáảãạãäåâấầậẩẫăắằặẳẵ]", "g"), "a");
     r = r.replace(new RegExp("æ", "g"), "ae");
     r = r.replace(new RegExp("ç", "g"), "c");
     r = r.replace(new RegExp("[èéẻẹẽêëêếềểễệ]", "g"), "e");
